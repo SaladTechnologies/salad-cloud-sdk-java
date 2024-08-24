@@ -1,0 +1,31 @@
+name: Publish Maven Artifact
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  build-and-publish:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install GPG secret key
+        run: |
+          cat <(echo -e "${{ secrets.GPG_PRIVATE_KEY }}") | gpg --batch --import
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+      - name: Publish package
+        run: |
+          mvn \
+            --no-transfer-progress \
+            --batch-mode \
+            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
+            clean deploy -P release-sign-artifacts -e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
