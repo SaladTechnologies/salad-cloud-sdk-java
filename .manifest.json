@@ -1,0 +1,602 @@
+{
+  "liblabVersion": "2.1.30",
+  "date": "2024-09-01T19:59:05.723Z",
+  "config": {
+    "apiId": 1094,
+    "sdkName": "salad-cloud-sdk",
+    "sdkVersion": "0.9.0-alpha.1",
+    "liblabVersion": "2",
+    "deliveryMethods": ["zip"],
+    "languages": ["java"],
+    "specFilePath": "spec.yaml",
+    "docs": ["snippets"],
+    "auth": ["apikey"],
+    "languageOptions": {
+      "csharp": {
+        "packageId": "Salad.Cloud.SDK",
+        "authors": [
+          {
+            "name": "salad"
+          },
+          {
+            "name": "seniorquico"
+          }
+        ],
+        "githubRepoName": "salad-cloud-sdk-dotnet",
+        "homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-dotnet",
+        "ignoreFiles": [".gitignore", "LICENSE"],
+        "liblabVersion": "2",
+        "sdkVersion": "0.9.0-alpha.1",
+        "targetBranch": "main"
+      },
+      "go": {
+        "goModuleName": "github.com/saladtechnologies/salad-cloud-sdk-go",
+        "githubRepoName": "salad-cloud-sdk-go",
+        "ignoreFiles": [".gitignore", "LICENSE"],
+        "liblabVersion": "2",
+        "sdkVersion": "0.9.0-alpha.1",
+        "targetBranch": "main"
+      },
+      "java": {
+        "groupId": "com.salad.cloud",
+        "artifactId": "sdk",
+        "developers": [
+          {
+            "name": "SaladCloud Developers",
+            "email": "dev@salad.com",
+            "organization": "Salad Technologies",
+            "organizationUrl": "https://salad.com"
+          },
+          {
+            "name": "Kyle Dodson",
+            "email": "kyle@salad.com",
+            "organization": "Salad Technologies",
+            "organizationUrl": "https://salad.com"
+          }
+        ],
+        "githubRepoName": "salad-cloud-sdk-java",
+        "homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-java",
+        "ignoreFiles": [".gitignore", "LICENSE"],
+        "liblabVersion": "2",
+        "sdkVersion": "0.9.0-alpha.1",
+        "targetBranch": "main"
+      },
+      "python": {
+        "alwaysInitializeOptionals": true,
+        "classifiers": [
+          "Development Status :: 3 - Alpha",
+          "Intended Audience :: Developers",
+          "License :: OSI Approved :: MIT License",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3 :: Only",
+          "Programming Language :: Python :: 3.7",
+          "Programming Language :: Python :: 3.8",
+          "Programming Language :: Python :: 3.9",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Topic :: Internet",
+          "Topic :: Software Development",
+          "Topic :: Software Development :: Libraries"
+        ],
+        "projectUrls": {
+          "Homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-python",
+          "Documentation": "https://docs.salad.com",
+          "Repository": "https://github.com/SaladTechnologies/salad-cloud-sdk-python.git",
+          "Issues": "https://github.com/SaladTechnologies/salad-cloud-sdk-python/issues"
+        },
+        "pypiPackageName": "salad-cloud-sdk",
+        "authors": [
+          {
+            "email": "dev@salad.com",
+            "name": "SaladCloud Developers"
+          },
+          {
+            "email": "kyle@salad.com",
+            "name": "Kyle Dodson"
+          }
+        ],
+        "githubRepoName": "salad-cloud-sdk-python",
+        "ignoreFiles": [".gitignore", "LICENSE"],
+        "liblabVersion": "2",
+        "sdkVersion": "0.9.0-alpha.1",
+        "targetBranch": "main"
+      },
+      "terraform": {
+        "hideComputedDiff": false,
+        "mockAcceptance": true,
+        "providerGoModuleName": "github.com/saladtechnologies/terraform-provider-salad-cloud",
+        "providerName": "salad-cloud",
+        "providerSchemaConfig": {
+          "authTokenKey": "api_key"
+        },
+        "providerVersion": "0.9.0-alpha.1",
+        "githubRepoName": "terraform-provider-salad-cloud",
+        "ignoreFiles": [".gitignore", "LICENSE"],
+        "liblabVersion": "2",
+        "targetBranch": "main"
+      },
+      "typescript": {
+        "bundle": true,
+        "exportClassDefault": false,
+        "httpClient": "fetch",
+        "npmName": "salad-cloud-sdk",
+        "npmOrg": "saladtechnologies-oss",
+        "authors": [
+          {
+            "email": "dev@salad.com",
+            "name": "SaladCloud Developers"
+          },
+          {
+            "email": "kyle@salad.com",
+            "name": "Kyle Dodson"
+          }
+        ],
+        "githubRepoName": "salad-cloud-sdk-javascript",
+        "homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-javascript",
+        "ignoreFiles": [".gitignore", "LICENSE"],
+        "liblabVersion": "2",
+        "sdkVersion": "0.9.0-alpha.1",
+        "targetBranch": "main"
+      }
+    },
+    "publishing": {
+      "githubOrg": "SaladTechnologies"
+    },
+    "validationsToIgnore": [
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "CreateQueueProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "UpdateQueueProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "CreateQueueJobProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "CreateContainerGroupProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "ListContainerGroupsProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "DeleteContainerGroupProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "GetContainerGroupProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "UpdateContainerGroupProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "StartContainerGroupProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "StopContainerGroupProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "ReallocateContainerGroupInstanceProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "RecreateContainerGroupInstanceProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "RestartContainerGroupInstanceProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "CreateInferenceEndpointJobProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "GetInferenceEndpointJobProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "GetInferenceEndpointJobsProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "DeleteInferenceEndpointJobProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "GetWebhookSecretKeyProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "UpdateWebhookSecretKeyProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "schemas", "ListGpuClassesProblemType"]
+      },
+      {
+        "code": "oas3-unused-component",
+        "path": ["components", "responses", "401"]
+      }
+    ],
+    "apiName": "SaladCloud API",
+    "apiVersion": "0.9.0-alpha.1",
+    "authentication": {
+      "apiKey": {
+        "header": "Salad-Api-Key"
+      }
+    },
+    "devContainer": true,
+    "generateEnv": true,
+    "includeOptionalSnippetParameters": true,
+    "inferServiceNames": false,
+    "license": {
+      "type": "MIT",
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT",
+      "path": "MIT.ejs"
+    },
+    "responseHeaders": false,
+    "retry": {
+      "enabled": true,
+      "maxAttempts": 3,
+      "retryDelay": 150,
+      "maxDelay": 5000,
+      "retryDelayJitter": 50,
+      "backOffFactor": 2,
+      "httpCodesToRetry": [408, 429, 500, 502, 503, 504],
+      "httpMethodsToRetry": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
+    },
+    "multiTenant": true,
+    "includeWatermark": false,
+    "groupId": "com.salad.cloud",
+    "artifactId": "sdk",
+    "developers": [
+      {
+        "name": "SaladCloud Developers",
+        "email": "dev@salad.com",
+        "organization": "Salad Technologies",
+        "organizationUrl": "https://salad.com"
+      },
+      {
+        "name": "Kyle Dodson",
+        "email": "kyle@salad.com",
+        "organization": "Salad Technologies",
+        "organizationUrl": "https://salad.com"
+      }
+    ],
+    "githubRepoName": "salad-cloud-sdk-java",
+    "homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-java",
+    "ignoreFiles": [".gitignore", "LICENSE"],
+    "targetBranch": "main",
+    "language": "java",
+    "deliveryMethod": "zip",
+    "hooks": {
+      "enabled": false,
+      "sourceDir": ""
+    },
+    "usesFormData": false,
+    "environmentVariables": [],
+    "fileOutput": "/tmp",
+    "httpLibrary": {
+      "name": "axios",
+      "packages": {
+        "axios": "^1.7.4"
+      },
+      "languages": ["typescript"]
+    },
+    "customQueries": {
+      "paths": [],
+      "rawQueries": [],
+      "queriesData": []
+    }
+  },
+  "files": [
+    "pom.xml",
+    "src/main/java/com/salad/cloud/sdk/validation/annotation/Length.java",
+    "src/main/java/com/salad/cloud/sdk/validation/annotation/Max.java",
+    "src/main/java/com/salad/cloud/sdk/validation/annotation/Min.java",
+    "src/main/java/com/salad/cloud/sdk/validation/annotation/Pattern.java",
+    "src/main/java/com/salad/cloud/sdk/validation/annotation/Valid.java",
+    "src/main/java/com/salad/cloud/sdk/services/BaseService.java",
+    "src/main/java/com/salad/cloud/sdk/http/HttpMethod.java",
+    "src/main/java/com/salad/cloud/sdk/http/ModelConverter.java",
+    "src/main/java/com/salad/cloud/sdk/http/util/HttpArgumentConverter.java",
+    "src/main/java/com/salad/cloud/sdk/http/util/RequestBuilder.java",
+    "src/main/java/com/salad/cloud/sdk/http/serialization/PathSerializationStyle.java",
+    "src/main/java/com/salad/cloud/sdk/http/serialization/QuerySerializationStyle.java",
+    "src/main/java/com/salad/cloud/sdk/http/serialization/SerializationStyle.java",
+    "src/main/java/com/salad/cloud/sdk/http/serialization/Serializer.java",
+    "src/main/java/com/salad/cloud/sdk/http/serialization/Util.java",
+    "src/main/java/com/salad/cloud/sdk/http/interceptors/DefaultHeadersInterceptor.java",
+    "src/main/java/com/salad/cloud/sdk/hook/Hook.java",
+    "src/main/java/com/salad/cloud/sdk/exceptions/ApiException.java",
+    "src/main/java/com/salad/cloud/sdk/services/WorkloadErrorsService.java",
+    "src/main/java/com/salad/cloud/sdk/services/QuotasService.java",
+    "src/main/java/com/salad/cloud/sdk/services/OrganizationDataService.java",
+    "src/main/java/com/salad/cloud/sdk/http/Environment.java",
+    "src/main/java/com/salad/cloud/sdk/SaladCloudSdk.java",
+    "./LICENSE",
+    "src/main/java/com/salad/cloud/sdk/http/interceptors/RetryInterceptor.java",
+    "src/main/java/com/salad/cloud/sdk/config/RetryConfig.java",
+    "src/main/java/com/salad/cloud/sdk/http/interceptors/TokenInterceptor.java",
+    "src/main/java/com/salad/cloud/sdk/config/SaladCloudSdkConfig.java",
+    "src/main/java/com/salad/cloud/sdk/config/ApiKeyAuthConfig.java",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-post.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-patch.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-delete.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-start-post.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-stop-post.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-instances-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-instances-{container_group_instance_id}-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-instances-{container_group_instance_id}-reallocate-post.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-instances-{container_group_instance_id}-recreate-post.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-instances-{container_group_instance_id}-restart-post.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-containers-{container_group_name}-errors-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-post.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-{queue_name}-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-{queue_name}-patch.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-{queue_name}-delete.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-{queue_name}-jobs-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-{queue_name}-jobs-post.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-{queue_name}-jobs-{queue_job_id}-get.md",
+    "documentation/snippets/organizations-{organization_name}-projects-{project_name}-queues-{queue_name}-jobs-{queue_job_id}-delete.md",
+    "documentation/snippets/organizations-{organization_name}-quotas-get.md",
+    "documentation/snippets/organizations-{organization_name}-inference-endpoints-get.md",
+    "documentation/snippets/organizations-{organization_name}-inference-endpoints-{inference_endpoint_name}-get.md",
+    "documentation/snippets/organizations-{organization_name}-inference-endpoints-{inference_endpoint_name}-jobs-get.md",
+    "documentation/snippets/organizations-{organization_name}-inference-endpoints-{inference_endpoint_name}-jobs-post.md",
+    "documentation/snippets/organizations-{organization_name}-inference-endpoints-{inference_endpoint_name}-jobs-{inference_endpoint_job_id}-get.md",
+    "documentation/snippets/organizations-{organization_name}-inference-endpoints-{inference_endpoint_name}-jobs-{inference_endpoint_job_id}-delete.md",
+    "documentation/snippets/organizations-{organization_name}-gpu-classes-get.md",
+    "documentation/snippets/organizations-{organization_name}-webhook-secret-key-get.md",
+    "documentation/snippets/organizations-{organization_name}-webhook-secret-key-post.md",
+    "documentation/models/ContainerGroupList.md",
+    "documentation/models/CreateContainerGroup.md",
+    "documentation/models/ContainerGroup.md",
+    "documentation/models/UpdateContainerGroup.md",
+    "documentation/models/ContainerGroupInstances.md",
+    "documentation/models/ContainerGroupInstance.md",
+    "documentation/models/WorkloadErrorList.md",
+    "documentation/models/QueueList.md",
+    "documentation/models/CreateQueue.md",
+    "documentation/models/Queue.md",
+    "documentation/models/UpdateQueue.md",
+    "documentation/models/QueueJobList.md",
+    "documentation/models/CreateQueueJob.md",
+    "documentation/models/QueueJob.md",
+    "documentation/models/Quotas.md",
+    "documentation/models/InferenceEndpointsList.md",
+    "documentation/models/InferenceEndpoint.md",
+    "documentation/models/InferenceEndpointJobList.md",
+    "documentation/models/CreateInferenceEndpointJob.md",
+    "documentation/models/InferenceEndpointJob.md",
+    "documentation/models/GpuClassesList.md",
+    "documentation/models/WebhookSecretKey.md",
+    "documentation/models/Container.md",
+    "documentation/models/ContainerRestartPolicy.md",
+    "documentation/models/ContainerGroupState.md",
+    "documentation/models/CountryCode.md",
+    "documentation/models/ContainerGroupNetworking.md",
+    "documentation/models/ContainerGroupLivenessProbe.md",
+    "documentation/models/ContainerGroupReadinessProbe.md",
+    "documentation/models/ContainerGroupStartupProbe.md",
+    "documentation/models/ContainerGroupQueueConnection.md",
+    "documentation/models/ContainerResourceRequirements.md",
+    "documentation/models/ContainerGroupPriority.md",
+    "documentation/models/ContainerLogging.md",
+    "documentation/models/LoggingAxiom1.md",
+    "documentation/models/LoggingDatadog1.md",
+    "documentation/models/LoggingNewRelic1.md",
+    "documentation/models/LoggingSplunk1.md",
+    "documentation/models/LoggingTcp1.md",
+    "documentation/models/LoggingHttp1.md",
+    "documentation/models/DatadogTags1.md",
+    "documentation/models/HttpFormat1.md",
+    "documentation/models/HttpHeaders1.md",
+    "documentation/models/HttpCompression1.md",
+    "documentation/models/ContainerGroupStatus.md",
+    "documentation/models/ContainerGroupInstanceStatusCount.md",
+    "documentation/models/ContainerNetworkingProtocol.md",
+    "documentation/models/ContainerGroupProbeTcp.md",
+    "documentation/models/ContainerGroupProbeHttp.md",
+    "documentation/models/ContainerGroupProbeGrpc.md",
+    "documentation/models/ContainerGroupProbeExec.md",
+    "documentation/models/ContainerProbeHttpScheme.md",
+    "documentation/models/ContainerGroupProbeHttpHeaders2.md",
+    "documentation/models/CreateContainer.md",
+    "documentation/models/CreateContainerGroupNetworking.md",
+    "documentation/models/CreateContainerLogging.md",
+    "documentation/models/CreateContainerRegistryAuthentication.md",
+    "documentation/models/LoggingAxiom2.md",
+    "documentation/models/LoggingDatadog2.md",
+    "documentation/models/LoggingNewRelic2.md",
+    "documentation/models/LoggingSplunk2.md",
+    "documentation/models/LoggingTcp2.md",
+    "documentation/models/LoggingHttp2.md",
+    "documentation/models/DatadogTags2.md",
+    "documentation/models/HttpFormat2.md",
+    "documentation/models/HttpHeaders3.md",
+    "documentation/models/HttpCompression2.md",
+    "documentation/models/RegistryAuthenticationBasic1.md",
+    "documentation/models/RegistryAuthenticationGcpGcr1.md",
+    "documentation/models/RegistryAuthenticationAwsEcr1.md",
+    "documentation/models/RegistryAuthenticationDockerHub1.md",
+    "documentation/models/RegistryAuthenticationGcpGar1.md",
+    "documentation/models/UpdateContainer.md",
+    "documentation/models/UpdateContainerGroupNetworking.md",
+    "documentation/models/Resources.md",
+    "documentation/models/UpdateContainerLogging.md",
+    "documentation/models/UpdateContainerRegistryAuthentication.md",
+    "documentation/models/LoggingAxiom3.md",
+    "documentation/models/LoggingDatadog3.md",
+    "documentation/models/LoggingNewRelic3.md",
+    "documentation/models/LoggingSplunk3.md",
+    "documentation/models/LoggingTcp3.md",
+    "documentation/models/LoggingHttp3.md",
+    "documentation/models/DatadogTags3.md",
+    "documentation/models/HttpFormat3.md",
+    "documentation/models/HttpHeaders4.md",
+    "documentation/models/HttpCompression3.md",
+    "documentation/models/RegistryAuthenticationBasic2.md",
+    "documentation/models/RegistryAuthenticationGcpGcr2.md",
+    "documentation/models/RegistryAuthenticationAwsEcr2.md",
+    "documentation/models/RegistryAuthenticationDockerHub2.md",
+    "documentation/models/RegistryAuthenticationGcpGar2.md",
+    "documentation/models/State.md",
+    "documentation/models/WorkloadError.md",
+    "documentation/models/QueueJobStatus.md",
+    "documentation/models/QueueJobEvent.md",
+    "documentation/models/QueueJobEventAction.md",
+    "documentation/models/ContainerGroupsQuotas.md",
+    "documentation/models/RecipesQuotas.md",
+    "documentation/models/InferenceEndpointJobStatus.md",
+    "documentation/models/InferenceEndpointJobEvent.md",
+    "documentation/models/InferenceEndpointJobEventAction.md",
+    "documentation/models/GpuClass.md",
+    "documentation/models/GpuClassPrice.md",
+    "documentation/models/ListQueueJobsParameters.md",
+    "documentation/models/ListInferenceEndpointsParameters.md",
+    "documentation/models/GetInferenceEndpointJobsParameters.md",
+    "src/main/java/com/salad/cloud/sdk/json/TypeUtils.java",
+    ".devcontainer/devcontainer.json",
+    "example/pom.xml",
+    "example/setup.sh",
+    "example/src/main/java/com/example/Main.java",
+    "example/.gitignore",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerRestartPolicy.java",
+    "src/main/java/com/salad/cloud/sdk/models/CountryCode.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupPriority.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpFormat1.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpCompression1.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupStatus.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerNetworkingProtocol.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerProbeHttpScheme.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpFormat2.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpCompression2.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpFormat3.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpCompression3.java",
+    "src/main/java/com/salad/cloud/sdk/models/State.java",
+    "src/main/java/com/salad/cloud/sdk/models/QueueJobStatus.java",
+    "src/main/java/com/salad/cloud/sdk/models/QueueJobEventAction.java",
+    "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJobStatus.java",
+    "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJobEventAction.java",
+    "src/main/java/com/salad/cloud/sdk/services/WebhookSecretKeyService.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupList.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupInstances.java",
+    "src/main/java/com/salad/cloud/sdk/models/WorkloadErrorList.java",
+    "src/main/java/com/salad/cloud/sdk/models/QueueList.java",
+    "src/main/java/com/salad/cloud/sdk/models/QueueJobList.java",
+    "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointsList.java",
+    "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJobList.java",
+    "src/main/java/com/salad/cloud/sdk/models/GpuClassesList.java",
+    "src/main/java/com/salad/cloud/sdk/models/WebhookSecretKey.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupProbeTcp.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupProbeExec.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationGcpGcr1.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationGcpGar1.java",
+    "src/main/java/com/salad/cloud/sdk/models/UpdateContainerGroupNetworking.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationGcpGcr2.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationGcpGar2.java",
+    "documentation/services/WorkloadErrorsService.md",
+    "documentation/services/QuotasService.md",
+    "documentation/services/OrganizationDataService.md",
+    "src/main/java/com/salad/cloud/sdk/models/UpdateQueue.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingNewRelic1.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingSplunk1.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingTcp1.java",
+    "src/main/java/com/salad/cloud/sdk/models/DatadogTags1.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpHeaders1.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupProbeGrpc.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupProbeHttpHeaders2.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingNewRelic2.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingSplunk2.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingTcp2.java",
+    "src/main/java/com/salad/cloud/sdk/models/DatadogTags2.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpHeaders3.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationBasic1.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationAwsEcr1.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationDockerHub1.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingNewRelic3.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingSplunk3.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingTcp3.java",
+    "src/main/java/com/salad/cloud/sdk/models/DatadogTags3.java",
+    "src/main/java/com/salad/cloud/sdk/models/HttpHeaders4.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationBasic2.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationAwsEcr2.java",
+    "src/main/java/com/salad/cloud/sdk/models/RegistryAuthenticationDockerHub2.java",
+    "src/main/java/com/salad/cloud/sdk/models/QueueJobEvent.java",
+    "src/main/java/com/salad/cloud/sdk/models/RecipesQuotas.java",
+    "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJobEvent.java",
+    "src/main/java/com/salad/cloud/sdk/models/ListQueueJobsParameters.java",
+    "src/main/java/com/salad/cloud/sdk/models/ListInferenceEndpointsParameters.java",
+    "src/main/java/com/salad/cloud/sdk/models/GetInferenceEndpointJobsParameters.java",
+    "documentation/services/WebhookSecretKeyService.md",
+    "src/main/java/com/salad/cloud/sdk/models/CreateQueue.java",
+    "src/main/java/com/salad/cloud/sdk/models/CreateQueueJob.java",
+    "src/main/java/com/salad/cloud/sdk/models/CreateInferenceEndpointJob.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupQueueConnection.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingAxiom1.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingDatadog1.java",
+    "src/main/java/com/salad/cloud/sdk/models/CreateContainerGroupNetworking.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingAxiom2.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingDatadog2.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingAxiom3.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingDatadog3.java",
+    "src/main/java/com/salad/cloud/sdk/models/Quotas.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupNetworking.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerResourceRequirements.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupInstanceStatusCount.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupProbeHttp.java",
+    "src/main/java/com/salad/cloud/sdk/models/Resources.java",
+    "src/main/java/com/salad/cloud/sdk/models/GpuClass.java",
+    "src/main/java/com/salad/cloud/sdk/models/GpuClassPrice.java",
+    "src/main/java/com/salad/cloud/sdk/services/InferenceEndpointsService.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupState.java",
+    "src/main/java/com/salad/cloud/sdk/models/CreateContainerRegistryAuthentication.java",
+    "src/main/java/com/salad/cloud/sdk/models/UpdateContainerRegistryAuthentication.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupsQuotas.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerLogging.java",
+    "src/main/java/com/salad/cloud/sdk/models/CreateContainerLogging.java",
+    "src/main/java/com/salad/cloud/sdk/models/UpdateContainerLogging.java",
+    "documentation/services/InferenceEndpointsService.md",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupInstance.java",
+    "src/main/java/com/salad/cloud/sdk/models/Queue.java",
+    "src/main/java/com/salad/cloud/sdk/models/CreateContainer.java",
+    "src/main/java/com/salad/cloud/sdk/models/UpdateContainer.java",
+    "src/main/java/com/salad/cloud/sdk/models/WorkloadError.java",
+    "src/main/java/com/salad/cloud/sdk/services/QueuesService.java",
+    "src/main/java/com/salad/cloud/sdk/models/UpdateContainerGroup.java",
+    "src/main/java/com/salad/cloud/sdk/models/InferenceEndpoint.java",
+    "src/main/java/com/salad/cloud/sdk/models/Container.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingHttp1.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingHttp2.java",
+    "src/main/java/com/salad/cloud/sdk/models/LoggingHttp3.java",
+    "README.md",
+    "src/main/java/com/salad/cloud/sdk/models/QueueJob.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupLivenessProbe.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupReadinessProbe.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroupStartupProbe.java",
+    "documentation/services/QueuesService.md",
+    "src/main/java/com/salad/cloud/sdk/services/ContainerGroupsService.java",
+    "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJob.java",
+    "src/main/java/com/salad/cloud/sdk/models/CreateContainerGroup.java",
+    "documentation/services/ContainerGroupsService.md",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerGroup.java"
+  ]
+}
