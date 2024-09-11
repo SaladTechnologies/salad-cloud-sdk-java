@@ -2,7 +2,7 @@
 
 **Properties**
 
-| Name | Type   | Required | Description |
-| :--- | :----- | :------- | :---------- |
-| NONE | String | ✅       | "none"      |
-| GZIP | String | ✅       | "gzip"      |
+| Name | Type     | Required | Description |
+| :--- | :------- | :------- | :---------- |
+| NONE | `String` | ✅       | "none"      |
+| GZIP | `String` | ✅       | "gzip"      |

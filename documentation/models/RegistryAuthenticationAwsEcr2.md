@@ -2,7 +2,7 @@
 
 **Properties**
 
-| Name            | Type   | Required | Description |
-| :-------------- | :----- | :------- | :---------- |
-| accessKeyId     | String | ✅       |             |
-| secretAccessKey | String | ✅       |             |
+| Name            | Type     | Required | Description |
+| :-------------- | :------- | :------- | :---------- |
+| accessKeyId     | `String` | ✅       |             |
+| secretAccessKey | `String` | ✅       |             |

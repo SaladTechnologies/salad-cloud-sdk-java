@@ -2,8 +2,8 @@
 
 **Properties**
 
-| Name   | Type               | Required | Description |
-| :----- | :----------------- | :------- | :---------- |
-| host   | String             | ✅       |             |
-| apiKey | String             | ✅       |             |
-| tags   | List<DatadogTags3> | ❌       |             |
+| Name   | Type                 | Required | Description |
+| :----- | :------------------- | :------- | :---------- |
+| host   | `String`             | ✅       |             |
+| apiKey | `String`             | ✅       |             |
+| tags   | `List<DatadogTags3>` | ❌       |             |

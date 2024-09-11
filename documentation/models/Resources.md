@@ -2,9 +2,9 @@
 
 **Properties**
 
-| Name          | Type         | Required | Description |
-| :------------ | :----------- | :------- | :---------- |
-| cpu           | Long         | ❌       |             |
-| memory        | Long         | ❌       |             |
-| gpuClasses    | List<String> | ❌       |             |
-| storageAmount | Long         | ❌       |             |
+| Name          | Type           | Required | Description |
+| :------------ | :------------- | :------- | :---------- |
+| cpu           | `Long`         | ❌       |             |
+| memory        | `Long`         | ❌       |             |
+| gpuClasses    | `List<String>` | ❌       |             |
+| storageAmount | `Long`         | ❌       |             |
