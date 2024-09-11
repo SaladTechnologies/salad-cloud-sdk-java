@@ -73,7 +73,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Create a Container Group
+   * Create Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -92,7 +92,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Create a Container Group
+   * Create Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -129,7 +129,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Get a Container Group
+   * Get Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -148,7 +148,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Get a Container Group
+   * Get Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -185,7 +185,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Update a Container Group
+   * Update Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -207,7 +207,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Update a Container Group
+   * Update Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -249,7 +249,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Delete a Container Group
+   * Delete Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -266,7 +266,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Delete a Container Group
+   * Delete Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -301,7 +301,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Start a Container Group
+   * Start Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -318,7 +318,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Start a Container Group
+   * Start Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -353,7 +353,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Stop a Container Group
+   * Stop Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -370,7 +370,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Stop a Container Group
+   * Stop Container Group
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -461,7 +461,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Get Container Group Instance by instance ID
+   * Get Container Group Instance
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -488,7 +488,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Get Container Group Instance by instance ID
+   * Get Container Group Instance
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -535,7 +535,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Reallocate container group instance to another node
+   * Reallocate Container Group Instance
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -560,7 +560,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Reallocate container group instance to another node
+   * Reallocate Container Group Instance
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -605,7 +605,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Recreate container on a node
+   * Recreate Container Group Instance
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -630,7 +630,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Recreate container on a node
+   * Recreate Container Group Instance
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -675,7 +675,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Restart container on a node
+   * Restart container Group Instance
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -700,7 +700,7 @@ public class ContainerGroupsService extends BaseService {
   }
 
   /**
-   * Restart container on a node
+   * Restart container Group Instance
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.

@@ -33,6 +33,7 @@ import com.salad.cloud.sdk.models.LoggingHttp2;
 import com.salad.cloud.sdk.models.LoggingNewRelic2;
 import com.salad.cloud.sdk.models.LoggingSplunk2;
 import com.salad.cloud.sdk.models.LoggingTcp2;
+import com.salad.cloud.sdk.models.QueueAutoscaler;
 import com.salad.cloud.sdk.models.RegistryAuthenticationAwsEcr1;
 import com.salad.cloud.sdk.models.RegistryAuthenticationBasic1;
 import com.salad.cloud.sdk.models.RegistryAuthenticationDockerHub1;
@@ -66,31 +67,26 @@ public class Main {
 
     LoggingAxiom2 loggingAxiom2 = LoggingAxiom2
       .builder()
-      .host("in culpa aute")
-      .apiToken("mollit culpa")
-      .dataset("qui nulla laborum ex")
+      .host("Ut con")
+      .apiToken("nostrud irure dolore")
+      .dataset("mollit irure et Duis dolore")
       .build();
 
     DatadogTags2 datadogTags2 = DatadogTags2.builder().name("name").value("value").build();
 
     List<DatadogTags2> tags = Arrays.asList(datadogTags2);
 
-    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2
-      .builder()
-      .host("id fugiat cillum")
-      .apiKey("nostrud")
-      .tags(tags)
-      .build();
+    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2.builder().host("pariatur").apiKey("non ut").tags(tags).build();
 
     LoggingNewRelic2 loggingNewRelic2 = LoggingNewRelic2
       .builder()
-      .host("en")
-      .ingestionKey("aliqua ad laboris anim")
+      .host("cupidatat cillum est sit minim")
+      .ingestionKey("dolore laboris fugiat Duis")
       .build();
 
-    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("enim cupidatat eiusmod").token("do").build();
+    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("aliquip velit culpa").token("ex").build();
 
-    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("aliquip labore dolor id").port(45778L).build();
+    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("aliqua").port(17249L).build();
 
     HttpHeaders3 httpHeaders3 = HttpHeaders3.builder().name("name").value("value").build();
 
@@ -98,8 +94,8 @@ public class Main {
 
     LoggingHttp2 loggingHttp2 = LoggingHttp2
       .builder()
-      .host("pariatur")
-      .port(16204L)
+      .host("magna")
+      .port(62049L)
       .user("user")
       .password("password")
       .path("path")
@@ -157,7 +153,7 @@ public class Main {
 
     CreateContainer createContainer = CreateContainer
       .builder()
-      .image("velit qui cillum veniam ullamco")
+      .image("voluptate officia adipisicing")
       .resources(containerResourceRequirements)
       .command(command)
       .priority(ContainerGroupPriority.HIGH)
@@ -171,8 +167,8 @@ public class Main {
     CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking
       .builder()
       .protocol(ContainerNetworkingProtocol.HTTP)
-      .port(19760L)
-      .auth(true)
+      .port(9813L)
+      .auth(false)
       .build();
 
     ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(23269L).build();
@@ -249,20 +245,31 @@ public class Main {
       .queueName("nnz26lyemw7nednorlqjlsihb42092pn8d")
       .build();
 
+    QueueAutoscaler queueAutoscaler = QueueAutoscaler
+      .builder()
+      .minReplicas(57L)
+      .maxReplicas(24L)
+      .desiredQueueLength(20L)
+      .pollingPeriod(1406L)
+      .maxUpscalePerMinute(35L)
+      .maxDownscalePerMinute(42L)
+      .build();
+
     CreateContainerGroup createContainerGroup = CreateContainerGroup
       .builder()
-      .name("oh2mpxyfojt-6cco")
-      .displayName("HoT")
+      .name("qfojt-6ccoil4t55-ccoyybgw92dermtsdfn3t2xmag")
+      .displayName("O0hSlJUW")
       .container(createContainer)
       .autostartPolicy(false)
       .restartPolicy(ContainerRestartPolicy.ALWAYS)
-      .replicas(225L)
+      .replicas(114L)
       .countryCodes(countryCodes)
       .networking(createContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
       .readinessProbe(containerGroupReadinessProbe)
       .startupProbe(containerGroupStartupProbe)
       .queueConnection(containerGroupQueueConnection)
+      .queueAutoscaler(queueAutoscaler)
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroupsService.createContainerGroup(

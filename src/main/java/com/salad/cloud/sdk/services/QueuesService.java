@@ -72,7 +72,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Create a Queue
+   * Create Queue
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -91,7 +91,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Create a Queue
+   * Create Queue
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -128,7 +128,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Get a Queue
+   * Get Queue
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -144,7 +144,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Get a Queue
+   * Get Queue
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -181,7 +181,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Update a Queue
+   * Update Queue
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -202,7 +202,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Update a Queue
+   * Update Queue
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -243,7 +243,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Delete a Queue
+   * Delete Queue
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -257,7 +257,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Delete a Queue
+   * Delete Queue
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -292,7 +292,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * List Jobs in a Queue that match the paginated query parameters. If no paginated query\nparameters are provided, the full list is returned.
+   * List Jobs
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -313,7 +313,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * List Jobs in a Queue that match the paginated query parameters. If no paginated query\nparameters are provided, the full list is returned.
+   * List Jobs
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -355,7 +355,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Create a new Job
+   * Create Job
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -376,7 +376,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Create a new Job
+   * Create Job
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -417,7 +417,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Returns a job in a queue
+   * Get Job
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -438,7 +438,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Returns a job in a queue
+   * Get Job
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -479,7 +479,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Delete a job from a queue
+   * Delete Job
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
@@ -498,7 +498,7 @@ public class QueuesService extends BaseService {
   }
 
   /**
-   * Delete a job from a queue
+   * Delete Job
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.

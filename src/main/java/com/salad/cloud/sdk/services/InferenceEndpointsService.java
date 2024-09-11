@@ -28,7 +28,7 @@ public class InferenceEndpointsService extends BaseService {
   }
 
   /**
-   * Gets a list of inference endpoints that match the paginated query parameters. If no paginated query\nparameters are provided, the full list is returned.
+   * List Inference Endpoints
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param requestParameters {@link ListInferenceEndpointsParameters} Request Parameters Object
@@ -45,7 +45,7 @@ public class InferenceEndpointsService extends BaseService {
   }
 
   /**
-   * Gets a list of inference endpoints that match the paginated query parameters. If no paginated query\nparameters are provided, the full list is returned.
+   * List Inference Endpoints
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param requestParameters {@link ListInferenceEndpointsParameters} Request Parameters Object
@@ -75,7 +75,7 @@ public class InferenceEndpointsService extends BaseService {
   }
 
   /**
-   * Get an Inference Endpoint
+   * Get Inference Endpoint
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param inferenceEndpointName String The unique inference endpoint name
@@ -92,7 +92,7 @@ public class InferenceEndpointsService extends BaseService {
   }
 
   /**
-   * Get an Inference Endpoint
+   * Get Inference Endpoint
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param inferenceEndpointName String The unique inference endpoint name
@@ -125,7 +125,7 @@ public class InferenceEndpointsService extends BaseService {
   }
 
   /**
-   * Gets a list of inference endpoints jobs that match the paginated query parameters. If no paginated query\nparameters are provided, the full list is returned.
+   * List Inference Endpoint Jobs
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param inferenceEndpointName String The unique inference endpoint name
@@ -145,7 +145,7 @@ public class InferenceEndpointsService extends BaseService {
   }
 
   /**
-   * Gets a list of inference endpoints jobs that match the paginated query parameters. If no paginated query\nparameters are provided, the full list is returned.
+   * List Inference Endpoint Jobs
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param inferenceEndpointName String The unique inference endpoint name

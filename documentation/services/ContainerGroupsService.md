@@ -2,20 +2,20 @@
 
 A list of all methods in the `ContainerGroupsService` service. Click on the method name to view detailed information about that method.
 
-| Methods                                                               | Description                                                                                                              |
-| :-------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
-| [listContainerGroups](#listcontainergroups)                           | Gets the list of container groups                                                                                        |
-| [createContainerGroup](#createcontainergroup)                         | Creates a new container group                                                                                            |
-| [getContainerGroup](#getcontainergroup)                               | Gets a container group                                                                                                   |
-| [updateContainerGroup](#updatecontainergroup)                         | Updates a container group                                                                                                |
-| [deleteContainerGroup](#deletecontainergroup)                         | Deletes a container group                                                                                                |
-| [startContainerGroup](#startcontainergroup)                           | Starts a container group                                                                                                 |
-| [stopContainerGroup](#stopcontainergroup)                             | Stops a container group                                                                                                  |
-| [listContainerGroupInstances](#listcontainergroupinstances)           | Retrieves a list of container group instances                                                                            |
-| [getContainerGroupInstance](#getcontainergroupinstance)               | Retrieves the details of a single instance within a container group by instance ID                                       |
-| [reallocateContainerGroupInstance](#reallocatecontainergroupinstance) | Remove a node from a workload and reallocate the workload to a different node                                            |
-| [recreateContainerGroupInstance](#recreatecontainergroupinstance)     | Stops a container, destroys it, creates a new one without requiring the image to be downloaded again on a different node |
-| [restartContainerGroupInstance](#restartcontainergroupinstance)       | Restarts a workload on a node without reallocating it                                                                    |
+| Methods                                                               | Description                                                                                                                 |
+| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| [listContainerGroups](#listcontainergroups)                           | Gets the list of container groups                                                                                           |
+| [createContainerGroup](#createcontainergroup)                         | Creates a new container group                                                                                               |
+| [getContainerGroup](#getcontainergroup)                               | Gets a container group                                                                                                      |
+| [updateContainerGroup](#updatecontainergroup)                         | Updates a container group                                                                                                   |
+| [deleteContainerGroup](#deletecontainergroup)                         | Deletes a container group                                                                                                   |
+| [startContainerGroup](#startcontainergroup)                           | Starts a container group                                                                                                    |
+| [stopContainerGroup](#stopcontainergroup)                             | Stops a container group                                                                                                     |
+| [listContainerGroupInstances](#listcontainergroupinstances)           | Gets the list of container group instances                                                                                  |
+| [getContainerGroupInstance](#getcontainergroupinstance)               | Gets a container group instance                                                                                             |
+| [reallocateContainerGroupInstance](#reallocatecontainergroupinstance) | Reallocates a container group instance to run on a different Salad Node                                                     |
+| [recreateContainerGroupInstance](#recreatecontainergroupinstance)     | Stops a container, destroys it, and starts a new one without requiring the image to be downloaded again on a new Salad Node |
+| [restartContainerGroupInstance](#restartcontainergroupinstance)       | Stops a container and restarts it on the same Salad Node                                                                    |
 
 ## listContainerGroups
 
@@ -26,10 +26,10 @@ Gets the list of container groups
 
 **Parameters**
 
-| Name             | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :--------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName      | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| Name             | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :--------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName      | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
 
 **Return Type**
 
@@ -73,11 +73,11 @@ Creates a new container group
 
 **Parameters**
 
-| Name                 | Type                                                      | Required | Description                                                                                                                                                                                                                                         |
-| :------------------- | :-------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName     | String                                                    | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName          | String                                                    | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| createContainerGroup | [CreateContainerGroup](../models/CreateContainerGroup.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+| Name                 | Type                                                        | Required | Description                                                                                                                                                                                                                                         |
+| :------------------- | :---------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName     | `String`                                                    | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName          | `String`                                                    | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| createContainerGroup | `[CreateContainerGroup](../models/CreateContainerGroup.md)` | ✅       | Request Body                                                                                                                                                                                                                                        |
 
 **Return Type**
 
@@ -120,6 +120,7 @@ import com.salad.cloud.sdk.models.LoggingHttp2;
 import com.salad.cloud.sdk.models.LoggingNewRelic2;
 import com.salad.cloud.sdk.models.LoggingSplunk2;
 import com.salad.cloud.sdk.models.LoggingTcp2;
+import com.salad.cloud.sdk.models.QueueAutoscaler;
 import com.salad.cloud.sdk.models.RegistryAuthenticationAwsEcr1;
 import com.salad.cloud.sdk.models.RegistryAuthenticationBasic1;
 import com.salad.cloud.sdk.models.RegistryAuthenticationDockerHub1;
@@ -153,31 +154,26 @@ public class Main {
 
     LoggingAxiom2 loggingAxiom2 = LoggingAxiom2
       .builder()
-      .host("in culpa aute")
-      .apiToken("mollit culpa")
-      .dataset("qui nulla laborum ex")
+      .host("Ut con")
+      .apiToken("nostrud irure dolore")
+      .dataset("mollit irure et Duis dolore")
       .build();
 
     DatadogTags2 datadogTags2 = DatadogTags2.builder().name("name").value("value").build();
 
     List<DatadogTags2> tags = Arrays.asList(datadogTags2);
 
-    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2
-      .builder()
-      .host("id fugiat cillum")
-      .apiKey("nostrud")
-      .tags(tags)
-      .build();
+    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2.builder().host("pariatur").apiKey("non ut").tags(tags).build();
 
     LoggingNewRelic2 loggingNewRelic2 = LoggingNewRelic2
       .builder()
-      .host("en")
-      .ingestionKey("aliqua ad laboris anim")
+      .host("cupidatat cillum est sit minim")
+      .ingestionKey("dolore laboris fugiat Duis")
       .build();
 
-    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("enim cupidatat eiusmod").token("do").build();
+    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("aliquip velit culpa").token("ex").build();
 
-    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("aliquip labore dolor id").port(45778L).build();
+    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("aliqua").port(17249L).build();
 
     HttpHeaders3 httpHeaders3 = HttpHeaders3.builder().name("name").value("value").build();
 
@@ -185,8 +181,8 @@ public class Main {
 
     LoggingHttp2 loggingHttp2 = LoggingHttp2
       .builder()
-      .host("pariatur")
-      .port(16204L)
+      .host("magna")
+      .port(62049L)
       .user("user")
       .password("password")
       .path("path")
@@ -244,7 +240,7 @@ public class Main {
 
     CreateContainer createContainer = CreateContainer
       .builder()
-      .image("velit qui cillum veniam ullamco")
+      .image("voluptate officia adipisicing")
       .resources(containerResourceRequirements)
       .command(command)
       .priority(ContainerGroupPriority.HIGH)
@@ -258,8 +254,8 @@ public class Main {
     CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking
       .builder()
       .protocol(ContainerNetworkingProtocol.HTTP)
-      .port(19760L)
-      .auth(true)
+      .port(9813L)
+      .auth(false)
       .build();
 
     ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(23269L).build();
@@ -336,20 +332,31 @@ public class Main {
       .queueName("nnz26lyemw7nednorlqjlsihb42092pn8d")
       .build();
 
+    QueueAutoscaler queueAutoscaler = QueueAutoscaler
+      .builder()
+      .minReplicas(57L)
+      .maxReplicas(24L)
+      .desiredQueueLength(20L)
+      .pollingPeriod(1406L)
+      .maxUpscalePerMinute(35L)
+      .maxDownscalePerMinute(42L)
+      .build();
+
     CreateContainerGroup createContainerGroup = CreateContainerGroup
       .builder()
-      .name("oh2mpxyfojt-6cco")
-      .displayName("HoT")
+      .name("qfojt-6ccoil4t55-ccoyybgw92dermtsdfn3t2xmag")
+      .displayName("O0hSlJUW")
       .container(createContainer)
       .autostartPolicy(false)
       .restartPolicy(ContainerRestartPolicy.ALWAYS)
-      .replicas(225L)
+      .replicas(114L)
       .countryCodes(countryCodes)
       .networking(createContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
       .readinessProbe(containerGroupReadinessProbe)
       .startupProbe(containerGroupStartupProbe)
       .queueConnection(containerGroupQueueConnection)
+      .queueAutoscaler(queueAutoscaler)
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroupsService.createContainerGroup(
@@ -373,11 +380,11 @@ Gets a container group
 
 **Parameters**
 
-| Name               | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName   | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName        | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| Name               | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName   | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName        | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
 
 **Return Type**
 
@@ -402,9 +409,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     ContainerGroup response = saladCloudSdk.containerGroupsService.getContainerGroup(
-      "ob3ca5hduqlb1uzytbhhukf1u0-ahl0b9oqfjj0q",
-      "x7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lx71",
-      "cif9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrm0urjjj5b9hbe2fr6f"
+      "gq7z7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lw",
+      "xd-if9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrmz",
+      "ojjj5b9hbe2fr6f5t7j1htjaws1zx3r"
     );
 
     System.out.println(response);
@@ -422,12 +429,12 @@ Updates a container group
 
 **Parameters**
 
-| Name                 | Type                                                      | Required | Description                                                                                                                                                                                                                                         |
-| :------------------- | :-------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName     | String                                                    | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName          | String                                                    | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName   | String                                                    | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| updateContainerGroup | [UpdateContainerGroup](../models/UpdateContainerGroup.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+| Name                 | Type                                                        | Required | Description                                                                                                                                                                                                                                         |
+| :------------------- | :---------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName     | `String`                                                    | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName          | `String`                                                    | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName   | `String`                                                    | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| updateContainerGroup | `[UpdateContainerGroup](../models/UpdateContainerGroup.md)` | ✅       | Request Body                                                                                                                                                                                                                                        |
 
 **Return Type**
 
@@ -491,18 +498,18 @@ public class Main {
     Resources resources = Resources
       .builder()
       .cpu(11L)
-      .memory(1557L)
+      .memory(21424L)
       .gpuClasses(gpuClasses)
-      .storageAmount(40250176413L)
+      .storageAmount(12333132242L)
       .build();
 
     List<String> command = Arrays.asList("command");
 
     LoggingAxiom3 loggingAxiom3 = LoggingAxiom3
       .builder()
-      .host("nisi et veniam")
-      .apiToken("Lorem esse dolor")
-      .dataset("et commodo Duis")
+      .host("commodo ea exercitation pariatur consequat")
+      .apiToken("ipsum")
+      .dataset("id Excepteur")
       .build();
 
     DatadogTags3 datadogTags3 = DatadogTags3.builder().name("name").value("value").build();
@@ -511,24 +518,20 @@ public class Main {
 
     LoggingDatadog3 loggingDatadog3 = LoggingDatadog3
       .builder()
-      .host("veniam deserunt sunt dolore")
-      .apiKey("ullamco occaecat nostrud irure")
+      .host("exercitation aliquip")
+      .apiKey("veniam")
       .tags(tags)
       .build();
 
     LoggingNewRelic3 loggingNewRelic3 = LoggingNewRelic3
       .builder()
-      .host("dolor adipisicing eu dolore incididunt")
-      .ingestionKey("aliqua")
+      .host("amet velit sed cillum")
+      .ingestionKey("et")
       .build();
 
-    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3
-      .builder()
-      .host("enim incididunt")
-      .token("Lorem Duis ipsum et")
-      .build();
+    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3.builder().host("proident").token("est").build();
 
-    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("qui in cupidatat deserunt cillum").port(39897L).build();
+    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("ut velit ea cillum").port(13557L).build();
 
     HttpHeaders4 httpHeaders4 = HttpHeaders4.builder().name("name").value("value").build();
 
@@ -536,8 +539,8 @@ public class Main {
 
     LoggingHttp3 loggingHttp3 = LoggingHttp3
       .builder()
-      .host("nostrud ea dolore")
-      .port(52587L)
+      .host("nisi fugiat cupidatat")
+      .port(60288L)
       .user("user")
       .password("password")
       .path("path")
@@ -595,7 +598,7 @@ public class Main {
 
     UpdateContainer updateContainer = UpdateContainer
       .builder()
-      .image("culpa nulla eu non")
+      .image("ex cillum dolor")
       .resources(resources)
       .command(command)
       .priority(ContainerGroupPriority.HIGH)
@@ -608,7 +611,7 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(60033L)
+      .port(64823L)
       .build();
 
     ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(23269L).build();
@@ -680,9 +683,9 @@ public class Main {
 
     UpdateContainerGroup updateContainerGroup = UpdateContainerGroup
       .builder()
-      .displayName("UtDi9VD ZS")
+      .displayName("-xzxtaW.t2I")
       .container(updateContainer)
-      .replicas(183L)
+      .replicas(110L)
       .countryCodes(countryCodes)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -691,9 +694,9 @@ public class Main {
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroupsService.updateContainerGroup(
-      "ob3ca5hduqlb1uzytbhhukf1u0-ahl0b9oqfjj0q",
-      "x7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lx71",
-      "cif9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrm0urjjj5b9hbe2fr6f",
+      "gq7z7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lw",
+      "xd-if9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrmz",
+      "ojjj5b9hbe2fr6f5t7j1htjaws1zx3r",
       updateContainerGroup
     );
 
@@ -712,11 +715,11 @@ Deletes a container group
 
 **Parameters**
 
-| Name               | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName   | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName        | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| Name               | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName   | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName        | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
 
 **Example Usage Code Snippet**
 
@@ -736,9 +739,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     saladCloudSdk.containerGroupsService.deleteContainerGroup(
-      "ob3ca5hduqlb1uzytbhhukf1u0-ahl0b9oqfjj0q",
-      "x7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lx71",
-      "cif9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrm0urjjj5b9hbe2fr6f"
+      "gq7z7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lw",
+      "xd-if9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrmz",
+      "ojjj5b9hbe2fr6f5t7j1htjaws1zx3r"
     );
   }
 }
@@ -754,11 +757,11 @@ Starts a container group
 
 **Parameters**
 
-| Name               | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName   | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName        | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| Name               | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName   | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName        | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
 
 **Example Usage Code Snippet**
 
@@ -778,7 +781,7 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     saladCloudSdk.containerGroupsService.startContainerGroup(
-      "uh5upyur493wxwbxrj4xt9wfx07sgyz1fs97sfhtue78-54vdogp2qrcnt-8a",
+      "zfx07sgyz1fs97sfhtue78-54vdogp2qrcnt-8a",
       "v7jhy3jn2rdf012fi7ouno3mk9",
       "a4d0ajj5ajjquzeg-z3kvqxtnoxnlzhjhjt-8naw"
     );
@@ -796,11 +799,11 @@ Stops a container group
 
 **Parameters**
 
-| Name               | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName   | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName        | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| Name               | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName   | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName        | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
 
 **Example Usage Code Snippet**
 
@@ -831,18 +834,18 @@ public class Main {
 
 ## listContainerGroupInstances
 
-Retrieves a list of container group instances
+Gets the list of container group instances
 
 - HTTP Method: `GET`
 - Endpoint: `/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances`
 
 **Parameters**
 
-| Name               | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName   | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName        | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| Name               | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName   | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName        | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
 
 **Return Type**
 
@@ -880,19 +883,19 @@ public class Main {
 
 ## getContainerGroupInstance
 
-Retrieves the details of a single instance within a container group by instance ID
+Gets a container group instance
 
 - HTTP Method: `GET`
 - Endpoint: `/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}`
 
 **Parameters**
 
-| Name                     | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName         | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName              | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName       | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| containerGroupInstanceId | String | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
+| Name                     | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName         | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName              | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName       | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| containerGroupInstanceId | `String` | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
 
 **Return Type**
 
@@ -931,19 +934,19 @@ public class Main {
 
 ## reallocateContainerGroupInstance
 
-Remove a node from a workload and reallocate the workload to a different node
+Reallocates a container group instance to run on a different Salad Node
 
 - HTTP Method: `POST`
 - Endpoint: `/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/reallocate`
 
 **Parameters**
 
-| Name                     | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName         | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName              | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName       | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| containerGroupInstanceId | String | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
+| Name                     | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName         | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName              | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName       | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| containerGroupInstanceId | `String` | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
 
 **Example Usage Code Snippet**
 
@@ -975,19 +978,19 @@ public class Main {
 
 ## recreateContainerGroupInstance
 
-Stops a container, destroys it, creates a new one without requiring the image to be downloaded again on a different node
+Stops a container, destroys it, and starts a new one without requiring the image to be downloaded again on a new Salad Node
 
 - HTTP Method: `POST`
 - Endpoint: `/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/recreate`
 
 **Parameters**
 
-| Name                     | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName         | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName              | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName       | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| containerGroupInstanceId | String | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
+| Name                     | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName         | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName              | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName       | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| containerGroupInstanceId | `String` | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
 
 **Example Usage Code Snippet**
 
@@ -1019,19 +1022,19 @@ public class Main {
 
 ## restartContainerGroupInstance
 
-Restarts a workload on a node without reallocating it
+Stops a container and restarts it on the same Salad Node
 
 - HTTP Method: `POST`
 - Endpoint: `/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/restart`
 
 **Parameters**
 
-| Name                     | Type   | Required | Description                                                                                                                                                                                                                                         |
-| :----------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName         | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName              | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName       | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| containerGroupInstanceId | String | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
+| Name                     | Type     | Required | Description                                                                                                                                                                                                                                         |
+| :----------------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName         | `String` | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName              | `String` | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName       | `String` | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| containerGroupInstanceId | `String` | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
 
 **Example Usage Code Snippet**
 
