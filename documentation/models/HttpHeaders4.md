@@ -2,7 +2,7 @@
 
 **Properties**
 
-| Name  | Type   | Required | Description |
-| :---- | :----- | :------- | :---------- |
-| name  | String | ✅       |             |
-| value | String | ✅       |             |
+| Name  | Type     | Required | Description |
+| :---- | :------- | :------- | :---------- |
+| name  | `String` | ✅       |             |
+| value | `String` | ✅       |             |

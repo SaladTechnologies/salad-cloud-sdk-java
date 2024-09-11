@@ -1,11 +1,11 @@
-# SaladCloudSdk Java SDK 0.9.0-alpha.1
+# SaladCloudSdk Java SDK 0.9.0-alpha.2
 
 Welcome to the SaladCloudSdk SDK documentation. This guide will help you get started with integrating and using the SaladCloudSdk SDK in your project.
 
 ## Versions
 
-- API version: `0.9.0-alpha.1`
-- SDK version: `0.9.0-alpha.1`
+- API version: `0.9.0-alpha.2`
+- SDK version: `0.9.0-alpha.2`
 
 ## About the API
 
@@ -38,14 +38,14 @@ If you use Maven, place the following within the _dependency_ tag in your `pom.x
 <dependency>
     <groupId>com.salad.cloud</groupId>
     <artifactId>salad-cloud-sdk</artifactId>
-    <version>0.9.0-alpha.1</version>
+    <version>0.9.0-alpha.2</version>
 </dependency>
 ```
 
 If you use Gradle, paste the next line inside the _dependencies_ block of your `build.gradle` file:
 
 ```Gradle
-implementation group: com.salad.cloud, name: salad-cloud-sdk, version: 0.9.0-alpha.1
+implementation group: com.salad.cloud, name: salad-cloud-sdk, version: 0.9.0-alpha.2
 ```
 
 If you use JAR files, package the SDK by running the following command:
@@ -200,6 +200,7 @@ The SDK includes several models that represent the data structures used in API r
 | [ContainerGroupReadinessProbe](documentation/models/ContainerGroupReadinessProbe.md)             | Represents the container group readiness probe                           |
 | [ContainerGroupStartupProbe](documentation/models/ContainerGroupStartupProbe.md)                 | Represents the container group startup probe                             |
 | [ContainerGroupQueueConnection](documentation/models/ContainerGroupQueueConnection.md)           | Represents container group queue connection                              |
+| [QueueAutoscaler](documentation/models/QueueAutoscaler.md)                                       | Represents the autoscaling rules for a queue                             |
 | [ContainerResourceRequirements](documentation/models/ContainerResourceRequirements.md)           | Represents a container resource requirements                             |
 | [ContainerGroupPriority](documentation/models/ContainerGroupPriority.md)                         |                                                                          |
 | [ContainerGroupStatus](documentation/models/ContainerGroupStatus.md)                             |                                                                          |

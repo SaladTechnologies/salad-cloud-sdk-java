@@ -1,10 +1,10 @@
 {
-  "liblabVersion": "2.1.30",
-  "date": "2024-09-01T19:59:05.723Z",
+  "liblabVersion": "2.2.0",
+  "date": "2024-09-11T04:10:26.152Z",
   "config": {
-    "apiId": 1094,
+    "apiId": 1143,
     "sdkName": "salad-cloud-sdk",
-    "sdkVersion": "0.9.0-alpha.1",
+    "sdkVersion": "0.9.0-alpha.2",
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
     "languages": ["java"],
@@ -24,17 +24,17 @@
         ],
         "githubRepoName": "salad-cloud-sdk-dotnet",
         "homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-dotnet",
-        "ignoreFiles": [".gitignore", "LICENSE"],
+        "ignoreFiles": [".gitignore", "./LICENSE"],
         "liblabVersion": "2",
-        "sdkVersion": "0.9.0-alpha.1",
+        "sdkVersion": "0.9.0-alpha.2",
         "targetBranch": "main"
       },
       "go": {
         "goModuleName": "github.com/saladtechnologies/salad-cloud-sdk-go",
         "githubRepoName": "salad-cloud-sdk-go",
-        "ignoreFiles": [".gitignore", "LICENSE"],
+        "ignoreFiles": [".gitignore", "./LICENSE"],
         "liblabVersion": "2",
-        "sdkVersion": "0.9.0-alpha.1",
+        "sdkVersion": "0.9.0-alpha.2",
         "targetBranch": "main"
       },
       "java": {
@@ -56,9 +56,9 @@
         ],
         "githubRepoName": "salad-cloud-sdk-java",
         "homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-java",
-        "ignoreFiles": [".gitignore", "LICENSE"],
+        "ignoreFiles": [".gitignore", "./LICENSE"],
         "liblabVersion": "2",
-        "sdkVersion": "0.9.0-alpha.1",
+        "sdkVersion": "0.9.0-alpha.2",
         "targetBranch": "main"
       },
       "python": {
@@ -99,9 +99,9 @@
           }
         ],
         "githubRepoName": "salad-cloud-sdk-python",
-        "ignoreFiles": [".gitignore", "LICENSE"],
+        "ignoreFiles": [".gitignore", "./LICENSE"],
         "liblabVersion": "2",
-        "sdkVersion": "0.9.0-alpha.1",
+        "sdkVersion": "0.9.0-alpha.2",
         "targetBranch": "main"
       },
       "terraform": {
@@ -112,9 +112,9 @@
         "providerSchemaConfig": {
           "authTokenKey": "api_key"
         },
-        "providerVersion": "0.9.0-alpha.1",
+        "providerVersion": "0.9.0-alpha.2",
         "githubRepoName": "terraform-provider-salad-cloud",
-        "ignoreFiles": [".gitignore", "LICENSE"],
+        "ignoreFiles": [".gitignore", "./LICENSE"],
         "liblabVersion": "2",
         "targetBranch": "main"
       },
@@ -136,9 +136,9 @@
         ],
         "githubRepoName": "salad-cloud-sdk-javascript",
         "homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-javascript",
-        "ignoreFiles": [".gitignore", "LICENSE"],
+        "ignoreFiles": [".gitignore", "./LICENSE"],
         "liblabVersion": "2",
-        "sdkVersion": "0.9.0-alpha.1",
+        "sdkVersion": "0.9.0-alpha.2",
         "targetBranch": "main"
       }
     },
@@ -232,7 +232,7 @@
       }
     ],
     "apiName": "SaladCloud API",
-    "apiVersion": "0.9.0-alpha.1",
+    "apiVersion": "0.9.0-alpha.2",
     "authentication": {
       "apiKey": {
         "header": "Salad-Api-Key"
@@ -279,7 +279,7 @@
     ],
     "githubRepoName": "salad-cloud-sdk-java",
     "homepage": "https://github.com/saladtechnologies/salad-cloud-sdk-java",
-    "ignoreFiles": [".gitignore", "LICENSE"],
+    "ignoreFiles": [".gitignore", "./LICENSE"],
     "targetBranch": "main",
     "language": "java",
     "deliveryMethod": "zip",
@@ -328,7 +328,6 @@
     "src/main/java/com/salad/cloud/sdk/services/OrganizationDataService.java",
     "src/main/java/com/salad/cloud/sdk/http/Environment.java",
     "src/main/java/com/salad/cloud/sdk/SaladCloudSdk.java",
-    "./LICENSE",
     "src/main/java/com/salad/cloud/sdk/http/interceptors/RetryInterceptor.java",
     "src/main/java/com/salad/cloud/sdk/config/RetryConfig.java",
     "src/main/java/com/salad/cloud/sdk/http/interceptors/TokenInterceptor.java",
@@ -397,6 +396,7 @@
     "documentation/models/ContainerGroupReadinessProbe.md",
     "documentation/models/ContainerGroupStartupProbe.md",
     "documentation/models/ContainerGroupQueueConnection.md",
+    "documentation/models/QueueAutoscaler.md",
     "documentation/models/ContainerResourceRequirements.md",
     "documentation/models/ContainerGroupPriority.md",
     "documentation/models/ContainerLogging.md",
@@ -571,6 +571,7 @@
     "src/main/java/com/salad/cloud/sdk/models/CreateContainerRegistryAuthentication.java",
     "src/main/java/com/salad/cloud/sdk/models/UpdateContainerRegistryAuthentication.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerGroupsQuotas.java",
+    "src/main/java/com/salad/cloud/sdk/models/QueueAutoscaler.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerLogging.java",
     "src/main/java/com/salad/cloud/sdk/models/CreateContainerLogging.java",
     "src/main/java/com/salad/cloud/sdk/models/UpdateContainerLogging.java",
@@ -595,8 +596,8 @@
     "documentation/services/QueuesService.md",
     "src/main/java/com/salad/cloud/sdk/services/ContainerGroupsService.java",
     "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJob.java",
-    "src/main/java/com/salad/cloud/sdk/models/CreateContainerGroup.java",
     "documentation/services/ContainerGroupsService.md",
+    "src/main/java/com/salad/cloud/sdk/models/CreateContainerGroup.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerGroup.java"
   ]
 }

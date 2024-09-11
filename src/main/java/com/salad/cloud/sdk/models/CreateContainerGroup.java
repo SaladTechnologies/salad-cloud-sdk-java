@@ -93,4 +93,10 @@ public class CreateContainerGroup {
   @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("queue_connection")
   private ContainerGroupQueueConnection queueConnection;
+
+  /**
+   * Represents the autoscaling rules for a queue
+   */
+  @JsonProperty("queue_autoscaler")
+  private QueueAutoscaler queueAutoscaler;
 }

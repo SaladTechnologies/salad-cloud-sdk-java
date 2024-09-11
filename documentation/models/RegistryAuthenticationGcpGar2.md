@@ -2,6 +2,6 @@
 
 **Properties**
 
-| Name       | Type   | Required | Description |
-| :--------- | :----- | :------- | :---------- |
-| serviceKey | String | ✅       |             |
+| Name       | Type     | Required | Description |
+| :--------- | :------- | :------- | :---------- |
+| serviceKey | `String` | ✅       |             |

@@ -2,7 +2,7 @@
 
 **Properties**
 
-| Name     | Type   | Required | Description |
-| :------- | :----- | :------- | :---------- |
-| username | String | ✅       |             |
-| password | String | ✅       |             |
+| Name     | Type     | Required | Description |
+| :------- | :------- | :------- | :---------- |
+| username | `String` | ✅       |             |
+| password | `String` | ✅       |             |

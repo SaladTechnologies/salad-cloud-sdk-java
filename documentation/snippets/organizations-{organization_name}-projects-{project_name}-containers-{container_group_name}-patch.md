@@ -54,18 +54,18 @@ public class Main {
     Resources resources = Resources
       .builder()
       .cpu(11L)
-      .memory(1557L)
+      .memory(21424L)
       .gpuClasses(gpuClasses)
-      .storageAmount(40250176413L)
+      .storageAmount(12333132242L)
       .build();
 
     List<String> command = Arrays.asList("command");
 
     LoggingAxiom3 loggingAxiom3 = LoggingAxiom3
       .builder()
-      .host("nisi et veniam")
-      .apiToken("Lorem esse dolor")
-      .dataset("et commodo Duis")
+      .host("commodo ea exercitation pariatur consequat")
+      .apiToken("ipsum")
+      .dataset("id Excepteur")
       .build();
 
     DatadogTags3 datadogTags3 = DatadogTags3.builder().name("name").value("value").build();
@@ -74,24 +74,20 @@ public class Main {
 
     LoggingDatadog3 loggingDatadog3 = LoggingDatadog3
       .builder()
-      .host("veniam deserunt sunt dolore")
-      .apiKey("ullamco occaecat nostrud irure")
+      .host("exercitation aliquip")
+      .apiKey("veniam")
       .tags(tags)
       .build();
 
     LoggingNewRelic3 loggingNewRelic3 = LoggingNewRelic3
       .builder()
-      .host("dolor adipisicing eu dolore incididunt")
-      .ingestionKey("aliqua")
+      .host("amet velit sed cillum")
+      .ingestionKey("et")
       .build();
 
-    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3
-      .builder()
-      .host("enim incididunt")
-      .token("Lorem Duis ipsum et")
-      .build();
+    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3.builder().host("proident").token("est").build();
 
-    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("qui in cupidatat deserunt cillum").port(39897L).build();
+    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("ut velit ea cillum").port(13557L).build();
 
     HttpHeaders4 httpHeaders4 = HttpHeaders4.builder().name("name").value("value").build();
 
@@ -99,8 +95,8 @@ public class Main {
 
     LoggingHttp3 loggingHttp3 = LoggingHttp3
       .builder()
-      .host("nostrud ea dolore")
-      .port(52587L)
+      .host("nisi fugiat cupidatat")
+      .port(60288L)
       .user("user")
       .password("password")
       .path("path")
@@ -158,7 +154,7 @@ public class Main {
 
     UpdateContainer updateContainer = UpdateContainer
       .builder()
-      .image("culpa nulla eu non")
+      .image("ex cillum dolor")
       .resources(resources)
       .command(command)
       .priority(ContainerGroupPriority.HIGH)
@@ -171,7 +167,7 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(60033L)
+      .port(64823L)
       .build();
 
     ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(23269L).build();
@@ -243,9 +239,9 @@ public class Main {
 
     UpdateContainerGroup updateContainerGroup = UpdateContainerGroup
       .builder()
-      .displayName("UtDi9VD ZS")
+      .displayName("-xzxtaW.t2I")
       .container(updateContainer)
-      .replicas(183L)
+      .replicas(110L)
       .countryCodes(countryCodes)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -254,9 +250,9 @@ public class Main {
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroupsService.updateContainerGroup(
-      "ob3ca5hduqlb1uzytbhhukf1u0-ahl0b9oqfjj0q",
-      "x7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lx71",
-      "cif9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrm0urjjj5b9hbe2fr6f",
+      "gq7z7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lw",
+      "xd-if9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrmz",
+      "ojjj5b9hbe2fr6f5t7j1htjaws1zx3r",
       updateContainerGroup
     );
 

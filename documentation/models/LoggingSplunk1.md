@@ -2,7 +2,7 @@
 
 **Properties**
 
-| Name  | Type   | Required | Description |
-| :---- | :----- | :------- | :---------- |
-| host  | String | ✅       |             |
-| token | String | ✅       |             |
+| Name  | Type     | Required | Description |
+| :---- | :------- | :------- | :---------- |
+| host  | `String` | ✅       |             |
+| token | `String` | ✅       |             |
