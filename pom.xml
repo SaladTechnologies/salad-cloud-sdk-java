@@ -8,7 +8,7 @@
 
     <groupId>com.salad.cloud</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.9.0-alpha.2</version>
+    <version>0.9.0-alpha.3</version>
 
     <!-- See https://central.sonatype.org/publish/requirements/#project-name-description-and-url -->
     <name>${project.groupId}:${project.artifactId}</name>

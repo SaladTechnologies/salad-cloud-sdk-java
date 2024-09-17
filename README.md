@@ -1,11 +1,11 @@
-# SaladCloudSdk Java SDK 0.9.0-alpha.2
+# SaladCloudSdk Java SDK 0.9.0-alpha.3
 
 Welcome to the SaladCloudSdk SDK documentation. This guide will help you get started with integrating and using the SaladCloudSdk SDK in your project.
 
 ## Versions
 
-- API version: `0.9.0-alpha.2`
-- SDK version: `0.9.0-alpha.2`
+- API version: `0.9.0-alpha.3`
+- SDK version: `0.9.0-alpha.3`
 
 ## About the API
 
@@ -37,15 +37,15 @@ If you use Maven, place the following within the _dependency_ tag in your `pom.x
 ```XML
 <dependency>
     <groupId>com.salad.cloud</groupId>
-    <artifactId>salad-cloud-sdk</artifactId>
-    <version>0.9.0-alpha.2</version>
+    <artifactId>sdk</artifactId>
+    <version>0.9.0-alpha.3</version>
 </dependency>
 ```
 
 If you use Gradle, paste the next line inside the _dependencies_ block of your `build.gradle` file:
 
 ```Gradle
-implementation group: com.salad.cloud, name: salad-cloud-sdk, version: 0.9.0-alpha.2
+implementation group: com.salad.cloud, name: sdk, version: 0.9.0-alpha.3
 ```
 
 If you use JAR files, package the SDK by running the following command:

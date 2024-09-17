@@ -13,6 +13,10 @@ import com.salad.cloud.sdk.models.QueueJob;
 import com.salad.cloud.sdk.models.QueueJobList;
 import com.salad.cloud.sdk.models.QueueList;
 import com.salad.cloud.sdk.models.UpdateQueue;
+import com.salad.cloud.sdk.validation.ViolationAggregator;
+import com.salad.cloud.sdk.validation.exceptions.ValidationException;
+import com.salad.cloud.sdk.validation.validators.NumericValidator;
+import com.salad.cloud.sdk.validation.validators.StringValidator;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.MediaType;
@@ -36,7 +40,8 @@ public class QueuesService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @return response of {@code QueueList}
    */
-  public QueueList listQueues(@NonNull String organizationName, @NonNull String projectName) throws ApiException {
+  public QueueList listQueues(@NonNull String organizationName, @NonNull String projectName)
+    throws ApiException, ValidationException {
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     Response response = this.execute(request);
 
@@ -51,7 +56,7 @@ public class QueuesService extends BaseService {
    * @return response of {@code QueueList}
    */
   public CompletableFuture<QueueList> listQueuesAsync(@NonNull String organizationName, @NonNull String projectName)
-    throws ApiException {
+    throws ApiException, ValidationException {
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -60,7 +65,19 @@ public class QueuesService extends BaseService {
     });
   }
 
-  private Request buildListQueuesRequest(@NonNull String organizationName, @NonNull String projectName) {
+  private Request buildListQueuesRequest(@NonNull String organizationName, @NonNull String projectName)
+    throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -83,7 +100,7 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull CreateQueue createQueue
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildCreateQueueRequest(organizationName, projectName, createQueue);
     Response response = this.execute(request);
 
@@ -102,7 +119,7 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull CreateQueue createQueue
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildCreateQueueRequest(organizationName, projectName, createQueue);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -115,7 +132,18 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull CreateQueue createQueue
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -136,7 +164,7 @@ public class QueuesService extends BaseService {
    * @return response of {@code Queue}
    */
   public Queue getQueue(@NonNull String organizationName, @NonNull String projectName, @NonNull String queueName)
-    throws ApiException {
+    throws ApiException, ValidationException {
     Request request = this.buildGetQueueRequest(organizationName, projectName, queueName);
     Response response = this.execute(request);
 
@@ -155,7 +183,7 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetQueueRequest(organizationName, projectName, queueName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -168,7 +196,22 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        queueName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -194,7 +237,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull UpdateQueue updateQueue
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, updateQueue);
     Response response = this.execute(request);
 
@@ -215,7 +258,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull UpdateQueue updateQueue
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, updateQueue);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -229,7 +272,22 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull UpdateQueue updateQueue
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        queueName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.PATCH,
       this.serverUrl,
@@ -251,7 +309,7 @@ public class QueuesService extends BaseService {
    * @return response of {@code Void}
    */
   public void deleteQueue(@NonNull String organizationName, @NonNull String projectName, @NonNull String queueName)
-    throws ApiException {
+    throws ApiException, ValidationException {
     Request request = this.buildDeleteQueueRequest(organizationName, projectName, queueName);
     this.execute(request);
   }
@@ -268,7 +326,7 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildDeleteQueueRequest(organizationName, projectName, queueName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -279,7 +337,22 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        queueName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.DELETE,
       this.serverUrl,
@@ -305,7 +378,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull ListQueueJobsParameters requestParameters
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     Response response = this.execute(request);
 
@@ -326,7 +399,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull ListQueueJobsParameters requestParameters
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -340,7 +413,22 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull ListQueueJobsParameters requestParameters
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        queueName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -368,7 +456,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull CreateQueueJob createQueueJob
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, createQueueJob);
     Response response = this.execute(request);
 
@@ -389,7 +477,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull CreateQueueJob createQueueJob
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, createQueueJob);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -403,7 +491,22 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull CreateQueueJob createQueueJob
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        queueName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -430,7 +533,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     Response response = this.execute(request);
 
@@ -451,7 +554,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -465,7 +568,22 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        queueName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -492,7 +610,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildDeleteQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     this.execute(request);
   }
@@ -511,7 +629,7 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildDeleteQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -523,7 +641,22 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        queueName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.DELETE,
       this.serverUrl,

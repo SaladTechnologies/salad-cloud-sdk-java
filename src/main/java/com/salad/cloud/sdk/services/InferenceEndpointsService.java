@@ -12,6 +12,10 @@ import com.salad.cloud.sdk.models.InferenceEndpointJob;
 import com.salad.cloud.sdk.models.InferenceEndpointJobList;
 import com.salad.cloud.sdk.models.InferenceEndpointsList;
 import com.salad.cloud.sdk.models.ListInferenceEndpointsParameters;
+import com.salad.cloud.sdk.validation.ViolationAggregator;
+import com.salad.cloud.sdk.validation.exceptions.ValidationException;
+import com.salad.cloud.sdk.validation.validators.NumericValidator;
+import com.salad.cloud.sdk.validation.validators.StringValidator;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.OkHttpClient;
@@ -37,7 +41,7 @@ public class InferenceEndpointsService extends BaseService {
   public InferenceEndpointsList listInferenceEndpoints(
     @NonNull String organizationName,
     @NonNull ListInferenceEndpointsParameters requestParameters
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     Response response = this.execute(request);
 
@@ -54,7 +58,7 @@ public class InferenceEndpointsService extends BaseService {
   public CompletableFuture<InferenceEndpointsList> listInferenceEndpointsAsync(
     @NonNull String organizationName,
     @NonNull ListInferenceEndpointsParameters requestParameters
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -66,7 +70,14 @@ public class InferenceEndpointsService extends BaseService {
   private Request buildListInferenceEndpointsRequest(
     @NonNull String organizationName,
     @NonNull ListInferenceEndpointsParameters requestParameters
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .validateAll();
+
     return new RequestBuilder(HttpMethod.GET, this.serverUrl, "organizations/{organization_name}/inference-endpoints")
       .setPathParameter("organization_name", organizationName)
       .setOptionalQueryParameter("page", requestParameters.getPage())
@@ -84,7 +95,7 @@ public class InferenceEndpointsService extends BaseService {
   public InferenceEndpoint getInferenceEndpoint(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetInferenceEndpointRequest(organizationName, inferenceEndpointName);
     Response response = this.execute(request);
 
@@ -101,7 +112,7 @@ public class InferenceEndpointsService extends BaseService {
   public CompletableFuture<InferenceEndpoint> getInferenceEndpointAsync(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetInferenceEndpointRequest(organizationName, inferenceEndpointName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -113,7 +124,15 @@ public class InferenceEndpointsService extends BaseService {
   private Request buildGetInferenceEndpointRequest(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -136,7 +155,7 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull GetInferenceEndpointJobsParameters requestParameters
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildGetInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     Response response = this.execute(request);
@@ -156,7 +175,7 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull GetInferenceEndpointJobsParameters requestParameters
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildGetInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     CompletableFuture<Response> response = this.executeAsync(request);
@@ -170,7 +189,15 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull GetInferenceEndpointJobsParameters requestParameters
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -195,7 +222,7 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull CreateInferenceEndpointJob createInferenceEndpointJob
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildCreateInferenceEndpointJobRequest(organizationName, inferenceEndpointName, createInferenceEndpointJob);
     Response response = this.execute(request);
@@ -215,7 +242,7 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull CreateInferenceEndpointJob createInferenceEndpointJob
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildCreateInferenceEndpointJobRequest(organizationName, inferenceEndpointName, createInferenceEndpointJob);
     CompletableFuture<Response> response = this.executeAsync(request);
@@ -229,7 +256,15 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull CreateInferenceEndpointJob createInferenceEndpointJob
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -253,7 +288,7 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildGetInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     Response response = this.execute(request);
@@ -273,7 +308,7 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildGetInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     CompletableFuture<Response> response = this.executeAsync(request);
@@ -287,7 +322,15 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -311,7 +354,7 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildDeleteInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     this.execute(request);
@@ -329,7 +372,7 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildDeleteInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     CompletableFuture<Response> response = this.executeAsync(request);
@@ -341,7 +384,15 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.DELETE,
       this.serverUrl,

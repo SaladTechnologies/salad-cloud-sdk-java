@@ -11,6 +11,9 @@ import com.salad.cloud.sdk.models.ContainerGroupInstances;
 import com.salad.cloud.sdk.models.ContainerGroupList;
 import com.salad.cloud.sdk.models.CreateContainerGroup;
 import com.salad.cloud.sdk.models.UpdateContainerGroup;
+import com.salad.cloud.sdk.validation.ViolationAggregator;
+import com.salad.cloud.sdk.validation.exceptions.ValidationException;
+import com.salad.cloud.sdk.validation.validators.StringValidator;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.MediaType;
@@ -35,7 +38,7 @@ public class ContainerGroupsService extends BaseService {
    * @return response of {@code ContainerGroupList}
    */
   public ContainerGroupList listContainerGroups(@NonNull String organizationName, @NonNull String projectName)
-    throws ApiException {
+    throws ApiException, ValidationException {
     Request request = this.buildListContainerGroupsRequest(organizationName, projectName);
     Response response = this.execute(request);
 
@@ -52,7 +55,7 @@ public class ContainerGroupsService extends BaseService {
   public CompletableFuture<ContainerGroupList> listContainerGroupsAsync(
     @NonNull String organizationName,
     @NonNull String projectName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildListContainerGroupsRequest(organizationName, projectName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -61,7 +64,19 @@ public class ContainerGroupsService extends BaseService {
     });
   }
 
-  private Request buildListContainerGroupsRequest(@NonNull String organizationName, @NonNull String projectName) {
+  private Request buildListContainerGroupsRequest(@NonNull String organizationName, @NonNull String projectName)
+    throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -84,7 +99,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull CreateContainerGroup createContainerGroup
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildCreateContainerGroupRequest(organizationName, projectName, createContainerGroup);
     Response response = this.execute(request);
 
@@ -103,7 +118,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull CreateContainerGroup createContainerGroup
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildCreateContainerGroupRequest(organizationName, projectName, createContainerGroup);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -116,7 +131,18 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull CreateContainerGroup createContainerGroup
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -140,7 +166,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetContainerGroupRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
 
@@ -159,7 +185,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetContainerGroupRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -172,7 +198,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -198,7 +239,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull UpdateContainerGroup updateContainerGroup
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildUpdateContainerGroupRequest(organizationName, projectName, containerGroupName, updateContainerGroup);
     Response response = this.execute(request);
@@ -220,7 +261,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull UpdateContainerGroup updateContainerGroup
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildUpdateContainerGroupRequest(organizationName, projectName, containerGroupName, updateContainerGroup);
     CompletableFuture<Response> response = this.executeAsync(request);
@@ -235,7 +276,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull UpdateContainerGroup updateContainerGroup
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.PATCH,
       this.serverUrl,
@@ -260,7 +316,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildDeleteContainerGroupRequest(organizationName, projectName, containerGroupName);
     this.execute(request);
   }
@@ -277,7 +333,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildDeleteContainerGroupRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -288,7 +344,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.DELETE,
       this.serverUrl,
@@ -312,7 +383,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildStartContainerGroupRequest(organizationName, projectName, containerGroupName);
     this.execute(request);
   }
@@ -329,7 +400,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildStartContainerGroupRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -340,7 +411,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -364,7 +450,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildStopContainerGroupRequest(organizationName, projectName, containerGroupName);
     this.execute(request);
   }
@@ -381,7 +467,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildStopContainerGroupRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -392,7 +478,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -416,7 +517,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildListContainerGroupInstancesRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
 
@@ -435,7 +536,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildListContainerGroupInstancesRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -448,7 +549,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -474,7 +590,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildGetContainerGroupInstanceRequest(
           organizationName,
@@ -501,7 +617,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildGetContainerGroupInstanceRequest(
           organizationName,
@@ -521,7 +637,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -548,7 +679,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildReallocateContainerGroupInstanceRequest(
           organizationName,
@@ -573,7 +704,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildReallocateContainerGroupInstanceRequest(
           organizationName,
@@ -591,7 +722,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -618,7 +764,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildRecreateContainerGroupInstanceRequest(
           organizationName,
@@ -643,7 +789,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildRecreateContainerGroupInstanceRequest(
           organizationName,
@@ -661,7 +807,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -688,7 +849,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildRestartContainerGroupInstanceRequest(
           organizationName,
@@ -713,7 +874,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request =
       this.buildRestartContainerGroupInstanceRequest(
           organizationName,
@@ -731,7 +892,22 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName,
     @NonNull String containerGroupName,
     @NonNull String containerGroupInstanceId
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
