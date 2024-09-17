@@ -123,6 +123,7 @@ public class ContainerGroup {
   /**
    * Represents the autoscaling rules for a queue
    */
+  @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("queue_autoscaler")
   private QueueAutoscaler queueAutoscaler;
 }

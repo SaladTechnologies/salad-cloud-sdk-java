@@ -6,6 +6,9 @@ import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
 import com.salad.cloud.sdk.models.WorkloadErrorList;
+import com.salad.cloud.sdk.validation.ViolationAggregator;
+import com.salad.cloud.sdk.validation.exceptions.ValidationException;
+import com.salad.cloud.sdk.validation.validators.StringValidator;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.OkHttpClient;
@@ -33,7 +36,7 @@ public class WorkloadErrorsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetWorkloadErrorsRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
 
@@ -52,7 +55,7 @@ public class WorkloadErrorsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException {
+  ) throws ApiException, ValidationException {
     Request request = this.buildGetWorkloadErrorsRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> response = this.executeAsync(request);
 
@@ -65,7 +68,22 @@ public class WorkloadErrorsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) {
+  ) throws ValidationException {
+    new ViolationAggregator()
+      .add(
+        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        organizationName
+      )
+      .add(
+        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        projectName
+      )
+      .add(
+        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
+        containerGroupName
+      )
+      .validateAll();
+
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,

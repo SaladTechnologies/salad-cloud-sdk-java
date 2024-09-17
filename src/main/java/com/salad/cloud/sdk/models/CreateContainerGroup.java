@@ -97,6 +97,7 @@ public class CreateContainerGroup {
   /**
    * Represents the autoscaling rules for a queue
    */
+  @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("queue_autoscaler")
   private QueueAutoscaler queueAutoscaler;
 }

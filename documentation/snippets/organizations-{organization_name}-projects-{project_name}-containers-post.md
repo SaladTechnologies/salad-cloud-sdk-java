@@ -248,7 +248,7 @@ public class Main {
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
       .minReplicas(57L)
-      .maxReplicas(24L)
+      .maxReplicas(58L)
       .desiredQueueLength(20L)
       .pollingPeriod(1406L)
       .maxUpscalePerMinute(35L)

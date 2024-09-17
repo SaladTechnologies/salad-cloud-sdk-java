@@ -27,7 +27,7 @@ public class QueueAutoscaler {
   private Long minReplicas;
 
   @NonNull
-  @Max(100)
+  @Max(250)
   @Min(1)
   @JsonProperty("max_replicas")
   private Long maxReplicas;

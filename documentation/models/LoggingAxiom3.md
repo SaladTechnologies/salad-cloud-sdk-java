@@ -2,8 +2,8 @@
 
 **Properties**
 
-| Name     | Type     | Required | Description |
-| :------- | :------- | :------- | :---------- |
-| host     | `String` | ✅       |             |
-| apiToken | `String` | ✅       |             |
-| dataset  | `String` | ✅       |             |
+| Name     | Type   | Required | Description |
+| :------- | :----- | :------- | :---------- |
+| host     | String | ✅       |             |
+| apiToken | String | ✅       |             |
+| dataset  | String | ✅       |             |

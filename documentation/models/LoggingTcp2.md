@@ -2,7 +2,7 @@
 
 **Properties**
 
-| Name | Type     | Required | Description |
-| :--- | :------- | :------- | :---------- |
-| host | `String` | ✅       |             |
-| port | `Long`   | ✅       |             |
+| Name | Type   | Required | Description |
+| :--- | :----- | :------- | :---------- |
+| host | String | ✅       |             |
+| port | Long   | ✅       |             |
