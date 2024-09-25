@@ -2,7 +2,6 @@ package com.salad.cloud.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.salad.cloud.sdk.validation.annotation.Length;
 import java.util.List;
 import java.util.Map;
 import lombok.Builder;
@@ -22,7 +21,6 @@ import lombok.extern.jackson.Jacksonized;
 public class UpdateContainer {
 
   @JsonInclude(JsonInclude.Include.ALWAYS)
-  @Length(min = 1, max = 1024)
   private String image;
 
   @JsonInclude(JsonInclude.Include.ALWAYS)

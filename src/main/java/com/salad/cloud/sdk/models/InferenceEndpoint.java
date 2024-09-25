@@ -1,8 +1,6 @@
 package com.salad.cloud.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.salad.cloud.sdk.validation.annotation.Length;
-import com.salad.cloud.sdk.validation.annotation.Pattern;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,8 +34,6 @@ public class InferenceEndpoint {
    * The inference endpoint display name
    */
   @NonNull
-  @Length(min = 2, max = 63)
-  @Pattern("^[ ,-.0-9A-Za-z]+$")
   @JsonProperty("display_name")
   private String displayName;
 

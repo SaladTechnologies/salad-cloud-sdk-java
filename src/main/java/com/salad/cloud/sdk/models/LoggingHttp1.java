@@ -1,9 +1,6 @@
 package com.salad.cloud.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.salad.cloud.sdk.validation.annotation.Length;
-import com.salad.cloud.sdk.validation.annotation.Max;
-import com.salad.cloud.sdk.validation.annotation.Min;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
@@ -20,12 +17,9 @@ import lombok.extern.jackson.Jacksonized;
 public class LoggingHttp1 {
 
   @NonNull
-  @Length(min = 1, max = 1000)
   private String host;
 
   @NonNull
-  @Max(65535)
-  @Min(1)
   private Long port;
 
   @NonNull

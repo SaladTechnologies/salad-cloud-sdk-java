@@ -1,7 +1,5 @@
 package com.salad.cloud.sdk.models;
 
-import com.salad.cloud.sdk.validation.annotation.Max;
-import com.salad.cloud.sdk.validation.annotation.Min;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +15,5 @@ import lombok.extern.jackson.Jacksonized;
 public class ContainerGroupProbeTcp {
 
   @NonNull
-  @Max(65536)
-  @Min(0)
   private Long port;
 }

@@ -1,7 +1,6 @@
 package com.salad.cloud.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.salad.cloud.sdk.validation.annotation.Length;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,7 +25,6 @@ public class GpuClassPrice {
    * The price
    */
   @NonNull
-  @Length(min = 1, max = 20)
   private String price;
 
   // Overwrite lombok builder methods

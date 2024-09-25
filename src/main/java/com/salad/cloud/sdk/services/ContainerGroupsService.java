@@ -14,6 +14,8 @@ import com.salad.cloud.sdk.models.UpdateContainerGroup;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
+import com.salad.cloud.sdk.validation.validators.modelValidators.CreateContainerGroupValidator;
+import com.salad.cloud.sdk.validation.validators.modelValidators.UpdateContainerGroupValidator;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.MediaType;
@@ -141,6 +143,7 @@ public class ContainerGroupsService extends BaseService {
         new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
         projectName
       )
+      .add(new CreateContainerGroupValidator("createContainerGroup"), createContainerGroup)
       .validateAll();
 
     return new RequestBuilder(
@@ -290,6 +293,7 @@ public class ContainerGroupsService extends BaseService {
         new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
         containerGroupName
       )
+      .add(new UpdateContainerGroupValidator("updateContainerGroup"), updateContainerGroup)
       .validateAll();
 
     return new RequestBuilder(
