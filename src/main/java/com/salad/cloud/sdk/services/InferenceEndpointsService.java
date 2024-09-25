@@ -14,7 +14,6 @@ import com.salad.cloud.sdk.models.InferenceEndpointsList;
 import com.salad.cloud.sdk.models.ListInferenceEndpointsParameters;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
-import com.salad.cloud.sdk.validation.validators.NumericValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;

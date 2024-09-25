@@ -15,8 +15,9 @@ import com.salad.cloud.sdk.models.QueueList;
 import com.salad.cloud.sdk.models.UpdateQueue;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
-import com.salad.cloud.sdk.validation.validators.NumericValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
+import com.salad.cloud.sdk.validation.validators.modelValidators.CreateQueueValidator;
+import com.salad.cloud.sdk.validation.validators.modelValidators.UpdateQueueValidator;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.MediaType;
@@ -142,6 +143,7 @@ public class QueuesService extends BaseService {
         new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
         projectName
       )
+      .add(new CreateQueueValidator("createQueue"), createQueue)
       .validateAll();
 
     return new RequestBuilder(
@@ -286,6 +288,7 @@ public class QueuesService extends BaseService {
         new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
         queueName
       )
+      .add(new UpdateQueueValidator("updateQueue"), updateQueue)
       .validateAll();
 
     return new RequestBuilder(

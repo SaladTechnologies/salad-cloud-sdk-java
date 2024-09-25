@@ -1,7 +1,6 @@
 package com.salad.cloud.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.salad.cloud.sdk.validation.annotation.Min;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -50,7 +49,6 @@ public class ContainerGroupInstance {
    * The version of the running container group
    */
   @NonNull
-  @Min(1)
   private Long version;
 
   /**

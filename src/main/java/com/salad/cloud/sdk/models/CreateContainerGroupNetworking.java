@@ -1,7 +1,5 @@
 package com.salad.cloud.sdk.models;
 
-import com.salad.cloud.sdk.validation.annotation.Max;
-import com.salad.cloud.sdk.validation.annotation.Min;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,8 +21,6 @@ public class CreateContainerGroupNetworking {
   private ContainerNetworkingProtocol protocol;
 
   @NonNull
-  @Max(65535)
-  @Min(1)
   private Long port;
 
   @NonNull

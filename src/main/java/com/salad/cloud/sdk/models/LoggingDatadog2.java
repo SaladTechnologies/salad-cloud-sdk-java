@@ -2,7 +2,6 @@ package com.salad.cloud.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.salad.cloud.sdk.validation.annotation.Length;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
@@ -19,11 +18,9 @@ import lombok.extern.jackson.Jacksonized;
 public class LoggingDatadog2 {
 
   @NonNull
-  @Length(min = 1, max = 1000)
   private String host;
 
   @NonNull
-  @Length(min = 1, max = 1000)
   @JsonProperty("api_key")
   private String apiKey;
 

@@ -2,7 +2,6 @@ package com.salad.cloud.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.salad.cloud.sdk.validation.annotation.Min;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,7 +39,6 @@ public class WorkloadError {
   private String allocatedAt;
 
   @NonNull
-  @Min(1)
   private Long version;
 
   @JsonInclude(JsonInclude.Include.ALWAYS)

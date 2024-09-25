@@ -2,10 +2,6 @@ package com.salad.cloud.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.salad.cloud.sdk.validation.annotation.Length;
-import com.salad.cloud.sdk.validation.annotation.Max;
-import com.salad.cloud.sdk.validation.annotation.Min;
-import com.salad.cloud.sdk.validation.annotation.Pattern;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
@@ -25,8 +21,6 @@ import lombok.extern.jackson.Jacksonized;
 public class CreateContainerGroup {
 
   @NonNull
-  @Length(min = 2, max = 63)
-  @Pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
   private String name;
 
   /**
@@ -44,13 +38,9 @@ public class CreateContainerGroup {
   private ContainerRestartPolicy restartPolicy;
 
   @NonNull
-  @Max(250)
-  @Min(0)
   private Long replicas;
 
   @JsonInclude(JsonInclude.Include.ALWAYS)
-  @Length(min = 2, max = 63)
-  @Pattern("^[ ,-.0-9A-Za-z]+$")
   @JsonProperty("display_name")
   private String displayName;
 
