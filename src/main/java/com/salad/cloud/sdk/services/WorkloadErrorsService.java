@@ -71,16 +71,25 @@ public class WorkloadErrorsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 

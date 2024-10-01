@@ -15,12 +15,12 @@ public class CreateContainerLoggingValidator extends AbstractModelValidator<Crea
   @Override
   protected Violation[] validateModel(CreateContainerLogging createContainerLogging) {
     return new ViolationAggregator()
-      .add(new LoggingAxiom2Validator("axiom"), createContainerLogging.getAxiom())
-      .add(new LoggingDatadog2Validator("datadog"), createContainerLogging.getDatadog())
-      .add(new LoggingNewRelic2Validator("newRelic"), createContainerLogging.getNewRelic())
-      .add(new LoggingSplunk2Validator("splunk"), createContainerLogging.getSplunk())
-      .add(new LoggingTcp2Validator("tcp"), createContainerLogging.getTcp())
-      .add(new LoggingHttp2Validator("http"), createContainerLogging.getHttp())
+      .add(new LoggingAxiom2Validator("axiom").validate(createContainerLogging.getAxiom()))
+      .add(new LoggingDatadog2Validator("datadog").validate(createContainerLogging.getDatadog()))
+      .add(new LoggingNewRelic2Validator("newRelic").validate(createContainerLogging.getNewRelic()))
+      .add(new LoggingSplunk2Validator("splunk").validate(createContainerLogging.getSplunk()))
+      .add(new LoggingTcp2Validator("tcp").validate(createContainerLogging.getTcp()))
+      .add(new LoggingHttp2Validator("http").validate(createContainerLogging.getHttp()))
       .aggregate();
   }
 }

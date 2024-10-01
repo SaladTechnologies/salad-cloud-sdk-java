@@ -145,7 +145,7 @@ public class Main {
     ContainerResourceRequirements containerResourceRequirements = ContainerResourceRequirements
       .builder()
       .cpu(10L)
-      .memory(17858L)
+      .memory(35273L)
       .gpuClasses(gpuClasses)
       .storageAmount(32391110488L)
       .build();

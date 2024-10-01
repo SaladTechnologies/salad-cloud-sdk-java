@@ -18,8 +18,10 @@ public class QueueJobListValidator extends AbstractModelValidator<QueueJobList> 
   protected Violation[] validateModel(QueueJobList queueJobList) {
     return new ViolationAggregator()
       .add(
-        new ListValidator<QueueJob>("items").maxLength(100).itemValidator(new QueueJobValidator()),
-        queueJobList.getItems()
+        new ListValidator<QueueJob>("items")
+          .maxLength(100)
+          .itemValidator(new QueueJobValidator())
+          .validate(queueJobList.getItems())
       )
       .aggregate();
   }

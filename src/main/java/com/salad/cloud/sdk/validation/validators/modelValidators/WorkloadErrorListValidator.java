@@ -17,7 +17,7 @@ public class WorkloadErrorListValidator extends AbstractModelValidator<WorkloadE
   @Override
   protected Violation[] validateModel(WorkloadErrorList workloadErrorList) {
     return new ViolationAggregator()
-      .add(new ListValidator<WorkloadError>("items").maxLength(50), workloadErrorList.getItems())
+      .add(new ListValidator<WorkloadError>("items").maxLength(50).validate(workloadErrorList.getItems()))
       .aggregate();
   }
 }

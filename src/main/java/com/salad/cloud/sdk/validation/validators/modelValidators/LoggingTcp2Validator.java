@@ -17,8 +17,8 @@ public class LoggingTcp2Validator extends AbstractModelValidator<LoggingTcp2> {
   @Override
   protected Violation[] validateModel(LoggingTcp2 loggingTcp2) {
     return new ViolationAggregator()
-      .add(new StringValidator("host").minLength(1).maxLength(1000), loggingTcp2.getHost())
-      .add(new NumericValidator<Long>("port").min(1L).max(65535L), loggingTcp2.getPort())
+      .add(new StringValidator("host").minLength(1).maxLength(1000).validate(loggingTcp2.getHost()))
+      .add(new NumericValidator<Long>("port").min(1L).max(65535L).validate(loggingTcp2.getPort()))
       .aggregate();
   }
 }

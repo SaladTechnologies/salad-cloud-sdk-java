@@ -17,10 +17,13 @@ public class UpdateQueueValidator extends AbstractModelValidator<UpdateQueue> {
   protected Violation[] validateModel(UpdateQueue updateQueue) {
     return new ViolationAggregator()
       .add(
-        new StringValidator("displayName").minLength(2).maxLength(63).pattern("^[ ,-.0-9A-Za-z]+$"),
-        updateQueue.getDisplayName()
+        new StringValidator("displayName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[ ,-.0-9A-Za-z]+$")
+          .validate(updateQueue.getDisplayName())
       )
-      .add(new StringValidator("description").maxLength(500), updateQueue.getDescription())
+      .add(new StringValidator("description").maxLength(500).validate(updateQueue.getDescription()))
       .aggregate();
   }
 }

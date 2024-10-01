@@ -19,9 +19,9 @@ public class LoggingHttp3Validator extends AbstractModelValidator<LoggingHttp3> 
   @Override
   protected Violation[] validateModel(LoggingHttp3 loggingHttp3) {
     return new ViolationAggregator()
-      .add(new StringValidator("host").minLength(1).maxLength(1000), loggingHttp3.getHost())
-      .add(new NumericValidator<Long>("port").min(1L).max(65535L), loggingHttp3.getPort())
-      .add(new ListValidator<HttpHeaders4>("headers").maxLength(1000), loggingHttp3.getHeaders())
+      .add(new StringValidator("host").minLength(1).maxLength(1000).validate(loggingHttp3.getHost()))
+      .add(new NumericValidator<Long>("port").min(1L).max(65535L).validate(loggingHttp3.getPort()))
+      .add(new ListValidator<HttpHeaders4>("headers").maxLength(1000).validate(loggingHttp3.getHeaders()))
       .aggregate();
   }
 }

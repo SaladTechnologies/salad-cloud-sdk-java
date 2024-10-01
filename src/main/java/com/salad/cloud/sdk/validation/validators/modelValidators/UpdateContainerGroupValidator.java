@@ -20,14 +20,19 @@ public class UpdateContainerGroupValidator extends AbstractModelValidator<Update
   protected Violation[] validateModel(UpdateContainerGroup updateContainerGroup) {
     return new ViolationAggregator()
       .add(
-        new StringValidator("displayName").minLength(2).maxLength(63).pattern("^[ ,-.0-9A-Za-z]+$"),
-        updateContainerGroup.getDisplayName()
+        new StringValidator("displayName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[ ,-.0-9A-Za-z]+$")
+          .validate(updateContainerGroup.getDisplayName())
       )
-      .add(new UpdateContainerValidator("container"), updateContainerGroup.getContainer())
-      .add(new NumericValidator<Long>("replicas").min(0L).max(250L), updateContainerGroup.getReplicas())
+      .add(new UpdateContainerValidator("container").validate(updateContainerGroup.getContainer()))
+      .add(new NumericValidator<Long>("replicas").min(0L).max(250L).validate(updateContainerGroup.getReplicas()))
       .add(
-        new ListValidator<CountryCode>("countryCodes").minLength(1).maxLength(500),
-        updateContainerGroup.getCountryCodes()
+        new ListValidator<CountryCode>("countryCodes")
+          .minLength(1)
+          .maxLength(500)
+          .validate(updateContainerGroup.getCountryCodes())
       )
       .aggregate();
   }

@@ -17,7 +17,12 @@ public class QueueListValidator extends AbstractModelValidator<QueueList> {
   @Override
   protected Violation[] validateModel(QueueList queueList) {
     return new ViolationAggregator()
-      .add(new ListValidator<Queue>("items").maxLength(100).itemValidator(new QueueValidator()), queueList.getItems())
+      .add(
+        new ListValidator<Queue>("items")
+          .maxLength(100)
+          .itemValidator(new QueueValidator())
+          .validate(queueList.getItems())
+      )
       .aggregate();
   }
 }

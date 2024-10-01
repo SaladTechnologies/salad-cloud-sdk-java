@@ -17,8 +17,8 @@ public class LoggingTcp3Validator extends AbstractModelValidator<LoggingTcp3> {
   @Override
   protected Violation[] validateModel(LoggingTcp3 loggingTcp3) {
     return new ViolationAggregator()
-      .add(new StringValidator("host").minLength(1).maxLength(1000), loggingTcp3.getHost())
-      .add(new NumericValidator<Long>("port").min(1L).max(65535L), loggingTcp3.getPort())
+      .add(new StringValidator("host").minLength(1).maxLength(1000).validate(loggingTcp3.getHost()))
+      .add(new NumericValidator<Long>("port").min(1L).max(65535L).validate(loggingTcp3.getPort()))
       .aggregate();
   }
 }

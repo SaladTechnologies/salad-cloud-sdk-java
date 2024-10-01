@@ -19,9 +19,9 @@ public class LoggingHttp2Validator extends AbstractModelValidator<LoggingHttp2> 
   @Override
   protected Violation[] validateModel(LoggingHttp2 loggingHttp2) {
     return new ViolationAggregator()
-      .add(new StringValidator("host").minLength(1).maxLength(1000), loggingHttp2.getHost())
-      .add(new NumericValidator<Long>("port").min(1L).max(65535L), loggingHttp2.getPort())
-      .add(new ListValidator<HttpHeaders3>("headers").maxLength(1000), loggingHttp2.getHeaders())
+      .add(new StringValidator("host").minLength(1).maxLength(1000).validate(loggingHttp2.getHost()))
+      .add(new NumericValidator<Long>("port").min(1L).max(65535L).validate(loggingHttp2.getPort()))
+      .add(new ListValidator<HttpHeaders3>("headers").maxLength(1000).validate(loggingHttp2.getHeaders()))
       .aggregate();
   }
 }

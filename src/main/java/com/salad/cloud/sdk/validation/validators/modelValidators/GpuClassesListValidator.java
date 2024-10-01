@@ -18,8 +18,10 @@ public class GpuClassesListValidator extends AbstractModelValidator<GpuClassesLi
   protected Violation[] validateModel(GpuClassesList gpuClassesList) {
     return new ViolationAggregator()
       .add(
-        new ListValidator<GpuClass>("items").maxLength(100).itemValidator(new GpuClassValidator()),
-        gpuClassesList.getItems()
+        new ListValidator<GpuClass>("items")
+          .maxLength(100)
+          .itemValidator(new GpuClassValidator())
+          .validate(gpuClassesList.getItems())
       )
       .aggregate();
   }

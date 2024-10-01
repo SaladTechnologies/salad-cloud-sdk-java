@@ -16,8 +16,8 @@ public class LoggingSplunk3Validator extends AbstractModelValidator<LoggingSplun
   @Override
   protected Violation[] validateModel(LoggingSplunk3 loggingSplunk3) {
     return new ViolationAggregator()
-      .add(new StringValidator("host").minLength(1).maxLength(1000), loggingSplunk3.getHost())
-      .add(new StringValidator("token").minLength(1).maxLength(1000), loggingSplunk3.getToken())
+      .add(new StringValidator("host").minLength(1).maxLength(1000).validate(loggingSplunk3.getHost()))
+      .add(new StringValidator("token").minLength(1).maxLength(1000).validate(loggingSplunk3.getToken()))
       .aggregate();
   }
 }
