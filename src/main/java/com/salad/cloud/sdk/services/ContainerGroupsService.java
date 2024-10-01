@@ -70,12 +70,18 @@ public class ContainerGroupsService extends BaseService {
     throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .validateAll();
 
@@ -136,14 +142,20 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
-      .add(new CreateContainerGroupValidator("createContainerGroup"), createContainerGroup)
+      .add(new CreateContainerGroupValidator("createContainerGroup").validate(createContainerGroup))
       .validateAll();
 
     return new RequestBuilder(
@@ -204,16 +216,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 
@@ -282,18 +303,27 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
-      .add(new UpdateContainerGroupValidator("updateContainerGroup"), updateContainerGroup)
+      .add(new UpdateContainerGroupValidator("updateContainerGroup").validate(updateContainerGroup))
       .validateAll();
 
     return new RequestBuilder(
@@ -351,16 +381,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 
@@ -418,16 +457,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 
@@ -485,16 +533,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 
@@ -556,16 +613,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 
@@ -644,16 +710,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 
@@ -729,16 +804,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 
@@ -814,16 +898,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 
@@ -899,16 +992,25 @@ public class ContainerGroupsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .add(
-        new StringValidator("projectName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        projectName
+        new StringValidator("projectName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(projectName)
       )
       .add(
-        new StringValidator("containerGroupName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupName
+        new StringValidator("containerGroupName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupName)
       )
       .validateAll();
 

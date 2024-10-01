@@ -16,9 +16,9 @@ public class LoggingAxiom3Validator extends AbstractModelValidator<LoggingAxiom3
   @Override
   protected Violation[] validateModel(LoggingAxiom3 loggingAxiom3) {
     return new ViolationAggregator()
-      .add(new StringValidator("host").minLength(1).maxLength(1000), loggingAxiom3.getHost())
-      .add(new StringValidator("apiToken").minLength(1).maxLength(1000), loggingAxiom3.getApiToken())
-      .add(new StringValidator("dataset").minLength(1).maxLength(1000), loggingAxiom3.getDataset())
+      .add(new StringValidator("host").minLength(1).maxLength(1000).validate(loggingAxiom3.getHost()))
+      .add(new StringValidator("apiToken").minLength(1).maxLength(1000).validate(loggingAxiom3.getApiToken()))
+      .add(new StringValidator("dataset").minLength(1).maxLength(1000).validate(loggingAxiom3.getDataset()))
       .aggregate();
   }
 }

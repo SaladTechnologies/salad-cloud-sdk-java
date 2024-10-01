@@ -18,8 +18,10 @@ public class InferenceEndpointsListValidator extends AbstractModelValidator<Infe
   protected Violation[] validateModel(InferenceEndpointsList inferenceEndpointsList) {
     return new ViolationAggregator()
       .add(
-        new ListValidator<InferenceEndpoint>("items").maxLength(100).itemValidator(new InferenceEndpointValidator()),
-        inferenceEndpointsList.getItems()
+        new ListValidator<InferenceEndpoint>("items")
+          .maxLength(100)
+          .itemValidator(new InferenceEndpointValidator())
+          .validate(inferenceEndpointsList.getItems())
       )
       .aggregate();
   }

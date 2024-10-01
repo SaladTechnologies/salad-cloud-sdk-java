@@ -16,7 +16,7 @@ public class GpuClassPriceValidator extends AbstractModelValidator<GpuClassPrice
   @Override
   protected Violation[] validateModel(GpuClassPrice gpuClassPrice) {
     return new ViolationAggregator()
-      .add(new StringValidator("price").minLength(1).maxLength(20), gpuClassPrice.getPrice())
+      .add(new StringValidator("price").minLength(1).maxLength(20).validate(gpuClassPrice.getPrice()))
       .aggregate();
   }
 }

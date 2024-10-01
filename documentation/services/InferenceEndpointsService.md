@@ -50,12 +50,12 @@ public class Main {
 
     ListInferenceEndpointsParameters requestParameters = ListInferenceEndpointsParameters
       .builder()
-      .page(756148233L)
-      .pageSize(66L)
+      .page(832002798L)
+      .pageSize(51L)
       .build();
 
     InferenceEndpointsList response = saladCloudSdk.inferenceEndpointsService.listInferenceEndpoints(
-      "wg1umdxtc9fte8osib-e-5ux2vsmrhjjt13u7q3pryxxnm",
+      "l50g1umdxtc9fte7",
       requestParameters
     );
 
@@ -102,8 +102,8 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     InferenceEndpoint response = saladCloudSdk.inferenceEndpointsService.getInferenceEndpoint(
-      "uzp1dyfm2yp4-lxa27tl0fwms3fu3myo74a99jr6ouv4w8",
-      "aute Ut reprehenderit occaecat sed"
+      "zux2vsmrhjjt13u7q3pryxxnnnyigut20zp1dyfm2yp4-lxa27tl0e",
+      "qui adipisicing"
     );
 
     System.out.println(response);
@@ -152,13 +152,13 @@ public class Main {
 
     GetInferenceEndpointJobsParameters requestParameters = GetInferenceEndpointJobsParameters
       .builder()
-      .page(1653138765L)
-      .pageSize(76L)
+      .page(82661968L)
+      .pageSize(27L)
       .build();
 
     InferenceEndpointJobList response = saladCloudSdk.inferenceEndpointsService.getInferenceEndpointJobs(
-      "trzfoq1p77wk9jgwxjp56dzbnwtbgowklqt1wsbe00",
-      "ut officia ut",
+      "bzx0y-i4o1cvulgdrx",
+      "minim",
       requestParameters
     );
 
@@ -214,8 +214,8 @@ public class Main {
       .build();
 
     InferenceEndpointJob response = saladCloudSdk.inferenceEndpointsService.createInferenceEndpointJob(
-      "trzfoq1p77wk9jgwxjp56dzbnwtbgowklqt1wsbe00",
-      "ut officia ut",
+      "bzx0y-i4o1cvulgdrx",
+      "minim",
       createInferenceEndpointJob
     );
 
@@ -263,8 +263,8 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     InferenceEndpointJob response = saladCloudSdk.inferenceEndpointsService.getInferenceEndpointJob(
-      "b7tj9",
-      "sed eu labore",
+      "v0jo001xz6w2uhgmhtgvpqzhztmaqawqn92-rig0bznv-21cb7tj-hp2ecbvldq",
+      "elit sint",
       "inference_endpoint_job_id"
     );
 
@@ -307,8 +307,8 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     saladCloudSdk.inferenceEndpointsService.deleteInferenceEndpointJob(
-      "b7tj9",
-      "sed eu labore",
+      "v0jo001xz6w2uhgmhtgvpqzhztmaqawqn92-rig0bznv-21cb7tj-hp2ecbvldq",
+      "elit sint",
       "inference_endpoint_job_id"
     );
   }

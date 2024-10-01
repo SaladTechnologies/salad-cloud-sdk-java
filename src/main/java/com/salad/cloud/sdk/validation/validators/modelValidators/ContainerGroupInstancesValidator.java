@@ -18,8 +18,9 @@ public class ContainerGroupInstancesValidator extends AbstractModelValidator<Con
   protected Violation[] validateModel(ContainerGroupInstances containerGroupInstances) {
     return new ViolationAggregator()
       .add(
-        new ListValidator<ContainerGroupInstance>("instances").maxLength(1000),
-        containerGroupInstances.getInstances()
+        new ListValidator<ContainerGroupInstance>("instances")
+          .maxLength(1000)
+          .validate(containerGroupInstances.getInstances())
       )
       .aggregate();
   }

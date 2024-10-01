@@ -17,7 +17,7 @@ public class QueueJobValidator extends AbstractModelValidator<QueueJob> {
   @Override
   protected Violation[] validateModel(QueueJob queueJob) {
     return new ViolationAggregator()
-      .add(new ListValidator<QueueJobEvent>("events").maxLength(1000), queueJob.getEvents())
+      .add(new ListValidator<QueueJobEvent>("events").maxLength(1000).validate(queueJob.getEvents()))
       .aggregate();
   }
 }

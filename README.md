@@ -1,11 +1,11 @@
-# SaladCloudSdk Java SDK 0.9.0-alpha.4
+# SaladCloudSdk Java SDK 0.9.0-alpha.5
 
 Welcome to the SaladCloudSdk SDK documentation. This guide will help you get started with integrating and using the SaladCloudSdk SDK in your project.
 
 ## Versions
 
-- API version: `0.9.0-alpha.3`
-- SDK version: `0.9.0-alpha.4`
+- API version: `0.9.0-alpha.4`
+- SDK version: `0.9.0-alpha.5`
 
 ## About the API
 
@@ -38,14 +38,14 @@ If you use Maven, place the following within the _dependency_ tag in your `pom.x
 <dependency>
     <groupId>com.salad.cloud</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.9.0-alpha.4</version>
+    <version>0.9.0-alpha.5</version>
 </dependency>
 ```
 
 If you use Gradle, paste the next line inside the _dependencies_ block of your `build.gradle` file:
 
 ```Gradle
-implementation group: com.salad.cloud, name: sdk, version: 0.9.0-alpha.4
+implementation group: com.salad.cloud, name: sdk, version: 0.9.0-alpha.5
 ```
 
 If you use JAR files, package the SDK by running the following command:
@@ -219,7 +219,6 @@ The SDK includes several models that represent the data structures used in API r
 | [WorkloadError](documentation/models/WorkloadError.md)                                           | Represents a workload error                                              |
 | [QueueJobEvent](documentation/models/QueueJobEvent.md)                                           | Represents an event for queue job                                        |
 | [ContainerGroupsQuotas](documentation/models/ContainerGroupsQuotas.md)                           |                                                                          |
-| [RecipesQuotas](documentation/models/RecipesQuotas.md)                                           |                                                                          |
 | [InferenceEndpointJobEvent](documentation/models/InferenceEndpointJobEvent.md)                   | Represents an event for inference endpoint job                           |
 | [GpuClass](documentation/models/GpuClass.md)                                                     | Represents a GPU Class                                                   |
 | [GpuClassPrice](documentation/models/GpuClassPrice.md)                                           | Represents the price of a GPU class for a given container group priority |

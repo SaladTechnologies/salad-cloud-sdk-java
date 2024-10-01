@@ -38,7 +38,7 @@ public class BaseService {
     }
   }
 
-  protected CompletableFuture<Response> executeAsync(Request request) throws ApiException {
+  protected CompletableFuture<Response> executeAsync(Request request) {
     CompletableFuture<Response> future = new CompletableFuture<>();
     this.httpClient.newCall(request)
       .enqueue(

@@ -17,8 +17,11 @@ public class InferenceEndpointValidator extends AbstractModelValidator<Inference
   protected Violation[] validateModel(InferenceEndpoint inferenceEndpoint) {
     return new ViolationAggregator()
       .add(
-        new StringValidator("displayName").minLength(2).maxLength(63).pattern("^[ ,-.0-9A-Za-z]+$"),
-        inferenceEndpoint.getDisplayName()
+        new StringValidator("displayName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[ ,-.0-9A-Za-z]+$")
+          .validate(inferenceEndpoint.getDisplayName())
       )
       .aggregate();
   }

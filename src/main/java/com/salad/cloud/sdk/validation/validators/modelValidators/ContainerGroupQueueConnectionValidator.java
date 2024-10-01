@@ -17,11 +17,14 @@ public class ContainerGroupQueueConnectionValidator extends AbstractModelValidat
   @Override
   protected Violation[] validateModel(ContainerGroupQueueConnection containerGroupQueueConnection) {
     return new ViolationAggregator()
-      .add(new StringValidator("path").minLength(1).maxLength(1024), containerGroupQueueConnection.getPath())
-      .add(new NumericValidator<Long>("port").min(1L).max(65535L), containerGroupQueueConnection.getPort())
+      .add(new StringValidator("path").minLength(1).maxLength(1024).validate(containerGroupQueueConnection.getPath()))
+      .add(new NumericValidator<Long>("port").min(1L).max(65535L).validate(containerGroupQueueConnection.getPort()))
       .add(
-        new StringValidator("queueName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        containerGroupQueueConnection.getQueueName()
+        new StringValidator("queueName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(containerGroupQueueConnection.getQueueName())
       )
       .aggregate();
   }

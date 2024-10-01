@@ -17,13 +17,13 @@ public class Main {
 
     GetInferenceEndpointJobsParameters requestParameters = GetInferenceEndpointJobsParameters
       .builder()
-      .page(1653138765L)
-      .pageSize(76L)
+      .page(82661968L)
+      .pageSize(27L)
       .build();
 
     InferenceEndpointJobList response = saladCloudSdk.inferenceEndpointsService.getInferenceEndpointJobs(
-      "trzfoq1p77wk9jgwxjp56dzbnwtbgowklqt1wsbe00",
-      "ut officia ut",
+      "bzx0y-i4o1cvulgdrx",
+      "minim",
       requestParameters
     );
 

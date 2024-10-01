@@ -22,10 +22,6 @@ public class Quotas {
   @JsonProperty("container_groups_quotas")
   private ContainerGroupsQuotas containerGroupsQuotas;
 
-  @NonNull
-  @JsonProperty("recipes_quotas")
-  private RecipesQuotas recipesQuotas;
-
   /**
    * The time the resource was created
    */

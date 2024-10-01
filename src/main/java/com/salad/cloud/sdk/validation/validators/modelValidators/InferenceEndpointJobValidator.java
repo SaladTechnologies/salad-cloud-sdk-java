@@ -17,7 +17,11 @@ public class InferenceEndpointJobValidator extends AbstractModelValidator<Infere
   @Override
   protected Violation[] validateModel(InferenceEndpointJob inferenceEndpointJob) {
     return new ViolationAggregator()
-      .add(new ListValidator<InferenceEndpointJobEvent>("events").maxLength(1000), inferenceEndpointJob.getEvents())
+      .add(
+        new ListValidator<InferenceEndpointJobEvent>("events")
+          .maxLength(1000)
+          .validate(inferenceEndpointJob.getEvents())
+      )
       .aggregate();
   }
 }

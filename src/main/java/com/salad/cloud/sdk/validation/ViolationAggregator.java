@@ -10,11 +10,8 @@ public class ViolationAggregator {
 
   List<Violation> violations = new ArrayList<>();
 
-  public <T> ViolationAggregator add(AbstractValidator<T> validator, T value) {
-    Violation[] violations = validator.validate(value);
-    if (violations.length > 0) {
-      this.violations.addAll(Arrays.asList(violations));
-    }
+  public <T> ViolationAggregator add(Violation[] violations) {
+    this.violations.addAll(Arrays.asList(violations));
     return this;
   }
 

@@ -16,8 +16,10 @@ public class LoggingNewRelic1Validator extends AbstractModelValidator<LoggingNew
   @Override
   protected Violation[] validateModel(LoggingNewRelic1 loggingNewRelic1) {
     return new ViolationAggregator()
-      .add(new StringValidator("host").minLength(1).maxLength(1000), loggingNewRelic1.getHost())
-      .add(new StringValidator("ingestionKey").minLength(1).maxLength(1000), loggingNewRelic1.getIngestionKey())
+      .add(new StringValidator("host").minLength(1).maxLength(1000).validate(loggingNewRelic1.getHost()))
+      .add(
+        new StringValidator("ingestionKey").minLength(1).maxLength(1000).validate(loggingNewRelic1.getIngestionKey())
+      )
       .aggregate();
   }
 }

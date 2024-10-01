@@ -72,8 +72,11 @@ public class InferenceEndpointsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
       .validateAll();
 
@@ -126,10 +129,13 @@ public class InferenceEndpointsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
-      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63).validate(inferenceEndpointName))
       .validateAll();
 
     return new RequestBuilder(
@@ -191,10 +197,13 @@ public class InferenceEndpointsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
-      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63).validate(inferenceEndpointName))
       .validateAll();
 
     return new RequestBuilder(
@@ -258,10 +267,13 @@ public class InferenceEndpointsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
-      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63).validate(inferenceEndpointName))
       .validateAll();
 
     return new RequestBuilder(
@@ -324,10 +336,13 @@ public class InferenceEndpointsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
-      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63).validate(inferenceEndpointName))
       .validateAll();
 
     return new RequestBuilder(
@@ -386,10 +401,13 @@ public class InferenceEndpointsService extends BaseService {
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
-        new StringValidator("organizationName").minLength(2).maxLength(63).pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$"),
-        organizationName
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .validate(organizationName)
       )
-      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63), inferenceEndpointName)
+      .add(new StringValidator("inferenceEndpointName").minLength(2).maxLength(63).validate(inferenceEndpointName))
       .validateAll();
 
     return new RequestBuilder(

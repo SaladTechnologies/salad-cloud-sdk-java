@@ -17,12 +17,12 @@ public class Main {
 
     ListInferenceEndpointsParameters requestParameters = ListInferenceEndpointsParameters
       .builder()
-      .page(756148233L)
-      .pageSize(66L)
+      .page(832002798L)
+      .pageSize(51L)
       .build();
 
     InferenceEndpointsList response = saladCloudSdk.inferenceEndpointsService.listInferenceEndpoints(
-      "wg1umdxtc9fte8osib-e-5ux2vsmrhjjt13u7q3pryxxnm",
+      "l50g1umdxtc9fte7",
       requestParameters
     );
 

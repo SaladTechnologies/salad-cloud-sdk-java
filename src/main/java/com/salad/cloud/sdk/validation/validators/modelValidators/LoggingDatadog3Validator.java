@@ -18,9 +18,9 @@ public class LoggingDatadog3Validator extends AbstractModelValidator<LoggingData
   @Override
   protected Violation[] validateModel(LoggingDatadog3 loggingDatadog3) {
     return new ViolationAggregator()
-      .add(new StringValidator("host").minLength(1).maxLength(1000), loggingDatadog3.getHost())
-      .add(new StringValidator("apiKey").minLength(1).maxLength(1000), loggingDatadog3.getApiKey())
-      .add(new ListValidator<DatadogTags3>("tags").maxLength(1000), loggingDatadog3.getTags())
+      .add(new StringValidator("host").minLength(1).maxLength(1000).validate(loggingDatadog3.getHost()))
+      .add(new StringValidator("apiKey").minLength(1).maxLength(1000).validate(loggingDatadog3.getApiKey()))
+      .add(new ListValidator<DatadogTags3>("tags").maxLength(1000).validate(loggingDatadog3.getTags()))
       .aggregate();
   }
 }
