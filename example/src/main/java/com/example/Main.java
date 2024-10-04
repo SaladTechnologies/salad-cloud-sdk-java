@@ -15,7 +15,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    Quotas response = saladCloudSdk.quotasService.getQuotas("o110sou");
+    Quotas response = saladCloudSdk.quotasService.getQuotas("oecson4k2eclxr");
 
     System.out.println(response);
   }

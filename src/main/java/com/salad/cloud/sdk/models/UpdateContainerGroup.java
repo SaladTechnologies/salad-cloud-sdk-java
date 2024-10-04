@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.With;
 import lombok.extern.jackson.Jacksonized;
 
 /**
@@ -14,6 +15,7 @@ import lombok.extern.jackson.Jacksonized;
  */
 @Data
 @Builder
+@With
 @ToString
 @EqualsAndHashCode
 @Jacksonized
@@ -64,4 +66,11 @@ public class UpdateContainerGroup {
   @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("startup_probe")
   private ContainerGroupStartupProbe startupProbe;
+
+  /**
+   * Represents the autoscaling rules for a queue
+   */
+  @JsonInclude(JsonInclude.Include.ALWAYS)
+  @JsonProperty("queue_autoscaler")
+  private QueueAutoscaler queueAutoscaler;
 }

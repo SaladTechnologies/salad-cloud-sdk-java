@@ -15,9 +15,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     Queue response = saladCloudSdk.queuesService.getQueue(
-      "g1bq27ohe5dpzbgsk8gvpuhecson4k2eclxss3",
-      "wtxd1j0ixuhfk-hdff3n3-hbtsigyh53bt0g4gjh8mcz4",
-      "bnkfiyt3k5ke3wy-5gl1809r"
+      "bb5wprcvb9628akhug9lnd2",
+      "bw-4bdb9jsi-f1xex70mdgjf5n-5ua-e28xyu9ujbls0vsy",
+      "wilo12xl52y9c178cmdya6ykpby-hunb0b6s7s2l"
     );
 
     System.out.println(response);

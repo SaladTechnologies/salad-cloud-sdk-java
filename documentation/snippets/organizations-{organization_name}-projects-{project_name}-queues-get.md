@@ -15,8 +15,8 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     QueueList response = saladCloudSdk.queuesService.listQueues(
-      "rtxaydgbmb5wprcvb9628akhug9lnd3c0",
-      "p4bdb9jsi-f1xex70mdgjf5n-5ua-e28xyu9ujbls0vsz6xilo12xl52y9c177"
+      "xtp82b9jzwqov1insghigvfq0donadhrrdqx-2redu46g7e",
+      "xk27gbnpmwk5xor49bk4ujk7"
     );
 
     System.out.println(response);
