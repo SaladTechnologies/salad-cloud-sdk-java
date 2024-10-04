@@ -24,6 +24,7 @@ import com.salad.cloud.sdk.models.LoggingHttp3;
 import com.salad.cloud.sdk.models.LoggingNewRelic3;
 import com.salad.cloud.sdk.models.LoggingSplunk3;
 import com.salad.cloud.sdk.models.LoggingTcp3;
+import com.salad.cloud.sdk.models.QueueAutoscaler;
 import com.salad.cloud.sdk.models.RegistryAuthenticationAwsEcr2;
 import com.salad.cloud.sdk.models.RegistryAuthenticationBasic2;
 import com.salad.cloud.sdk.models.RegistryAuthenticationDockerHub2;
@@ -53,19 +54,19 @@ public class Main {
 
     Resources resources = Resources
       .builder()
-      .cpu(11L)
-      .memory(21424L)
+      .cpu(3L)
+      .memory(14678L)
       .gpuClasses(gpuClasses)
-      .storageAmount(12333132242L)
+      .storageAmount(47984533464L)
       .build();
 
     List<String> command = Arrays.asList("command");
 
     LoggingAxiom3 loggingAxiom3 = LoggingAxiom3
       .builder()
-      .host("commodo ea exercitation pariatur consequat")
-      .apiToken("ipsum")
-      .dataset("id Excepteur")
+      .host("aute veniam exercitation eiusmod et")
+      .apiToken("mollit")
+      .dataset("nisi in Lorem")
       .build();
 
     DatadogTags3 datadogTags3 = DatadogTags3.builder().name("name").value("value").build();
@@ -74,20 +75,24 @@ public class Main {
 
     LoggingDatadog3 loggingDatadog3 = LoggingDatadog3
       .builder()
-      .host("exercitation aliquip")
-      .apiKey("veniam")
+      .host("velit officia consequat")
+      .apiKey("sit in veniam")
       .tags(tags)
       .build();
 
     LoggingNewRelic3 loggingNewRelic3 = LoggingNewRelic3
       .builder()
-      .host("amet velit sed cillum")
-      .ingestionKey("et")
+      .host("consequat sed")
+      .ingestionKey("tempor exercitation")
       .build();
 
-    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3.builder().host("proident").token("est").build();
+    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3
+      .builder()
+      .host("qui enim Ut nostrud deserunt")
+      .token("cillum sint ullamco veniam occaecat")
+      .build();
 
-    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("ut velit ea cillum").port(13557L).build();
+    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("Ut amet").port(30110L).build();
 
     HttpHeaders4 httpHeaders4 = HttpHeaders4.builder().name("name").value("value").build();
 
@@ -95,8 +100,8 @@ public class Main {
 
     LoggingHttp3 loggingHttp3 = LoggingHttp3
       .builder()
-      .host("nisi fugiat cupidatat")
-      .port(60288L)
+      .host("eiusmod labore proident sit ut")
+      .port(17490L)
       .user("user")
       .password("password")
       .path("path")
@@ -154,7 +159,7 @@ public class Main {
 
     UpdateContainer updateContainer = UpdateContainer
       .builder()
-      .image("ex cillum dolor")
+      .image("labore")
       .resources(resources)
       .command(command)
       .priority(ContainerGroupPriority.HIGH)
@@ -167,10 +172,10 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(64823L)
+      .port(35022L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(23269L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(61900L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -183,7 +188,7 @@ public class Main {
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(61900L)
+      .port(58759L)
       .scheme(ContainerProbeHttpScheme.HTTP)
       .headers(headers)
       .build();
@@ -191,7 +196,7 @@ public class Main {
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(58759L)
+      .port(32748L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -204,7 +209,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(5L)
+      .initialDelaySeconds(6L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -217,7 +222,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(6L)
+      .initialDelaySeconds(4L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -230,29 +235,40 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(4L)
+      .initialDelaySeconds(10L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
       .failureThreshold(1200L)
       .build();
 
+    QueueAutoscaler queueAutoscaler = QueueAutoscaler
+      .builder()
+      .minReplicas(96L)
+      .maxReplicas(190L)
+      .desiredQueueLength(42L)
+      .pollingPeriod(684L)
+      .maxUpscalePerMinute(95L)
+      .maxDownscalePerMinute(10L)
+      .build();
+
     UpdateContainerGroup updateContainerGroup = UpdateContainerGroup
       .builder()
-      .displayName("-xzxtaW.t2I")
+      .displayName("01n75")
       .container(updateContainer)
-      .replicas(110L)
+      .replicas(232L)
       .countryCodes(countryCodes)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
       .readinessProbe(containerGroupReadinessProbe)
       .startupProbe(containerGroupStartupProbe)
+      .queueAutoscaler(queueAutoscaler)
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroupsService.updateContainerGroup(
-      "gq7z7dvdopv2czgde1zrufxgiv5tp-kncd4gfzda9ik-lw",
-      "xd-if9b1yvozs9trd4v0bll7qwslfehyhnfadnjp2w52gwrmz",
-      "ojjj5b9hbe2fr6f5t7j1htjaws1zx3r",
+      "oji7lyvxb3ca5hc",
+      "olb1uzytbhhukf1u0-ahl0b9oqfjj",
+      "s7z7dvdopv2czgde1zrufxgiv5tp-j",
       updateContainerGroup
     );
 

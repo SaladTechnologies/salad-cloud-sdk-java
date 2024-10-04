@@ -21,6 +21,7 @@ import com.salad.cloud.sdk.models.CountryCode;
 import com.salad.cloud.sdk.models.CreateContainer;
 import com.salad.cloud.sdk.models.CreateContainerGroup;
 import com.salad.cloud.sdk.models.CreateContainerGroupNetworking;
+import com.salad.cloud.sdk.models.CreateContainerGroupNetworkingLoadBalancer;
 import com.salad.cloud.sdk.models.CreateContainerLogging;
 import com.salad.cloud.sdk.models.CreateContainerRegistryAuthentication;
 import com.salad.cloud.sdk.models.DatadogTags2;
@@ -67,26 +68,35 @@ public class Main {
 
     LoggingAxiom2 loggingAxiom2 = LoggingAxiom2
       .builder()
-      .host("Ut con")
-      .apiToken("nostrud irure dolore")
-      .dataset("mollit irure et Duis dolore")
+      .host("irure ut eiusmod velit incididunt")
+      .apiToken("deserunt aute cillum dolor occaecat")
+      .dataset("exercitation sit")
       .build();
 
     DatadogTags2 datadogTags2 = DatadogTags2.builder().name("name").value("value").build();
 
     List<DatadogTags2> tags = Arrays.asList(datadogTags2);
 
-    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2.builder().host("pariatur").apiKey("non ut").tags(tags).build();
+    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2
+      .builder()
+      .host("sunt consequat irure fugiat")
+      .apiKey("magna")
+      .tags(tags)
+      .build();
 
     LoggingNewRelic2 loggingNewRelic2 = LoggingNewRelic2
       .builder()
-      .host("cupidatat cillum est sit minim")
-      .ingestionKey("dolore laboris fugiat Duis")
+      .host("quis aute in id proident")
+      .ingestionKey("aliqua enim pariatur")
       .build();
 
-    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("aliquip velit culpa").token("ex").build();
+    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2
+      .builder()
+      .host("ad")
+      .token("irure velit labore nostrud elit")
+      .build();
 
-    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("aliqua").port(17249L).build();
+    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("fugiat do").port(1272L).build();
 
     HttpHeaders3 httpHeaders3 = HttpHeaders3.builder().name("name").value("value").build();
 
@@ -94,8 +104,8 @@ public class Main {
 
     LoggingHttp2 loggingHttp2 = LoggingHttp2
       .builder()
-      .host("magna")
-      .port(62049L)
+      .host("cillum")
+      .port(21241L)
       .user("user")
       .password("password")
       .path("path")
@@ -153,7 +163,7 @@ public class Main {
 
     CreateContainer createContainer = CreateContainer
       .builder()
-      .image("voluptate officia adipisicing")
+      .image("reprehenderit")
       .resources(containerResourceRequirements)
       .command(command)
       .priority(ContainerGroupPriority.HIGH)
@@ -167,11 +177,15 @@ public class Main {
     CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking
       .builder()
       .protocol(ContainerNetworkingProtocol.HTTP)
-      .port(9813L)
+      .port(43901L)
       .auth(false)
+      .loadBalancer(CreateContainerGroupNetworkingLoadBalancer.ROUND_ROBIN)
+      .singleConnectionLimit(true)
+      .clientRequestTimeout(100000L)
+      .serverResponseTimeout(100000L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(23269L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(61900L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -184,7 +198,7 @@ public class Main {
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(61900L)
+      .port(58759L)
       .scheme(ContainerProbeHttpScheme.HTTP)
       .headers(headers)
       .build();
@@ -192,7 +206,7 @@ public class Main {
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(58759L)
+      .port(32748L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -205,7 +219,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(5L)
+      .initialDelaySeconds(6L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -218,7 +232,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(6L)
+      .initialDelaySeconds(4L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -231,7 +245,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(4L)
+      .initialDelaySeconds(10L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
@@ -240,29 +254,29 @@ public class Main {
 
     ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection
       .builder()
-      .path("ullamco magna est nulla aliqua")
-      .port(49952L)
-      .queueName("nnz26lyemw7nednorlqjlsihb42092pn8d")
+      .path("pariatur Ut aliqua irure")
+      .port(34903L)
+      .queueName("nz26lyemw7nednorlqjlsihb3")
       .build();
 
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
-      .minReplicas(57L)
-      .maxReplicas(58L)
-      .desiredQueueLength(20L)
-      .pollingPeriod(1406L)
-      .maxUpscalePerMinute(35L)
-      .maxDownscalePerMinute(42L)
+      .minReplicas(96L)
+      .maxReplicas(190L)
+      .desiredQueueLength(42L)
+      .pollingPeriod(684L)
+      .maxUpscalePerMinute(95L)
+      .maxDownscalePerMinute(10L)
       .build();
 
     CreateContainerGroup createContainerGroup = CreateContainerGroup
       .builder()
-      .name("qfojt-6ccoil4t55-ccoyybgw92dermtsdfn3t2xmag")
-      .displayName("O0hSlJUW")
+      .name("xvih")
+      .displayName("INce5LCTy")
       .container(createContainer)
       .autostartPolicy(false)
       .restartPolicy(ContainerRestartPolicy.ALWAYS)
-      .replicas(114L)
+      .replicas(12L)
       .countryCodes(countryCodes)
       .networking(createContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)

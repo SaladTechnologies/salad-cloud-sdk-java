@@ -23,9 +23,9 @@ public class Main {
       .build();
 
     QueueJob response = saladCloudSdk.queuesService.createQueueJob(
-      "jb7eyumc25lm4prwopvwr-1961g-m85nbqda3ufs",
-      "sn780t45z2tw4xt1b86w0clx6vkq-3",
-      "sx811v32aty9s-ghx1hm2nw1mhgooidhvnhwadaqzuh19krhv62or5c",
+      "wcaz2jbu5pfmpygxffsf4bh4e6",
+      "dzh9lv6afpamv8cx0x6",
+      "s9f4ikmr0j6c3n18n4djttkqmgzb46dd5wogzrfe2pq12s2",
       createQueueJob
     );
 

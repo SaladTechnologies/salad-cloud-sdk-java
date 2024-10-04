@@ -43,7 +43,7 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     WebhookSecretKey response = saladCloudSdk.webhookSecretKeyService.getWebhookSecretKey(
-      "wmkuf3v0nd2roppi64zikv73wys88ns81"
+      "mouv4w914sp420zyiuo43jexocjzq6rnxf04dqmccakipx9g3a72svbj"
     );
 
     System.out.println(response);
@@ -88,7 +88,7 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     WebhookSecretKey response = saladCloudSdk.webhookSecretKeyService.updateWebhookSecretKey(
-      "wmkuf3v0nd2roppi64zikv73wys88ns81"
+      "mouv4w914sp420zyiuo43jexocjzq6rnxf04dqmccakipx9g3a72svbj"
     );
 
     System.out.println(response);

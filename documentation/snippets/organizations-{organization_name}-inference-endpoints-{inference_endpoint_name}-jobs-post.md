@@ -23,8 +23,8 @@ public class Main {
       .build();
 
     InferenceEndpointJob response = saladCloudSdk.inferenceEndpointsService.createInferenceEndpointJob(
-      "bzx0y-i4o1cvulgdrx",
-      "minim",
+      "yg0u13rmnwb7eyumc25lm4prwopvwr-1961f",
+      "consectetur occaecat",
       createInferenceEndpointJob
     );
 

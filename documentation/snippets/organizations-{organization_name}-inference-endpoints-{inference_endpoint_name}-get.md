@@ -15,8 +15,8 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     InferenceEndpoint response = saladCloudSdk.inferenceEndpointsService.getInferenceEndpoint(
-      "zux2vsmrhjjt13u7q3pryxxnnnyigut20zp1dyfm2yp4-lxa27tl0e",
-      "qui adipisicing"
+      "u5ke3wy-5gl1809s8so",
+      "et tempor sint"
     );
 
     System.out.println(response);

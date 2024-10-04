@@ -14,9 +14,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     saladCloudSdk.containerGroupsService.recreateContainerGroupInstance(
-      "pkfh3rhnvt4x30k5t",
-      "o7r3q30xz",
-      "aq7hd1fjfxgtq8uehil3eplo",
+      "m-gfjsmt",
+      "qljdg4",
+      "nzzyoj4pl2kuh4c67m3ae7qwlwipkdye-ad90-cq0up7kyr6",
       "container_group_instance_id"
     );
   }
