@@ -22,9 +22,9 @@ public class Main {
       .webhook("webhook")
       .build();
 
-    InferenceEndpointJob response = saladCloudSdk.inferenceEndpointsService.createInferenceEndpointJob(
-      "yg0u13rmnwb7eyumc25lm4prwopvwr-1961f",
-      "consectetur occaecat",
+    InferenceEndpointJob response = saladCloudSdk.inferenceEndpoints.createInferenceEndpointJob(
+      "pk05fdmxk23ipxt6vd6e",
+      "inference_endpoint_name",
       createInferenceEndpointJob
     );
 

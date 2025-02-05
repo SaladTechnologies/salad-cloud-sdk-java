@@ -33,7 +33,16 @@ public class StringValidator extends AbstractValidator<String> {
 
   @Override
   public Violation[] validate(String value) {
+    Violation requiredViolation = validateRequired(value);
+    if (requiredViolation != null) {
+      return new Violation[] { requiredViolation };
+    }
+    if (value == null) {
+      return new Violation[0];
+    }
+
     List<Violation> violations = new ArrayList<>();
+
     if (minLength != null && value.length() < minLength) {
       violations.add(new Violation(getFieldName(), String.format("must be at least %d characters long", minLength)));
     }
@@ -43,6 +52,7 @@ public class StringValidator extends AbstractValidator<String> {
     if (pattern != null && !value.matches(pattern)) {
       violations.add(new Violation(getFieldName(), String.format("must match pattern %s", pattern)));
     }
+
     return violations.toArray(new Violation[0]);
   }
 }

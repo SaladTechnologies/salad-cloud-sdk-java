@@ -39,7 +39,6 @@ public class WorkloadErrorsService extends BaseService {
   ) throws ApiException, ValidationException {
     Request request = this.buildGetWorkloadErrorsRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<WorkloadErrorList>() {});
   }
 
@@ -49,7 +48,7 @@ public class WorkloadErrorsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code WorkloadErrorList}
+   * @return response of {@code CompletableFuture<WorkloadErrorList>}
    */
   public CompletableFuture<WorkloadErrorList> getWorkloadErrorsAsync(
     @NonNull String organizationName,
@@ -57,11 +56,10 @@ public class WorkloadErrorsService extends BaseService {
     @NonNull String containerGroupName
   ) throws ApiException, ValidationException {
     Request request = this.buildGetWorkloadErrorsRequest(organizationName, projectName, containerGroupName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<WorkloadErrorList>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<WorkloadErrorList>() {})
+    );
   }
 
   private Request buildGetWorkloadErrorsRequest(
@@ -75,6 +73,7 @@ public class WorkloadErrorsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -82,6 +81,7 @@ public class WorkloadErrorsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -89,10 +89,10 @@ public class WorkloadErrorsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,

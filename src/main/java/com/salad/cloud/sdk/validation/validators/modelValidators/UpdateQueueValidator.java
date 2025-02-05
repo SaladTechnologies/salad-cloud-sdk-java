@@ -21,9 +21,10 @@ public class UpdateQueueValidator extends AbstractModelValidator<UpdateQueue> {
           .minLength(2)
           .maxLength(63)
           .pattern("^[ ,-.0-9A-Za-z]+$")
+          .optional()
           .validate(updateQueue.getDisplayName())
       )
-      .add(new StringValidator("description").maxLength(500).validate(updateQueue.getDescription()))
+      .add(new StringValidator("description").maxLength(500).optional().validate(updateQueue.getDescription()))
       .aggregate();
   }
 }

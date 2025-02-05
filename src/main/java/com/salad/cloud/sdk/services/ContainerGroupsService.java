@@ -43,7 +43,6 @@ public class ContainerGroupsService extends BaseService {
     throws ApiException, ValidationException {
     Request request = this.buildListContainerGroupsRequest(organizationName, projectName);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<ContainerGroupList>() {});
   }
 
@@ -52,18 +51,17 @@ public class ContainerGroupsService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-   * @return response of {@code ContainerGroupList}
+   * @return response of {@code CompletableFuture<ContainerGroupList>}
    */
   public CompletableFuture<ContainerGroupList> listContainerGroupsAsync(
     @NonNull String organizationName,
     @NonNull String projectName
   ) throws ApiException, ValidationException {
     Request request = this.buildListContainerGroupsRequest(organizationName, projectName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<ContainerGroupList>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<ContainerGroupList>() {})
+    );
   }
 
   private Request buildListContainerGroupsRequest(@NonNull String organizationName, @NonNull String projectName)
@@ -74,6 +72,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -81,10 +80,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -110,7 +109,6 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiException, ValidationException {
     Request request = this.buildCreateContainerGroupRequest(organizationName, projectName, createContainerGroup);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<ContainerGroup>() {});
   }
 
@@ -120,7 +118,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param createContainerGroup {@link CreateContainerGroup} Request Body
-   * @return response of {@code ContainerGroup}
+   * @return response of {@code CompletableFuture<ContainerGroup>}
    */
   public CompletableFuture<ContainerGroup> createContainerGroupAsync(
     @NonNull String organizationName,
@@ -128,11 +126,10 @@ public class ContainerGroupsService extends BaseService {
     @NonNull CreateContainerGroup createContainerGroup
   ) throws ApiException, ValidationException {
     Request request = this.buildCreateContainerGroupRequest(organizationName, projectName, createContainerGroup);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<ContainerGroup>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<ContainerGroup>() {})
+    );
   }
 
   private Request buildCreateContainerGroupRequest(
@@ -146,6 +143,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -153,11 +151,11 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
-      .add(new CreateContainerGroupValidator("createContainerGroup").validate(createContainerGroup))
+      .add(new CreateContainerGroupValidator("createContainerGroup").required().validate(createContainerGroup))
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -184,7 +182,6 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiException, ValidationException {
     Request request = this.buildGetContainerGroupRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<ContainerGroup>() {});
   }
 
@@ -194,7 +191,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code ContainerGroup}
+   * @return response of {@code CompletableFuture<ContainerGroup>}
    */
   public CompletableFuture<ContainerGroup> getContainerGroupAsync(
     @NonNull String organizationName,
@@ -202,11 +199,10 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String containerGroupName
   ) throws ApiException, ValidationException {
     Request request = this.buildGetContainerGroupRequest(organizationName, projectName, containerGroupName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<ContainerGroup>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<ContainerGroup>() {})
+    );
   }
 
   private Request buildGetContainerGroupRequest(
@@ -220,6 +216,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -227,6 +224,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -234,10 +232,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -267,7 +265,6 @@ public class ContainerGroupsService extends BaseService {
     Request request =
       this.buildUpdateContainerGroupRequest(organizationName, projectName, containerGroupName, updateContainerGroup);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<ContainerGroup>() {});
   }
 
@@ -278,7 +275,7 @@ public class ContainerGroupsService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
    * @param updateContainerGroup {@link UpdateContainerGroup} Request Body
-   * @return response of {@code ContainerGroup}
+   * @return response of {@code CompletableFuture<ContainerGroup>}
    */
   public CompletableFuture<ContainerGroup> updateContainerGroupAsync(
     @NonNull String organizationName,
@@ -288,11 +285,10 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiException, ValidationException {
     Request request =
       this.buildUpdateContainerGroupRequest(organizationName, projectName, containerGroupName, updateContainerGroup);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<ContainerGroup>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<ContainerGroup>() {})
+    );
   }
 
   private Request buildUpdateContainerGroupRequest(
@@ -307,6 +303,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -314,6 +311,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -321,11 +319,11 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
-      .add(new UpdateContainerGroupValidator("updateContainerGroup").validate(updateContainerGroup))
+      .add(new UpdateContainerGroupValidator("updateContainerGroup").required().validate(updateContainerGroup))
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.PATCH,
       this.serverUrl,
@@ -344,7 +342,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code Void}
+   * @return response of {@code void}
    */
   public void deleteContainerGroup(
     @NonNull String organizationName,
@@ -361,7 +359,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code Void}
+   * @return response of {@code CompletableFuture<Void>}
    */
   public CompletableFuture<Void> deleteContainerGroupAsync(
     @NonNull String organizationName,
@@ -369,9 +367,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String containerGroupName
   ) throws ApiException, ValidationException {
     Request request = this.buildDeleteContainerGroupRequest(organizationName, projectName, containerGroupName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> null);
+    return this.executeAsync(request).thenApplyAsync(response -> null);
   }
 
   private Request buildDeleteContainerGroupRequest(
@@ -385,6 +381,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -392,6 +389,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -399,10 +397,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.DELETE,
       this.serverUrl,
@@ -420,7 +418,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code Void}
+   * @return response of {@code void}
    */
   public void startContainerGroup(
     @NonNull String organizationName,
@@ -437,7 +435,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code Void}
+   * @return response of {@code CompletableFuture<Void>}
    */
   public CompletableFuture<Void> startContainerGroupAsync(
     @NonNull String organizationName,
@@ -445,9 +443,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String containerGroupName
   ) throws ApiException, ValidationException {
     Request request = this.buildStartContainerGroupRequest(organizationName, projectName, containerGroupName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> null);
+    return this.executeAsync(request).thenApplyAsync(response -> null);
   }
 
   private Request buildStartContainerGroupRequest(
@@ -461,6 +457,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -468,6 +465,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -475,10 +473,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -496,7 +494,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code Void}
+   * @return response of {@code void}
    */
   public void stopContainerGroup(
     @NonNull String organizationName,
@@ -513,7 +511,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code Void}
+   * @return response of {@code CompletableFuture<Void>}
    */
   public CompletableFuture<Void> stopContainerGroupAsync(
     @NonNull String organizationName,
@@ -521,9 +519,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String containerGroupName
   ) throws ApiException, ValidationException {
     Request request = this.buildStopContainerGroupRequest(organizationName, projectName, containerGroupName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> null);
+    return this.executeAsync(request).thenApplyAsync(response -> null);
   }
 
   private Request buildStopContainerGroupRequest(
@@ -537,6 +533,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -544,6 +541,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -551,10 +549,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -581,7 +579,6 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiException, ValidationException {
     Request request = this.buildListContainerGroupInstancesRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<ContainerGroupInstances>() {});
   }
 
@@ -591,7 +588,7 @@ public class ContainerGroupsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
-   * @return response of {@code ContainerGroupInstances}
+   * @return response of {@code CompletableFuture<ContainerGroupInstances>}
    */
   public CompletableFuture<ContainerGroupInstances> listContainerGroupInstancesAsync(
     @NonNull String organizationName,
@@ -599,11 +596,10 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String containerGroupName
   ) throws ApiException, ValidationException {
     Request request = this.buildListContainerGroupInstancesRequest(organizationName, projectName, containerGroupName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<ContainerGroupInstances>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<ContainerGroupInstances>() {})
+    );
   }
 
   private Request buildListContainerGroupInstancesRequest(
@@ -617,6 +613,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -624,6 +621,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -631,10 +629,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -669,7 +667,6 @@ public class ContainerGroupsService extends BaseService {
           containerGroupInstanceId
         );
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<ContainerGroupInstance>() {});
   }
 
@@ -680,7 +677,7 @@ public class ContainerGroupsService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
    * @param containerGroupInstanceId String The unique instance identifier
-   * @return response of {@code ContainerGroupInstance}
+   * @return response of {@code CompletableFuture<ContainerGroupInstance>}
    */
   public CompletableFuture<ContainerGroupInstance> getContainerGroupInstanceAsync(
     @NonNull String organizationName,
@@ -695,11 +692,10 @@ public class ContainerGroupsService extends BaseService {
           containerGroupName,
           containerGroupInstanceId
         );
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<ContainerGroupInstance>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<ContainerGroupInstance>() {})
+    );
   }
 
   private Request buildGetContainerGroupInstanceRequest(
@@ -714,6 +710,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -721,6 +718,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -728,10 +726,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.GET,
       this.serverUrl,
@@ -751,7 +749,7 @@ public class ContainerGroupsService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
    * @param containerGroupInstanceId String The unique instance identifier
-   * @return response of {@code Void}
+   * @return response of {@code void}
    */
   public void reallocateContainerGroupInstance(
     @NonNull String organizationName,
@@ -776,7 +774,7 @@ public class ContainerGroupsService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
    * @param containerGroupInstanceId String The unique instance identifier
-   * @return response of {@code Void}
+   * @return response of {@code CompletableFuture<Void>}
    */
   public CompletableFuture<Void> reallocateContainerGroupInstanceAsync(
     @NonNull String organizationName,
@@ -791,9 +789,7 @@ public class ContainerGroupsService extends BaseService {
           containerGroupName,
           containerGroupInstanceId
         );
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> null);
+    return this.executeAsync(request).thenApplyAsync(response -> null);
   }
 
   private Request buildReallocateContainerGroupInstanceRequest(
@@ -808,6 +804,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -815,6 +812,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -822,10 +820,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -845,7 +843,7 @@ public class ContainerGroupsService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
    * @param containerGroupInstanceId String The unique instance identifier
-   * @return response of {@code Void}
+   * @return response of {@code void}
    */
   public void recreateContainerGroupInstance(
     @NonNull String organizationName,
@@ -870,7 +868,7 @@ public class ContainerGroupsService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
    * @param containerGroupInstanceId String The unique instance identifier
-   * @return response of {@code Void}
+   * @return response of {@code CompletableFuture<Void>}
    */
   public CompletableFuture<Void> recreateContainerGroupInstanceAsync(
     @NonNull String organizationName,
@@ -885,9 +883,7 @@ public class ContainerGroupsService extends BaseService {
           containerGroupName,
           containerGroupInstanceId
         );
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> null);
+    return this.executeAsync(request).thenApplyAsync(response -> null);
   }
 
   private Request buildRecreateContainerGroupInstanceRequest(
@@ -902,6 +898,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -909,6 +906,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -916,10 +914,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,
@@ -939,7 +937,7 @@ public class ContainerGroupsService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
    * @param containerGroupInstanceId String The unique instance identifier
-   * @return response of {@code Void}
+   * @return response of {@code void}
    */
   public void restartContainerGroupInstance(
     @NonNull String organizationName,
@@ -964,7 +962,7 @@ public class ContainerGroupsService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param containerGroupName String The unique container group name
    * @param containerGroupInstanceId String The unique instance identifier
-   * @return response of {@code Void}
+   * @return response of {@code CompletableFuture<Void>}
    */
   public CompletableFuture<Void> restartContainerGroupInstanceAsync(
     @NonNull String organizationName,
@@ -979,9 +977,7 @@ public class ContainerGroupsService extends BaseService {
           containerGroupName,
           containerGroupInstanceId
         );
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> null);
+    return this.executeAsync(request).thenApplyAsync(response -> null);
   }
 
   private Request buildRestartContainerGroupInstanceRequest(
@@ -996,6 +992,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .add(
@@ -1003,6 +1000,7 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(projectName)
       )
       .add(
@@ -1010,10 +1008,10 @@ public class ContainerGroupsService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(containerGroupName)
       )
       .validateAll();
-
     return new RequestBuilder(
       HttpMethod.POST,
       this.serverUrl,

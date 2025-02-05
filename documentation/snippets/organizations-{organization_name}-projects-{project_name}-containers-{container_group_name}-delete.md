@@ -13,10 +13,10 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroupsService.deleteContainerGroup(
-      "oji7lyvxb3ca5hc",
-      "olb1uzytbhhukf1u0-ahl0b9oqfjj",
-      "s7z7dvdopv2czgde1zrufxgiv5tp-j"
+    saladCloudSdk.containerGroups.deleteContainerGroup(
+      "mk0yct7b8bo1g8tvl9",
+      "ax4qyju9jcnr3fw8e9al8o-4oreg5ocaz2jbu5pfmpygxffsf4bh4e6",
+      "dzh9lv6afpamv8cx0x6"
     );
   }
 }

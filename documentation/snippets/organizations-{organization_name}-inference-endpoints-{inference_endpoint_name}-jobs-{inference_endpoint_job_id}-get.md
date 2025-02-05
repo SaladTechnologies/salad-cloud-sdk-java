@@ -14,9 +14,9 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    InferenceEndpointJob response = saladCloudSdk.inferenceEndpointsService.getInferenceEndpointJob(
-      "kdhvnhwadaqzuh18",
-      "eiusmod dolore do",
+    InferenceEndpointJob response = saladCloudSdk.inferenceEndpoints.getInferenceEndpointJob(
+      "igqfe6b1d0c-0auqqph3bt-7bft4c1m95idut36tc-x7mo2nsh7uoln",
+      "inference_endpoint_name",
       "inference_endpoint_job_id"
     );
 

@@ -39,6 +39,14 @@ public class NumericValidator<T extends Number> extends AbstractValidator<T> {
 
   @Override
   public Violation[] validate(T value) {
+    Violation requiredViolation = validateRequired(value);
+    if (requiredViolation != null) {
+      return new Violation[] { requiredViolation };
+    }
+    if (value == null) {
+      return new Violation[0];
+    }
+
     List<Violation> violations = new ArrayList<>();
 
     if (this.minValue != null) {

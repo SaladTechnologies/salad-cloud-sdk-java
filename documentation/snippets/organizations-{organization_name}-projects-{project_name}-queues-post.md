@@ -17,14 +17,14 @@ public class Main {
 
     CreateQueue createQueue = CreateQueue
       .builder()
-      .name("ho4d79h7bg0vpngqc8hz5pxjwi")
-      .displayName("IWPKHVWPTc")
-      .description("aliqua id nostrud")
+      .name("name")
+      .displayName("M a1HEy")
+      .description("description")
       .build();
 
-    Queue response = saladCloudSdk.queuesService.createQueue(
-      "xtp82b9jzwqov1insghigvfq0donadhrrdqx-2redu46g7e",
-      "xk27gbnpmwk5xor49bk4ujk7",
+    Queue response = saladCloudSdk.queues.createQueue(
+      "ymfonstzqzsopxf2dyjvm8sjxa281t2p7ne1m",
+      "sxk12v91ajseb3fzyxdaq",
       createQueue
     );
 

@@ -21,6 +21,7 @@ public class InferenceEndpointValidator extends AbstractModelValidator<Inference
           .minLength(2)
           .maxLength(63)
           .pattern("^[ ,-.0-9A-Za-z]+$")
+          .required()
           .validate(inferenceEndpoint.getDisplayName())
       )
       .aggregate();

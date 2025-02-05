@@ -21,6 +21,7 @@ public class CreateQueueValidator extends AbstractModelValidator<CreateQueue> {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(createQueue.getName())
       )
       .add(
@@ -28,9 +29,10 @@ public class CreateQueueValidator extends AbstractModelValidator<CreateQueue> {
           .minLength(2)
           .maxLength(63)
           .pattern("^[ ,-.0-9A-Za-z]+$")
+          .optional()
           .validate(createQueue.getDisplayName())
       )
-      .add(new StringValidator("description").maxLength(500).validate(createQueue.getDescription()))
+      .add(new StringValidator("description").maxLength(500).optional().validate(createQueue.getDescription()))
       .aggregate();
   }
 }

@@ -16,10 +16,19 @@ public abstract class AbstractModelValidator<T> extends AbstractValidator<T> {
 
   @Override
   public Violation[] validate(T value) {
+    Violation requiredViolation = validateRequired(value);
+    if (requiredViolation != null) {
+      return new Violation[] { requiredViolation };
+    }
+    if (value == null) {
+      return new Violation[0];
+    }
+
     Violation[] violations = validateModel(value);
     if (violations.length == 0) {
       return violations;
     }
+
     return Arrays
       .stream(violations)
       .map(violation -> {

@@ -31,8 +31,8 @@ public final class ModelConverter {
       return mapper.readValue(body.string(), clazz);
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
-    return null;
   }
 
   public static <T> T convert(final String response, final Class<T> clazz) {
@@ -40,8 +40,8 @@ public final class ModelConverter {
       return mapper.readValue(response, clazz);
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
-    return null;
   }
 
   public static <T> T convert(Response response, TypeReference<T> typeReference) {
@@ -49,9 +49,8 @@ public final class ModelConverter {
       return convert(response.body().string(), typeReference);
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
-
-    return null;
   }
 
   public static <T> T convert(String response, TypeReference<T> typeReference) {
@@ -59,9 +58,26 @@ public final class ModelConverter {
       return mapper.readValue(response, typeReference);
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
+  }
 
-    return null;
+  public static String readString(Response response) {
+    try {
+      return response.body().string();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  public static byte[] readBytes(Response response) {
+    try {
+      return response.body().bytes();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   public static String modelToJson(final Object model) {
@@ -69,7 +85,7 @@ public final class ModelConverter {
       return mapper.writeValueAsString(model);
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
-    return null;
   }
 }

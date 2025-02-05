@@ -3,6 +3,7 @@ package com.example;
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
+import com.salad.cloud.sdk.exceptions.ApiException;
 import com.salad.cloud.sdk.models.Quotas;
 
 public class Main {
@@ -15,8 +16,14 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    Quotas response = saladCloudSdk.quotasService.getQuotas("oecson4k2eclxr");
+    try {
+      Quotas response = saladCloudSdk.quotas.getQuotas("fu2s7l");
 
-    System.out.println(response);
+      System.out.println(response);
+    } catch (ApiException e) {
+      e.printStackTrace();
+    }
+
+    System.exit(0);
   }
 }

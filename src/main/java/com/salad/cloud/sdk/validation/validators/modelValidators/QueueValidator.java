@@ -23,6 +23,7 @@ public class QueueValidator extends AbstractModelValidator<Queue> {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(queue.getName())
       )
       .add(
@@ -30,15 +31,17 @@ public class QueueValidator extends AbstractModelValidator<Queue> {
           .minLength(2)
           .maxLength(63)
           .pattern("^[ ,-.0-9A-Za-z]+$")
+          .required()
           .validate(queue.getDisplayName())
       )
       .add(
         new ListValidator<ContainerGroup>("containerGroups")
           .maxLength(100)
-          .itemValidator(new ContainerGroupValidator())
+          .itemValidator(new ContainerGroupValidator().required())
+          .required()
           .validate(queue.getContainerGroups())
       )
-      .add(new StringValidator("description").maxLength(500).validate(queue.getDescription()))
+      .add(new StringValidator("description").maxLength(500).optional().validate(queue.getDescription()))
       .aggregate();
   }
 }

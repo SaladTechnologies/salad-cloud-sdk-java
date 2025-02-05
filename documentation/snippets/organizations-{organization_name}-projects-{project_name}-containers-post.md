@@ -59,44 +59,26 @@ public class Main {
     ContainerResourceRequirements containerResourceRequirements = ContainerResourceRequirements
       .builder()
       .cpu(10L)
-      .memory(35273L)
+      .memory(9057L)
       .gpuClasses(gpuClasses)
-      .storageAmount(32391110488L)
+      .storageAmount(34911830561L)
       .build();
 
     List<String> command = Arrays.asList("command");
 
-    LoggingAxiom2 loggingAxiom2 = LoggingAxiom2
-      .builder()
-      .host("irure ut eiusmod velit incididunt")
-      .apiToken("deserunt aute cillum dolor occaecat")
-      .dataset("exercitation sit")
-      .build();
+    LoggingAxiom2 loggingAxiom2 = LoggingAxiom2.builder().host("host").apiToken("api_token").dataset("dataset").build();
 
     DatadogTags2 datadogTags2 = DatadogTags2.builder().name("name").value("value").build();
 
     List<DatadogTags2> tags = Arrays.asList(datadogTags2);
 
-    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2
-      .builder()
-      .host("sunt consequat irure fugiat")
-      .apiKey("magna")
-      .tags(tags)
-      .build();
+    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2.builder().host("host").apiKey("api_key").tags(tags).build();
 
-    LoggingNewRelic2 loggingNewRelic2 = LoggingNewRelic2
-      .builder()
-      .host("quis aute in id proident")
-      .ingestionKey("aliqua enim pariatur")
-      .build();
+    LoggingNewRelic2 loggingNewRelic2 = LoggingNewRelic2.builder().host("host").ingestionKey("ingestion_key").build();
 
-    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2
-      .builder()
-      .host("ad")
-      .token("irure velit labore nostrud elit")
-      .build();
+    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("host").token("token").build();
 
-    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("fugiat do").port(1272L).build();
+    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("host").port(32723L).build();
 
     HttpHeaders3 httpHeaders3 = HttpHeaders3.builder().name("name").value("value").build();
 
@@ -104,8 +86,8 @@ public class Main {
 
     LoggingHttp2 loggingHttp2 = LoggingHttp2
       .builder()
-      .host("cillum")
-      .port(21241L)
+      .host("host")
+      .port(51830L)
       .user("user")
       .password("password")
       .path("path")
@@ -163,7 +145,7 @@ public class Main {
 
     CreateContainer createContainer = CreateContainer
       .builder()
-      .image("reprehenderit")
+      .image("image")
       .resources(containerResourceRequirements)
       .command(command)
       .priority(ContainerGroupPriority.HIGH)
@@ -177,7 +159,7 @@ public class Main {
     CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking
       .builder()
       .protocol(ContainerNetworkingProtocol.HTTP)
-      .port(43901L)
+      .port(4465L)
       .auth(false)
       .loadBalancer(CreateContainerGroupNetworkingLoadBalancer.ROUND_ROBIN)
       .singleConnectionLimit(true)
@@ -185,7 +167,7 @@ public class Main {
       .serverResponseTimeout(100000L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(61900L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(993L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -198,7 +180,7 @@ public class Main {
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(58759L)
+      .port(64175L)
       .scheme(ContainerProbeHttpScheme.HTTP)
       .headers(headers)
       .build();
@@ -206,7 +188,7 @@ public class Main {
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(32748L)
+      .port(8441L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -219,7 +201,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(6L)
+      .initialDelaySeconds(8L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -232,7 +214,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(4L)
+      .initialDelaySeconds(10L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -245,7 +227,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
+      .initialDelaySeconds(7L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
@@ -254,29 +236,29 @@ public class Main {
 
     ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection
       .builder()
-      .path("pariatur Ut aliqua irure")
-      .port(34903L)
-      .queueName("nz26lyemw7nednorlqjlsihb3")
+      .path("path")
+      .port(43154L)
+      .queueName("oujbls0vsz6xilo12xl52y9c178cmdya6ykpby-hunb0b6s7s2mppfvzd5f4e")
       .build();
 
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
-      .minReplicas(96L)
-      .maxReplicas(190L)
-      .desiredQueueLength(42L)
-      .pollingPeriod(684L)
-      .maxUpscalePerMinute(95L)
-      .maxDownscalePerMinute(10L)
+      .minReplicas(41L)
+      .maxReplicas(135L)
+      .desiredQueueLength(51L)
+      .pollingPeriod(188L)
+      .maxUpscalePerMinute(30L)
+      .maxDownscalePerMinute(42L)
       .build();
 
     CreateContainerGroup createContainerGroup = CreateContainerGroup
       .builder()
-      .name("xvih")
-      .displayName("INce5LCTy")
+      .name("name")
+      .displayName("hfR")
       .container(createContainer)
-      .autostartPolicy(false)
+      .autostartPolicy(true)
       .restartPolicy(ContainerRestartPolicy.ALWAYS)
-      .replicas(12L)
+      .replicas(169L)
       .countryCodes(countryCodes)
       .networking(createContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -286,9 +268,9 @@ public class Main {
       .queueAutoscaler(queueAutoscaler)
       .build();
 
-    ContainerGroup response = saladCloudSdk.containerGroupsService.createContainerGroup(
-      "v50imwzgi4em4q035",
-      "m6yw3-xm60cb7tiev8rketqiiwjepibzf2ust1cvjx8oua8mepeueo5-1",
+    ContainerGroup response = saladCloudSdk.containerGroups.createContainerGroup(
+      "o9lnd3c1w-4b",
+      "c9jr",
       createContainerGroup
     );
 

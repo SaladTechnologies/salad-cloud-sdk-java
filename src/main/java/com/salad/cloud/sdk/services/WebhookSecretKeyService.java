@@ -34,7 +34,6 @@ public class WebhookSecretKeyService extends BaseService {
     throws ApiException, ValidationException {
     Request request = this.buildGetWebhookSecretKeyRequest(organizationName);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<WebhookSecretKey>() {});
   }
 
@@ -42,16 +41,15 @@ public class WebhookSecretKeyService extends BaseService {
    * Gets the webhook secret key
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-   * @return response of {@code WebhookSecretKey}
+   * @return response of {@code CompletableFuture<WebhookSecretKey>}
    */
   public CompletableFuture<WebhookSecretKey> getWebhookSecretKeyAsync(@NonNull String organizationName)
     throws ApiException, ValidationException {
     Request request = this.buildGetWebhookSecretKeyRequest(organizationName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<WebhookSecretKey>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<WebhookSecretKey>() {})
+    );
   }
 
   private Request buildGetWebhookSecretKeyRequest(@NonNull String organizationName) throws ValidationException {
@@ -61,10 +59,10 @@ public class WebhookSecretKeyService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .validateAll();
-
     return new RequestBuilder(HttpMethod.GET, this.serverUrl, "organizations/{organization_name}/webhook-secret-key")
       .setPathParameter("organization_name", organizationName)
       .build();
@@ -80,7 +78,6 @@ public class WebhookSecretKeyService extends BaseService {
     throws ApiException, ValidationException {
     Request request = this.buildUpdateWebhookSecretKeyRequest(organizationName);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<WebhookSecretKey>() {});
   }
 
@@ -88,16 +85,15 @@ public class WebhookSecretKeyService extends BaseService {
    * Updates the webhook secret key
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-   * @return response of {@code WebhookSecretKey}
+   * @return response of {@code CompletableFuture<WebhookSecretKey>}
    */
   public CompletableFuture<WebhookSecretKey> updateWebhookSecretKeyAsync(@NonNull String organizationName)
     throws ApiException, ValidationException {
     Request request = this.buildUpdateWebhookSecretKeyRequest(organizationName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<WebhookSecretKey>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<WebhookSecretKey>() {})
+    );
   }
 
   private Request buildUpdateWebhookSecretKeyRequest(@NonNull String organizationName) throws ValidationException {
@@ -107,10 +103,10 @@ public class WebhookSecretKeyService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .validateAll();
-
     return new RequestBuilder(HttpMethod.POST, this.serverUrl, "organizations/{organization_name}/webhook-secret-key")
       .setPathParameter("organization_name", organizationName)
       .build();

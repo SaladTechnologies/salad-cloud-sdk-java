@@ -39,32 +39,43 @@ public class ListValidator<T> extends AbstractValidator<List<T>> {
 
   @Override
   public Violation[] validate(List<T> list) {
-    List<Violation> errors = new ArrayList<>();
+    Violation requiredViolation = validateRequired(list);
+    if (requiredViolation != null) {
+      return new Violation[] { requiredViolation };
+    }
+    if (list == null) {
+      return new Violation[0];
+    }
+
+    List<Violation> violations = new ArrayList<>();
 
     if (minLength != null && list.size() < minLength) {
-      errors.add(new Violation(getFieldName(), String.format("must have at least %d items", minLength)));
+      violations.add(new Violation(getFieldName(), String.format("must have at least %d items", minLength)));
     }
 
     if (maxLength != null && list.size() > maxLength) {
-      errors.add(new Violation(getFieldName(), String.format("must have at most %d items", maxLength)));
+      violations.add(new Violation(getFieldName(), String.format("must have at most %d items", maxLength)));
     }
 
     if (uniqueItems != null && list.stream().distinct().count() != list.size()) {
-      errors.add(new Violation(getFieldName(), "must have unique items"));
+      violations.add(new Violation(getFieldName(), "must have unique items"));
     }
 
     if (itemValidator != null) {
       for (int i = 0; i < list.size(); i++) {
         T item = list.get(i);
-        Violation[] itemErrors = itemValidator.setFieldName(String.valueOf(i)).validate(item);
-        for (Violation itemError : itemErrors) {
-          errors.add(
-            new Violation(String.format("%s[%s]", getFieldName(), itemValidator.getFieldName()), itemError.getMessage())
+        Violation[] itemViolations = itemValidator.setFieldName(String.valueOf(i)).validate(item);
+        for (Violation itemViolation : itemViolations) {
+          violations.add(
+            new Violation(
+              String.format("%s[%s]", getFieldName(), itemValidator.getFieldName()),
+              itemViolation.getMessage()
+            )
           );
         }
       }
     }
 
-    return errors.toArray(new Violation[0]);
+    return violations.toArray(new Violation[0]);
   }
 }

@@ -20,7 +20,8 @@ public class GpuClassesListValidator extends AbstractModelValidator<GpuClassesLi
       .add(
         new ListValidator<GpuClass>("items")
           .maxLength(100)
-          .itemValidator(new GpuClassValidator())
+          .itemValidator(new GpuClassValidator().required())
+          .required()
           .validate(gpuClassesList.getItems())
       )
       .aggregate();

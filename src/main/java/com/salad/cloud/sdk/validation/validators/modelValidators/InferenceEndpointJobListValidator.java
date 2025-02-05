@@ -20,7 +20,8 @@ public class InferenceEndpointJobListValidator extends AbstractModelValidator<In
       .add(
         new ListValidator<InferenceEndpointJob>("items")
           .maxLength(100)
-          .itemValidator(new InferenceEndpointJobValidator())
+          .itemValidator(new InferenceEndpointJobValidator().required())
+          .required()
           .validate(inferenceEndpointJobList.getItems())
       )
       .aggregate();

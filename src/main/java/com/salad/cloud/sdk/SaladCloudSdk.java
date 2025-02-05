@@ -11,6 +11,7 @@ import com.salad.cloud.sdk.services.InferenceEndpointsService;
 import com.salad.cloud.sdk.services.OrganizationDataService;
 import com.salad.cloud.sdk.services.QueuesService;
 import com.salad.cloud.sdk.services.QuotasService;
+import com.salad.cloud.sdk.services.SystemLogsService;
 import com.salad.cloud.sdk.services.WebhookSecretKeyService;
 import com.salad.cloud.sdk.services.WorkloadErrorsService;
 import java.util.concurrent.TimeUnit;
@@ -19,13 +20,14 @@ import okhttp3.OkHttpClient;
 /** The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details. */
 public class SaladCloudSdk {
 
-  public final ContainerGroupsService containerGroupsService;
-  public final WorkloadErrorsService workloadErrorsService;
-  public final QueuesService queuesService;
-  public final QuotasService quotasService;
-  public final InferenceEndpointsService inferenceEndpointsService;
-  public final OrganizationDataService organizationDataService;
-  public final WebhookSecretKeyService webhookSecretKeyService;
+  public final ContainerGroupsService containerGroups;
+  public final WorkloadErrorsService workloadErrors;
+  public final SystemLogsService systemLogs;
+  public final QueuesService queues;
+  public final QuotasService quotas;
+  public final InferenceEndpointsService inferenceEndpoints;
+  public final OrganizationDataService organizationData;
+  public final WebhookSecretKeyService webhookSecretKey;
 
   private final TokenInterceptor apiKeyAuthInterceptor;
 
@@ -48,13 +50,14 @@ public class SaladCloudSdk {
       .readTimeout(config.getTimeout(), TimeUnit.MILLISECONDS)
       .build();
 
-    this.containerGroupsService = new ContainerGroupsService(httpClient, serverUrl);
-    this.workloadErrorsService = new WorkloadErrorsService(httpClient, serverUrl);
-    this.queuesService = new QueuesService(httpClient, serverUrl);
-    this.quotasService = new QuotasService(httpClient, serverUrl);
-    this.inferenceEndpointsService = new InferenceEndpointsService(httpClient, serverUrl);
-    this.organizationDataService = new OrganizationDataService(httpClient, serverUrl);
-    this.webhookSecretKeyService = new WebhookSecretKeyService(httpClient, serverUrl);
+    this.containerGroups = new ContainerGroupsService(httpClient, serverUrl);
+    this.workloadErrors = new WorkloadErrorsService(httpClient, serverUrl);
+    this.systemLogs = new SystemLogsService(httpClient, serverUrl);
+    this.queues = new QueuesService(httpClient, serverUrl);
+    this.quotas = new QuotasService(httpClient, serverUrl);
+    this.inferenceEndpoints = new InferenceEndpointsService(httpClient, serverUrl);
+    this.organizationData = new OrganizationDataService(httpClient, serverUrl);
+    this.webhookSecretKey = new WebhookSecretKeyService(httpClient, serverUrl);
   }
 
   public void setEnvironment(Environment environment) {
@@ -62,13 +65,14 @@ public class SaladCloudSdk {
   }
 
   public void setBaseUrl(String baseUrl) {
-    this.containerGroupsService.setBaseUrl(baseUrl);
-    this.workloadErrorsService.setBaseUrl(baseUrl);
-    this.queuesService.setBaseUrl(baseUrl);
-    this.quotasService.setBaseUrl(baseUrl);
-    this.inferenceEndpointsService.setBaseUrl(baseUrl);
-    this.organizationDataService.setBaseUrl(baseUrl);
-    this.webhookSecretKeyService.setBaseUrl(baseUrl);
+    this.containerGroups.setBaseUrl(baseUrl);
+    this.workloadErrors.setBaseUrl(baseUrl);
+    this.systemLogs.setBaseUrl(baseUrl);
+    this.queues.setBaseUrl(baseUrl);
+    this.quotas.setBaseUrl(baseUrl);
+    this.inferenceEndpoints.setBaseUrl(baseUrl);
+    this.organizationData.setBaseUrl(baseUrl);
+    this.webhookSecretKey.setBaseUrl(baseUrl);
   }
 
   public void setApiKey(String apiKey) {

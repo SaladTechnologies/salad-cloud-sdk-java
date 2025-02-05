@@ -20,7 +20,8 @@ public class QueueJobListValidator extends AbstractModelValidator<QueueJobList> 
       .add(
         new ListValidator<QueueJob>("items")
           .maxLength(100)
-          .itemValidator(new QueueJobValidator())
+          .itemValidator(new QueueJobValidator().required())
+          .required()
           .validate(queueJobList.getItems())
       )
       .aggregate();
