@@ -33,7 +33,6 @@ public class QuotasService extends BaseService {
   public Quotas getQuotas(@NonNull String organizationName) throws ApiException, ValidationException {
     Request request = this.buildGetQuotasRequest(organizationName);
     Response response = this.execute(request);
-
     return ModelConverter.convert(response, new TypeReference<Quotas>() {});
   }
 
@@ -41,16 +40,13 @@ public class QuotasService extends BaseService {
    * Get Quotas
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-   * @return response of {@code Quotas}
+   * @return response of {@code CompletableFuture<Quotas>}
    */
   public CompletableFuture<Quotas> getQuotasAsync(@NonNull String organizationName)
     throws ApiException, ValidationException {
     Request request = this.buildGetQuotasRequest(organizationName);
-    CompletableFuture<Response> response = this.executeAsync(request);
-
-    return response.thenApplyAsync(res -> {
-      return ModelConverter.convert(res, new TypeReference<Quotas>() {});
-    });
+    CompletableFuture<Response> futureResponse = this.executeAsync(request);
+    return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Quotas>() {}));
   }
 
   private Request buildGetQuotasRequest(@NonNull String organizationName) throws ValidationException {
@@ -60,10 +56,10 @@ public class QuotasService extends BaseService {
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(organizationName)
       )
       .validateAll();
-
     return new RequestBuilder(HttpMethod.GET, this.serverUrl, "organizations/{organization_name}/quotas")
       .setPathParameter("organization_name", organizationName)
       .build();

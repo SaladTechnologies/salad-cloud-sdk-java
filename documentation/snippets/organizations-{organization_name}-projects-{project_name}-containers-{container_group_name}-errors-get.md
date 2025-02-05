@@ -14,10 +14,10 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    WorkloadErrorList response = saladCloudSdk.workloadErrorsService.getWorkloadErrors(
-      "x4hd7xmy53wgq8mpuy5k2wfbbzlhws5edt3sje",
-      "hug6abtk-ewjq1594j27m6u1whmqikj9f18pd",
-      "lq52i317o2r8pje-v4-ccp8q-329szw31h4fee236"
+    WorkloadErrorList response = saladCloudSdk.workloadErrors.getWorkloadErrors(
+      "x4djttkqmgzb46dd5wogzrfe1",
+      "l12s3mq9cm-jv1bq27ohe5dpzbgr",
+      "hgvpuhecson4k2eclxss450txd1j0ixuhfk-hdff3n3-hbtsigyh53bt0g4g"
     );
 
     System.out.println(response);

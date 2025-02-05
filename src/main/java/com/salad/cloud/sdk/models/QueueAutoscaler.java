@@ -20,10 +20,16 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class QueueAutoscaler {
 
+  /**
+   * The minimum number of instances the container can scale down to
+   */
   @NonNull
   @JsonProperty("min_replicas")
   private Long minReplicas;
 
+  /**
+   * The maximum number of instances the container can scale up to
+   */
   @NonNull
   @JsonProperty("max_replicas")
   private Long maxReplicas;
@@ -32,12 +38,21 @@ public class QueueAutoscaler {
   @JsonProperty("desired_queue_length")
   private Long desiredQueueLength;
 
+  /**
+   * The period (in seconds) in which the queue checks the formula
+   */
   @JsonProperty("polling_period")
   private Long pollingPeriod;
 
+  /**
+   * The maximum number of instances that can be added per minute
+   */
   @JsonProperty("max_upscale_per_minute")
   private Long maxUpscalePerMinute;
 
+  /**
+   * The maximum number of instances that can be removed per minute
+   */
   @JsonProperty("max_downscale_per_minute")
   private Long maxDownscalePerMinute;
 }

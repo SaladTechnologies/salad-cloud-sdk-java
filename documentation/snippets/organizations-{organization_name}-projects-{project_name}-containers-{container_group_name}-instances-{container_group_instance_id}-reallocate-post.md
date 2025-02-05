@@ -13,10 +13,10 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroupsService.reallocateContainerGroupInstance(
-      "sws1rwna83a3asu0izd6ugn07m5xpcp89lefemdke05z4s9d",
-      "ed2caksvlhpzmfccbh2v7dcapp3enb9gd2f4k49vviu53s5",
-      "xkwwnw",
+    saladCloudSdk.containerGroups.reallocateContainerGroupInstance(
+      "a7tl0fwms3fu3myo74a99jr6ouv4w914sp420zyiuo43jexn",
+      "czq6rnxf04dqmccakh",
+      "k9g3a72svbjzx0y-i4o1cvulgdrylaujk1yrzfoq1",
       "container_group_instance_id"
     );
   }

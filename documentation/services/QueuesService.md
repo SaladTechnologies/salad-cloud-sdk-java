@@ -50,9 +50,9 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueueList response = saladCloudSdk.queuesService.listQueues(
-      "xtp82b9jzwqov1insghigvfq0donadhrrdqx-2redu46g7e",
-      "xk27gbnpmwk5xor49bk4ujk7"
+    QueueList response = saladCloudSdk.queues.listQueues(
+      "ymfonstzqzsopxf2dyjvm8sjxa281t2p7ne1m",
+      "sxk12v91ajseb3fzyxdaq"
     );
 
     System.out.println(response);
@@ -101,14 +101,14 @@ public class Main {
 
     CreateQueue createQueue = CreateQueue
       .builder()
-      .name("ho4d79h7bg0vpngqc8hz5pxjwi")
-      .displayName("IWPKHVWPTc")
-      .description("aliqua id nostrud")
+      .name("name")
+      .displayName("M a1HEy")
+      .description("description")
       .build();
 
-    Queue response = saladCloudSdk.queuesService.createQueue(
-      "xtp82b9jzwqov1insghigvfq0donadhrrdqx-2redu46g7e",
-      "xk27gbnpmwk5xor49bk4ujk7",
+    Queue response = saladCloudSdk.queues.createQueue(
+      "ymfonstzqzsopxf2dyjvm8sjxa281t2p7ne1m",
+      "sxk12v91ajseb3fzyxdaq",
       createQueue
     );
 
@@ -155,10 +155,10 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    Queue response = saladCloudSdk.queuesService.getQueue(
-      "bb5wprcvb9628akhug9lnd2",
-      "bw-4bdb9jsi-f1xex70mdgjf5n-5ua-e28xyu9ujbls0vsy",
-      "wilo12xl52y9c178cmdya6ykpby-hunb0b6s7s2l"
+    Queue response = saladCloudSdk.queues.getQueue(
+      "xrt9bh26smkuf3v0nd2roppi64zikv73wys88ns82g85qcczec2y8bnwc4gs",
+      "y6aeebojnkc8rl8-7pysy62j25cdn",
+      "ujh0v34w5-21z63jxnxh38ckz48-k1ecu"
     );
 
     System.out.println(response);
@@ -206,12 +206,12 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    UpdateQueue updateQueue = UpdateQueue.builder().displayName("O5Yf2").description("cupidatat").build();
+    UpdateQueue updateQueue = UpdateQueue.builder().displayName("eYpeFzhf").description("description").build();
 
-    Queue response = saladCloudSdk.queuesService.updateQueue(
-      "bb5wprcvb9628akhug9lnd2",
-      "bw-4bdb9jsi-f1xex70mdgjf5n-5ua-e28xyu9ujbls0vsy",
-      "wilo12xl52y9c178cmdya6ykpby-hunb0b6s7s2l",
+    Queue response = saladCloudSdk.queues.updateQueue(
+      "xrt9bh26smkuf3v0nd2roppi64zikv73wys88ns82g85qcczec2y8bnwc4gs",
+      "y6aeebojnkc8rl8-7pysy62j25cdn",
+      "ujh0v34w5-21z63jxnxh38ckz48-k1ecu",
       updateQueue
     );
 
@@ -253,10 +253,10 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.queuesService.deleteQueue(
-      "bb5wprcvb9628akhug9lnd2",
-      "bw-4bdb9jsi-f1xex70mdgjf5n-5ua-e28xyu9ujbls0vsy",
-      "wilo12xl52y9c178cmdya6ykpby-hunb0b6s7s2l"
+    saladCloudSdk.queues.deleteQueue(
+      "xrt9bh26smkuf3v0nd2roppi64zikv73wys88ns82g85qcczec2y8bnwc4gs",
+      "y6aeebojnkc8rl8-7pysy62j25cdn",
+      "ujh0v34w5-21z63jxnxh38ckz48-k1ecu"
     );
   }
 }
@@ -304,14 +304,14 @@ public class Main {
 
     ListQueueJobsParameters requestParameters = ListQueueJobsParameters
       .builder()
-      .page(706148771L)
-      .pageSize(45L)
+      .page(1000778021L)
+      .pageSize(88L)
       .build();
 
-    QueueJobList response = saladCloudSdk.queuesService.listQueueJobs(
-      "wcaz2jbu5pfmpygxffsf4bh4e6",
-      "dzh9lv6afpamv8cx0x6",
-      "s9f4ikmr0j6c3n18n4djttkqmgzb46dd5wogzrfe2pq12s2",
+    QueueJobList response = saladCloudSdk.queues.listQueueJobs(
+      "yl-v1qf-186n2145dgb2tg1emlkmk",
+      "ufo7nbyl9hodgr47mbi5x5lh",
+      "g-5jd",
       requestParameters
     );
 
@@ -367,10 +367,10 @@ public class Main {
       .webhook("webhook")
       .build();
 
-    QueueJob response = saladCloudSdk.queuesService.createQueueJob(
-      "wcaz2jbu5pfmpygxffsf4bh4e6",
-      "dzh9lv6afpamv8cx0x6",
-      "s9f4ikmr0j6c3n18n4djttkqmgzb46dd5wogzrfe2pq12s2",
+    QueueJob response = saladCloudSdk.queues.createQueueJob(
+      "yl-v1qf-186n2145dgb2tg1emlkmk",
+      "ufo7nbyl9hodgr47mbi5x5lh",
+      "g-5jd",
       createQueueJob
     );
 
@@ -418,7 +418,12 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueueJob response = saladCloudSdk.queuesService.getQueueJob("zm-jv", "tq26", "je5dpzbgsk8gvp", "queue_job_id");
+    QueueJob response = saladCloudSdk.queues.getQueueJob(
+      "hrf4burmjglxm0qfqui7u2clb2gfk12ij-g2i1z7we77-hpgwjdxcrr6-3c9",
+      "dv3zyz-95e2zp7wjr",
+      "zkrdg5h3eeasigc",
+      "queue_job_id"
+    );
 
     System.out.println(response);
   }
@@ -459,7 +464,12 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.queuesService.deleteQueueJob("zm-jv", "tq26", "je5dpzbgsk8gvp", "queue_job_id");
+    saladCloudSdk.queues.deleteQueueJob(
+      "hrf4burmjglxm0qfqui7u2clb2gfk12ij-g2i1z7we77-hpgwjdxcrr6-3c9",
+      "dv3zyz-95e2zp7wjr",
+      "zkrdg5h3eeasigc",
+      "queue_job_id"
+    );
   }
 }
 

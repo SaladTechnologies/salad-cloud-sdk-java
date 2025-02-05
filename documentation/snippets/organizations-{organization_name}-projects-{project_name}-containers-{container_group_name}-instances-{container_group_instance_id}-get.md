@@ -14,10 +14,10 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ContainerGroupInstance response = saladCloudSdk.containerGroupsService.getContainerGroupInstance(
-      "a09xnu6-fkv3",
-      "ca4ydy-pi16e4ddle58fi8u9w2qgnsgj7cn",
-      "b4p90a72aagy0fz",
+    ContainerGroupInstance response = saladCloudSdk.containerGroups.getContainerGroupInstance(
+      "z-5ux2vsm",
+      "mjjt13u7q3pryx",
+      "qnnyigut20zp1dyfm2yp4-lw",
       "container_group_instance_id"
     );
 

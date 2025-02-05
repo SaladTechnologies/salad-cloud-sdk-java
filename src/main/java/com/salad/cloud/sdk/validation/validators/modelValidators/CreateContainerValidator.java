@@ -17,9 +17,10 @@ public class CreateContainerValidator extends AbstractModelValidator<CreateConta
   @Override
   protected Violation[] validateModel(CreateContainer createContainer) {
     return new ViolationAggregator()
-      .add(new StringValidator("image").minLength(1).maxLength(1024).validate(createContainer.getImage()))
-      .add(new ListValidator<String>("command").maxLength(100).validate(createContainer.getCommand()))
-      .add(new CreateContainerLoggingValidator("logging").validate(createContainer.getLogging()))
+      .add(new StringValidator("image").minLength(1).maxLength(1024).required().validate(createContainer.getImage()))
+      .add(new ContainerResourceRequirementsValidator("resources").required().validate(createContainer.getResources()))
+      .add(new ListValidator<String>("command").maxLength(100).optional().validate(createContainer.getCommand()))
+      .add(new CreateContainerLoggingValidator("logging").optional().validate(createContainer.getLogging()))
       .aggregate();
   }
 }

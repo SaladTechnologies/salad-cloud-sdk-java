@@ -20,7 +20,8 @@ public class QueueListValidator extends AbstractModelValidator<QueueList> {
       .add(
         new ListValidator<Queue>("items")
           .maxLength(100)
-          .itemValidator(new QueueValidator())
+          .itemValidator(new QueueValidator().required())
+          .required()
           .validate(queueList.getItems())
       )
       .aggregate();

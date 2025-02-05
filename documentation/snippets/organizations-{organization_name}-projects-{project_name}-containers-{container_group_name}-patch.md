@@ -54,45 +54,27 @@ public class Main {
 
     Resources resources = Resources
       .builder()
-      .cpu(3L)
-      .memory(14678L)
+      .cpu(12L)
+      .memory(16671L)
       .gpuClasses(gpuClasses)
-      .storageAmount(47984533464L)
+      .storageAmount(47892181137L)
       .build();
 
     List<String> command = Arrays.asList("command");
 
-    LoggingAxiom3 loggingAxiom3 = LoggingAxiom3
-      .builder()
-      .host("aute veniam exercitation eiusmod et")
-      .apiToken("mollit")
-      .dataset("nisi in Lorem")
-      .build();
+    LoggingAxiom3 loggingAxiom3 = LoggingAxiom3.builder().host("host").apiToken("api_token").dataset("dataset").build();
 
     DatadogTags3 datadogTags3 = DatadogTags3.builder().name("name").value("value").build();
 
     List<DatadogTags3> tags = Arrays.asList(datadogTags3);
 
-    LoggingDatadog3 loggingDatadog3 = LoggingDatadog3
-      .builder()
-      .host("velit officia consequat")
-      .apiKey("sit in veniam")
-      .tags(tags)
-      .build();
+    LoggingDatadog3 loggingDatadog3 = LoggingDatadog3.builder().host("host").apiKey("api_key").tags(tags).build();
 
-    LoggingNewRelic3 loggingNewRelic3 = LoggingNewRelic3
-      .builder()
-      .host("consequat sed")
-      .ingestionKey("tempor exercitation")
-      .build();
+    LoggingNewRelic3 loggingNewRelic3 = LoggingNewRelic3.builder().host("host").ingestionKey("ingestion_key").build();
 
-    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3
-      .builder()
-      .host("qui enim Ut nostrud deserunt")
-      .token("cillum sint ullamco veniam occaecat")
-      .build();
+    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3.builder().host("host").token("token").build();
 
-    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("Ut amet").port(30110L).build();
+    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("host").port(4071L).build();
 
     HttpHeaders4 httpHeaders4 = HttpHeaders4.builder().name("name").value("value").build();
 
@@ -100,8 +82,8 @@ public class Main {
 
     LoggingHttp3 loggingHttp3 = LoggingHttp3
       .builder()
-      .host("eiusmod labore proident sit ut")
-      .port(17490L)
+      .host("host")
+      .port(52384L)
       .user("user")
       .password("password")
       .path("path")
@@ -159,7 +141,7 @@ public class Main {
 
     UpdateContainer updateContainer = UpdateContainer
       .builder()
-      .image("labore")
+      .image("image")
       .resources(resources)
       .command(command)
       .priority(ContainerGroupPriority.HIGH)
@@ -172,10 +154,10 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(35022L)
+      .port(49186L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(61900L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(993L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -188,7 +170,7 @@ public class Main {
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(58759L)
+      .port(64175L)
       .scheme(ContainerProbeHttpScheme.HTTP)
       .headers(headers)
       .build();
@@ -196,7 +178,7 @@ public class Main {
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(32748L)
+      .port(8441L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -209,7 +191,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(6L)
+      .initialDelaySeconds(8L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -222,7 +204,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(4L)
+      .initialDelaySeconds(10L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -235,7 +217,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
+      .initialDelaySeconds(7L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
@@ -244,19 +226,19 @@ public class Main {
 
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
-      .minReplicas(96L)
-      .maxReplicas(190L)
-      .desiredQueueLength(42L)
-      .pollingPeriod(684L)
-      .maxUpscalePerMinute(95L)
-      .maxDownscalePerMinute(10L)
+      .minReplicas(41L)
+      .maxReplicas(135L)
+      .desiredQueueLength(51L)
+      .pollingPeriod(188L)
+      .maxUpscalePerMinute(30L)
+      .maxDownscalePerMinute(42L)
       .build();
 
     UpdateContainerGroup updateContainerGroup = UpdateContainerGroup
       .builder()
-      .displayName("01n75")
+      .displayName("hx6nAEIR")
       .container(updateContainer)
-      .replicas(232L)
+      .replicas(90L)
       .countryCodes(countryCodes)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -265,10 +247,10 @@ public class Main {
       .queueAutoscaler(queueAutoscaler)
       .build();
 
-    ContainerGroup response = saladCloudSdk.containerGroupsService.updateContainerGroup(
-      "oji7lyvxb3ca5hc",
-      "olb1uzytbhhukf1u0-ahl0b9oqfjj",
-      "s7z7dvdopv2czgde1zrufxgiv5tp-j",
+    ContainerGroup response = saladCloudSdk.containerGroups.updateContainerGroup(
+      "mk0yct7b8bo1g8tvl9",
+      "ax4qyju9jcnr3fw8e9al8o-4oreg5ocaz2jbu5pfmpygxffsf4bh4e6",
+      "dzh9lv6afpamv8cx0x6",
       updateContainerGroup
     );
 

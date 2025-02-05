@@ -14,9 +14,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    WebhookSecretKey response = saladCloudSdk.webhookSecretKeyService.updateWebhookSecretKey(
-      "mouv4w914sp420zyiuo43jexocjzq6rnxf04dqmccakipx9g3a72svbj"
-    );
+    WebhookSecretKey response = saladCloudSdk.webhookSecretKey.updateWebhookSecretKey("eqlckzjaa8wys5nkv5h5z8lk18");
 
     System.out.println(response);
   }

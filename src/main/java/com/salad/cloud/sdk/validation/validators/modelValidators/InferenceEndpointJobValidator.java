@@ -20,6 +20,7 @@ public class InferenceEndpointJobValidator extends AbstractModelValidator<Infere
       .add(
         new ListValidator<InferenceEndpointJobEvent>("events")
           .maxLength(1000)
+          .required()
           .validate(inferenceEndpointJob.getEvents())
       )
       .aggregate();

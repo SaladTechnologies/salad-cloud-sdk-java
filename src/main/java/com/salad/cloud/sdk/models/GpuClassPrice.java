@@ -35,16 +35,16 @@ public class GpuClassPrice {
     /**
      * Flag to track if the priority property has been set.
      */
-    private boolean wasPrioritySet = false;
+    private boolean priority$set = false;
 
     public GpuClassPriceBuilder priority(ContainerGroupPriority priority) {
-      this.wasPrioritySet = true;
+      this.priority$set = true;
       this.priority = priority;
       return this;
     }
 
     public GpuClassPrice build() {
-      if (!wasPrioritySet) {
+      if (!priority$set) {
         throw new IllegalStateException("priority is required");
       }
       return new GpuClassPrice(priority, price);

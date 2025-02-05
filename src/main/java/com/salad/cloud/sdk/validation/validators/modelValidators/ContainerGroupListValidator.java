@@ -20,7 +20,8 @@ public class ContainerGroupListValidator extends AbstractModelValidator<Containe
       .add(
         new ListValidator<ContainerGroup>("items")
           .maxLength(100)
-          .itemValidator(new ContainerGroupValidator())
+          .itemValidator(new ContainerGroupValidator().required())
+          .required()
           .validate(containerGroupList.getItems())
       )
       .aggregate();

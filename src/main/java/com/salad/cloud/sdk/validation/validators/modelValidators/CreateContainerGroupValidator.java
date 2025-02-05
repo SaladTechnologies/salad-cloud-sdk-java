@@ -24,26 +24,55 @@ public class CreateContainerGroupValidator extends AbstractModelValidator<Create
           .minLength(2)
           .maxLength(63)
           .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
           .validate(createContainerGroup.getName())
       )
-      .add(new CreateContainerValidator("container").validate(createContainerGroup.getContainer()))
-      .add(new NumericValidator<Long>("replicas").min(0L).max(250L).validate(createContainerGroup.getReplicas()))
+      .add(new CreateContainerValidator("container").required().validate(createContainerGroup.getContainer()))
+      .add(
+        new NumericValidator<Long>("replicas").min(0L).max(250L).required().validate(createContainerGroup.getReplicas())
+      )
       .add(
         new StringValidator("displayName")
           .minLength(2)
           .maxLength(63)
           .pattern("^[ ,-.0-9A-Za-z]+$")
+          .optional()
           .validate(createContainerGroup.getDisplayName())
       )
       .add(
         new ListValidator<CountryCode>("countryCodes")
           .minLength(1)
           .maxLength(500)
+          .optional()
           .validate(createContainerGroup.getCountryCodes())
       )
       .add(
+        new CreateContainerGroupNetworkingValidator("networking")
+          .optional()
+          .validate(createContainerGroup.getNetworking())
+      )
+      .add(
+        new ContainerGroupLivenessProbeValidator("livenessProbe")
+          .optional()
+          .validate(createContainerGroup.getLivenessProbe())
+      )
+      .add(
+        new ContainerGroupReadinessProbeValidator("readinessProbe")
+          .optional()
+          .validate(createContainerGroup.getReadinessProbe())
+      )
+      .add(
+        new ContainerGroupStartupProbeValidator("startupProbe")
+          .optional()
+          .validate(createContainerGroup.getStartupProbe())
+      )
+      .add(
         new ContainerGroupQueueConnectionValidator("queueConnection")
+          .optional()
           .validate(createContainerGroup.getQueueConnection())
+      )
+      .add(
+        new QueueAutoscalerValidator("queueAutoscaler").optional().validate(createContainerGroup.getQueueAutoscaler())
       )
       .aggregate();
   }

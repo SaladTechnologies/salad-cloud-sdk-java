@@ -15,12 +15,12 @@ public class UpdateContainerLoggingValidator extends AbstractModelValidator<Upda
   @Override
   protected Violation[] validateModel(UpdateContainerLogging updateContainerLogging) {
     return new ViolationAggregator()
-      .add(new LoggingAxiom3Validator("axiom").validate(updateContainerLogging.getAxiom()))
-      .add(new LoggingDatadog3Validator("datadog").validate(updateContainerLogging.getDatadog()))
-      .add(new LoggingNewRelic3Validator("newRelic").validate(updateContainerLogging.getNewRelic()))
-      .add(new LoggingSplunk3Validator("splunk").validate(updateContainerLogging.getSplunk()))
-      .add(new LoggingTcp3Validator("tcp").validate(updateContainerLogging.getTcp()))
-      .add(new LoggingHttp3Validator("http").validate(updateContainerLogging.getHttp()))
+      .add(new LoggingAxiom3Validator("axiom").optional().validate(updateContainerLogging.getAxiom()))
+      .add(new LoggingDatadog3Validator("datadog").optional().validate(updateContainerLogging.getDatadog()))
+      .add(new LoggingNewRelic3Validator("newRelic").optional().validate(updateContainerLogging.getNewRelic()))
+      .add(new LoggingSplunk3Validator("splunk").optional().validate(updateContainerLogging.getSplunk()))
+      .add(new LoggingTcp3Validator("tcp").optional().validate(updateContainerLogging.getTcp()))
+      .add(new LoggingHttp3Validator("http").optional().validate(updateContainerLogging.getHttp()))
       .aggregate();
   }
 }

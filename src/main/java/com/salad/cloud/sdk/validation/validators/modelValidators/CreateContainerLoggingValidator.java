@@ -15,12 +15,12 @@ public class CreateContainerLoggingValidator extends AbstractModelValidator<Crea
   @Override
   protected Violation[] validateModel(CreateContainerLogging createContainerLogging) {
     return new ViolationAggregator()
-      .add(new LoggingAxiom2Validator("axiom").validate(createContainerLogging.getAxiom()))
-      .add(new LoggingDatadog2Validator("datadog").validate(createContainerLogging.getDatadog()))
-      .add(new LoggingNewRelic2Validator("newRelic").validate(createContainerLogging.getNewRelic()))
-      .add(new LoggingSplunk2Validator("splunk").validate(createContainerLogging.getSplunk()))
-      .add(new LoggingTcp2Validator("tcp").validate(createContainerLogging.getTcp()))
-      .add(new LoggingHttp2Validator("http").validate(createContainerLogging.getHttp()))
+      .add(new LoggingAxiom2Validator("axiom").optional().validate(createContainerLogging.getAxiom()))
+      .add(new LoggingDatadog2Validator("datadog").optional().validate(createContainerLogging.getDatadog()))
+      .add(new LoggingNewRelic2Validator("newRelic").optional().validate(createContainerLogging.getNewRelic()))
+      .add(new LoggingSplunk2Validator("splunk").optional().validate(createContainerLogging.getSplunk()))
+      .add(new LoggingTcp2Validator("tcp").optional().validate(createContainerLogging.getTcp()))
+      .add(new LoggingHttp2Validator("http").optional().validate(createContainerLogging.getHttp()))
       .aggregate();
   }
 }

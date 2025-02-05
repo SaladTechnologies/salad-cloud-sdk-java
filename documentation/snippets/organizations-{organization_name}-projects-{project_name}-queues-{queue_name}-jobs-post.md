@@ -22,10 +22,10 @@ public class Main {
       .webhook("webhook")
       .build();
 
-    QueueJob response = saladCloudSdk.queuesService.createQueueJob(
-      "wcaz2jbu5pfmpygxffsf4bh4e6",
-      "dzh9lv6afpamv8cx0x6",
-      "s9f4ikmr0j6c3n18n4djttkqmgzb46dd5wogzrfe2pq12s2",
+    QueueJob response = saladCloudSdk.queues.createQueueJob(
+      "yl-v1qf-186n2145dgb2tg1emlkmk",
+      "ufo7nbyl9hodgr47mbi5x5lh",
+      "g-5jd",
       createQueueJob
     );
 

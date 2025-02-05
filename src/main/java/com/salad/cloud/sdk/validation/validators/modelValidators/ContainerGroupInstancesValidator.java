@@ -20,6 +20,8 @@ public class ContainerGroupInstancesValidator extends AbstractModelValidator<Con
       .add(
         new ListValidator<ContainerGroupInstance>("instances")
           .maxLength(1000)
+          .itemValidator(new ContainerGroupInstanceValidator().required())
+          .required()
           .validate(containerGroupInstances.getInstances())
       )
       .aggregate();

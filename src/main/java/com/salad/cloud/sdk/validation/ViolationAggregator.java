@@ -1,7 +1,6 @@
 package com.salad.cloud.sdk.validation;
 
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
-import com.salad.cloud.sdk.validation.validators.AbstractValidator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

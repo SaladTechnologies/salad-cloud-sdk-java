@@ -8,9 +8,9 @@ Represents a container
 | :------------------- | :---------------------------- | :------- | :------------------------------------------- |
 | image                | String                        | ✅       |                                              |
 | resources            | ContainerResourceRequirements | ✅       | Represents a container resource requirements |
-| command              | List<String>                  | ✅       |                                              |
+| command              | List\<String\>                | ✅       |                                              |
 | priority             | ContainerGroupPriority        | ❌       |                                              |
 | size                 | Long                          | ❌       |                                              |
 | hash                 | String                        | ❌       |                                              |
-| environmentVariables | Map<String, String>           | ❌       |                                              |
+| environmentVariables | Map\<String, String\>         | ❌       |                                              |
 | logging              | ContainerLogging              | ❌       |                                              |
