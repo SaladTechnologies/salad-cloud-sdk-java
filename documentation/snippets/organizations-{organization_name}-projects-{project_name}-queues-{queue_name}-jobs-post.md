@@ -22,12 +22,7 @@ public class Main {
       .webhook("webhook")
       .build();
 
-    QueueJob response = saladCloudSdk.queues.createQueueJob(
-      "yl-v1qf-186n2145dgb2tg1emlkmk",
-      "ufo7nbyl9hodgr47mbi5x5lh",
-      "g-5jd",
-      createQueueJob
-    );
+    QueueJob response = saladCloudSdk.queues.createQueueJob("acme-corp", "dev-env", "fifo-queue", createQueueJob);
 
     System.out.println(response);
   }

@@ -14,7 +14,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    GpuClassesList response = saladCloudSdk.organizationData.listGpuClasses("ydd335fjnk1n3-2syw9jsf8am-o3r88blouno");
+    GpuClassesList response = saladCloudSdk.organizationData.listGpuClasses("acme-corp");
 
     System.out.println(response);
   }

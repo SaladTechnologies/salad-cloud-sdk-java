@@ -22,6 +22,9 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class InferenceEndpointJob {
 
+  /**
+   * The unique identifier.
+   */
   @NonNull
   private String id;
 
@@ -32,36 +35,54 @@ public class InferenceEndpointJob {
   private Object input;
 
   /**
-   * The inference endpoint name
+   * The inference endpoint name.
    */
   @NonNull
   @JsonProperty("inference_endpoint_name")
   private String inferenceEndpointName;
 
+  /**
+   * The current status.
+   */
   @NonNull
   private InferenceEndpointJobStatus status;
 
+  /**
+   * The list of events.
+   */
   @NonNull
   private List<InferenceEndpointJobEvent> events;
 
   /**
-   * The organization name
+   * The organization name.
    */
   @NonNull
   @JsonProperty("organization_name")
   private String organizationName;
 
+  /**
+   * The time the job was created.
+   */
   @NonNull
   @JsonProperty("create_time")
   private String createTime;
 
+  /**
+   * The time the job was last updated.
+   */
   @NonNull
   @JsonProperty("update_time")
   private String updateTime;
 
+  /**
+   * The job metadata. May be any valid JSON.
+   */
   @JsonInclude(JsonInclude.Include.ALWAYS)
   private Object metadata;
 
+  /**
+   * The webhook URL called when the job completes.
+   */
   @JsonInclude(JsonInclude.Include.ALWAYS)
   private String webhook;
 

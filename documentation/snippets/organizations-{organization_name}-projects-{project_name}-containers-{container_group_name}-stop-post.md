@@ -13,11 +13,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroups.stopContainerGroup(
-      "fooidhvnhwad",
-      "azuh19krhv62or5c-im9-8sae7tz",
-      "oo0emyztq64o8ut710qtepjztx34mk6lruecseiyq06ab3ok5xsg-okxar"
-    );
+    saladCloudSdk.containerGroups.stopContainerGroup("acme-corp", "dev-env", "x5pfkx3zz5np0cn9u94xdcf5g5w9-1");
   }
 }
 

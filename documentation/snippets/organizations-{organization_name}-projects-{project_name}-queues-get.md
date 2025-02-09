@@ -14,10 +14,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueueList response = saladCloudSdk.queues.listQueues(
-      "ymfonstzqzsopxf2dyjvm8sjxa281t2p7ne1m",
-      "sxk12v91ajseb3fzyxdaq"
-    );
+    QueueList response = saladCloudSdk.queues.listQueues("acme-corp", "dev-env");
 
     System.out.println(response);
   }

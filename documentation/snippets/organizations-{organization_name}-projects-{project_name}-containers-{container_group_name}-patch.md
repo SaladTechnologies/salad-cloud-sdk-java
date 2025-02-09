@@ -54,10 +54,10 @@ public class Main {
 
     Resources resources = Resources
       .builder()
-      .cpu(12L)
-      .memory(16671L)
+      .cpu(11L)
+      .memory(57017L)
       .gpuClasses(gpuClasses)
-      .storageAmount(47892181137L)
+      .storageAmount(34792510764L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -74,7 +74,7 @@ public class Main {
 
     LoggingSplunk3 loggingSplunk3 = LoggingSplunk3.builder().host("host").token("token").build();
 
-    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("host").port(4071L).build();
+    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("host").port(48471L).build();
 
     HttpHeaders4 httpHeaders4 = HttpHeaders4.builder().name("name").value("value").build();
 
@@ -83,7 +83,7 @@ public class Main {
     LoggingHttp3 loggingHttp3 = LoggingHttp3
       .builder()
       .host("host")
-      .port(52384L)
+      .port(488L)
       .user("user")
       .password("password")
       .path("path")
@@ -154,10 +154,10 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(49186L)
+      .port(29069L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(993L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(22350L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -170,7 +170,7 @@ public class Main {
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(64175L)
+      .port(56884L)
       .scheme(ContainerProbeHttpScheme.HTTP)
       .headers(headers)
       .build();
@@ -178,7 +178,7 @@ public class Main {
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(8441L)
+      .port(47172L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -191,7 +191,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(8L)
+      .initialDelaySeconds(0L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -204,7 +204,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
+      .initialDelaySeconds(0L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -217,7 +217,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(7L)
+      .initialDelaySeconds(9L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
@@ -226,19 +226,19 @@ public class Main {
 
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
-      .minReplicas(41L)
-      .maxReplicas(135L)
-      .desiredQueueLength(51L)
-      .pollingPeriod(188L)
-      .maxUpscalePerMinute(30L)
-      .maxDownscalePerMinute(42L)
+      .minReplicas(26L)
+      .maxReplicas(28L)
+      .desiredQueueLength(42L)
+      .pollingPeriod(442L)
+      .maxUpscalePerMinute(3L)
+      .maxDownscalePerMinute(69L)
       .build();
 
     UpdateContainerGroup updateContainerGroup = UpdateContainerGroup
       .builder()
-      .displayName("hx6nAEIR")
+      .displayName("AvVDo,")
       .container(updateContainer)
-      .replicas(90L)
+      .replicas(160L)
       .countryCodes(countryCodes)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -248,9 +248,9 @@ public class Main {
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroups.updateContainerGroup(
-      "mk0yct7b8bo1g8tvl9",
-      "ax4qyju9jcnr3fw8e9al8o-4oreg5ocaz2jbu5pfmpygxffsf4bh4e6",
-      "dzh9lv6afpamv8cx0x6",
+      "acme-corp",
+      "dev-env",
+      "deo5-1hcilmn8m1ouq40vp547cf-9sn3yad",
       updateContainerGroup
     );
 

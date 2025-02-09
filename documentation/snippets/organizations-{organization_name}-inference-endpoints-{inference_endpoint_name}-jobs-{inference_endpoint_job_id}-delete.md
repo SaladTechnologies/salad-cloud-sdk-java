@@ -14,7 +14,7 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     saladCloudSdk.inferenceEndpoints.deleteInferenceEndpointJob(
-      "igqfe6b1d0c-0auqqph3bt-7bft4c1m95idut36tc-x7mo2nsh7uoln",
+      "acme-corp",
       "inference_endpoint_name",
       "inference_endpoint_job_id"
     );

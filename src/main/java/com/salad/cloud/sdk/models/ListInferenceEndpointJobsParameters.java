@@ -15,7 +15,7 @@ import lombok.extern.jackson.Jacksonized;
 @ToString
 @EqualsAndHashCode
 @Jacksonized
-public class GetInferenceEndpointJobsParameters {
+public class ListInferenceEndpointJobsParameters {
 
   /**
    * The page number

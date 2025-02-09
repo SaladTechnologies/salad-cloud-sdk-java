@@ -5,6 +5,7 @@ import com.salad.cloud.sdk.models.InferenceEndpointJobEvent;
 import com.salad.cloud.sdk.validation.Violation;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.validators.ListValidator;
+import com.salad.cloud.sdk.validation.validators.StringValidator;
 
 public class InferenceEndpointJobValidator extends AbstractModelValidator<InferenceEndpointJob> {
 
@@ -22,6 +23,14 @@ public class InferenceEndpointJobValidator extends AbstractModelValidator<Infere
           .maxLength(1000)
           .required()
           .validate(inferenceEndpointJob.getEvents())
+      )
+      .add(
+        new StringValidator("organizationName")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[a-z][a-z0-9-]{0,61}[a-z0-9]$")
+          .required()
+          .validate(inferenceEndpointJob.getOrganizationName())
       )
       .aggregate();
   }

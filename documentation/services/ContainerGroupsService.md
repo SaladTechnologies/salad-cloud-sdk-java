@@ -53,7 +53,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ContainerGroupList response = saladCloudSdk.containerGroups.listContainerGroups("o9lnd3c1w-4b", "c9jr");
+    ContainerGroupList response = saladCloudSdk.containerGroups.listContainerGroups("acme-corp", "dev-env");
 
     System.out.println(response);
   }
@@ -142,10 +142,10 @@ public class Main {
 
     ContainerResourceRequirements containerResourceRequirements = ContainerResourceRequirements
       .builder()
-      .cpu(10L)
-      .memory(9057L)
+      .cpu(13L)
+      .memory(8139L)
       .gpuClasses(gpuClasses)
-      .storageAmount(34911830561L)
+      .storageAmount(43769579402L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -162,7 +162,7 @@ public class Main {
 
     LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("host").token("token").build();
 
-    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("host").port(32723L).build();
+    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("host").port(24951L).build();
 
     HttpHeaders3 httpHeaders3 = HttpHeaders3.builder().name("name").value("value").build();
 
@@ -171,7 +171,7 @@ public class Main {
     LoggingHttp2 loggingHttp2 = LoggingHttp2
       .builder()
       .host("host")
-      .port(51830L)
+      .port(36565L)
       .user("user")
       .password("password")
       .path("path")
@@ -243,15 +243,15 @@ public class Main {
     CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking
       .builder()
       .protocol(ContainerNetworkingProtocol.HTTP)
-      .port(4465L)
+      .port(22764L)
       .auth(false)
       .loadBalancer(CreateContainerGroupNetworkingLoadBalancer.ROUND_ROBIN)
-      .singleConnectionLimit(true)
+      .singleConnectionLimit(false)
       .clientRequestTimeout(100000L)
       .serverResponseTimeout(100000L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(993L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(22350L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -264,7 +264,7 @@ public class Main {
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(64175L)
+      .port(56884L)
       .scheme(ContainerProbeHttpScheme.HTTP)
       .headers(headers)
       .build();
@@ -272,7 +272,7 @@ public class Main {
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(8441L)
+      .port(47172L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -285,7 +285,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(8L)
+      .initialDelaySeconds(0L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -298,7 +298,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
+      .initialDelaySeconds(0L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -311,7 +311,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(7L)
+      .initialDelaySeconds(9L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
@@ -321,28 +321,28 @@ public class Main {
     ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection
       .builder()
       .path("path")
-      .port(43154L)
-      .queueName("oujbls0vsz6xilo12xl52y9c178cmdya6ykpby-hunb0b6s7s2mppfvzd5f4e")
+      .port(34605L)
+      .queueName("gv8rketqh")
       .build();
 
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
-      .minReplicas(41L)
-      .maxReplicas(135L)
-      .desiredQueueLength(51L)
-      .pollingPeriod(188L)
-      .maxUpscalePerMinute(30L)
-      .maxDownscalePerMinute(42L)
+      .minReplicas(26L)
+      .maxReplicas(28L)
+      .desiredQueueLength(42L)
+      .pollingPeriod(442L)
+      .maxUpscalePerMinute(3L)
+      .maxDownscalePerMinute(69L)
       .build();
 
     CreateContainerGroup createContainerGroup = CreateContainerGroup
       .builder()
       .name("name")
-      .displayName("hfR")
+      .displayName("VSVi1YCcw")
       .container(createContainer)
-      .autostartPolicy(true)
+      .autostartPolicy(false)
       .restartPolicy(ContainerRestartPolicy.ALWAYS)
-      .replicas(169L)
+      .replicas(231L)
       .countryCodes(countryCodes)
       .networking(createContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -353,8 +353,8 @@ public class Main {
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroups.createContainerGroup(
-      "o9lnd3c1w-4b",
-      "c9jr",
+      "acme-corp",
+      "dev-env",
       createContainerGroup
     );
 
@@ -402,9 +402,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     ContainerGroup response = saladCloudSdk.containerGroups.getContainerGroup(
-      "mk0yct7b8bo1g8tvl9",
-      "ax4qyju9jcnr3fw8e9al8o-4oreg5ocaz2jbu5pfmpygxffsf4bh4e6",
-      "dzh9lv6afpamv8cx0x6"
+      "acme-corp",
+      "dev-env",
+      "deo5-1hcilmn8m1ouq40vp547cf-9sn3yad"
     );
 
     System.out.println(response);
@@ -491,10 +491,10 @@ public class Main {
 
     Resources resources = Resources
       .builder()
-      .cpu(12L)
-      .memory(16671L)
+      .cpu(11L)
+      .memory(57017L)
       .gpuClasses(gpuClasses)
-      .storageAmount(47892181137L)
+      .storageAmount(34792510764L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -511,7 +511,7 @@ public class Main {
 
     LoggingSplunk3 loggingSplunk3 = LoggingSplunk3.builder().host("host").token("token").build();
 
-    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("host").port(4071L).build();
+    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("host").port(48471L).build();
 
     HttpHeaders4 httpHeaders4 = HttpHeaders4.builder().name("name").value("value").build();
 
@@ -520,7 +520,7 @@ public class Main {
     LoggingHttp3 loggingHttp3 = LoggingHttp3
       .builder()
       .host("host")
-      .port(52384L)
+      .port(488L)
       .user("user")
       .password("password")
       .path("path")
@@ -591,10 +591,10 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(49186L)
+      .port(29069L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(993L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(22350L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -607,7 +607,7 @@ public class Main {
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(64175L)
+      .port(56884L)
       .scheme(ContainerProbeHttpScheme.HTTP)
       .headers(headers)
       .build();
@@ -615,7 +615,7 @@ public class Main {
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(8441L)
+      .port(47172L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -628,7 +628,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(8L)
+      .initialDelaySeconds(0L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -641,7 +641,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
+      .initialDelaySeconds(0L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -654,7 +654,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(7L)
+      .initialDelaySeconds(9L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
@@ -663,19 +663,19 @@ public class Main {
 
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
-      .minReplicas(41L)
-      .maxReplicas(135L)
-      .desiredQueueLength(51L)
-      .pollingPeriod(188L)
-      .maxUpscalePerMinute(30L)
-      .maxDownscalePerMinute(42L)
+      .minReplicas(26L)
+      .maxReplicas(28L)
+      .desiredQueueLength(42L)
+      .pollingPeriod(442L)
+      .maxUpscalePerMinute(3L)
+      .maxDownscalePerMinute(69L)
       .build();
 
     UpdateContainerGroup updateContainerGroup = UpdateContainerGroup
       .builder()
-      .displayName("hx6nAEIR")
+      .displayName("AvVDo,")
       .container(updateContainer)
-      .replicas(90L)
+      .replicas(160L)
       .countryCodes(countryCodes)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -685,9 +685,9 @@ public class Main {
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroups.updateContainerGroup(
-      "mk0yct7b8bo1g8tvl9",
-      "ax4qyju9jcnr3fw8e9al8o-4oreg5ocaz2jbu5pfmpygxffsf4bh4e6",
-      "dzh9lv6afpamv8cx0x6",
+      "acme-corp",
+      "dev-env",
+      "deo5-1hcilmn8m1ouq40vp547cf-9sn3yad",
       updateContainerGroup
     );
 
@@ -729,11 +729,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroups.deleteContainerGroup(
-      "mk0yct7b8bo1g8tvl9",
-      "ax4qyju9jcnr3fw8e9al8o-4oreg5ocaz2jbu5pfmpygxffsf4bh4e6",
-      "dzh9lv6afpamv8cx0x6"
-    );
+    saladCloudSdk.containerGroups.deleteContainerGroup("acme-corp", "dev-env", "deo5-1hcilmn8m1ouq40vp547cf-9sn3yad");
   }
 }
 
@@ -771,11 +767,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroups.startContainerGroup(
-      "vrwopvwr-1961g-m85nbqda3ufsy",
-      "m780t45z2tw4xt1b86w0clx6u",
-      "h-405x811v32aty9s-ghx1hm2nw1m"
-    );
+    saladCloudSdk.containerGroups.startContainerGroup("acme-corp", "dev-env", "ldlzsuvite9");
   }
 }
 
@@ -813,11 +805,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroups.stopContainerGroup(
-      "fooidhvnhwad",
-      "azuh19krhv62or5c-im9-8sae7tz",
-      "oo0emyztq64o8ut710qtepjztx34mk6lruecseiyq06ab3ok5xsg-okxar"
-    );
+    saladCloudSdk.containerGroups.stopContainerGroup("acme-corp", "dev-env", "x5pfkx3zz5np0cn9u94xdcf5g5w9-1");
   }
 }
 
@@ -861,9 +849,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     ContainerGroupInstances response = saladCloudSdk.containerGroups.listContainerGroupInstances(
-      "y7y892q4m5rifzmevenpg1u",
-      "k8xgbal184sloim-c7555huym18dia9d-gb",
-      "opn2qgtohqud110sou2jqi50g1umdxtc9fte8n"
+      "acme-corp",
+      "dev-env",
+      "o-41alirjhsw60"
     );
 
     System.out.println(response);
@@ -911,9 +899,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     ContainerGroupInstance response = saladCloudSdk.containerGroups.getContainerGroupInstance(
-      "z-5ux2vsm",
-      "mjjt13u7q3pryx",
-      "qnnyigut20zp1dyfm2yp4-lw",
+      "acme-corp",
+      "dev-env",
+      "djh4s8hz0soygun3m687oust14ot1pk0icevxf5izkd-rds",
       "container_group_instance_id"
     );
 
@@ -957,9 +945,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     saladCloudSdk.containerGroups.reallocateContainerGroupInstance(
-      "a7tl0fwms3fu3myo74a99jr6ouv4w914sp420zyiuo43jexn",
-      "czq6rnxf04dqmccakh",
-      "k9g3a72svbjzx0y-i4o1cvulgdrylaujk1yrzfoq1",
+      "acme-corp",
+      "dev-env",
+      "rlr6585lj2n",
       "container_group_instance_id"
     );
   }
@@ -1001,9 +989,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     saladCloudSdk.containerGroups.recreateContainerGroupInstance(
-      "l7wk9jgwxjp56dzbnwtbgowklqt1wsbe00osnj3370c21vihvroq1cuqjb",
-      "g-0jo001xz6w2uhgmhtgvpqzhztmaqawqn92-rig0bznv-21cb7s",
-      "ghp2ecbvldrihtmaa78lqy5q1wdpi7ayf187etvt65ezckogou9lhenou1q2jx",
+      "acme-corp",
+      "dev-env",
+      "n8-fjfpg-8o880hinx8ob81zddo5rum25m5fl-ocry41fabtao7",
       "container_group_instance_id"
     );
   }
@@ -1045,9 +1033,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     saladCloudSdk.containerGroups.restartContainerGroupInstance(
-      "ogx1pei8lousb7ikadj659qttkrqdm5b9xdq",
-      "cmet9ioqxf-a3suyfz4tkhle7s9-vpaj7uvpjx9jbtvwzjwvj900",
-      "bqh9-1g8glb2305o-txbnrdvt2jc9nvk5fkdf18q9zdv3",
+      "acme-corp",
+      "dev-env",
+      "p1adeb-w3gjttgd7m2r1wt99qo455",
       "container_group_instance_id"
     );
   }

@@ -1,4 +1,4 @@
-# GetInferenceEndpointJobsParameters
+# ListInferenceEndpointJobsParameters
 
 **Properties**
 
