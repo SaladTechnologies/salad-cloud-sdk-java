@@ -1,13 +1,13 @@
 {
-  "liblabVersion": "2.13.0",
-  "date": "2025-02-05T02:35:47.199Z",
+  "liblabVersion": "2.14.0",
+  "date": "2025-02-10T21:32:16.581Z",
   "config": {
     "apiId": 1737,
     "sdkName": "salad-cloud-sdk",
     "sdkVersion": "0.9.0-alpha.7",
     "languages": ["java"],
     "auth": ["apikey"],
-    "docs": ["snippets"],
+    "docs": ["enhancedApiSpec", "snippets"],
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
     "rawConfig": {
@@ -15,11 +15,22 @@
       "specFilePath": "spec.yaml",
       "languages": ["csharp", "go", "java", "python", "typescript"],
       "auth": ["apikey"],
-      "docs": ["snippets"],
+      "docs": ["enhancedApiSpec"],
       "customizations": {
         "authentication": {
           "apiKey": {
             "header": "Salad-Api-Key"
+          }
+        },
+        "documentation": {
+          "enhancedApiSpec": {
+            "customOutputName": "salad-cloud.yaml",
+            "provider": "mintlify",
+            "githubRepoName": "salad-cloud-docs",
+            "targetBranch": "main",
+            "mintlify": {
+              "codeSamplesLanguages": ["python", "typescript", "go", "csharp"]
+            }
           }
         },
         "license": {
@@ -480,6 +491,11 @@
         "header": "Salad-Api-Key"
       }
     },
+    "documentation": {
+      "enhancedApiSpec": {
+        "customOutputName": "salad-cloud.yaml"
+      }
+    },
     "devContainer": true,
     "generateEnv": true,
     "includeOptionalSnippetParameters": true,
@@ -720,7 +736,7 @@
     "documentation/models/GpuClassPrice.md",
     "documentation/models/ListQueueJobsParameters.md",
     "documentation/models/ListInferenceEndpointsParameters.md",
-    "documentation/models/GetInferenceEndpointJobsParameters.md",
+    "documentation/models/ListInferenceEndpointJobsParameters.md",
     "src/main/java/com/salad/cloud/sdk/json/TypeUtils.java",
     ".devcontainer/devcontainer.json",
     "example/pom.xml",
@@ -794,7 +810,7 @@
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/GpuClassPriceValidator.java",
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/ListQueueJobsParametersValidator.java",
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/ListInferenceEndpointsParametersValidator.java",
-    "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/GetInferenceEndpointJobsParametersValidator.java",
+    "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/ListInferenceEndpointJobsParametersValidator.java",
     ".idea/workspace.xml",
     ".idea/misc.xml",
     ".idea/compiler.xml",
@@ -872,7 +888,7 @@
     "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJobEvent.java",
     "src/main/java/com/salad/cloud/sdk/models/ListQueueJobsParameters.java",
     "src/main/java/com/salad/cloud/sdk/models/ListInferenceEndpointsParameters.java",
-    "src/main/java/com/salad/cloud/sdk/models/GetInferenceEndpointJobsParameters.java",
+    "src/main/java/com/salad/cloud/sdk/models/ListInferenceEndpointJobsParameters.java",
     "documentation/services/WebhookSecretKeyService.md",
     "src/main/java/com/salad/cloud/sdk/models/CreateQueue.java",
     "src/main/java/com/salad/cloud/sdk/models/CreateQueueJob.java",

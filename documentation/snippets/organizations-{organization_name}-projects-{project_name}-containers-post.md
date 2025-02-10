@@ -58,10 +58,10 @@ public class Main {
 
     ContainerResourceRequirements containerResourceRequirements = ContainerResourceRequirements
       .builder()
-      .cpu(10L)
-      .memory(9057L)
+      .cpu(3L)
+      .memory(16094L)
       .gpuClasses(gpuClasses)
-      .storageAmount(34911830561L)
+      .storageAmount(50473301867L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -78,7 +78,7 @@ public class Main {
 
     LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("host").token("token").build();
 
-    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("host").port(32723L).build();
+    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("host").port(52754L).build();
 
     HttpHeaders3 httpHeaders3 = HttpHeaders3.builder().name("name").value("value").build();
 
@@ -87,7 +87,7 @@ public class Main {
     LoggingHttp2 loggingHttp2 = LoggingHttp2
       .builder()
       .host("host")
-      .port(51830L)
+      .port(58619L)
       .user("user")
       .password("password")
       .path("path")
@@ -159,15 +159,15 @@ public class Main {
     CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking
       .builder()
       .protocol(ContainerNetworkingProtocol.HTTP)
-      .port(4465L)
-      .auth(false)
+      .port(64929L)
+      .auth(true)
       .loadBalancer(CreateContainerGroupNetworkingLoadBalancer.ROUND_ROBIN)
       .singleConnectionLimit(true)
       .clientRequestTimeout(100000L)
       .serverResponseTimeout(100000L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(993L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(9366L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -180,7 +180,7 @@ public class Main {
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(64175L)
+      .port(398L)
       .scheme(ContainerProbeHttpScheme.HTTP)
       .headers(headers)
       .build();
@@ -188,7 +188,7 @@ public class Main {
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(8441L)
+      .port(23866L)
       .build();
 
     List<String> command = Arrays.asList("command");
@@ -201,7 +201,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(8L)
+      .initialDelaySeconds(1L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -214,7 +214,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
+      .initialDelaySeconds(8L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -227,7 +227,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(7L)
+      .initialDelaySeconds(2L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
@@ -237,28 +237,28 @@ public class Main {
     ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection
       .builder()
       .path("path")
-      .port(43154L)
-      .queueName("oujbls0vsz6xilo12xl52y9c178cmdya6ykpby-hunb0b6s7s2mppfvzd5f4e")
+      .port(34806L)
+      .queueName("r3qna2yfhck403bsaqbf6nweyawtm7q4ohr")
       .build();
 
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
-      .minReplicas(41L)
-      .maxReplicas(135L)
-      .desiredQueueLength(51L)
-      .pollingPeriod(188L)
-      .maxUpscalePerMinute(30L)
-      .maxDownscalePerMinute(42L)
+      .minReplicas(88L)
+      .maxReplicas(197L)
+      .desiredQueueLength(57L)
+      .pollingPeriod(1449L)
+      .maxUpscalePerMinute(85L)
+      .maxDownscalePerMinute(33L)
       .build();
 
     CreateContainerGroup createContainerGroup = CreateContainerGroup
       .builder()
       .name("name")
-      .displayName("hfR")
+      .displayName("ny")
       .container(createContainer)
       .autostartPolicy(true)
       .restartPolicy(ContainerRestartPolicy.ALWAYS)
-      .replicas(169L)
+      .replicas(47L)
       .countryCodes(countryCodes)
       .networking(createContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -269,8 +269,8 @@ public class Main {
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroups.createContainerGroup(
-      "o9lnd3c1w-4b",
-      "c9jr",
+      "acme-corp",
+      "dev-env",
       createContainerGroup
     );
 

@@ -15,9 +15,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     ContainerGroupInstances response = saladCloudSdk.containerGroups.listContainerGroupInstances(
-      "y7y892q4m5rifzmevenpg1u",
-      "k8xgbal184sloim-c7555huym18dia9d-gb",
-      "opn2qgtohqud110sou2jqi50g1umdxtc9fte8n"
+      "acme-corp",
+      "dev-env",
+      "znynn9io8wrozbled"
     );
 
     System.out.println(response);

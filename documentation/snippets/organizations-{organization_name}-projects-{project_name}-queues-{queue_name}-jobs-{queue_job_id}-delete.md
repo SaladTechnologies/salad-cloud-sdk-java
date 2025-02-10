@@ -13,12 +13,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.queues.deleteQueueJob(
-      "hrf4burmjglxm0qfqui7u2clb2gfk12ij-g2i1z7we77-hpgwjdxcrr6-3c9",
-      "dv3zyz-95e2zp7wjr",
-      "zkrdg5h3eeasigc",
-      "queue_job_id"
-    );
+    saladCloudSdk.queues.deleteQueueJob("acme-corp", "dev-env", "fifo-queue", "7dcd6922-50e9-4d56-89b5-91cde26f0211");
   }
 }
 

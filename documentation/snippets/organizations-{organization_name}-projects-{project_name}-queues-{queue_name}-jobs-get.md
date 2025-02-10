@@ -17,16 +17,11 @@ public class Main {
 
     ListQueueJobsParameters requestParameters = ListQueueJobsParameters
       .builder()
-      .page(1000778021L)
-      .pageSize(88L)
+      .page(1675858596L)
+      .pageSize(52L)
       .build();
 
-    QueueJobList response = saladCloudSdk.queues.listQueueJobs(
-      "yl-v1qf-186n2145dgb2tg1emlkmk",
-      "ufo7nbyl9hodgr47mbi5x5lh",
-      "g-5jd",
-      requestParameters
-    );
+    QueueJobList response = saladCloudSdk.queues.listQueueJobs("acme-corp", "dev-env", "fifo-queue", requestParameters);
 
     System.out.println(response);
   }

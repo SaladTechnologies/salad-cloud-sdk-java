@@ -2,8 +2,8 @@
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.GetInferenceEndpointJobsParameters;
 import com.salad.cloud.sdk.models.InferenceEndpointJobList;
+import com.salad.cloud.sdk.models.ListInferenceEndpointJobsParameters;
 
 public class Main {
 
@@ -15,14 +15,14 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    GetInferenceEndpointJobsParameters requestParameters = GetInferenceEndpointJobsParameters
+    ListInferenceEndpointJobsParameters requestParameters = ListInferenceEndpointJobsParameters
       .builder()
-      .page(1228703779L)
-      .pageSize(80L)
+      .page(693199848L)
+      .pageSize(96L)
       .build();
 
-    InferenceEndpointJobList response = saladCloudSdk.inferenceEndpoints.getInferenceEndpointJobs(
-      "pk05fdmxk23ipxt6vd6e",
+    InferenceEndpointJobList response = saladCloudSdk.inferenceEndpoints.listInferenceEndpointJobs(
+      "acme-corp",
       "inference_endpoint_name",
       requestParameters
     );
