@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum QueueJobEventAction {
+public enum Action {
   CREATED("created"),
   STARTED("started"),
   SUCCEEDED("succeeded"),
@@ -19,11 +19,7 @@ public enum QueueJobEventAction {
   private final String value;
 
   @JsonCreator
-  public static QueueJobEventAction fromValue(String value) {
-    return Arrays
-      .stream(QueueJobEventAction.values())
-      .filter(item -> item.value.equals(value))
-      .findFirst()
-      .orElse(null);
+  public static Action fromValue(String value) {
+    return Arrays.stream(Action.values()).filter(item -> item.value.equals(value)).findFirst().orElse(null);
   }
 }

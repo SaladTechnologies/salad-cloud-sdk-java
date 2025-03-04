@@ -19,12 +19,12 @@ public class Main {
       .builder()
       .input(new Object())
       .metadata(new Object())
-      .webhook("webhook")
+      .webhookUrl("webhook_url")
       .build();
 
     InferenceEndpointJob response = saladCloudSdk.inferenceEndpoints.createInferenceEndpointJob(
-      "pk05fdmxk23ipxt6vd6e",
-      "inference_endpoint_name",
+      "acme-corp",
+      "transcribe",
       createInferenceEndpointJob
     );
 

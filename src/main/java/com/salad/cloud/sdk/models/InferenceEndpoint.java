@@ -21,36 +21,36 @@ import lombok.extern.jackson.Jacksonized;
 public class InferenceEndpoint {
 
   /**
-   * The unique identifier
+   * The inference endpoint identifier.
    */
   @NonNull
   private String id;
 
   /**
-   * The inference endpoint name
+   * The inference endpoint name.
    */
   @NonNull
   private String name;
 
   /**
-   * The inference endpoint display name
+   * The organization name.
+   */
+  @NonNull
+  @JsonProperty("organization_name")
+  private String organizationName;
+
+  /**
+   * The display-friendly name of the resource.
    */
   @NonNull
   @JsonProperty("display_name")
   private String displayName;
 
   /**
-   * a brief description of the inference endpoint
+   * The detailed description of the resource.
    */
   @NonNull
   private String description;
-
-  /**
-   * The URL of the inference endpoint
-   */
-  @NonNull
-  @JsonProperty("endpoint_url")
-  private String endpointUrl;
 
   /**
    * A markdown file containing a detailed description of the inference endpoint
@@ -69,6 +69,20 @@ public class InferenceEndpoint {
    * The URL of the icon image
    */
   @NonNull
-  @JsonProperty("icon_image")
-  private String iconImage;
+  @JsonProperty("icon_url")
+  private String iconUrl;
+
+  /**
+   * The input schema
+   */
+  @NonNull
+  @JsonProperty("input_schema")
+  private String inputSchema;
+
+  /**
+   * The output schema
+   */
+  @NonNull
+  @JsonProperty("output_schema")
+  private String outputSchema;
 }

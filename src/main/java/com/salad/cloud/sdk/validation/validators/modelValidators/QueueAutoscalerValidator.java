@@ -26,7 +26,7 @@ public class QueueAutoscalerValidator extends AbstractModelValidator<QueueAutosc
       .add(
         new NumericValidator<Long>("maxReplicas")
           .min(1L)
-          .max(250L)
+          .max(500L)
           .required()
           .validate(queueAutoscaler.getMaxReplicas())
       )

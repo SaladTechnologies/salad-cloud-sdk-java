@@ -44,9 +44,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     SystemLogList response = saladCloudSdk.systemLogs.getSystemLogs(
-      "fmcz5cnnkfiyt3k5ke3wy-5gl1809s8sotrp88klv3q4l4ni7uszkt0ht2",
-      "jpum7p7dqeb0o9xu",
-      "nlzoet3pfl3xit2pe40saanre16q8ug0u13rmnwb7eyumc1"
+      "acme-corp",
+      "dev-env",
+      "pkhp3h5ljgqmbs6a7swqmq3nj6oy8b2wpzbidnelidy9s6k9wystxax"
     );
 
     System.out.println(response);

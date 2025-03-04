@@ -1,6 +1,5 @@
 package com.salad.cloud.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import lombok.Builder;
@@ -22,8 +21,25 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class InferenceEndpointJob {
 
+  /**
+   * The inference endpoint job identifier.
+   */
   @NonNull
   private String id;
+
+  /**
+   * The inference endpoint name.
+   */
+  @NonNull
+  @JsonProperty("inference_endpoint_name")
+  private String inferenceEndpointName;
+
+  /**
+   * The organization name.
+   */
+  @NonNull
+  @JsonProperty("organization_name")
+  private String organizationName;
 
   /**
    * The job input. May be any valid JSON.
@@ -32,38 +48,46 @@ public class InferenceEndpointJob {
   private Object input;
 
   /**
-   * The inference endpoint name
+   * The current status.
    */
   @NonNull
-  @JsonProperty("inference_endpoint_name")
-  private String inferenceEndpointName;
+  private Status status;
 
-  @NonNull
-  private InferenceEndpointJobStatus status;
-
+  /**
+   * The list of events.
+   */
   @NonNull
   private List<InferenceEndpointJobEvent> events;
 
   /**
-   * The organization name
+   * The time the job was created.
    */
-  @NonNull
-  @JsonProperty("organization_name")
-  private String organizationName;
-
   @NonNull
   @JsonProperty("create_time")
   private String createTime;
 
+  /**
+   * The time the job was last updated.
+   */
   @NonNull
   @JsonProperty("update_time")
   private String updateTime;
 
-  @JsonInclude(JsonInclude.Include.ALWAYS)
+  /**
+   * The job metadata. May be any valid JSON.
+   */
   private Object metadata;
 
-  @JsonInclude(JsonInclude.Include.ALWAYS)
+  /**
+   * The webhook URL called when the job completes.
+   */
   private String webhook;
+
+  /**
+   * The webhook URL called when the job completes.
+   */
+  @JsonProperty("webhook_url")
+  private String webhookUrl;
 
   /**
    * The job output. May be any valid JSON.

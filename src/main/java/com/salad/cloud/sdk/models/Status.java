@@ -6,9 +6,12 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * The current status.
+ */
 @Getter
 @AllArgsConstructor
-public enum InferenceEndpointJobStatus {
+public enum Status {
   PENDING("pending"),
   RUNNING("running"),
   SUCCEEDED("succeeded"),
@@ -19,11 +22,7 @@ public enum InferenceEndpointJobStatus {
   private final String value;
 
   @JsonCreator
-  public static InferenceEndpointJobStatus fromValue(String value) {
-    return Arrays
-      .stream(InferenceEndpointJobStatus.values())
-      .filter(item -> item.value.equals(value))
-      .findFirst()
-      .orElse(null);
+  public static Status fromValue(String value) {
+    return Arrays.stream(Status.values()).filter(item -> item.value.equals(value)).findFirst().orElse(null);
   }
 }

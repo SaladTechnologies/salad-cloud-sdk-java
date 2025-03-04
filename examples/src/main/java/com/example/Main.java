@@ -17,7 +17,7 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     try {
-      Quotas response = saladCloudSdk.quotas.getQuotas("fu2s7l");
+      Quotas response = saladCloudSdk.quotas.getQuotas("acme-corp");
 
       System.out.println(response);
     } catch (ApiException e) {

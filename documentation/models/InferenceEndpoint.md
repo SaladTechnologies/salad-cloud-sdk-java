@@ -6,11 +6,13 @@ Represents an inference endpoint
 
 | Name             | Type   | Required | Description                                                                 |
 | :--------------- | :----- | :------- | :-------------------------------------------------------------------------- |
-| id               | String | ✅       | The unique identifier                                                       |
-| name             | String | ✅       | The inference endpoint name                                                 |
-| displayName      | String | ✅       | The inference endpoint display name                                         |
-| description      | String | ✅       | a brief description of the inference endpoint                               |
-| endpointUrl      | String | ✅       | The URL of the inference endpoint                                           |
+| id               | String | ✅       | The inference endpoint identifier.                                          |
+| name             | String | ✅       | The inference endpoint name.                                                |
+| organizationName | String | ✅       | The organization name.                                                      |
+| displayName      | String | ✅       | The display-friendly name of the resource.                                  |
+| description      | String | ✅       | The detailed description of the resource.                                   |
 | readme           | String | ✅       | A markdown file containing a detailed description of the inference endpoint |
 | priceDescription | String | ✅       | A description of the price                                                  |
-| iconImage        | String | ✅       | The URL of the icon image                                                   |
+| iconUrl          | String | ✅       | The URL of the icon image                                                   |
+| inputSchema      | String | ✅       | The input schema                                                            |
+| outputSchema     | String | ✅       | The output schema                                                           |

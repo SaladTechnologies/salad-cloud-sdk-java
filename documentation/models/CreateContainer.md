@@ -13,3 +13,4 @@ Represents a container
 | environmentVariables   | Map\<String, String\>                 | ❌       |                                                                                                  |
 | logging                | CreateContainerLogging                | ❌       |                                                                                                  |
 | registryAuthentication | CreateContainerRegistryAuthentication | ❌       |                                                                                                  |
+| imageCaching           | Boolean                               | ❌       |                                                                                                  |

@@ -20,7 +20,7 @@ import lombok.extern.jackson.Jacksonized;
 public class QueueJobEvent {
 
   @NonNull
-  private QueueJobEventAction action;
+  private Action action;
 
   @NonNull
   private String time;

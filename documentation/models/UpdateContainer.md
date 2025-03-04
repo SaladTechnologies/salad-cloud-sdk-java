@@ -13,3 +13,4 @@ Represents an update container object
 | environmentVariables   | Map\<String, String\>                 | ❌       |                                                                                                  |
 | logging                | UpdateContainerLogging                | ❌       |                                                                                                  |
 | registryAuthentication | UpdateContainerRegistryAuthentication | ❌       |                                                                                                  |
+| imageCaching           | Boolean                               | ❌       |                                                                                                  |

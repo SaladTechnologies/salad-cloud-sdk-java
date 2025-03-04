@@ -50,45 +50,45 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    List<String> gpuClasses = Arrays.asList("gpu_classes");
+    List<String> gpuClassesList = Arrays.asList("gpu_classes");
 
     Resources resources = Resources
       .builder()
-      .cpu(12L)
-      .memory(16671L)
-      .gpuClasses(gpuClasses)
-      .storageAmount(47892181137L)
+      .cpu(4L)
+      .memory(42436L)
+      .gpuClasses(gpuClassesList)
+      .storageAmount(46147219728L)
       .build();
 
-    List<String> command = Arrays.asList("command");
+    List<String> commandList = Arrays.asList("command");
 
     LoggingAxiom3 loggingAxiom3 = LoggingAxiom3.builder().host("host").apiToken("api_token").dataset("dataset").build();
 
     DatadogTags3 datadogTags3 = DatadogTags3.builder().name("name").value("value").build();
 
-    List<DatadogTags3> tags = Arrays.asList(datadogTags3);
+    List<DatadogTags3> tagsList = Arrays.asList(datadogTags3);
 
-    LoggingDatadog3 loggingDatadog3 = LoggingDatadog3.builder().host("host").apiKey("api_key").tags(tags).build();
+    LoggingDatadog3 loggingDatadog3 = LoggingDatadog3.builder().host("host").apiKey("api_key").tags(tagsList).build();
 
     LoggingNewRelic3 loggingNewRelic3 = LoggingNewRelic3.builder().host("host").ingestionKey("ingestion_key").build();
 
     LoggingSplunk3 loggingSplunk3 = LoggingSplunk3.builder().host("host").token("token").build();
 
-    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("host").port(4071L).build();
+    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("host").port(27612L).build();
 
     HttpHeaders4 httpHeaders4 = HttpHeaders4.builder().name("name").value("value").build();
 
-    List<HttpHeaders4> headers = Arrays.asList(httpHeaders4);
+    List<HttpHeaders4> headersList = Arrays.asList(httpHeaders4);
 
     LoggingHttp3 loggingHttp3 = LoggingHttp3
       .builder()
       .host("host")
-      .port(52384L)
+      .port(41733L)
       .user("user")
       .password("password")
       .path("path")
       .format(HttpFormat3.JSON)
-      .headers(headers)
+      .headers(headersList)
       .compression(HttpCompression3.NONE)
       .build();
 
@@ -143,21 +143,22 @@ public class Main {
       .builder()
       .image("image")
       .resources(resources)
-      .command(command)
+      .command(commandList)
       .priority(ContainerGroupPriority.HIGH)
       .environmentVariables(new HashMap())
       .logging(updateContainerLogging)
       .registryAuthentication(updateContainerRegistryAuthentication)
+      .imageCaching(false)
       .build();
 
-    List<CountryCode> countryCodes = Arrays.asList(CountryCode.AF);
+    List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(49186L)
+      .port(15426L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(993L).build();
+    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(48638L).build();
 
     ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
       .builder()
@@ -165,25 +166,25 @@ public class Main {
       .value("value")
       .build();
 
-    List<ContainerGroupProbeHttpHeaders2> headers = Arrays.asList(containerGroupProbeHttpHeaders2);
+    List<ContainerGroupProbeHttpHeaders2> headersList = Arrays.asList(containerGroupProbeHttpHeaders2);
 
     ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
       .builder()
       .path("path")
-      .port(64175L)
+      .port(19938L)
       .scheme(ContainerProbeHttpScheme.HTTP)
-      .headers(headers)
+      .headers(headersList)
       .build();
 
     ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
       .builder()
       .service("service")
-      .port(8441L)
+      .port(56724L)
       .build();
 
-    List<String> command = Arrays.asList("command");
+    List<String> commandList = Arrays.asList("command");
 
-    ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder().command(command).build();
+    ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder().command(commandList).build();
 
     ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
       .builder()
@@ -191,7 +192,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(8L)
+      .initialDelaySeconds(7L)
       .periodSeconds(10L)
       .timeoutSeconds(30L)
       .successThreshold(1L)
@@ -204,7 +205,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
+      .initialDelaySeconds(2L)
       .periodSeconds(1L)
       .timeoutSeconds(1L)
       .successThreshold(1L)
@@ -217,7 +218,7 @@ public class Main {
       .http(containerGroupProbeHttp)
       .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(7L)
+      .initialDelaySeconds(10L)
       .periodSeconds(3L)
       .timeoutSeconds(10L)
       .successThreshold(2L)
@@ -226,20 +227,20 @@ public class Main {
 
     QueueAutoscaler queueAutoscaler = QueueAutoscaler
       .builder()
-      .minReplicas(41L)
-      .maxReplicas(135L)
-      .desiredQueueLength(51L)
-      .pollingPeriod(188L)
-      .maxUpscalePerMinute(30L)
-      .maxDownscalePerMinute(42L)
+      .minReplicas(94L)
+      .maxReplicas(15L)
+      .desiredQueueLength(98L)
+      .pollingPeriod(1417L)
+      .maxUpscalePerMinute(93L)
+      .maxDownscalePerMinute(43L)
       .build();
 
     UpdateContainerGroup updateContainerGroup = UpdateContainerGroup
       .builder()
-      .displayName("hx6nAEIR")
+      .displayName("K7P1u")
       .container(updateContainer)
-      .replicas(90L)
-      .countryCodes(countryCodes)
+      .replicas(308L)
+      .countryCodes(countryCodesList)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
       .readinessProbe(containerGroupReadinessProbe)
@@ -248,9 +249,9 @@ public class Main {
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroups.updateContainerGroup(
-      "mk0yct7b8bo1g8tvl9",
-      "ax4qyju9jcnr3fw8e9al8o-4oreg5ocaz2jbu5pfmpygxffsf4bh4e6",
-      "dzh9lv6afpamv8cx0x6",
+      "acme-corp",
+      "dev-env",
+      "nx30k5tue7r3q30x0anq7hd1fjfxgtq8uehil3eploo4d79h7bg0v",
       updateContainerGroup
     );
 

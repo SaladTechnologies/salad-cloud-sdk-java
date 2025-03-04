@@ -29,7 +29,7 @@ public class UpdateContainerGroupValidator extends AbstractModelValidator<Update
       )
       .add(new UpdateContainerValidator("container").optional().validate(updateContainerGroup.getContainer()))
       .add(
-        new NumericValidator<Long>("replicas").min(0L).max(250L).optional().validate(updateContainerGroup.getReplicas())
+        new NumericValidator<Long>("replicas").min(0L).max(500L).optional().validate(updateContainerGroup.getReplicas())
       )
       .add(
         new ListValidator<CountryCode>("countryCodes")

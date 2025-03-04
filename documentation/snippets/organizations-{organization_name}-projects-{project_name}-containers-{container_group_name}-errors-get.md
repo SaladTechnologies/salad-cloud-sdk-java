@@ -15,9 +15,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     WorkloadErrorList response = saladCloudSdk.workloadErrors.getWorkloadErrors(
-      "x4djttkqmgzb46dd5wogzrfe1",
-      "l12s3mq9cm-jv1bq27ohe5dpzbgr",
-      "hgvpuhecson4k2eclxss450txd1j0ixuhfk-hdff3n3-hbtsigyh53bt0g4g"
+      "acme-corp",
+      "dev-env",
+      "xuqnmuuqsx3q3zm2hxkci4"
     );
 
     System.out.println(response);
