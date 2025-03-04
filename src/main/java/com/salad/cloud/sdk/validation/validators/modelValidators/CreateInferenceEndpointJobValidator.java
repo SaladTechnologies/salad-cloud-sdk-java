@@ -16,7 +16,13 @@ public class CreateInferenceEndpointJobValidator extends AbstractModelValidator<
   @Override
   protected Violation[] validateModel(CreateInferenceEndpointJob createInferenceEndpointJob) {
     return new ViolationAggregator()
-      .add(new StringValidator("webhook").maxLength(2000).optional().validate(createInferenceEndpointJob.getWebhook()))
+      .add(new StringValidator("webhook").maxLength(2048).optional().validate(createInferenceEndpointJob.getWebhook()))
+      .add(
+        new StringValidator("webhookUrl")
+          .maxLength(2048)
+          .optional()
+          .validate(createInferenceEndpointJob.getWebhookUrl())
+      )
       .aggregate();
   }
 }

@@ -1,6 +1,6 @@
 package com.salad.cloud.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,9 +26,10 @@ public class CreateInferenceEndpointJob {
   @NonNull
   private Object input;
 
-  @JsonInclude(JsonInclude.Include.ALWAYS)
   private Object metadata;
 
-  @JsonInclude(JsonInclude.Include.ALWAYS)
   private String webhook;
+
+  @JsonProperty("webhook_url")
+  private String webhookUrl;
 }

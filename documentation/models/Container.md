@@ -14,3 +14,4 @@ Represents a container
 | hash                 | String                        | ❌       |                                              |
 | environmentVariables | Map\<String, String\>         | ❌       |                                              |
 | logging              | ContainerLogging              | ❌       |                                              |
+| imageCaching         | Boolean                       | ❌       |                                              |

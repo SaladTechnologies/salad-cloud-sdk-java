@@ -14,11 +14,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    Queue response = saladCloudSdk.queues.getQueue(
-      "xrt9bh26smkuf3v0nd2roppi64zikv73wys88ns82g85qcczec2y8bnwc4gs",
-      "y6aeebojnkc8rl8-7pysy62j25cdn",
-      "ujh0v34w5-21z63jxnxh38ckz48-k1ecu"
-    );
+    Queue response = saladCloudSdk.queues.getQueue("acme-corp", "dev-env", "fifo-queue");
 
     System.out.println(response);
   }

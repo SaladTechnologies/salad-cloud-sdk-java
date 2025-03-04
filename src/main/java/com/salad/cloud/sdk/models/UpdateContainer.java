@@ -46,4 +46,7 @@ public class UpdateContainer {
   @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("registry_authentication")
   private UpdateContainerRegistryAuthentication registryAuthentication;
+
+  @JsonProperty("image_caching")
+  private Boolean imageCaching;
 }

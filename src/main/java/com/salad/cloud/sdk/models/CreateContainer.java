@@ -50,4 +50,7 @@ public class CreateContainer {
   @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("registry_authentication")
   private CreateContainerRegistryAuthentication registryAuthentication;
+
+  @JsonProperty("image_caching")
+  private Boolean imageCaching;
 }

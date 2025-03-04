@@ -14,10 +14,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    InferenceEndpoint response = saladCloudSdk.inferenceEndpoints.getInferenceEndpoint(
-      "cx2mv031v8afyh5y7ht26t-sfc4u7-dhjnxb2hbrz-ipttu1m2vc",
-      "inference_endpoint_name"
-    );
+    InferenceEndpoint response = saladCloudSdk.inferenceEndpoints.getInferenceEndpoint("acme-corp", "transcribe");
 
     System.out.println(response);
   }

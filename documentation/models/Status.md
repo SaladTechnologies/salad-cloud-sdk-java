@@ -1,11 +1,13 @@
-# QueueJobEventAction
+# Status
+
+The current status.
 
 **Properties**
 
 | Name      | Type   | Required | Description |
 | :-------- | :----- | :------- | :---------- |
-| CREATED   | String | ✅       | "created"   |
-| STARTED   | String | ✅       | "started"   |
+| PENDING   | String | ✅       | "pending"   |
+| RUNNING   | String | ✅       | "running"   |
 | SUCCEEDED | String | ✅       | "succeeded" |
 | CANCELLED | String | ✅       | "cancelled" |
 | FAILED    | String | ✅       | "failed"    |

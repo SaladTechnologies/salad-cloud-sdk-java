@@ -47,4 +47,7 @@ public class Container {
 
   @JsonInclude(JsonInclude.Include.ALWAYS)
   private ContainerLogging logging;
+
+  @JsonProperty("image_caching")
+  private Boolean imageCaching;
 }

@@ -18,7 +18,14 @@ public class GpuClassValidator extends AbstractModelValidator<GpuClass> {
   @Override
   protected Violation[] validateModel(GpuClass gpuClass) {
     return new ViolationAggregator()
-      .add(new StringValidator("name").minLength(2).maxLength(63).required().validate(gpuClass.getName()))
+      .add(
+        new StringValidator("name")
+          .minLength(2)
+          .maxLength(63)
+          .pattern("^[ -~]{2,63}$")
+          .required()
+          .validate(gpuClass.getName())
+      )
       .add(
         new ListValidator<GpuClassPrice>("prices")
           .minLength(1)

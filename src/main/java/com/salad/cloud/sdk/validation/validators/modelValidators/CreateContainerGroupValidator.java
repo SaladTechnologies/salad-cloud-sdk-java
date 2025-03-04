@@ -29,7 +29,7 @@ public class CreateContainerGroupValidator extends AbstractModelValidator<Create
       )
       .add(new CreateContainerValidator("container").required().validate(createContainerGroup.getContainer()))
       .add(
-        new NumericValidator<Long>("replicas").min(0L).max(250L).required().validate(createContainerGroup.getReplicas())
+        new NumericValidator<Long>("replicas").min(0L).max(500L).required().validate(createContainerGroup.getReplicas())
       )
       .add(
         new StringValidator("displayName")
