@@ -14,11 +14,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    WorkloadErrorList response = saladCloudSdk.workloadErrors.getWorkloadErrors(
-      "acme-corp",
-      "dev-env",
-      "xuqnmuuqsx3q3zm2hxkci4"
-    );
+    WorkloadErrorList response = saladCloudSdk.workloadErrors.getWorkloadErrors("acme-corp", "dev-env", "mandlebrot");
 
     System.out.println(response);
   }

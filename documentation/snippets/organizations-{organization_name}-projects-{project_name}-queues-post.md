@@ -2,8 +2,8 @@
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.CreateQueue;
 import com.salad.cloud.sdk.models.Queue;
+import com.salad.cloud.sdk.models.QueuePrototype;
 
 public class Main {
 
@@ -15,9 +15,14 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    CreateQueue createQueue = CreateQueue.builder().name("name").displayName("wHZ").description("description").build();
+    QueuePrototype queuePrototype = QueuePrototype
+      .builder()
+      .name("name")
+      .displayName("Qskie")
+      .description("description")
+      .build();
 
-    Queue response = saladCloudSdk.queues.createQueue("acme-corp", "dev-env", createQueue);
+    Queue response = saladCloudSdk.queues.createQueue("acme-corp", "dev-env", queuePrototype);
 
     System.out.println(response);
   }

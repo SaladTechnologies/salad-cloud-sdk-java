@@ -6,6 +6,9 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * The action that was taken on the inference endpoint job.
+ */
 @Getter
 @AllArgsConstructor
 public enum InferenceEndpointJobEventAction {

@@ -6,6 +6,9 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Represents the current operational state of a container group within the Salad platform.
+ */
 @Getter
 @AllArgsConstructor
 public enum ContainerGroupStatus {

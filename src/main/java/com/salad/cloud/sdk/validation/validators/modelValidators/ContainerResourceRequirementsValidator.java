@@ -3,6 +3,7 @@ package com.salad.cloud.sdk.validation.validators.modelValidators;
 import com.salad.cloud.sdk.models.ContainerResourceRequirements;
 import com.salad.cloud.sdk.validation.Violation;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
+import com.salad.cloud.sdk.validation.validators.ListValidator;
 import com.salad.cloud.sdk.validation.validators.NumericValidator;
 
 public class ContainerResourceRequirementsValidator extends AbstractModelValidator<ContainerResourceRequirements> {
@@ -25,6 +26,12 @@ public class ContainerResourceRequirementsValidator extends AbstractModelValidat
           .max(61440L)
           .required()
           .validate(containerResourceRequirements.getMemory())
+      )
+      .add(
+        new ListValidator<String>("gpuClasses")
+          .maxLength(100)
+          .optional()
+          .validate(containerResourceRequirements.getGpuClasses())
       )
       .add(
         new NumericValidator<Long>("storageAmount")

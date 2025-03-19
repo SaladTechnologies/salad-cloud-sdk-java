@@ -10,7 +10,7 @@ import lombok.With;
 import lombok.extern.jackson.Jacksonized;
 
 /**
- * Represents the container group startup probe
+ * Defines a probe that checks if a container application has started successfully. Startup probes help prevent applications from being prematurely marked as unhealthy during initialization. The probe can use HTTP requests, TCP connections, gRPC calls, or shell commands to determine startup status.
  */
 @Data
 @Builder
@@ -20,35 +20,62 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class ContainerGroupStartupProbe {
 
+  /**
+   * Number of times the probe must fail before considering the container not started
+   */
+  @NonNull
+  @Builder.Default
+  @JsonProperty("failure_threshold")
+  private Long failureThreshold = 15L;
+
+  /**
+   * Number of seconds to wait after container startup before the first probe is executed
+   */
   @NonNull
   @JsonProperty("initial_delay_seconds")
   private Long initialDelaySeconds;
 
+  /**
+   * How frequently (in seconds) to perform the probe
+   */
   @NonNull
   @Builder.Default
   @JsonProperty("period_seconds")
   private Long periodSeconds = 3L;
 
-  @NonNull
-  @Builder.Default
-  @JsonProperty("timeout_seconds")
-  private Long timeoutSeconds = 10L;
-
+  /**
+   * Minimum consecutive successes required for the probe to be considered successful
+   */
   @NonNull
   @Builder.Default
   @JsonProperty("success_threshold")
   private Long successThreshold = 2L;
 
+  /**
+   * Maximum time (in seconds) to wait for a probe response before considering it failed
+   */
   @NonNull
   @Builder.Default
-  @JsonProperty("failure_threshold")
-  private Long failureThreshold = 1200L;
+  @JsonProperty("timeout_seconds")
+  private Long timeoutSeconds = 10L;
 
-  private ContainerGroupProbeTcp tcp;
-
-  private ContainerGroupProbeHttp http;
-
-  private ContainerGroupProbeGrpc grpc;
-
+  /**
+   * Defines the exec action for a probe in a container group. This is used to execute a command inside a container for health checks.
+   */
   private ContainerGroupProbeExec exec;
+
+  /**
+   * Configuration for gRPC-based health probes in container groups, used to determine container health status.
+   */
+  private ContainerGroupGRpcProbe grpc;
+
+  /**
+   * Defines HTTP probe configuration for container health checks within a container group.
+   */
+  private ContainerGroupHttpProbeConfiguration http;
+
+  /**
+   * Configuration for a TCP probe used to check container health via network connectivity.
+   */
+  private ContainerGroupTcpProbe tcp;
 }

@@ -1,5 +1,6 @@
 package com.salad.cloud.sdk.http.util;
 
+import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.serialization.PathSerializationStyle;
@@ -163,6 +164,16 @@ public class RequestBuilder {
     }
     setBody(RequestBody.create(Objects.requireNonNull(ModelConverter.modelToJson(content)), mediaType));
     return this;
+  }
+
+  /*
+   * Sets the API key authentication header.
+   */
+  public RequestBuilder setApiKeyAuth(ApiKeyAuthConfig config) {
+    if (config.getApiKey() == null) {
+      return this;
+    }
+    return setHeader(config.getApiKeyHeader(), config.getApiKey());
   }
 
   /**

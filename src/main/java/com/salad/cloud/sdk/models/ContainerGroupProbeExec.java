@@ -9,6 +9,9 @@ import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
 
+/**
+ * Defines the exec action for a probe in a container group. This is used to execute a command inside a container for health checks.
+ */
 @Data
 @Builder
 @With
@@ -17,6 +20,9 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class ContainerGroupProbeExec {
 
+  /**
+   * The command to execute inside the container. Exit status of 0 is considered successful, any other exit status is considered failure.
+   */
   @NonNull
   private List<String> command;
 }

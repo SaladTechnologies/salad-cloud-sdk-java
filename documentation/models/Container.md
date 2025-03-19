@@ -1,17 +1,16 @@
 # Container
 
-Represents a container
+Represents a container with its configuration and resource requirements.
 
 **Properties**
 
-| Name                 | Type                          | Required | Description                                  |
-| :------------------- | :---------------------------- | :------- | :------------------------------------------- |
-| image                | String                        | ✅       |                                              |
-| resources            | ContainerResourceRequirements | ✅       | Represents a container resource requirements |
-| command              | List\<String\>                | ✅       |                                              |
-| priority             | ContainerGroupPriority        | ❌       |                                              |
-| size                 | Long                          | ❌       |                                              |
-| hash                 | String                        | ❌       |                                              |
-| environmentVariables | Map\<String, String\>         | ❌       |                                              |
-| logging              | ContainerLogging              | ❌       |                                              |
-| imageCaching         | Boolean                       | ❌       |                                              |
+| Name                 | Type                          | Required | Description                                                                                                                                                                                                                                                                                                                                                           |
+| :------------------- | :---------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| command              | List\<String\>                | ✅       | List of commands to run inside the container. Each command is a string representing a command-line instruction.                                                                                                                                                                                                                                                       |
+| image                | String                        | ✅       | The container image.                                                                                                                                                                                                                                                                                                                                                  |
+| resources            | ContainerResourceRequirements | ✅       | Specifies the resource requirements for a container.                                                                                                                                                                                                                                                                                                                  |
+| environmentVariables | Map\<String, String\>         | ❌       | Environment variables to set in the container.                                                                                                                                                                                                                                                                                                                        |
+| hash                 | String                        | ❌       | SHA-256 hash (64-character hexadecimal string)                                                                                                                                                                                                                                                                                                                        |
+| imageCaching         | Boolean                       | ❌       | The container image caching.                                                                                                                                                                                                                                                                                                                                          |
+| logging              | ContainerLoggingConfiguration | ❌       | Configuration options for directing container logs to a logging provider. This schema enables you to specify a single logging destination for container output, supporting monitoring, debugging, and analytics use cases. Each provider has its own configuration parameters defined in the referenced schemas. Only one logging provider can be selected at a time. |
+| size                 | Long                          | ❌       | Size of the container in bytes.                                                                                                                                                                                                                                                                                                                                       |

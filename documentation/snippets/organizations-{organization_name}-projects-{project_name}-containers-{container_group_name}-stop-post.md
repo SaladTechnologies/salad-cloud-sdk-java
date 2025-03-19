@@ -13,7 +13,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroups.stopContainerGroup("acme-corp", "dev-env", "kcvb9628akhug9lnd3c1w-4bdb9jsi9");
+    saladCloudSdk.containerGroups.stopContainerGroup("acme-corp", "dev-env", "mandlebrot");
   }
 }
 

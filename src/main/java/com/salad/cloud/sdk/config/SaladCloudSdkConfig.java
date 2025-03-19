@@ -15,7 +15,7 @@ public class SaladCloudSdkConfig {
 
   @NonNull
   @Builder.Default
-  private Environment environment = Environment.DEFAULT;
+  private String baseUrl = Environment.DEFAULT.getUrl();
 
   @NonNull
   @Builder.Default
@@ -28,4 +28,12 @@ public class SaladCloudSdkConfig {
   /** Timeout in milliseconds */
   @Builder.Default
   private long timeout = 10_000;
+
+  public void setEnvironment(Environment environment) {
+    this.baseUrl = environment.getUrl();
+  }
+
+  public void setBaseUrl(String baseUrl) {
+    this.baseUrl = baseUrl;
+  }
 }

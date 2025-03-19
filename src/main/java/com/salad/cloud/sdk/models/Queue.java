@@ -1,6 +1,5 @@
 package com.salad.cloud.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import lombok.Builder;
@@ -41,6 +40,9 @@ public class Queue {
   @JsonProperty("display_name")
   private String displayName;
 
+  /**
+   * The container groups that are part of this queue. Each container group represents a scalable set of identical containers running as a distributed service.
+   */
   @NonNull
   @JsonProperty("container_groups")
   private List<ContainerGroup> containerGroups;
@@ -62,6 +64,5 @@ public class Queue {
   /**
    * The description. This may be used as a space for notes or other information about the queue.
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
   private String description;
 }

@@ -6,6 +6,9 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * ISO 3166-1 alpha-2 country codes
+ */
 @Getter
 @AllArgsConstructor
 public enum CountryCode {

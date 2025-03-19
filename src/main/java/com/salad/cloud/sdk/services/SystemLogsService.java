@@ -1,6 +1,7 @@
 package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
@@ -20,8 +21,8 @@ import okhttp3.Response;
  */
 public class SystemLogsService extends BaseService {
 
-  public SystemLogsService(@NonNull OkHttpClient httpClient, String serverUrl) {
-    super(httpClient, serverUrl);
+  public SystemLogsService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
+    super(httpClient, config);
   }
 
   /**
@@ -95,9 +96,10 @@ public class SystemLogsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/system-logs"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .setPathParameter("container_group_name", containerGroupName)

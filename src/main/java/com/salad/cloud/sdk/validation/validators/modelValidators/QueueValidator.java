@@ -41,7 +41,9 @@ public class QueueValidator extends AbstractModelValidator<Queue> {
           .required()
           .validate(queue.getContainerGroups())
       )
-      .add(new StringValidator("description").maxLength(500).optional().validate(queue.getDescription()))
+      .add(
+        new StringValidator("description").maxLength(500).pattern("^.*$").optional().validate(queue.getDescription())
+      )
       .aggregate();
   }
 }

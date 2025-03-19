@@ -6,6 +6,9 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Specifies the policy for restarting containers when they exit or fail.
+ */
 @Getter
 @AllArgsConstructor
 public enum ContainerRestartPolicy {

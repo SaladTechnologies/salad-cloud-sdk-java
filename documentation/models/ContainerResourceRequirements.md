@@ -1,12 +1,12 @@
 # ContainerResourceRequirements
 
-Represents a container resource requirements
+Specifies the resource requirements for a container.
 
 **Properties**
 
-| Name          | Type           | Required | Description |
-| :------------ | :------------- | :------- | :---------- |
-| cpu           | Long           | ✅       |             |
-| memory        | Long           | ✅       |             |
-| gpuClasses    | List\<String\> | ❌       |             |
-| storageAmount | Long           | ❌       |             |
+| Name          | Type           | Required | Description                                                                                                                        |
+| :------------ | :------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| cpu           | Long           | ✅       | The number of CPU cores required by the container. Must be between 1 and 16.                                                       |
+| memory        | Long           | ✅       | The amount of memory (in MB) required by the container. Must be between 1024 MB and 61440 MB.                                      |
+| gpuClasses    | List\<String\> | ✅       | A list of GPU class UUIDs required by the container. Can be null if no GPU is required.                                            |
+| storageAmount | Long           | ❌       | The amount of storage (in bytes) required by the container. Must be between 1 GB (1073741824 bytes) and 50 GB (53687091200 bytes). |

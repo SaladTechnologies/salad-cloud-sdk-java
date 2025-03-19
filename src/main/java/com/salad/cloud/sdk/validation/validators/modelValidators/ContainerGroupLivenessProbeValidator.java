@@ -17,38 +17,48 @@ public class ContainerGroupLivenessProbeValidator extends AbstractModelValidator
   protected Violation[] validateModel(ContainerGroupLivenessProbe containerGroupLivenessProbe) {
     return new ViolationAggregator()
       .add(
+        new NumericValidator<Long>("failureThreshold")
+          .min(1L)
+          .max(20L)
+          .required()
+          .validate(containerGroupLivenessProbe.getFailureThreshold())
+      )
+      .add(
         new NumericValidator<Long>("initialDelaySeconds")
           .min(0L)
+          .max(1200L)
           .required()
           .validate(containerGroupLivenessProbe.getInitialDelaySeconds())
       )
       .add(
         new NumericValidator<Long>("periodSeconds")
           .min(1L)
+          .max(120L)
           .required()
           .validate(containerGroupLivenessProbe.getPeriodSeconds())
       )
       .add(
-        new NumericValidator<Long>("timeoutSeconds")
-          .min(1L)
-          .required()
-          .validate(containerGroupLivenessProbe.getTimeoutSeconds())
-      )
-      .add(
         new NumericValidator<Long>("successThreshold")
           .min(1L)
+          .max(10L)
           .required()
           .validate(containerGroupLivenessProbe.getSuccessThreshold())
       )
       .add(
-        new NumericValidator<Long>("failureThreshold")
+        new NumericValidator<Long>("timeoutSeconds")
           .min(1L)
+          .max(60L)
           .required()
-          .validate(containerGroupLivenessProbe.getFailureThreshold())
+          .validate(containerGroupLivenessProbe.getTimeoutSeconds())
       )
-      .add(new ContainerGroupProbeTcpValidator("tcp").optional().validate(containerGroupLivenessProbe.getTcp()))
-      .add(new ContainerGroupProbeHttpValidator("http").optional().validate(containerGroupLivenessProbe.getHttp()))
-      .add(new ContainerGroupProbeGrpcValidator("grpc").optional().validate(containerGroupLivenessProbe.getGrpc()))
+      .add(new ContainerGroupProbeExecValidator("exec").optional().validate(containerGroupLivenessProbe.getExec()))
+      .add(new ContainerGroupGRpcProbeValidator("grpc").optional().validate(containerGroupLivenessProbe.getGrpc()))
+      .add(
+        new ContainerGroupHttpProbeConfigurationValidator("http")
+          .optional()
+          .validate(containerGroupLivenessProbe.getHttp())
+      )
+      .add(new ContainerGroupTcpProbeValidator("tcp").optional().validate(containerGroupLivenessProbe.getTcp()))
       .aggregate();
   }
 }

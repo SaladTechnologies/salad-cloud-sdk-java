@@ -5,7 +5,6 @@ import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.http.Environment;
 import com.salad.cloud.sdk.http.interceptors.DefaultHeadersInterceptor;
 import com.salad.cloud.sdk.http.interceptors.RetryInterceptor;
-import com.salad.cloud.sdk.http.interceptors.TokenInterceptor;
 import com.salad.cloud.sdk.services.ContainerGroupsService;
 import com.salad.cloud.sdk.services.InferenceEndpointsService;
 import com.salad.cloud.sdk.services.OrganizationDataService;
@@ -29,7 +28,7 @@ public class SaladCloudSdk {
   public final OrganizationDataService organizationData;
   public final WebhookSecretKeyService webhookSecretKey;
 
-  private final TokenInterceptor apiKeyAuthInterceptor;
+  private final SaladCloudSdkConfig config;
 
   public SaladCloudSdk() {
     // Default configs
@@ -37,27 +36,22 @@ public class SaladCloudSdk {
   }
 
   public SaladCloudSdk(SaladCloudSdkConfig config) {
-    final String serverUrl = config.getEnvironment().getUrl();
-
-    final ApiKeyAuthConfig apiKeyAuthConfig = config.getApiKeyAuthConfig();
-    this.apiKeyAuthInterceptor =
-      TokenInterceptor.builder().header(apiKeyAuthConfig.getApiKeyHeader()).token(apiKeyAuthConfig.getApiKey()).build();
+    this.config = config;
 
     final OkHttpClient httpClient = new OkHttpClient.Builder()
       .addInterceptor(new DefaultHeadersInterceptor(config))
-      .addInterceptor(apiKeyAuthInterceptor)
       .addInterceptor(new RetryInterceptor(config.getRetryConfig()))
       .readTimeout(config.getTimeout(), TimeUnit.MILLISECONDS)
       .build();
 
-    this.containerGroups = new ContainerGroupsService(httpClient, serverUrl);
-    this.workloadErrors = new WorkloadErrorsService(httpClient, serverUrl);
-    this.systemLogs = new SystemLogsService(httpClient, serverUrl);
-    this.queues = new QueuesService(httpClient, serverUrl);
-    this.quotas = new QuotasService(httpClient, serverUrl);
-    this.inferenceEndpoints = new InferenceEndpointsService(httpClient, serverUrl);
-    this.organizationData = new OrganizationDataService(httpClient, serverUrl);
-    this.webhookSecretKey = new WebhookSecretKeyService(httpClient, serverUrl);
+    this.containerGroups = new ContainerGroupsService(httpClient, config);
+    this.workloadErrors = new WorkloadErrorsService(httpClient, config);
+    this.systemLogs = new SystemLogsService(httpClient, config);
+    this.queues = new QueuesService(httpClient, config);
+    this.quotas = new QuotasService(httpClient, config);
+    this.inferenceEndpoints = new InferenceEndpointsService(httpClient, config);
+    this.organizationData = new OrganizationDataService(httpClient, config);
+    this.webhookSecretKey = new WebhookSecretKeyService(httpClient, config);
   }
 
   public void setEnvironment(Environment environment) {
@@ -65,22 +59,17 @@ public class SaladCloudSdk {
   }
 
   public void setBaseUrl(String baseUrl) {
-    this.containerGroups.setBaseUrl(baseUrl);
-    this.workloadErrors.setBaseUrl(baseUrl);
-    this.systemLogs.setBaseUrl(baseUrl);
-    this.queues.setBaseUrl(baseUrl);
-    this.quotas.setBaseUrl(baseUrl);
-    this.inferenceEndpoints.setBaseUrl(baseUrl);
-    this.organizationData.setBaseUrl(baseUrl);
-    this.webhookSecretKey.setBaseUrl(baseUrl);
+    this.config.setBaseUrl(baseUrl);
   }
 
   public void setApiKey(String apiKey) {
-    this.apiKeyAuthInterceptor.setToken(apiKey);
+    ApiKeyAuthConfig apiKeyAuthConfig = this.config.getApiKeyAuthConfig();
+    apiKeyAuthConfig.setApiKey(apiKey);
   }
 
   public void setApiKeyHeader(String apiKeyHeader) {
-    this.apiKeyAuthInterceptor.setHeader(apiKeyHeader);
+    ApiKeyAuthConfig apiKeyAuthConfig = this.config.getApiKeyAuthConfig();
+    apiKeyAuthConfig.setApiKeyHeader(apiKeyHeader);
   }
 }
 // c029837e0e474b76bc487506e8799df5e3335891efe4fb02bda7a1441840310c

@@ -6,6 +6,9 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Defines the communication protocol used for network traffic between containers or external systems. Currently supports HTTP protocol for web-based communication.
+ */
 @Getter
 @AllArgsConstructor
 public enum ContainerNetworkingProtocol {

@@ -2,7 +2,7 @@
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.InferenceEndpointJobList;
+import com.salad.cloud.sdk.models.InferenceEndpointJobCollection;
 import com.salad.cloud.sdk.models.ListInferenceEndpointJobsParameters;
 
 public class Main {
@@ -21,7 +21,7 @@ public class Main {
       .pageSize(1L)
       .build();
 
-    InferenceEndpointJobList response = saladCloudSdk.inferenceEndpoints.listInferenceEndpointJobs(
+    InferenceEndpointJobCollection response = saladCloudSdk.inferenceEndpoints.listInferenceEndpointJobs(
       "acme-corp",
       "transcribe",
       requestParameters

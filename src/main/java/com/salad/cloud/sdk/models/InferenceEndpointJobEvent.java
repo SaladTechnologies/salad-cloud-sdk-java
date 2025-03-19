@@ -19,9 +19,15 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class InferenceEndpointJobEvent {
 
+  /**
+   * The action that was taken on the inference endpoint job.
+   */
   @NonNull
   private InferenceEndpointJobEventAction action;
 
+  /**
+   * The time the event occurred.
+   */
   @NonNull
   private String time;
 }

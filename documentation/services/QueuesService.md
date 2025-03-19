@@ -30,7 +30,7 @@ Gets the list of queues in the given project.
 
 **Return Type**
 
-`QueueList`
+`QueueCollection`
 
 **Example Usage Code Snippet**
 
@@ -38,7 +38,7 @@ Gets the list of queues in the given project.
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.QueueList;
+import com.salad.cloud.sdk.models.QueueCollection;
 
 public class Main {
 
@@ -50,7 +50,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueueList response = saladCloudSdk.queues.listQueues("acme-corp", "dev-env");
+    QueueCollection response = saladCloudSdk.queues.listQueues("acme-corp", "dev-env");
 
     System.out.println(response);
   }
@@ -67,11 +67,11 @@ Creates a new queue in the given project.
 
 **Parameters**
 
-| Name             | Type                                    | Required | Description                                                                                                                                                                                                                                         |
-| :--------------- | :-------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName | String                                  | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName      | String                                  | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| createQueue      | [CreateQueue](../models/CreateQueue.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+| Name             | Type                                          | Required | Description                                                                                                                                                                                                                                         |
+| :--------------- | :-------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName | String                                        | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName      | String                                        | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| queuePrototype   | [QueuePrototype](../models/QueuePrototype.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
 
 **Return Type**
 
@@ -83,8 +83,8 @@ Creates a new queue in the given project.
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.CreateQueue;
 import com.salad.cloud.sdk.models.Queue;
+import com.salad.cloud.sdk.models.QueuePrototype;
 
 public class Main {
 
@@ -96,9 +96,14 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    CreateQueue createQueue = CreateQueue.builder().name("name").displayName("wHZ").description("description").build();
+    QueuePrototype queuePrototype = QueuePrototype
+      .builder()
+      .name("name")
+      .displayName("Qskie")
+      .description("description")
+      .build();
 
-    Queue response = saladCloudSdk.queues.createQueue("acme-corp", "dev-env", createQueue);
+    Queue response = saladCloudSdk.queues.createQueue("acme-corp", "dev-env", queuePrototype);
 
     System.out.println(response);
   }
@@ -160,12 +165,12 @@ Updates an existing queue in the given project.
 
 **Parameters**
 
-| Name             | Type                                    | Required | Description                                                                                                                                                                                                                                         |
-| :--------------- | :-------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName | String                                  | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName      | String                                  | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| queueName        | String                                  | ✅       | The queue name.                                                                                                                                                                                                                                     |
-| updateQueue      | [UpdateQueue](../models/UpdateQueue.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+| Name             | Type                                  | Required | Description                                                                                                                                                                                                                                         |
+| :--------------- | :------------------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName | String                                | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName      | String                                | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| queueName        | String                                | ✅       | The queue name.                                                                                                                                                                                                                                     |
+| queuePatch       | [QueuePatch](../models/QueuePatch.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
 
 **Return Type**
 
@@ -178,7 +183,7 @@ import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.models.Queue;
-import com.salad.cloud.sdk.models.UpdateQueue;
+import com.salad.cloud.sdk.models.QueuePatch;
 
 public class Main {
 
@@ -190,9 +195,9 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    UpdateQueue updateQueue = UpdateQueue.builder().displayName(" 6N HXu0bg").description("description").build();
+    QueuePatch queuePatch = QueuePatch.builder().displayName("i2VcwOa").description("description").build();
 
-    Queue response = saladCloudSdk.queues.updateQueue("acme-corp", "dev-env", "fifo-queue", updateQueue);
+    Queue response = saladCloudSdk.queues.updateQueue("acme-corp", "dev-env", "fifo-queue", queuePatch);
 
     System.out.println(response);
   }
@@ -256,7 +261,7 @@ Gets the list of jobs in a queue
 
 **Return Type**
 
-`QueueJobList`
+`QueueJobCollection`
 
 **Example Usage Code Snippet**
 
@@ -265,7 +270,7 @@ import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.models.ListQueueJobsParameters;
-import com.salad.cloud.sdk.models.QueueJobList;
+import com.salad.cloud.sdk.models.QueueJobCollection;
 
 public class Main {
 
@@ -279,7 +284,12 @@ public class Main {
 
     ListQueueJobsParameters requestParameters = ListQueueJobsParameters.builder().page(1L).pageSize(1L).build();
 
-    QueueJobList response = saladCloudSdk.queues.listQueueJobs("acme-corp", "dev-env", "fifo-queue", requestParameters);
+    QueueJobCollection response = saladCloudSdk.queues.listQueueJobs(
+      "acme-corp",
+      "dev-env",
+      "fifo-queue",
+      requestParameters
+    );
 
     System.out.println(response);
   }
@@ -296,12 +306,12 @@ Creates a new job
 
 **Parameters**
 
-| Name             | Type                                          | Required | Description                                                                                                                                                                                                                                         |
-| :--------------- | :-------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName | String                                        | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName      | String                                        | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| queueName        | String                                        | ✅       | The queue name.                                                                                                                                                                                                                                     |
-| createQueueJob   | [CreateQueueJob](../models/CreateQueueJob.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+| Name              | Type                                                | Required | Description                                                                                                                                                                                                                                         |
+| :---------------- | :-------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName  | String                                              | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName       | String                                              | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| queueName         | String                                              | ✅       | The queue name.                                                                                                                                                                                                                                     |
+| queueJobPrototype | [QueueJobPrototype](../models/QueueJobPrototype.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
 
 **Return Type**
 
@@ -313,8 +323,8 @@ Creates a new job
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.CreateQueueJob;
 import com.salad.cloud.sdk.models.QueueJob;
+import com.salad.cloud.sdk.models.QueueJobPrototype;
 
 public class Main {
 
@@ -326,14 +336,14 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    CreateQueueJob createQueueJob = CreateQueueJob
+    QueueJobPrototype queueJobPrototype = QueueJobPrototype
       .builder()
       .input(new Object())
       .metadata(new Object())
       .webhook("webhook")
       .build();
 
-    QueueJob response = saladCloudSdk.queues.createQueueJob("acme-corp", "dev-env", "fifo-queue", createQueueJob);
+    QueueJob response = saladCloudSdk.queues.createQueueJob("acme-corp", "dev-env", "fifo-queue", queueJobPrototype);
 
     System.out.println(response);
   }

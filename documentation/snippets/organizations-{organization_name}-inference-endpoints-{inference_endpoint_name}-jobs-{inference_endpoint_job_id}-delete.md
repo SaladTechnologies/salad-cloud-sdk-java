@@ -13,7 +13,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.inferenceEndpoints.cancelInferenceEndpointJob(
+    saladCloudSdk.inferenceEndpoints.deleteInferenceEndpointJob(
       "acme-corp",
       "transcribe",
       "2fc459a1-1c09-4a34-ade7-54d03fc51d6a"

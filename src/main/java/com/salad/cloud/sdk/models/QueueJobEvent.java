@@ -19,9 +19,15 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class QueueJobEvent {
 
+  /**
+   * The action that was taken on the queue job
+   */
   @NonNull
   private Action action;
 
+  /**
+   * The time the action was taken on the queue job
+   */
   @NonNull
   private String time;
 }

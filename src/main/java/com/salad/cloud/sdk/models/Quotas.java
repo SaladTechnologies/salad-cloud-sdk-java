@@ -20,6 +20,9 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class Quotas {
 
+  /**
+   * Represents the organization quotas for container groups
+   */
   @NonNull
   @JsonProperty("container_groups_quotas")
   private ContainerGroupsQuotas containerGroupsQuotas;

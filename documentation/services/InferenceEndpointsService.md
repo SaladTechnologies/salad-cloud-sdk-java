@@ -9,7 +9,7 @@ A list of all methods in the `InferenceEndpointsService` service. Click on the m
 | [listInferenceEndpointJobs](#listinferenceendpointjobs)   | Lists inference endpoint jobs.        |
 | [createInferenceEndpointJob](#createinferenceendpointjob) | Creates a new inference endpoint job. |
 | [getInferenceEndpointJob](#getinferenceendpointjob)       | Gets an inference endpoint job.       |
-| [cancelInferenceEndpointJob](#cancelinferenceendpointjob) | Cancels an inference endpoint job.    |
+| [deleteInferenceEndpointJob](#deleteinferenceendpointjob) | Cancels an inference endpoint job.    |
 
 ## listInferenceEndpoints
 
@@ -27,7 +27,7 @@ Lists inference endpoints.
 
 **Return Type**
 
-`InferenceEndpointList`
+`InferenceEndpointCollection`
 
 **Example Usage Code Snippet**
 
@@ -35,7 +35,7 @@ Lists inference endpoints.
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.InferenceEndpointList;
+import com.salad.cloud.sdk.models.InferenceEndpointCollection;
 import com.salad.cloud.sdk.models.ListInferenceEndpointsParameters;
 
 public class Main {
@@ -54,7 +54,7 @@ public class Main {
       .pageSize(1L)
       .build();
 
-    InferenceEndpointList response = saladCloudSdk.inferenceEndpoints.listInferenceEndpoints(
+    InferenceEndpointCollection response = saladCloudSdk.inferenceEndpoints.listInferenceEndpoints(
       "acme-corp",
       requestParameters
     );
@@ -126,7 +126,7 @@ Lists inference endpoint jobs.
 
 **Return Type**
 
-`InferenceEndpointJobList`
+`InferenceEndpointJobCollection`
 
 **Example Usage Code Snippet**
 
@@ -134,7 +134,7 @@ Lists inference endpoint jobs.
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.InferenceEndpointJobList;
+import com.salad.cloud.sdk.models.InferenceEndpointJobCollection;
 import com.salad.cloud.sdk.models.ListInferenceEndpointJobsParameters;
 
 public class Main {
@@ -153,7 +153,7 @@ public class Main {
       .pageSize(1L)
       .build();
 
-    InferenceEndpointJobList response = saladCloudSdk.inferenceEndpoints.listInferenceEndpointJobs(
+    InferenceEndpointJobCollection response = saladCloudSdk.inferenceEndpoints.listInferenceEndpointJobs(
       "acme-corp",
       "transcribe",
       requestParameters
@@ -174,11 +174,11 @@ Creates a new inference endpoint job.
 
 **Parameters**
 
-| Name                       | Type                                                                  | Required | Description                                                                                                                                                                                                                                         |
-| :------------------------- | :-------------------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName           | String                                                                | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| inferenceEndpointName      | String                                                                | ✅       | The inference endpoint name.                                                                                                                                                                                                                        |
-| createInferenceEndpointJob | [CreateInferenceEndpointJob](../models/CreateInferenceEndpointJob.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+| Name                          | Type                                                                        | Required | Description                                                                                                                                                                                                                                         |
+| :---------------------------- | :-------------------------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName              | String                                                                      | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| inferenceEndpointName         | String                                                                      | ✅       | The inference endpoint name.                                                                                                                                                                                                                        |
+| inferenceEndpointJobPrototype | [InferenceEndpointJobPrototype](../models/InferenceEndpointJobPrototype.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
 
 **Return Type**
 
@@ -190,8 +190,8 @@ Creates a new inference endpoint job.
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.CreateInferenceEndpointJob;
 import com.salad.cloud.sdk.models.InferenceEndpointJob;
+import com.salad.cloud.sdk.models.InferenceEndpointJobPrototype;
 
 public class Main {
 
@@ -203,17 +203,17 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    CreateInferenceEndpointJob createInferenceEndpointJob = CreateInferenceEndpointJob
+    InferenceEndpointJobPrototype inferenceEndpointJobPrototype = InferenceEndpointJobPrototype
       .builder()
       .input(new Object())
       .metadata(new Object())
-      .webhookUrl("webhook_url")
+      .webhookUrl("https://webhook.example.com/events")
       .build();
 
     InferenceEndpointJob response = saladCloudSdk.inferenceEndpoints.createInferenceEndpointJob(
       "acme-corp",
       "transcribe",
-      createInferenceEndpointJob
+      inferenceEndpointJobPrototype
     );
 
     System.out.println(response);
@@ -271,7 +271,7 @@ public class Main {
 
 ```
 
-## cancelInferenceEndpointJob
+## deleteInferenceEndpointJob
 
 Cancels an inference endpoint job.
 
@@ -303,7 +303,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.inferenceEndpoints.cancelInferenceEndpointJob(
+    saladCloudSdk.inferenceEndpoints.deleteInferenceEndpointJob(
       "acme-corp",
       "transcribe",
       "2fc459a1-1c09-4a34-ade7-54d03fc51d6a"

@@ -14,11 +14,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ContainerGroup response = saladCloudSdk.containerGroups.getContainerGroup(
-      "acme-corp",
-      "dev-env",
-      "nx30k5tue7r3q30x0anq7hd1fjfxgtq8uehil3eploo4d79h7bg0v"
-    );
+    ContainerGroup response = saladCloudSdk.containerGroups.getContainerGroup("acme-corp", "dev-env", "mandlebrot");
 
     System.out.println(response);
   }

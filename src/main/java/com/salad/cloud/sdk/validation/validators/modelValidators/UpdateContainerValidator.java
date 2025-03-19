@@ -17,10 +17,28 @@ public class UpdateContainerValidator extends AbstractModelValidator<UpdateConta
   @Override
   protected Violation[] validateModel(UpdateContainer updateContainer) {
     return new ViolationAggregator()
-      .add(new StringValidator("image").minLength(1).maxLength(1024).optional().validate(updateContainer.getImage()))
-      .add(new ResourcesValidator("resources").optional().validate(updateContainer.getResources()))
-      .add(new ListValidator<String>("command").maxLength(100).optional().validate(updateContainer.getCommand()))
-      .add(new UpdateContainerLoggingValidator("logging").optional().validate(updateContainer.getLogging()))
+      .add(
+        new ListValidator<String>("command")
+          .maxLength(100)
+          .itemValidator(new StringValidator().minLength(1).maxLength(1024).pattern("^.*$").required())
+          .optional()
+          .validate(updateContainer.getCommand())
+      )
+      .add(
+        new StringValidator("image")
+          .minLength(1)
+          .maxLength(1024)
+          .pattern("^.*$")
+          .optional()
+          .validate(updateContainer.getImage())
+      )
+      .add(new ContainerLoggingConfigurationValidator("logging").optional().validate(updateContainer.getLogging()))
+      .add(
+        new ContainerRegistryAuthenticationValidator("registryAuthentication")
+          .optional()
+          .validate(updateContainer.getRegistryAuthentication())
+      )
+      .add(new ContainerResourceUpdateSchemaValidator("resources").optional().validate(updateContainer.getResources()))
       .aggregate();
   }
 }

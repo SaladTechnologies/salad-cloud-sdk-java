@@ -1,6 +1,5 @@
 package com.salad.cloud.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import lombok.Builder;
@@ -22,6 +21,9 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class QueueJob {
 
+  /**
+   * The job identifier
+   */
   @NonNull
   private String id;
 
@@ -31,24 +33,40 @@ public class QueueJob {
   @NonNull
   private Object input;
 
+  /**
+   * The job status
+   */
   @NonNull
   private QueueJobStatus status;
 
+  /**
+   * The job events
+   */
   @NonNull
   private List<QueueJobEvent> events;
 
+  /**
+   * The job creation time
+   */
   @NonNull
   @JsonProperty("create_time")
   private String createTime;
 
+  /**
+   * The job update time
+   */
   @NonNull
   @JsonProperty("update_time")
   private String updateTime;
 
-  @JsonInclude(JsonInclude.Include.ALWAYS)
+  /**
+   * Additional metadata for the job
+   */
   private Object metadata;
 
-  @JsonInclude(JsonInclude.Include.ALWAYS)
+  /**
+   * The webhook URL to notify when the job completes
+   */
   private String webhook;
 
   /**

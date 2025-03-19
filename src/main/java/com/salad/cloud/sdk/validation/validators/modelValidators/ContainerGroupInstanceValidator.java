@@ -16,7 +16,20 @@ public class ContainerGroupInstanceValidator extends AbstractModelValidator<Cont
   @Override
   protected Violation[] validateModel(ContainerGroupInstance containerGroupInstance) {
     return new ViolationAggregator()
-      .add(new NumericValidator<Long>("version").min(1L).required().validate(containerGroupInstance.getVersion()))
+      .add(
+        new NumericValidator<Long>("version")
+          .min(1L)
+          .max(2147483647L)
+          .required()
+          .validate(containerGroupInstance.getVersion())
+      )
+      .add(
+        new NumericValidator<Long>("deletionCost")
+          .min(0L)
+          .max(100000L)
+          .optional()
+          .validate(containerGroupInstance.getDeletionCost())
+      )
       .aggregate();
   }
 }
