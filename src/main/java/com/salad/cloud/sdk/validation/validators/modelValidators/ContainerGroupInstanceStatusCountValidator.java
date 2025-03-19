@@ -20,24 +20,28 @@ public class ContainerGroupInstanceStatusCountValidator
       .add(
         new NumericValidator<Long>("allocatingCount")
           .min(0L)
+          .max(2147483647L)
           .required()
           .validate(containerGroupInstanceStatusCount.getAllocatingCount())
       )
       .add(
         new NumericValidator<Long>("creatingCount")
           .min(0L)
+          .max(2147483647L)
           .required()
           .validate(containerGroupInstanceStatusCount.getCreatingCount())
       )
       .add(
         new NumericValidator<Long>("runningCount")
           .min(0L)
+          .max(2147483647L)
           .required()
           .validate(containerGroupInstanceStatusCount.getRunningCount())
       )
       .add(
         new NumericValidator<Long>("stoppingCount")
           .min(0L)
+          .max(2147483647L)
           .required()
           .validate(containerGroupInstanceStatusCount.getStoppingCount())
       )

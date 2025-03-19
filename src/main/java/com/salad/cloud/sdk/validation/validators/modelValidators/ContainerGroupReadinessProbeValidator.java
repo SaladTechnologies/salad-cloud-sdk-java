@@ -17,38 +17,48 @@ public class ContainerGroupReadinessProbeValidator extends AbstractModelValidato
   protected Violation[] validateModel(ContainerGroupReadinessProbe containerGroupReadinessProbe) {
     return new ViolationAggregator()
       .add(
+        new NumericValidator<Long>("failureThreshold")
+          .min(1L)
+          .max(20L)
+          .required()
+          .validate(containerGroupReadinessProbe.getFailureThreshold())
+      )
+      .add(
         new NumericValidator<Long>("initialDelaySeconds")
           .min(0L)
+          .max(1200L)
           .required()
           .validate(containerGroupReadinessProbe.getInitialDelaySeconds())
       )
       .add(
         new NumericValidator<Long>("periodSeconds")
           .min(1L)
+          .max(120L)
           .required()
           .validate(containerGroupReadinessProbe.getPeriodSeconds())
       )
       .add(
-        new NumericValidator<Long>("timeoutSeconds")
-          .min(1L)
-          .required()
-          .validate(containerGroupReadinessProbe.getTimeoutSeconds())
-      )
-      .add(
         new NumericValidator<Long>("successThreshold")
           .min(1L)
+          .max(10L)
           .required()
           .validate(containerGroupReadinessProbe.getSuccessThreshold())
       )
       .add(
-        new NumericValidator<Long>("failureThreshold")
+        new NumericValidator<Long>("timeoutSeconds")
           .min(1L)
+          .max(60L)
           .required()
-          .validate(containerGroupReadinessProbe.getFailureThreshold())
+          .validate(containerGroupReadinessProbe.getTimeoutSeconds())
       )
-      .add(new ContainerGroupProbeTcpValidator("tcp").optional().validate(containerGroupReadinessProbe.getTcp()))
-      .add(new ContainerGroupProbeHttpValidator("http").optional().validate(containerGroupReadinessProbe.getHttp()))
-      .add(new ContainerGroupProbeGrpcValidator("grpc").optional().validate(containerGroupReadinessProbe.getGrpc()))
+      .add(new ContainerGroupProbeExecValidator("exec").optional().validate(containerGroupReadinessProbe.getExec()))
+      .add(new ContainerGroupGRpcProbeValidator("grpc").optional().validate(containerGroupReadinessProbe.getGrpc()))
+      .add(
+        new ContainerGroupHttpProbeConfigurationValidator("http")
+          .optional()
+          .validate(containerGroupReadinessProbe.getHttp())
+      )
+      .add(new ContainerGroupTcpProbeValidator("tcp").optional().validate(containerGroupReadinessProbe.getTcp()))
       .aggregate();
   }
 }

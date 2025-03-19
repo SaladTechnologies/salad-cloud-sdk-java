@@ -20,6 +20,9 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class GpuClassPrice {
 
+  /**
+   * Specifies the priority level for container group execution, which determines resource allocation and scheduling precedence.
+   */
   @JsonInclude(JsonInclude.Include.ALWAYS)
   private ContainerGroupPriority priority;
 

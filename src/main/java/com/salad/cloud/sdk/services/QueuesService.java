@@ -1,24 +1,26 @@
 package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
-import com.salad.cloud.sdk.models.CreateQueue;
-import com.salad.cloud.sdk.models.CreateQueueJob;
 import com.salad.cloud.sdk.models.ListQueueJobsParameters;
 import com.salad.cloud.sdk.models.Queue;
+import com.salad.cloud.sdk.models.QueueCollection;
 import com.salad.cloud.sdk.models.QueueJob;
-import com.salad.cloud.sdk.models.QueueJobList;
-import com.salad.cloud.sdk.models.QueueList;
-import com.salad.cloud.sdk.models.UpdateQueue;
+import com.salad.cloud.sdk.models.QueueJobCollection;
+import com.salad.cloud.sdk.models.QueueJobPrototype;
+import com.salad.cloud.sdk.models.QueuePatch;
+import com.salad.cloud.sdk.models.QueuePrototype;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
-import com.salad.cloud.sdk.validation.validators.modelValidators.CreateQueueValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.ListQueueJobsParametersValidator;
-import com.salad.cloud.sdk.validation.validators.modelValidators.UpdateQueueValidator;
+import com.salad.cloud.sdk.validation.validators.modelValidators.QueueJobPrototypeValidator;
+import com.salad.cloud.sdk.validation.validators.modelValidators.QueuePatchValidator;
+import com.salad.cloud.sdk.validation.validators.modelValidators.QueuePrototypeValidator;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.MediaType;
@@ -31,8 +33,8 @@ import okhttp3.Response;
  */
 public class QueuesService extends BaseService {
 
-  public QueuesService(@NonNull OkHttpClient httpClient, String serverUrl) {
-    super(httpClient, serverUrl);
+  public QueuesService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
+    super(httpClient, config);
   }
 
   /**
@@ -40,13 +42,13 @@ public class QueuesService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-   * @return response of {@code QueueList}
+   * @return response of {@code QueueCollection}
    */
-  public QueueList listQueues(@NonNull String organizationName, @NonNull String projectName)
+  public QueueCollection listQueues(@NonNull String organizationName, @NonNull String projectName)
     throws ApiException, ValidationException {
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<QueueList>() {});
+    return ModelConverter.convert(response, new TypeReference<QueueCollection>() {});
   }
 
   /**
@@ -54,13 +56,16 @@ public class QueuesService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-   * @return response of {@code CompletableFuture<QueueList>}
+   * @return response of {@code CompletableFuture<QueueCollection>}
    */
-  public CompletableFuture<QueueList> listQueuesAsync(@NonNull String organizationName, @NonNull String projectName)
-    throws ApiException, ValidationException {
+  public CompletableFuture<QueueCollection> listQueuesAsync(
+    @NonNull String organizationName,
+    @NonNull String projectName
+  ) throws ApiException, ValidationException {
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<QueueList>() {})
+    return futureResponse.thenApplyAsync(response ->
+      ModelConverter.convert(response, new TypeReference<QueueCollection>() {})
     );
   }
 
@@ -86,9 +91,10 @@ public class QueuesService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .build();
@@ -99,15 +105,15 @@ public class QueuesService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-   * @param createQueue {@link CreateQueue} Request Body
+   * @param queuePrototype {@link QueuePrototype} Request Body
    * @return response of {@code Queue}
    */
   public Queue createQueue(
     @NonNull String organizationName,
     @NonNull String projectName,
-    @NonNull CreateQueue createQueue
+    @NonNull QueuePrototype queuePrototype
   ) throws ApiException, ValidationException {
-    Request request = this.buildCreateQueueRequest(organizationName, projectName, createQueue);
+    Request request = this.buildCreateQueueRequest(organizationName, projectName, queuePrototype);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<Queue>() {});
   }
@@ -117,15 +123,15 @@ public class QueuesService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-   * @param createQueue {@link CreateQueue} Request Body
+   * @param queuePrototype {@link QueuePrototype} Request Body
    * @return response of {@code CompletableFuture<Queue>}
    */
   public CompletableFuture<Queue> createQueueAsync(
     @NonNull String organizationName,
     @NonNull String projectName,
-    @NonNull CreateQueue createQueue
+    @NonNull QueuePrototype queuePrototype
   ) throws ApiException, ValidationException {
-    Request request = this.buildCreateQueueRequest(organizationName, projectName, createQueue);
+    Request request = this.buildCreateQueueRequest(organizationName, projectName, queuePrototype);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Queue>() {}));
   }
@@ -133,7 +139,7 @@ public class QueuesService extends BaseService {
   private Request buildCreateQueueRequest(
     @NonNull String organizationName,
     @NonNull String projectName,
-    @NonNull CreateQueue createQueue
+    @NonNull QueuePrototype queuePrototype
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
@@ -152,16 +158,17 @@ public class QueuesService extends BaseService {
           .required()
           .validate(projectName)
       )
-      .add(new CreateQueueValidator("createQueue").required().validate(createQueue))
+      .add(new QueuePrototypeValidator("queuePrototype").required().validate(queuePrototype))
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
-      .setJsonContent(createQueue)
+      .setJsonContent(queuePrototype)
       .build();
   }
 
@@ -231,9 +238,10 @@ public class QueuesService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .setPathParameter("queue_name", queueName)
@@ -246,16 +254,16 @@ public class QueuesService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param queueName String The queue name.
-   * @param updateQueue {@link UpdateQueue} Request Body
+   * @param queuePatch {@link QueuePatch} Request Body
    * @return response of {@code Queue}
    */
   public Queue updateQueue(
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName,
-    @NonNull UpdateQueue updateQueue
+    @NonNull QueuePatch queuePatch
   ) throws ApiException, ValidationException {
-    Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, updateQueue);
+    Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, queuePatch);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<Queue>() {});
   }
@@ -266,16 +274,16 @@ public class QueuesService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param queueName String The queue name.
-   * @param updateQueue {@link UpdateQueue} Request Body
+   * @param queuePatch {@link QueuePatch} Request Body
    * @return response of {@code CompletableFuture<Queue>}
    */
   public CompletableFuture<Queue> updateQueueAsync(
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName,
-    @NonNull UpdateQueue updateQueue
+    @NonNull QueuePatch queuePatch
   ) throws ApiException, ValidationException {
-    Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, updateQueue);
+    Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, queuePatch);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Queue>() {}));
   }
@@ -284,7 +292,7 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName,
-    @NonNull UpdateQueue updateQueue
+    @NonNull QueuePatch queuePatch
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
@@ -311,17 +319,18 @@ public class QueuesService extends BaseService {
           .required()
           .validate(queueName)
       )
-      .add(new UpdateQueueValidator("updateQueue").required().validate(updateQueue))
+      .add(new QueuePatchValidator("queuePatch").required().validate(queuePatch))
       .validateAll();
     return new RequestBuilder(
       HttpMethod.PATCH,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .setPathParameter("queue_name", queueName)
-      .setJsonContent(updateQueue, MediaType.parse("application/merge-patch+json"))
+      .setJsonContent(queuePatch, MediaType.parse("application/merge-patch+json"))
       .build();
   }
 
@@ -389,9 +398,10 @@ public class QueuesService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.DELETE,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .setPathParameter("queue_name", queueName)
@@ -405,9 +415,9 @@ public class QueuesService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param queueName String The queue name.
    * @param requestParameters {@link ListQueueJobsParameters} Request Parameters Object
-   * @return response of {@code QueueJobList}
+   * @return response of {@code QueueJobCollection}
    */
-  public QueueJobList listQueueJobs(
+  public QueueJobCollection listQueueJobs(
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName,
@@ -415,7 +425,7 @@ public class QueuesService extends BaseService {
   ) throws ApiException, ValidationException {
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<QueueJobList>() {});
+    return ModelConverter.convert(response, new TypeReference<QueueJobCollection>() {});
   }
 
   /**
@@ -425,9 +435,9 @@ public class QueuesService extends BaseService {
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param queueName String The queue name.
    * @param requestParameters {@link ListQueueJobsParameters} Request Parameters Object
-   * @return response of {@code CompletableFuture<QueueJobList>}
+   * @return response of {@code CompletableFuture<QueueJobCollection>}
    */
-  public CompletableFuture<QueueJobList> listQueueJobsAsync(
+  public CompletableFuture<QueueJobCollection> listQueueJobsAsync(
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName,
@@ -436,7 +446,7 @@ public class QueuesService extends BaseService {
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<QueueJobList>() {})
+      ModelConverter.convert(response, new TypeReference<QueueJobCollection>() {})
     );
   }
 
@@ -475,9 +485,10 @@ public class QueuesService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .setPathParameter("queue_name", queueName)
@@ -492,16 +503,16 @@ public class QueuesService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param queueName String The queue name.
-   * @param createQueueJob {@link CreateQueueJob} Request Body
+   * @param queueJobPrototype {@link QueueJobPrototype} Request Body
    * @return response of {@code QueueJob}
    */
   public QueueJob createQueueJob(
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName,
-    @NonNull CreateQueueJob createQueueJob
+    @NonNull QueueJobPrototype queueJobPrototype
   ) throws ApiException, ValidationException {
-    Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, createQueueJob);
+    Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, queueJobPrototype);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<QueueJob>() {});
   }
@@ -512,16 +523,16 @@ public class QueuesService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param projectName String Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
    * @param queueName String The queue name.
-   * @param createQueueJob {@link CreateQueueJob} Request Body
+   * @param queueJobPrototype {@link QueueJobPrototype} Request Body
    * @return response of {@code CompletableFuture<QueueJob>}
    */
   public CompletableFuture<QueueJob> createQueueJobAsync(
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName,
-    @NonNull CreateQueueJob createQueueJob
+    @NonNull QueueJobPrototype queueJobPrototype
   ) throws ApiException, ValidationException {
-    Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, createQueueJob);
+    Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, queueJobPrototype);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<QueueJob>() {})
     );
@@ -531,7 +542,7 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName,
-    @NonNull CreateQueueJob createQueueJob
+    @NonNull QueueJobPrototype queueJobPrototype
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
@@ -558,16 +569,18 @@ public class QueuesService extends BaseService {
           .required()
           .validate(queueName)
       )
+      .add(new QueueJobPrototypeValidator("queueJobPrototype").required().validate(queueJobPrototype))
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .setPathParameter("queue_name", queueName)
-      .setJsonContent(createQueueJob)
+      .setJsonContent(queueJobPrototype)
       .build();
   }
 
@@ -646,9 +659,10 @@ public class QueuesService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .setPathParameter("queue_name", queueName)
@@ -728,9 +742,10 @@ public class QueuesService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.DELETE,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("project_name", projectName)
       .setPathParameter("queue_name", queueName)

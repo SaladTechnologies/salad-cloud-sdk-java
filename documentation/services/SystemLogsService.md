@@ -43,11 +43,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    SystemLogList response = saladCloudSdk.systemLogs.getSystemLogs(
-      "acme-corp",
-      "dev-env",
-      "pkhp3h5ljgqmbs6a7swqmq3nj6oy8b2wpzbidnelidy9s6k9wystxax"
-    );
+    SystemLogList response = saladCloudSdk.systemLogs.getSystemLogs("acme-corp", "dev-env", "mandlebrot");
 
     System.out.println(response);
   }

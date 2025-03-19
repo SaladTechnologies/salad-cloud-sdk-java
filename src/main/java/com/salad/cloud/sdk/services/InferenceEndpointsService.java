@@ -1,21 +1,22 @@
 package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
-import com.salad.cloud.sdk.models.CreateInferenceEndpointJob;
 import com.salad.cloud.sdk.models.InferenceEndpoint;
+import com.salad.cloud.sdk.models.InferenceEndpointCollection;
 import com.salad.cloud.sdk.models.InferenceEndpointJob;
-import com.salad.cloud.sdk.models.InferenceEndpointJobList;
-import com.salad.cloud.sdk.models.InferenceEndpointList;
+import com.salad.cloud.sdk.models.InferenceEndpointJobCollection;
+import com.salad.cloud.sdk.models.InferenceEndpointJobPrototype;
 import com.salad.cloud.sdk.models.ListInferenceEndpointJobsParameters;
 import com.salad.cloud.sdk.models.ListInferenceEndpointsParameters;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
-import com.salad.cloud.sdk.validation.validators.modelValidators.CreateInferenceEndpointJobValidator;
+import com.salad.cloud.sdk.validation.validators.modelValidators.InferenceEndpointJobPrototypeValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.ListInferenceEndpointJobsParametersValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.ListInferenceEndpointsParametersValidator;
 import java.util.concurrent.CompletableFuture;
@@ -29,8 +30,8 @@ import okhttp3.Response;
  */
 public class InferenceEndpointsService extends BaseService {
 
-  public InferenceEndpointsService(@NonNull OkHttpClient httpClient, String serverUrl) {
-    super(httpClient, serverUrl);
+  public InferenceEndpointsService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
+    super(httpClient, config);
   }
 
   /**
@@ -38,15 +39,15 @@ public class InferenceEndpointsService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param requestParameters {@link ListInferenceEndpointsParameters} Request Parameters Object
-   * @return response of {@code InferenceEndpointList}
+   * @return response of {@code InferenceEndpointCollection}
    */
-  public InferenceEndpointList listInferenceEndpoints(
+  public InferenceEndpointCollection listInferenceEndpoints(
     @NonNull String organizationName,
     @NonNull ListInferenceEndpointsParameters requestParameters
   ) throws ApiException, ValidationException {
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<InferenceEndpointList>() {});
+    return ModelConverter.convert(response, new TypeReference<InferenceEndpointCollection>() {});
   }
 
   /**
@@ -54,16 +55,16 @@ public class InferenceEndpointsService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param requestParameters {@link ListInferenceEndpointsParameters} Request Parameters Object
-   * @return response of {@code CompletableFuture<InferenceEndpointList>}
+   * @return response of {@code CompletableFuture<InferenceEndpointCollection>}
    */
-  public CompletableFuture<InferenceEndpointList> listInferenceEndpointsAsync(
+  public CompletableFuture<InferenceEndpointCollection> listInferenceEndpointsAsync(
     @NonNull String organizationName,
     @NonNull ListInferenceEndpointsParameters requestParameters
   ) throws ApiException, ValidationException {
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<InferenceEndpointList>() {})
+      ModelConverter.convert(response, new TypeReference<InferenceEndpointCollection>() {})
     );
   }
 
@@ -82,7 +83,12 @@ public class InferenceEndpointsService extends BaseService {
       )
       .add(new ListInferenceEndpointsParametersValidator("requestParameters").optional().validate(requestParameters))
       .validateAll();
-    return new RequestBuilder(HttpMethod.GET, this.serverUrl, "organizations/{organization_name}/inference-endpoints")
+    return new RequestBuilder(
+      HttpMethod.GET,
+      this.config.getBaseUrl(),
+      "organizations/{organization_name}/inference-endpoints"
+    )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setOptionalQueryParameter("page", requestParameters.getPage())
       .setOptionalQueryParameter("page_size", requestParameters.getPageSize())
@@ -147,9 +153,10 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("inference_endpoint_name", inferenceEndpointName)
       .build();
@@ -161,9 +168,9 @@ public class InferenceEndpointsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param inferenceEndpointName String The inference endpoint name.
    * @param requestParameters {@link ListInferenceEndpointJobsParameters} Request Parameters Object
-   * @return response of {@code InferenceEndpointJobList}
+   * @return response of {@code InferenceEndpointJobCollection}
    */
-  public InferenceEndpointJobList listInferenceEndpointJobs(
+  public InferenceEndpointJobCollection listInferenceEndpointJobs(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull ListInferenceEndpointJobsParameters requestParameters
@@ -171,7 +178,7 @@ public class InferenceEndpointsService extends BaseService {
     Request request =
       this.buildListInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<InferenceEndpointJobList>() {});
+    return ModelConverter.convert(response, new TypeReference<InferenceEndpointJobCollection>() {});
   }
 
   /**
@@ -180,9 +187,9 @@ public class InferenceEndpointsService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param inferenceEndpointName String The inference endpoint name.
    * @param requestParameters {@link ListInferenceEndpointJobsParameters} Request Parameters Object
-   * @return response of {@code CompletableFuture<InferenceEndpointJobList>}
+   * @return response of {@code CompletableFuture<InferenceEndpointJobCollection>}
    */
-  public CompletableFuture<InferenceEndpointJobList> listInferenceEndpointJobsAsync(
+  public CompletableFuture<InferenceEndpointJobCollection> listInferenceEndpointJobsAsync(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull ListInferenceEndpointJobsParameters requestParameters
@@ -191,7 +198,7 @@ public class InferenceEndpointsService extends BaseService {
       this.buildListInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<InferenceEndpointJobList>() {})
+      ModelConverter.convert(response, new TypeReference<InferenceEndpointJobCollection>() {})
     );
   }
 
@@ -221,9 +228,10 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("inference_endpoint_name", inferenceEndpointName)
       .setOptionalQueryParameter("page", requestParameters.getPage())
@@ -236,16 +244,20 @@ public class InferenceEndpointsService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param inferenceEndpointName String The inference endpoint name.
-   * @param createInferenceEndpointJob {@link CreateInferenceEndpointJob} Request Body
+   * @param inferenceEndpointJobPrototype {@link InferenceEndpointJobPrototype} Request Body
    * @return response of {@code InferenceEndpointJob}
    */
   public InferenceEndpointJob createInferenceEndpointJob(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
-    @NonNull CreateInferenceEndpointJob createInferenceEndpointJob
+    @NonNull InferenceEndpointJobPrototype inferenceEndpointJobPrototype
   ) throws ApiException, ValidationException {
     Request request =
-      this.buildCreateInferenceEndpointJobRequest(organizationName, inferenceEndpointName, createInferenceEndpointJob);
+      this.buildCreateInferenceEndpointJobRequest(
+          organizationName,
+          inferenceEndpointName,
+          inferenceEndpointJobPrototype
+        );
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<InferenceEndpointJob>() {});
   }
@@ -255,16 +267,20 @@ public class InferenceEndpointsService extends BaseService {
    *
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @param inferenceEndpointName String The inference endpoint name.
-   * @param createInferenceEndpointJob {@link CreateInferenceEndpointJob} Request Body
+   * @param inferenceEndpointJobPrototype {@link InferenceEndpointJobPrototype} Request Body
    * @return response of {@code CompletableFuture<InferenceEndpointJob>}
    */
   public CompletableFuture<InferenceEndpointJob> createInferenceEndpointJobAsync(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
-    @NonNull CreateInferenceEndpointJob createInferenceEndpointJob
+    @NonNull InferenceEndpointJobPrototype inferenceEndpointJobPrototype
   ) throws ApiException, ValidationException {
     Request request =
-      this.buildCreateInferenceEndpointJobRequest(organizationName, inferenceEndpointName, createInferenceEndpointJob);
+      this.buildCreateInferenceEndpointJobRequest(
+          organizationName,
+          inferenceEndpointName,
+          inferenceEndpointJobPrototype
+        );
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->
       ModelConverter.convert(response, new TypeReference<InferenceEndpointJob>() {})
@@ -274,7 +290,7 @@ public class InferenceEndpointsService extends BaseService {
   private Request buildCreateInferenceEndpointJobRequest(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
-    @NonNull CreateInferenceEndpointJob createInferenceEndpointJob
+    @NonNull InferenceEndpointJobPrototype inferenceEndpointJobPrototype
   ) throws ValidationException {
     new ViolationAggregator()
       .add(
@@ -294,19 +310,20 @@ public class InferenceEndpointsService extends BaseService {
           .validate(inferenceEndpointName)
       )
       .add(
-        new CreateInferenceEndpointJobValidator("createInferenceEndpointJob")
+        new InferenceEndpointJobPrototypeValidator("inferenceEndpointJobPrototype")
           .required()
-          .validate(createInferenceEndpointJob)
+          .validate(inferenceEndpointJobPrototype)
       )
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("inference_endpoint_name", inferenceEndpointName)
-      .setJsonContent(createInferenceEndpointJob)
+      .setJsonContent(inferenceEndpointJobPrototype)
       .build();
   }
 
@@ -375,9 +392,10 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("inference_endpoint_name", inferenceEndpointName)
       .setPathParameter("inference_endpoint_job_id", inferenceEndpointJobId)
@@ -392,13 +410,13 @@ public class InferenceEndpointsService extends BaseService {
    * @param inferenceEndpointJobId String The inference endpoint job identifier.
    * @return response of {@code void}
    */
-  public void cancelInferenceEndpointJob(
+  public void deleteInferenceEndpointJob(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
   ) throws ApiException, ValidationException {
     Request request =
-      this.buildCancelInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
+      this.buildDeleteInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     this.execute(request);
   }
 
@@ -410,17 +428,17 @@ public class InferenceEndpointsService extends BaseService {
    * @param inferenceEndpointJobId String The inference endpoint job identifier.
    * @return response of {@code CompletableFuture<Void>}
    */
-  public CompletableFuture<Void> cancelInferenceEndpointJobAsync(
+  public CompletableFuture<Void> deleteInferenceEndpointJobAsync(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
   ) throws ApiException, ValidationException {
     Request request =
-      this.buildCancelInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
+      this.buildDeleteInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     return this.executeAsync(request).thenApplyAsync(response -> null);
   }
 
-  private Request buildCancelInferenceEndpointJobRequest(
+  private Request buildDeleteInferenceEndpointJobRequest(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
@@ -445,9 +463,10 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.DELETE,
-      this.serverUrl,
+      this.config.getBaseUrl(),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}"
     )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .setPathParameter("inference_endpoint_name", inferenceEndpointName)
       .setPathParameter("inference_endpoint_job_id", inferenceEndpointJobId)

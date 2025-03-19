@@ -20,6 +20,9 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class SystemLogList {
 
+  /**
+   * A list of system logs
+   */
   @NonNull
   private List<SystemLog> items;
 }

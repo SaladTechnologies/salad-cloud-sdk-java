@@ -1,5 +1,6 @@
 package com.salad.cloud.sdk.services;
 
+import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
@@ -13,15 +14,11 @@ import org.jetbrains.annotations.NotNull;
 public class BaseService {
 
   protected OkHttpClient httpClient;
-  protected String serverUrl;
+  protected SaladCloudSdkConfig config;
 
-  public BaseService(OkHttpClient httpClient, String serverUrl) {
+  public BaseService(OkHttpClient httpClient, SaladCloudSdkConfig config) {
     this.httpClient = httpClient;
-    this.serverUrl = serverUrl;
-  }
-
-  public void setBaseUrl(String serverUrl) {
-    this.serverUrl = serverUrl;
+    this.config = config;
   }
 
   protected Response execute(Request request) throws ApiException {

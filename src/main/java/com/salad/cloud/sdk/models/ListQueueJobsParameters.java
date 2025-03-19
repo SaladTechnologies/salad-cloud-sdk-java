@@ -16,8 +16,14 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class ListQueueJobsParameters {
 
+  /**
+   * The page number.
+   */
   private Long page;
 
+  /**
+   * The maximum number of items per page.
+   */
   @JsonProperty("page_size")
   private Long pageSize;
 }

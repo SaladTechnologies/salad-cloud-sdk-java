@@ -2,7 +2,7 @@
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.QueueList;
+import com.salad.cloud.sdk.models.QueueCollection;
 
 public class Main {
 
@@ -14,7 +14,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueueList response = saladCloudSdk.queues.listQueues("acme-corp", "dev-env");
+    QueueCollection response = saladCloudSdk.queues.listQueues("acme-corp", "dev-env");
 
     System.out.println(response);
   }

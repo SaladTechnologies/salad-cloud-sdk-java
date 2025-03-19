@@ -21,6 +21,7 @@ public class ContainerGroupQueueConnectionValidator extends AbstractModelValidat
         new StringValidator("path")
           .minLength(1)
           .maxLength(1024)
+          .pattern("^.*$")
           .required()
           .validate(containerGroupQueueConnection.getPath())
       )

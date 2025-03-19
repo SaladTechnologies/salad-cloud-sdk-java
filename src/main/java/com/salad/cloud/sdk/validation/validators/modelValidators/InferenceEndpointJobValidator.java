@@ -40,6 +40,20 @@ public class InferenceEndpointJobValidator extends AbstractModelValidator<Infere
           .required()
           .validate(inferenceEndpointJob.getEvents())
       )
+      .add(
+        new StringValidator("webhook")
+          .minLength(1)
+          .maxLength(2048)
+          .optional()
+          .validate(inferenceEndpointJob.getWebhook())
+      )
+      .add(
+        new StringValidator("webhookUrl")
+          .minLength(1)
+          .maxLength(2048)
+          .optional()
+          .validate(inferenceEndpointJob.getWebhookUrl())
+      )
       .aggregate();
   }
 }

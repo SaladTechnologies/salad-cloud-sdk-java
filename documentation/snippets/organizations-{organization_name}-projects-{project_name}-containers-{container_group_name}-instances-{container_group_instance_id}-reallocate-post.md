@@ -16,8 +16,8 @@ public class Main {
     saladCloudSdk.containerGroups.reallocateContainerGroupInstance(
       "acme-corp",
       "dev-env",
-      "kfvzd5f4eycptsdkpj0zrs3vycqv",
-      "container_group_instance_id"
+      "mandlebrot",
+      "db3a4591-efc3-46c0-b06a-3d820c0ec100"
     );
   }
 }

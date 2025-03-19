@@ -1,6 +1,7 @@
 package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
@@ -20,8 +21,8 @@ import okhttp3.Response;
  */
 public class WebhookSecretKeyService extends BaseService {
 
-  public WebhookSecretKeyService(@NonNull OkHttpClient httpClient, String serverUrl) {
-    super(httpClient, serverUrl);
+  public WebhookSecretKeyService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
+    super(httpClient, config);
   }
 
   /**
@@ -63,7 +64,12 @@ public class WebhookSecretKeyService extends BaseService {
           .validate(organizationName)
       )
       .validateAll();
-    return new RequestBuilder(HttpMethod.GET, this.serverUrl, "organizations/{organization_name}/webhook-secret-key")
+    return new RequestBuilder(
+      HttpMethod.GET,
+      this.config.getBaseUrl(),
+      "organizations/{organization_name}/webhook-secret-key"
+    )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .build();
   }
@@ -107,7 +113,12 @@ public class WebhookSecretKeyService extends BaseService {
           .validate(organizationName)
       )
       .validateAll();
-    return new RequestBuilder(HttpMethod.POST, this.serverUrl, "organizations/{organization_name}/webhook-secret-key")
+    return new RequestBuilder(
+      HttpMethod.POST,
+      this.config.getBaseUrl(),
+      "organizations/{organization_name}/webhook-secret-key"
+    )
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .build();
   }

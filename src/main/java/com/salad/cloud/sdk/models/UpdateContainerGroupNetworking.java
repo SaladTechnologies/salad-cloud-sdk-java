@@ -19,6 +19,9 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class UpdateContainerGroupNetworking {
 
+  /**
+   * The port number to expose on the container group
+   */
   @JsonInclude(JsonInclude.Include.ALWAYS)
   private Long port;
 }

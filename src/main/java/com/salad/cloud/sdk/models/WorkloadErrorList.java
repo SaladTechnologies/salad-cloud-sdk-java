@@ -20,6 +20,9 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class WorkloadErrorList {
 
+  /**
+   * A list of workload errors
+   */
   @NonNull
   private List<WorkloadError> items;
 }

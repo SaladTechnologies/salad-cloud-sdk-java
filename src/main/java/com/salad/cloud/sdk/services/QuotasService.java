@@ -1,6 +1,7 @@
 package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
@@ -20,8 +21,8 @@ import okhttp3.Response;
  */
 public class QuotasService extends BaseService {
 
-  public QuotasService(@NonNull OkHttpClient httpClient, String serverUrl) {
-    super(httpClient, serverUrl);
+  public QuotasService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
+    super(httpClient, config);
   }
 
   /**
@@ -60,7 +61,8 @@ public class QuotasService extends BaseService {
           .validate(organizationName)
       )
       .validateAll();
-    return new RequestBuilder(HttpMethod.GET, this.serverUrl, "organizations/{organization_name}/quotas")
+    return new RequestBuilder(HttpMethod.GET, this.config.getBaseUrl(), "organizations/{organization_name}/quotas")
+      .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .build();
   }

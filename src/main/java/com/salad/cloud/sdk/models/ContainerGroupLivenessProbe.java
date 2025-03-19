@@ -10,7 +10,7 @@ import lombok.With;
 import lombok.extern.jackson.Jacksonized;
 
 /**
- * Represents the container group liveness probe
+ * Defines a liveness probe for container groups that determines when to restart a container if it becomes unhealthy
  */
 @Data
 @Builder
@@ -20,35 +20,62 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class ContainerGroupLivenessProbe {
 
-  @NonNull
-  @JsonProperty("initial_delay_seconds")
-  private Long initialDelaySeconds;
-
-  @NonNull
-  @Builder.Default
-  @JsonProperty("period_seconds")
-  private Long periodSeconds = 10L;
-
-  @NonNull
-  @Builder.Default
-  @JsonProperty("timeout_seconds")
-  private Long timeoutSeconds = 30L;
-
-  @NonNull
-  @Builder.Default
-  @JsonProperty("success_threshold")
-  private Long successThreshold = 1L;
-
+  /**
+   * Number of consecutive failures required to consider the probe as failed
+   */
   @NonNull
   @Builder.Default
   @JsonProperty("failure_threshold")
   private Long failureThreshold = 3L;
 
-  private ContainerGroupProbeTcp tcp;
+  /**
+   * Number of seconds to wait after container start before initiating liveness probes
+   */
+  @NonNull
+  @JsonProperty("initial_delay_seconds")
+  private Long initialDelaySeconds;
 
-  private ContainerGroupProbeHttp http;
+  /**
+   * Frequency in seconds at which the probe should be executed
+   */
+  @NonNull
+  @Builder.Default
+  @JsonProperty("period_seconds")
+  private Long periodSeconds = 10L;
 
-  private ContainerGroupProbeGrpc grpc;
+  /**
+   * Number of consecutive successes required to consider the probe successful
+   */
+  @NonNull
+  @Builder.Default
+  @JsonProperty("success_threshold")
+  private Long successThreshold = 1L;
 
+  /**
+   * Number of seconds after which the probe times out if no response is received
+   */
+  @NonNull
+  @Builder.Default
+  @JsonProperty("timeout_seconds")
+  private Long timeoutSeconds = 30L;
+
+  /**
+   * Defines the exec action for a probe in a container group. This is used to execute a command inside a container for health checks.
+   */
   private ContainerGroupProbeExec exec;
+
+  /**
+   * Configuration for gRPC-based health probes in container groups, used to determine container health status.
+   */
+  private ContainerGroupGRpcProbe grpc;
+
+  /**
+   * Defines HTTP probe configuration for container health checks within a container group.
+   */
+  private ContainerGroupHttpProbeConfiguration http;
+
+  /**
+   * Configuration for a TCP probe used to check container health via network connectivity.
+   */
+  private ContainerGroupTcpProbe tcp;
 }

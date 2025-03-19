@@ -13,6 +13,7 @@ A list of all methods in the `ContainerGroupsService` service. Click on the meth
 | [stopContainerGroup](#stopcontainergroup)                             | Stops a container group                                                                                                     |
 | [listContainerGroupInstances](#listcontainergroupinstances)           | Gets the list of container group instances                                                                                  |
 | [getContainerGroupInstance](#getcontainergroupinstance)               | Gets a container group instance                                                                                             |
+| [updateContainerGroupInstance](#updatecontainergroupinstance)         | Updates a container group instance                                                                                          |
 | [reallocateContainerGroupInstance](#reallocatecontainergroupinstance) | Reallocates a container group instance to run on a different Salad Node                                                     |
 | [recreateContainerGroupInstance](#recreatecontainergroupinstance)     | Stops a container, destroys it, and starts a new one without requiring the image to be downloaded again on a new Salad Node |
 | [restartContainerGroupInstance](#restartcontainergroupinstance)       | Stops a container and restarts it on the same Salad Node                                                                    |
@@ -33,7 +34,7 @@ Gets the list of container groups
 
 **Return Type**
 
-`ContainerGroupList`
+`ContainerGroupCollection`
 
 **Example Usage Code Snippet**
 
@@ -41,7 +42,7 @@ Gets the list of container groups
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.ContainerGroupList;
+import com.salad.cloud.sdk.models.ContainerGroupCollection;
 
 public class Main {
 
@@ -53,7 +54,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ContainerGroupList response = saladCloudSdk.containerGroups.listContainerGroups("acme-corp", "dev-env");
+    ContainerGroupCollection response = saladCloudSdk.containerGroups.listContainerGroups("acme-corp", "dev-env");
 
     System.out.println(response);
   }
@@ -70,11 +71,11 @@ Creates a new container group
 
 **Parameters**
 
-| Name                 | Type                                                      | Required | Description                                                                                                                                                                                                                                         |
-| :------------------- | :-------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName     | String                                                    | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName          | String                                                    | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| createContainerGroup | [CreateContainerGroup](../models/CreateContainerGroup.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+| Name                          | Type                                                                        | Required | Description                                                                                                                                                                                                                                         |
+| :---------------------------- | :-------------------------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName              | String                                                                      | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName                   | String                                                                      | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupCreationRequest | [ContainerGroupCreationRequest](../models/ContainerGroupCreationRequest.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
 
 **Return Type**
 
@@ -86,44 +87,44 @@ Creates a new container group
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
+import com.salad.cloud.sdk.models.AxiomLoggingConfiguration;
+import com.salad.cloud.sdk.models.Compression;
+import com.salad.cloud.sdk.models.ContainerConfiguration;
 import com.salad.cloud.sdk.models.ContainerGroup;
+import com.salad.cloud.sdk.models.ContainerGroupCreationRequest;
+import com.salad.cloud.sdk.models.ContainerGroupGRpcProbe;
+import com.salad.cloud.sdk.models.ContainerGroupHttpProbeConfiguration;
 import com.salad.cloud.sdk.models.ContainerGroupLivenessProbe;
 import com.salad.cloud.sdk.models.ContainerGroupPriority;
 import com.salad.cloud.sdk.models.ContainerGroupProbeExec;
-import com.salad.cloud.sdk.models.ContainerGroupProbeGrpc;
-import com.salad.cloud.sdk.models.ContainerGroupProbeHttp;
-import com.salad.cloud.sdk.models.ContainerGroupProbeHttpHeaders2;
-import com.salad.cloud.sdk.models.ContainerGroupProbeTcp;
+import com.salad.cloud.sdk.models.ContainerGroupProbeHttpHeader;
 import com.salad.cloud.sdk.models.ContainerGroupQueueConnection;
 import com.salad.cloud.sdk.models.ContainerGroupReadinessProbe;
 import com.salad.cloud.sdk.models.ContainerGroupStartupProbe;
+import com.salad.cloud.sdk.models.ContainerGroupTcpProbe;
+import com.salad.cloud.sdk.models.ContainerHttpLoggingConfiguration;
+import com.salad.cloud.sdk.models.ContainerLoggingConfiguration;
+import com.salad.cloud.sdk.models.ContainerLoggingHttpHeader;
+import com.salad.cloud.sdk.models.ContainerLoggingSplunkConfiguration;
 import com.salad.cloud.sdk.models.ContainerNetworkingProtocol;
-import com.salad.cloud.sdk.models.ContainerProbeHttpScheme;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthentication;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationAwsEcr;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationBasic;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationDockerHub;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationGcpGar;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationGcpGcr;
 import com.salad.cloud.sdk.models.ContainerResourceRequirements;
 import com.salad.cloud.sdk.models.ContainerRestartPolicy;
 import com.salad.cloud.sdk.models.CountryCode;
-import com.salad.cloud.sdk.models.CreateContainer;
-import com.salad.cloud.sdk.models.CreateContainerGroup;
 import com.salad.cloud.sdk.models.CreateContainerGroupNetworking;
-import com.salad.cloud.sdk.models.CreateContainerGroupNetworkingLoadBalancer;
-import com.salad.cloud.sdk.models.CreateContainerLogging;
-import com.salad.cloud.sdk.models.CreateContainerRegistryAuthentication;
-import com.salad.cloud.sdk.models.DatadogTags2;
-import com.salad.cloud.sdk.models.HttpCompression2;
-import com.salad.cloud.sdk.models.HttpFormat2;
-import com.salad.cloud.sdk.models.HttpHeaders3;
-import com.salad.cloud.sdk.models.LoggingAxiom2;
-import com.salad.cloud.sdk.models.LoggingDatadog2;
-import com.salad.cloud.sdk.models.LoggingHttp2;
-import com.salad.cloud.sdk.models.LoggingNewRelic2;
-import com.salad.cloud.sdk.models.LoggingSplunk2;
-import com.salad.cloud.sdk.models.LoggingTcp2;
-import com.salad.cloud.sdk.models.QueueAutoscaler;
-import com.salad.cloud.sdk.models.RegistryAuthenticationAwsEcr1;
-import com.salad.cloud.sdk.models.RegistryAuthenticationBasic1;
-import com.salad.cloud.sdk.models.RegistryAuthenticationDockerHub1;
-import com.salad.cloud.sdk.models.RegistryAuthenticationGcpGar1;
-import com.salad.cloud.sdk.models.RegistryAuthenticationGcpGcr1;
+import com.salad.cloud.sdk.models.DatadogLoggingConfiguration;
+import com.salad.cloud.sdk.models.DatadogTagForContainerLogging;
+import com.salad.cloud.sdk.models.Format;
+import com.salad.cloud.sdk.models.HttpScheme;
+import com.salad.cloud.sdk.models.NewRelicLoggingConfiguration;
+import com.salad.cloud.sdk.models.QueueBasedAutoscalerConfiguration;
+import com.salad.cloud.sdk.models.TcpLoggingConfiguration;
+import com.salad.cloud.sdk.models.TheContainerGroupNetworkingLoadBalancer;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -138,225 +139,256 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    List<String> gpuClassesList = Arrays.asList("gpu_classes");
-
-    ContainerResourceRequirements containerResourceRequirements = ContainerResourceRequirements
-      .builder()
-      .cpu(14L)
-      .memory(39206L)
-      .gpuClasses(gpuClassesList)
-      .storageAmount(21142065650L)
-      .build();
-
     List<String> commandList = Arrays.asList("command");
 
-    LoggingAxiom2 loggingAxiom2 = LoggingAxiom2.builder().host("host").apiToken("api_token").dataset("dataset").build();
-
-    DatadogTags2 datadogTags2 = DatadogTags2.builder().name("name").value("value").build();
-
-    List<DatadogTags2> tagsList = Arrays.asList(datadogTags2);
-
-    LoggingDatadog2 loggingDatadog2 = LoggingDatadog2.builder().host("host").apiKey("api_key").tags(tagsList).build();
-
-    LoggingNewRelic2 loggingNewRelic2 = LoggingNewRelic2.builder().host("host").ingestionKey("ingestion_key").build();
-
-    LoggingSplunk2 loggingSplunk2 = LoggingSplunk2.builder().host("host").token("token").build();
-
-    LoggingTcp2 loggingTcp2 = LoggingTcp2.builder().host("host").port(18162L).build();
-
-    HttpHeaders3 httpHeaders3 = HttpHeaders3.builder().name("name").value("value").build();
-
-    List<HttpHeaders3> headersList = Arrays.asList(httpHeaders3);
-
-    LoggingHttp2 loggingHttp2 = LoggingHttp2
+    AxiomLoggingConfiguration axiomLoggingConfiguration = AxiomLoggingConfiguration
       .builder()
       .host("host")
-      .port(9845L)
-      .user("user")
-      .password("password")
-      .path("path")
-      .format(HttpFormat2.JSON)
-      .headers(headersList)
-      .compression(HttpCompression2.NONE)
+      .apiToken("api_token")
+      .dataset("dataset")
       .build();
 
-    CreateContainerLogging createContainerLogging = CreateContainerLogging
-      .builder()
-      .axiom(loggingAxiom2)
-      .datadog(loggingDatadog2)
-      .newRelic(loggingNewRelic2)
-      .splunk(loggingSplunk2)
-      .tcp(loggingTcp2)
-      .http(loggingHttp2)
-      .build();
-
-    RegistryAuthenticationBasic1 registryAuthenticationBasic1 = RegistryAuthenticationBasic1
-      .builder()
-      .username("username")
-      .password("password")
-      .build();
-
-    RegistryAuthenticationGcpGcr1 registryAuthenticationGcpGcr1 = RegistryAuthenticationGcpGcr1
-      .builder()
-      .serviceKey("service_key")
-      .build();
-
-    RegistryAuthenticationAwsEcr1 registryAuthenticationAwsEcr1 = RegistryAuthenticationAwsEcr1
-      .builder()
-      .accessKeyId("access_key_id")
-      .secretAccessKey("secret_access_key")
-      .build();
-
-    RegistryAuthenticationDockerHub1 registryAuthenticationDockerHub1 = RegistryAuthenticationDockerHub1
-      .builder()
-      .username("username")
-      .personalAccessToken("personal_access_token")
-      .build();
-
-    RegistryAuthenticationGcpGar1 registryAuthenticationGcpGar1 = RegistryAuthenticationGcpGar1
-      .builder()
-      .serviceKey("service_key")
-      .build();
-
-    CreateContainerRegistryAuthentication createContainerRegistryAuthentication = CreateContainerRegistryAuthentication
-      .builder()
-      .basic(registryAuthenticationBasic1)
-      .gcpGcr(registryAuthenticationGcpGcr1)
-      .awsEcr(registryAuthenticationAwsEcr1)
-      .dockerHub(registryAuthenticationDockerHub1)
-      .gcpGar(registryAuthenticationGcpGar1)
-      .build();
-
-    CreateContainer createContainer = CreateContainer
-      .builder()
-      .image("image")
-      .resources(containerResourceRequirements)
-      .command(commandList)
-      .priority(ContainerGroupPriority.HIGH)
-      .environmentVariables(new HashMap())
-      .logging(createContainerLogging)
-      .registryAuthentication(createContainerRegistryAuthentication)
-      .imageCaching(false)
-      .build();
-
-    List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
-
-    CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking
-      .builder()
-      .protocol(ContainerNetworkingProtocol.HTTP)
-      .port(12950L)
-      .auth(false)
-      .loadBalancer(CreateContainerGroupNetworkingLoadBalancer.ROUND_ROBIN)
-      .singleConnectionLimit(true)
-      .clientRequestTimeout(100000L)
-      .serverResponseTimeout(100000L)
-      .build();
-
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(48638L).build();
-
-    ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
+    DatadogTagForContainerLogging datadogTagForContainerLogging = DatadogTagForContainerLogging
       .builder()
       .name("name")
       .value("value")
       .build();
 
-    List<ContainerGroupProbeHttpHeaders2> headersList = Arrays.asList(containerGroupProbeHttpHeaders2);
+    List<DatadogTagForContainerLogging> tagsList = Arrays.asList(datadogTagForContainerLogging);
 
-    ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
+    DatadogLoggingConfiguration datadogLoggingConfiguration = DatadogLoggingConfiguration
       .builder()
+      .host("host")
+      .apiKey("api_key")
+      .tags(tagsList)
+      .build();
+
+    ContainerLoggingHttpHeader containerLoggingHttpHeader = ContainerLoggingHttpHeader
+      .builder()
+      .name("name")
+      .value("value")
+      .build();
+
+    List<ContainerLoggingHttpHeader> headersList = Arrays.asList(containerLoggingHttpHeader);
+
+    ContainerHttpLoggingConfiguration containerHttpLoggingConfiguration = ContainerHttpLoggingConfiguration
+      .builder()
+      .host("host")
+      .port(43509L)
+      .user("user")
+      .password("password")
       .path("path")
-      .port(19938L)
-      .scheme(ContainerProbeHttpScheme.HTTP)
+      .format(Format.JSON)
       .headers(headersList)
+      .compression(Compression.NONE)
       .build();
 
-    ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
+    NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration
       .builder()
-      .service("service")
-      .port(56724L)
+      .host("host")
+      .ingestionKey("ingestion_key")
       .build();
 
-    List<String> commandList = Arrays.asList("command");
+    ContainerLoggingSplunkConfiguration containerLoggingSplunkConfiguration = ContainerLoggingSplunkConfiguration
+      .builder()
+      .host("host")
+      .token("token")
+      .build();
 
-    ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder().command(commandList).build();
+    TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration
+      .builder()
+      .host("host")
+      .port(35405L)
+      .build();
+
+    ContainerLoggingConfiguration containerLoggingConfiguration = ContainerLoggingConfiguration
+      .builder()
+      .axiom(axiomLoggingConfiguration)
+      .datadog(datadogLoggingConfiguration)
+      .http(containerHttpLoggingConfiguration)
+      .newRelic(newRelicLoggingConfiguration)
+      .splunk(containerLoggingSplunkConfiguration)
+      .tcp(tcpLoggingConfiguration)
+      .build();
+
+    ContainerRegistryAuthenticationAwsEcr containerRegistryAuthenticationAwsEcr = ContainerRegistryAuthenticationAwsEcr
+      .builder()
+      .accessKeyId("access_key_id")
+      .secretAccessKey("secret_access_key")
+      .build();
+
+    ContainerRegistryAuthenticationBasic containerRegistryAuthenticationBasic = ContainerRegistryAuthenticationBasic
+      .builder()
+      .username("username")
+      .password("password")
+      .build();
+
+    ContainerRegistryAuthenticationDockerHub containerRegistryAuthenticationDockerHub =
+      ContainerRegistryAuthenticationDockerHub
+        .builder()
+        .username("username")
+        .personalAccessToken("personal_access_token")
+        .build();
+
+    ContainerRegistryAuthenticationGcpGar containerRegistryAuthenticationGcpGar = ContainerRegistryAuthenticationGcpGar
+      .builder()
+      .serviceKey("service_key")
+      .build();
+
+    ContainerRegistryAuthenticationGcpGcr containerRegistryAuthenticationGcpGcr = ContainerRegistryAuthenticationGcpGcr
+      .builder()
+      .serviceKey("service_key")
+      .build();
+
+    ContainerRegistryAuthentication containerRegistryAuthentication = ContainerRegistryAuthentication
+      .builder()
+      .awsEcr(containerRegistryAuthenticationAwsEcr)
+      .basic(containerRegistryAuthenticationBasic)
+      .dockerHub(containerRegistryAuthenticationDockerHub)
+      .gcpGar(containerRegistryAuthenticationGcpGar)
+      .gcpGcr(containerRegistryAuthenticationGcpGcr)
+      .build();
+
+    List<String> gpuClassesList = Arrays.asList("gpu_classes");
+
+    ContainerResourceRequirements containerResourceRequirements = ContainerResourceRequirements
+      .builder()
+      .cpu(13L)
+      .memory(28311L)
+      .gpuClasses(gpuClassesList)
+      .storageAmount(20719714697L)
+      .build();
+
+    ContainerConfiguration containerConfiguration = ContainerConfiguration
+      .builder()
+      .command(commandList)
+      .environmentVariables(new HashMap())
+      .image("acme/:latest")
+      .imageCaching(true)
+      .logging(containerLoggingConfiguration)
+      .priority(ContainerGroupPriority.HIGH)
+      .registryAuthentication(containerRegistryAuthentication)
+      .resources(containerResourceRequirements)
+      .build();
+
+    List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
+
+    List<String> commandList1 = Arrays.asList("command");
+
+    ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder().command(commandList1).build();
+
+    ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe
+      .builder()
+      .port(4792L)
+      .service("service")
+      .build();
+
+    ContainerGroupProbeHttpHeader containerGroupProbeHttpHeader = ContainerGroupProbeHttpHeader
+      .builder()
+      .name("name")
+      .value("value")
+      .build();
+
+    List<ContainerGroupProbeHttpHeader> headersList1 = Arrays.asList(containerGroupProbeHttpHeader);
+
+    ContainerGroupHttpProbeConfiguration containerGroupHttpProbeConfiguration = ContainerGroupHttpProbeConfiguration
+      .builder()
+      .headers(headersList1)
+      .path("path")
+      .port(18942L)
+      .scheme(HttpScheme.HTTP)
+      .build();
+
+    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(47377L).build();
 
     ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
       .builder()
-      .tcp(containerGroupProbeTcp)
-      .http(containerGroupProbeHttp)
-      .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(7L)
+      .failureThreshold(3L)
+      .grpc(containerGroupGRpcProbe)
+      .http(containerGroupHttpProbeConfiguration)
+      .initialDelaySeconds(987L)
       .periodSeconds(10L)
+      .successThreshold(1L)
+      .tcp(containerGroupTcpProbe)
       .timeoutSeconds(30L)
-      .successThreshold(1L)
-      .failureThreshold(3L)
       .build();
 
-    ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe
+    CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking
       .builder()
-      .tcp(containerGroupProbeTcp)
-      .http(containerGroupProbeHttp)
-      .grpc(containerGroupProbeGrpc)
-      .exec(containerGroupProbeExec)
-      .initialDelaySeconds(2L)
-      .periodSeconds(1L)
-      .timeoutSeconds(1L)
-      .successThreshold(1L)
-      .failureThreshold(3L)
+      .auth(false)
+      .clientRequestTimeout(100000L)
+      .loadBalancer(TheContainerGroupNetworkingLoadBalancer.ROUND_ROBIN)
+      .port(60000L)
+      .protocol(ContainerNetworkingProtocol.HTTP)
+      .serverResponseTimeout(100000L)
+      .singleConnectionLimit(false)
       .build();
 
-    ContainerGroupStartupProbe containerGroupStartupProbe = ContainerGroupStartupProbe
+    QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration
       .builder()
-      .tcp(containerGroupProbeTcp)
-      .http(containerGroupProbeHttp)
-      .grpc(containerGroupProbeGrpc)
-      .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
-      .periodSeconds(3L)
-      .timeoutSeconds(10L)
-      .successThreshold(2L)
-      .failureThreshold(1200L)
+      .desiredQueueLength(2L)
+      .maxReplicas(219L)
+      .maxDownscalePerMinute(5L)
+      .maxUpscalePerMinute(16L)
+      .minReplicas(88L)
+      .pollingPeriod(680L)
       .build();
 
     ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection
       .builder()
       .path("path")
-      .port(55927L)
-      .queueName("pihwp4ho850l3faynnuq71ru6yrogza-e8llajq25o2")
+      .port(39086L)
+      .queueName("dawtm7q4ohrrc63u35mpg4-370h--6se6eqezp-gj0")
       .build();
 
-    QueueAutoscaler queueAutoscaler = QueueAutoscaler
+    ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe
       .builder()
-      .minReplicas(94L)
-      .maxReplicas(15L)
-      .desiredQueueLength(98L)
-      .pollingPeriod(1417L)
-      .maxUpscalePerMinute(93L)
-      .maxDownscalePerMinute(43L)
+      .exec(containerGroupProbeExec)
+      .failureThreshold(3L)
+      .grpc(containerGroupGRpcProbe)
+      .http(containerGroupHttpProbeConfiguration)
+      .initialDelaySeconds(479L)
+      .periodSeconds(1L)
+      .successThreshold(1L)
+      .tcp(containerGroupTcpProbe)
+      .timeoutSeconds(1L)
       .build();
 
-    CreateContainerGroup createContainerGroup = CreateContainerGroup
+    ContainerGroupStartupProbe containerGroupStartupProbe = ContainerGroupStartupProbe
       .builder()
-      .name("name")
-      .displayName("AZC")
-      .container(createContainer)
+      .exec(containerGroupProbeExec)
+      .failureThreshold(15L)
+      .grpc(containerGroupGRpcProbe)
+      .http(containerGroupHttpProbeConfiguration)
+      .initialDelaySeconds(563L)
+      .tcp(containerGroupTcpProbe)
+      .periodSeconds(3L)
+      .successThreshold(2L)
+      .timeoutSeconds(10L)
+      .build();
+
+    ContainerGroupCreationRequest containerGroupCreationRequest = ContainerGroupCreationRequest
+      .builder()
       .autostartPolicy(true)
-      .restartPolicy(ContainerRestartPolicy.ALWAYS)
-      .replicas(236L)
+      .container(containerConfiguration)
       .countryCodes(countryCodesList)
-      .networking(createContainerGroupNetworking)
+      .displayName("QTB")
       .livenessProbe(containerGroupLivenessProbe)
-      .readinessProbe(containerGroupReadinessProbe)
-      .startupProbe(containerGroupStartupProbe)
+      .name("name")
+      .networking(createContainerGroupNetworking)
+      .queueAutoscaler(queueBasedAutoscalerConfiguration)
       .queueConnection(containerGroupQueueConnection)
-      .queueAutoscaler(queueAutoscaler)
+      .readinessProbe(containerGroupReadinessProbe)
+      .replicas(257L)
+      .restartPolicy(ContainerRestartPolicy.ALWAYS)
+      .startupProbe(containerGroupStartupProbe)
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroups.createContainerGroup(
       "acme-corp",
       "dev-env",
-      createContainerGroup
+      containerGroupCreationRequest
     );
 
     System.out.println(response);
@@ -402,11 +434,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ContainerGroup response = saladCloudSdk.containerGroups.getContainerGroup(
-      "acme-corp",
-      "dev-env",
-      "nx30k5tue7r3q30x0anq7hd1fjfxgtq8uehil3eploo4d79h7bg0v"
-    );
+    ContainerGroup response = saladCloudSdk.containerGroups.getContainerGroup("acme-corp", "dev-env", "mandlebrot");
 
     System.out.println(response);
   }
@@ -423,12 +451,12 @@ Updates a container group
 
 **Parameters**
 
-| Name                 | Type                                                      | Required | Description                                                                                                                                                                                                                                         |
-| :------------------- | :-------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| organizationName     | String                                                    | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
-| projectName          | String                                                    | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
-| containerGroupName   | String                                                    | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| updateContainerGroup | [UpdateContainerGroup](../models/UpdateContainerGroup.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+| Name                | Type                                                    | Required | Description                                                                                                                                                                                                                                         |
+| :------------------ | :------------------------------------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName    | String                                                  | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName         | String                                                  | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName  | String                                                  | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| containerGroupPatch | [ContainerGroupPatch](../models/ContainerGroupPatch.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
 
 **Return Type**
 
@@ -440,40 +468,40 @@ Updates a container group
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
+import com.salad.cloud.sdk.models.AxiomLoggingConfiguration;
+import com.salad.cloud.sdk.models.Compression;
 import com.salad.cloud.sdk.models.ContainerGroup;
+import com.salad.cloud.sdk.models.ContainerGroupGRpcProbe;
+import com.salad.cloud.sdk.models.ContainerGroupHttpProbeConfiguration;
 import com.salad.cloud.sdk.models.ContainerGroupLivenessProbe;
+import com.salad.cloud.sdk.models.ContainerGroupPatch;
 import com.salad.cloud.sdk.models.ContainerGroupPriority;
 import com.salad.cloud.sdk.models.ContainerGroupProbeExec;
-import com.salad.cloud.sdk.models.ContainerGroupProbeGrpc;
-import com.salad.cloud.sdk.models.ContainerGroupProbeHttp;
-import com.salad.cloud.sdk.models.ContainerGroupProbeHttpHeaders2;
-import com.salad.cloud.sdk.models.ContainerGroupProbeTcp;
+import com.salad.cloud.sdk.models.ContainerGroupProbeHttpHeader;
 import com.salad.cloud.sdk.models.ContainerGroupReadinessProbe;
 import com.salad.cloud.sdk.models.ContainerGroupStartupProbe;
-import com.salad.cloud.sdk.models.ContainerProbeHttpScheme;
+import com.salad.cloud.sdk.models.ContainerGroupTcpProbe;
+import com.salad.cloud.sdk.models.ContainerHttpLoggingConfiguration;
+import com.salad.cloud.sdk.models.ContainerLoggingConfiguration;
+import com.salad.cloud.sdk.models.ContainerLoggingHttpHeader;
+import com.salad.cloud.sdk.models.ContainerLoggingSplunkConfiguration;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthentication;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationAwsEcr;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationBasic;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationDockerHub;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationGcpGar;
+import com.salad.cloud.sdk.models.ContainerRegistryAuthenticationGcpGcr;
+import com.salad.cloud.sdk.models.ContainerResourceUpdateSchema;
 import com.salad.cloud.sdk.models.CountryCode;
-import com.salad.cloud.sdk.models.DatadogTags3;
-import com.salad.cloud.sdk.models.HttpCompression3;
-import com.salad.cloud.sdk.models.HttpFormat3;
-import com.salad.cloud.sdk.models.HttpHeaders4;
-import com.salad.cloud.sdk.models.LoggingAxiom3;
-import com.salad.cloud.sdk.models.LoggingDatadog3;
-import com.salad.cloud.sdk.models.LoggingHttp3;
-import com.salad.cloud.sdk.models.LoggingNewRelic3;
-import com.salad.cloud.sdk.models.LoggingSplunk3;
-import com.salad.cloud.sdk.models.LoggingTcp3;
-import com.salad.cloud.sdk.models.QueueAutoscaler;
-import com.salad.cloud.sdk.models.RegistryAuthenticationAwsEcr2;
-import com.salad.cloud.sdk.models.RegistryAuthenticationBasic2;
-import com.salad.cloud.sdk.models.RegistryAuthenticationDockerHub2;
-import com.salad.cloud.sdk.models.RegistryAuthenticationGcpGar2;
-import com.salad.cloud.sdk.models.RegistryAuthenticationGcpGcr2;
-import com.salad.cloud.sdk.models.Resources;
+import com.salad.cloud.sdk.models.DatadogLoggingConfiguration;
+import com.salad.cloud.sdk.models.DatadogTagForContainerLogging;
+import com.salad.cloud.sdk.models.Format;
+import com.salad.cloud.sdk.models.HttpScheme;
+import com.salad.cloud.sdk.models.NewRelicLoggingConfiguration;
+import com.salad.cloud.sdk.models.QueueBasedAutoscalerConfiguration;
+import com.salad.cloud.sdk.models.TcpLoggingConfiguration;
 import com.salad.cloud.sdk.models.UpdateContainer;
-import com.salad.cloud.sdk.models.UpdateContainerGroup;
 import com.salad.cloud.sdk.models.UpdateContainerGroupNetworking;
-import com.salad.cloud.sdk.models.UpdateContainerLogging;
-import com.salad.cloud.sdk.models.UpdateContainerRegistryAuthentication;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -488,209 +516,240 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    List<String> gpuClassesList = Arrays.asList("gpu_classes");
-
-    Resources resources = Resources
-      .builder()
-      .cpu(4L)
-      .memory(42436L)
-      .gpuClasses(gpuClassesList)
-      .storageAmount(46147219728L)
-      .build();
-
     List<String> commandList = Arrays.asList("command");
 
-    LoggingAxiom3 loggingAxiom3 = LoggingAxiom3.builder().host("host").apiToken("api_token").dataset("dataset").build();
-
-    DatadogTags3 datadogTags3 = DatadogTags3.builder().name("name").value("value").build();
-
-    List<DatadogTags3> tagsList = Arrays.asList(datadogTags3);
-
-    LoggingDatadog3 loggingDatadog3 = LoggingDatadog3.builder().host("host").apiKey("api_key").tags(tagsList).build();
-
-    LoggingNewRelic3 loggingNewRelic3 = LoggingNewRelic3.builder().host("host").ingestionKey("ingestion_key").build();
-
-    LoggingSplunk3 loggingSplunk3 = LoggingSplunk3.builder().host("host").token("token").build();
-
-    LoggingTcp3 loggingTcp3 = LoggingTcp3.builder().host("host").port(27612L).build();
-
-    HttpHeaders4 httpHeaders4 = HttpHeaders4.builder().name("name").value("value").build();
-
-    List<HttpHeaders4> headersList = Arrays.asList(httpHeaders4);
-
-    LoggingHttp3 loggingHttp3 = LoggingHttp3
+    AxiomLoggingConfiguration axiomLoggingConfiguration = AxiomLoggingConfiguration
       .builder()
       .host("host")
-      .port(41733L)
+      .apiToken("api_token")
+      .dataset("dataset")
+      .build();
+
+    DatadogTagForContainerLogging datadogTagForContainerLogging = DatadogTagForContainerLogging
+      .builder()
+      .name("name")
+      .value("value")
+      .build();
+
+    List<DatadogTagForContainerLogging> tagsList = Arrays.asList(datadogTagForContainerLogging);
+
+    DatadogLoggingConfiguration datadogLoggingConfiguration = DatadogLoggingConfiguration
+      .builder()
+      .host("host")
+      .apiKey("api_key")
+      .tags(tagsList)
+      .build();
+
+    ContainerLoggingHttpHeader containerLoggingHttpHeader = ContainerLoggingHttpHeader
+      .builder()
+      .name("name")
+      .value("value")
+      .build();
+
+    List<ContainerLoggingHttpHeader> headersList = Arrays.asList(containerLoggingHttpHeader);
+
+    ContainerHttpLoggingConfiguration containerHttpLoggingConfiguration = ContainerHttpLoggingConfiguration
+      .builder()
+      .host("host")
+      .port(43509L)
       .user("user")
       .password("password")
       .path("path")
-      .format(HttpFormat3.JSON)
+      .format(Format.JSON)
       .headers(headersList)
-      .compression(HttpCompression3.NONE)
+      .compression(Compression.NONE)
       .build();
 
-    UpdateContainerLogging updateContainerLogging = UpdateContainerLogging
+    NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration
       .builder()
-      .axiom(loggingAxiom3)
-      .datadog(loggingDatadog3)
-      .newRelic(loggingNewRelic3)
-      .splunk(loggingSplunk3)
-      .tcp(loggingTcp3)
-      .http(loggingHttp3)
+      .host("host")
+      .ingestionKey("ingestion_key")
       .build();
 
-    RegistryAuthenticationBasic2 registryAuthenticationBasic2 = RegistryAuthenticationBasic2
+    ContainerLoggingSplunkConfiguration containerLoggingSplunkConfiguration = ContainerLoggingSplunkConfiguration
       .builder()
-      .username("username")
-      .password("password")
+      .host("host")
+      .token("token")
       .build();
 
-    RegistryAuthenticationGcpGcr2 registryAuthenticationGcpGcr2 = RegistryAuthenticationGcpGcr2
+    TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration
       .builder()
-      .serviceKey("service_key")
+      .host("host")
+      .port(35405L)
       .build();
 
-    RegistryAuthenticationAwsEcr2 registryAuthenticationAwsEcr2 = RegistryAuthenticationAwsEcr2
+    ContainerLoggingConfiguration containerLoggingConfiguration = ContainerLoggingConfiguration
+      .builder()
+      .axiom(axiomLoggingConfiguration)
+      .datadog(datadogLoggingConfiguration)
+      .http(containerHttpLoggingConfiguration)
+      .newRelic(newRelicLoggingConfiguration)
+      .splunk(containerLoggingSplunkConfiguration)
+      .tcp(tcpLoggingConfiguration)
+      .build();
+
+    ContainerRegistryAuthenticationAwsEcr containerRegistryAuthenticationAwsEcr = ContainerRegistryAuthenticationAwsEcr
       .builder()
       .accessKeyId("access_key_id")
       .secretAccessKey("secret_access_key")
       .build();
 
-    RegistryAuthenticationDockerHub2 registryAuthenticationDockerHub2 = RegistryAuthenticationDockerHub2
+    ContainerRegistryAuthenticationBasic containerRegistryAuthenticationBasic = ContainerRegistryAuthenticationBasic
       .builder()
       .username("username")
-      .personalAccessToken("personal_access_token")
+      .password("password")
       .build();
 
-    RegistryAuthenticationGcpGar2 registryAuthenticationGcpGar2 = RegistryAuthenticationGcpGar2
+    ContainerRegistryAuthenticationDockerHub containerRegistryAuthenticationDockerHub =
+      ContainerRegistryAuthenticationDockerHub
+        .builder()
+        .username("username")
+        .personalAccessToken("personal_access_token")
+        .build();
+
+    ContainerRegistryAuthenticationGcpGar containerRegistryAuthenticationGcpGar = ContainerRegistryAuthenticationGcpGar
       .builder()
       .serviceKey("service_key")
       .build();
 
-    UpdateContainerRegistryAuthentication updateContainerRegistryAuthentication = UpdateContainerRegistryAuthentication
+    ContainerRegistryAuthenticationGcpGcr containerRegistryAuthenticationGcpGcr = ContainerRegistryAuthenticationGcpGcr
       .builder()
-      .basic(registryAuthenticationBasic2)
-      .gcpGcr(registryAuthenticationGcpGcr2)
-      .awsEcr(registryAuthenticationAwsEcr2)
-      .dockerHub(registryAuthenticationDockerHub2)
-      .gcpGar(registryAuthenticationGcpGar2)
+      .serviceKey("service_key")
+      .build();
+
+    ContainerRegistryAuthentication containerRegistryAuthentication = ContainerRegistryAuthentication
+      .builder()
+      .awsEcr(containerRegistryAuthenticationAwsEcr)
+      .basic(containerRegistryAuthenticationBasic)
+      .dockerHub(containerRegistryAuthenticationDockerHub)
+      .gcpGar(containerRegistryAuthenticationGcpGar)
+      .gcpGcr(containerRegistryAuthenticationGcpGcr)
+      .build();
+
+    List<String> gpuClassesList = Arrays.asList("gpu_classes");
+
+    ContainerResourceUpdateSchema containerResourceUpdateSchema = ContainerResourceUpdateSchema
+      .builder()
+      .cpu(4L)
+      .memory(50175L)
+      .gpuClasses(gpuClassesList)
+      .storageAmount(27536827537L)
       .build();
 
     UpdateContainer updateContainer = UpdateContainer
       .builder()
-      .image("image")
-      .resources(resources)
       .command(commandList)
-      .priority(ContainerGroupPriority.HIGH)
       .environmentVariables(new HashMap())
-      .logging(updateContainerLogging)
-      .registryAuthentication(updateContainerRegistryAuthentication)
-      .imageCaching(false)
+      .image("image")
+      .imageCaching(true)
+      .logging(containerLoggingConfiguration)
+      .priority(ContainerGroupPriority.HIGH)
+      .registryAuthentication(containerRegistryAuthentication)
+      .resources(containerResourceUpdateSchema)
       .build();
 
     List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(15426L)
+      .port(27606L)
       .build();
 
-    ContainerGroupProbeTcp containerGroupProbeTcp = ContainerGroupProbeTcp.builder().port(48638L).build();
+    List<String> commandList1 = Arrays.asList("command");
 
-    ContainerGroupProbeHttpHeaders2 containerGroupProbeHttpHeaders2 = ContainerGroupProbeHttpHeaders2
+    ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder().command(commandList1).build();
+
+    ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe
+      .builder()
+      .port(4792L)
+      .service("service")
+      .build();
+
+    ContainerGroupProbeHttpHeader containerGroupProbeHttpHeader = ContainerGroupProbeHttpHeader
       .builder()
       .name("name")
       .value("value")
       .build();
 
-    List<ContainerGroupProbeHttpHeaders2> headersList = Arrays.asList(containerGroupProbeHttpHeaders2);
+    List<ContainerGroupProbeHttpHeader> headersList1 = Arrays.asList(containerGroupProbeHttpHeader);
 
-    ContainerGroupProbeHttp containerGroupProbeHttp = ContainerGroupProbeHttp
+    ContainerGroupHttpProbeConfiguration containerGroupHttpProbeConfiguration = ContainerGroupHttpProbeConfiguration
       .builder()
+      .headers(headersList1)
       .path("path")
-      .port(19938L)
-      .scheme(ContainerProbeHttpScheme.HTTP)
-      .headers(headersList)
+      .port(18942L)
+      .scheme(HttpScheme.HTTP)
       .build();
 
-    ContainerGroupProbeGrpc containerGroupProbeGrpc = ContainerGroupProbeGrpc
-      .builder()
-      .service("service")
-      .port(56724L)
-      .build();
-
-    List<String> commandList = Arrays.asList("command");
-
-    ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder().command(commandList).build();
+    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(47377L).build();
 
     ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
       .builder()
-      .tcp(containerGroupProbeTcp)
-      .http(containerGroupProbeHttp)
-      .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(7L)
-      .periodSeconds(10L)
-      .timeoutSeconds(30L)
-      .successThreshold(1L)
       .failureThreshold(3L)
+      .grpc(containerGroupGRpcProbe)
+      .http(containerGroupHttpProbeConfiguration)
+      .initialDelaySeconds(987L)
+      .periodSeconds(10L)
+      .successThreshold(1L)
+      .tcp(containerGroupTcpProbe)
+      .timeoutSeconds(30L)
       .build();
 
     ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe
       .builder()
-      .tcp(containerGroupProbeTcp)
-      .http(containerGroupProbeHttp)
-      .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(2L)
-      .periodSeconds(1L)
-      .timeoutSeconds(1L)
-      .successThreshold(1L)
       .failureThreshold(3L)
+      .grpc(containerGroupGRpcProbe)
+      .http(containerGroupHttpProbeConfiguration)
+      .initialDelaySeconds(479L)
+      .periodSeconds(1L)
+      .successThreshold(1L)
+      .tcp(containerGroupTcpProbe)
+      .timeoutSeconds(1L)
       .build();
 
     ContainerGroupStartupProbe containerGroupStartupProbe = ContainerGroupStartupProbe
       .builder()
-      .tcp(containerGroupProbeTcp)
-      .http(containerGroupProbeHttp)
-      .grpc(containerGroupProbeGrpc)
       .exec(containerGroupProbeExec)
-      .initialDelaySeconds(10L)
+      .failureThreshold(15L)
+      .grpc(containerGroupGRpcProbe)
+      .http(containerGroupHttpProbeConfiguration)
+      .initialDelaySeconds(563L)
+      .tcp(containerGroupTcpProbe)
       .periodSeconds(3L)
-      .timeoutSeconds(10L)
       .successThreshold(2L)
-      .failureThreshold(1200L)
+      .timeoutSeconds(10L)
       .build();
 
-    QueueAutoscaler queueAutoscaler = QueueAutoscaler
+    QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration
       .builder()
-      .minReplicas(94L)
-      .maxReplicas(15L)
-      .desiredQueueLength(98L)
-      .pollingPeriod(1417L)
-      .maxUpscalePerMinute(93L)
-      .maxDownscalePerMinute(43L)
+      .desiredQueueLength(2L)
+      .maxReplicas(219L)
+      .maxDownscalePerMinute(5L)
+      .maxUpscalePerMinute(16L)
+      .minReplicas(88L)
+      .pollingPeriod(680L)
       .build();
 
-    UpdateContainerGroup updateContainerGroup = UpdateContainerGroup
+    ContainerGroupPatch containerGroupPatch = ContainerGroupPatch
       .builder()
-      .displayName("K7P1u")
+      .displayName("rukYe")
       .container(updateContainer)
-      .replicas(308L)
+      .replicas(476L)
       .countryCodes(countryCodesList)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
       .readinessProbe(containerGroupReadinessProbe)
       .startupProbe(containerGroupStartupProbe)
-      .queueAutoscaler(queueAutoscaler)
+      .queueAutoscaler(queueBasedAutoscalerConfiguration)
       .build();
 
     ContainerGroup response = saladCloudSdk.containerGroups.updateContainerGroup(
       "acme-corp",
       "dev-env",
-      "nx30k5tue7r3q30x0anq7hd1fjfxgtq8uehil3eploo4d79h7bg0v",
-      updateContainerGroup
+      "mandlebrot",
+      containerGroupPatch
     );
 
     System.out.println(response);
@@ -731,11 +790,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroups.deleteContainerGroup(
-      "acme-corp",
-      "dev-env",
-      "nx30k5tue7r3q30x0anq7hd1fjfxgtq8uehil3eploo4d79h7bg0v"
-    );
+    saladCloudSdk.containerGroups.deleteContainerGroup("acme-corp", "dev-env", "mandlebrot");
   }
 }
 
@@ -773,7 +828,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroups.startContainerGroup("acme-corp", "dev-env", "i5w");
+    saladCloudSdk.containerGroups.startContainerGroup("acme-corp", "dev-env", "mandlebrot");
   }
 }
 
@@ -811,7 +866,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    saladCloudSdk.containerGroups.stopContainerGroup("acme-corp", "dev-env", "kcvb9628akhug9lnd3c1w-4bdb9jsi9");
+    saladCloudSdk.containerGroups.stopContainerGroup("acme-corp", "dev-env", "mandlebrot");
   }
 }
 
@@ -834,7 +889,7 @@ Gets the list of container group instances
 
 **Return Type**
 
-`ContainerGroupInstances`
+`ContainerGroupInstanceCollection`
 
 **Example Usage Code Snippet**
 
@@ -842,7 +897,7 @@ Gets the list of container group instances
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.ContainerGroupInstances;
+import com.salad.cloud.sdk.models.ContainerGroupInstanceCollection;
 
 public class Main {
 
@@ -854,10 +909,10 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ContainerGroupInstances response = saladCloudSdk.containerGroups.listContainerGroupInstances(
+    ContainerGroupInstanceCollection response = saladCloudSdk.containerGroups.listContainerGroupInstances(
       "acme-corp",
       "dev-env",
-      "dxex70mdgjf5n-5ua-e28xyu9ujbls0vsz6xilo12xl52y9c"
+      "mandlebrot"
     );
 
     System.out.println(response);
@@ -880,7 +935,7 @@ Gets a container group instance
 | organizationName         | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
 | projectName              | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
 | containerGroupName       | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| containerGroupInstanceId | String | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
+| containerGroupInstanceId | String | ✅       | The unique container group instance identifier                                                                                                                                                                                                      |
 
 **Return Type**
 
@@ -907,8 +962,67 @@ public class Main {
     ContainerGroupInstance response = saladCloudSdk.containerGroups.getContainerGroupInstance(
       "acme-corp",
       "dev-env",
-      "cdya6ykpby-hunb0b6s7s2l",
-      "container_group_instance_id"
+      "mandlebrot",
+      "db3a4591-efc3-46c0-b06a-3d820c0ec100"
+    );
+
+    System.out.println(response);
+  }
+}
+
+```
+
+## updateContainerGroupInstance
+
+Updates a container group instance
+
+- HTTP Method: `PATCH`
+- Endpoint: `/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}`
+
+**Parameters**
+
+| Name                        | Type                                                                    | Required | Description                                                                                                                                                                                                                                         |
+| :-------------------------- | :---------------------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| organizationName            | String                                                                  | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| projectName                 | String                                                                  | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
+| containerGroupName          | String                                                                  | ✅       | The unique container group name                                                                                                                                                                                                                     |
+| containerGroupInstanceId    | String                                                                  | ✅       | The unique container group instance identifier                                                                                                                                                                                                      |
+| containerGroupInstancePatch | [ContainerGroupInstancePatch](../models/ContainerGroupInstancePatch.md) | ✅       | Request Body                                                                                                                                                                                                                                        |
+
+**Return Type**
+
+`ContainerGroupInstance`
+
+**Example Usage Code Snippet**
+
+```java
+import com.salad.cloud.sdk.SaladCloudSdk;
+import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
+import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
+import com.salad.cloud.sdk.models.ContainerGroupInstance;
+import com.salad.cloud.sdk.models.ContainerGroupInstancePatch;
+
+public class Main {
+
+  public static void main(String[] args) {
+    SaladCloudSdkConfig config = SaladCloudSdkConfig
+      .builder()
+      .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
+      .build();
+
+    SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
+
+    ContainerGroupInstancePatch containerGroupInstancePatch = ContainerGroupInstancePatch
+      .builder()
+      .deletionCost(76724L)
+      .build();
+
+    ContainerGroupInstance response = saladCloudSdk.containerGroups.updateContainerGroupInstance(
+      "acme-corp",
+      "dev-env",
+      "mandlebrot",
+      "db3a4591-efc3-46c0-b06a-3d820c0ec100",
+      containerGroupInstancePatch
     );
 
     System.out.println(response);
@@ -931,7 +1045,7 @@ Reallocates a container group instance to run on a different Salad Node
 | organizationName         | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
 | projectName              | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
 | containerGroupName       | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| containerGroupInstanceId | String | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
+| containerGroupInstanceId | String | ✅       | The unique container group instance identifier                                                                                                                                                                                                      |
 
 **Example Usage Code Snippet**
 
@@ -953,8 +1067,8 @@ public class Main {
     saladCloudSdk.containerGroups.reallocateContainerGroupInstance(
       "acme-corp",
       "dev-env",
-      "kfvzd5f4eycptsdkpj0zrs3vycqv",
-      "container_group_instance_id"
+      "mandlebrot",
+      "db3a4591-efc3-46c0-b06a-3d820c0ec100"
     );
   }
 }
@@ -975,7 +1089,7 @@ Stops a container, destroys it, and starts a new one without requiring the image
 | organizationName         | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
 | projectName              | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
 | containerGroupName       | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| containerGroupInstanceId | String | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
+| containerGroupInstanceId | String | ✅       | The unique container group instance identifier                                                                                                                                                                                                      |
 
 **Example Usage Code Snippet**
 
@@ -997,8 +1111,8 @@ public class Main {
     saladCloudSdk.containerGroups.recreateContainerGroupInstance(
       "acme-corp",
       "dev-env",
-      "mk0yct7b8bo1g8tvl9",
-      "container_group_instance_id"
+      "mandlebrot",
+      "db3a4591-efc3-46c0-b06a-3d820c0ec100"
     );
   }
 }
@@ -1019,7 +1133,7 @@ Stops a container and restarts it on the same Salad Node
 | organizationName         | String | ✅       | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
 | projectName              | String | ✅       | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.                                                                                                                  |
 | containerGroupName       | String | ✅       | The unique container group name                                                                                                                                                                                                                     |
-| containerGroupInstanceId | String | ✅       | The unique instance identifier                                                                                                                                                                                                                      |
+| containerGroupInstanceId | String | ✅       | The unique container group instance identifier                                                                                                                                                                                                      |
 
 **Example Usage Code Snippet**
 
@@ -1041,8 +1155,8 @@ public class Main {
     saladCloudSdk.containerGroups.restartContainerGroupInstance(
       "acme-corp",
       "dev-env",
-      "ax4qyju9jcnr3fw8e9al8o-4oreg5ocaz2jbu5pfmpygxffsf4bh4e6",
-      "container_group_instance_id"
+      "mandlebrot",
+      "db3a4591-efc3-46c0-b06a-3d820c0ec100"
     );
   }
 }

@@ -3,7 +3,7 @@ import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.models.ListQueueJobsParameters;
-import com.salad.cloud.sdk.models.QueueJobList;
+import com.salad.cloud.sdk.models.QueueJobCollection;
 
 public class Main {
 
@@ -17,7 +17,12 @@ public class Main {
 
     ListQueueJobsParameters requestParameters = ListQueueJobsParameters.builder().page(1L).pageSize(1L).build();
 
-    QueueJobList response = saladCloudSdk.queues.listQueueJobs("acme-corp", "dev-env", "fifo-queue", requestParameters);
+    QueueJobCollection response = saladCloudSdk.queues.listQueueJobs(
+      "acme-corp",
+      "dev-env",
+      "fifo-queue",
+      requestParameters
+    );
 
     System.out.println(response);
   }

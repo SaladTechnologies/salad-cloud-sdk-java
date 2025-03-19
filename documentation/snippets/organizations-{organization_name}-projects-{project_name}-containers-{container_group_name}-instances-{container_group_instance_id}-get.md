@@ -17,8 +17,8 @@ public class Main {
     ContainerGroupInstance response = saladCloudSdk.containerGroups.getContainerGroupInstance(
       "acme-corp",
       "dev-env",
-      "cdya6ykpby-hunb0b6s7s2l",
-      "container_group_instance_id"
+      "mandlebrot",
+      "db3a4591-efc3-46c0-b06a-3d820c0ec100"
     );
 
     System.out.println(response);

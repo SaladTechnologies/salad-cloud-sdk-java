@@ -6,6 +6,9 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Specifies the priority level for container group execution, which determines resource allocation and scheduling precedence.
+ */
 @Getter
 @AllArgsConstructor
 public enum ContainerGroupPriority {

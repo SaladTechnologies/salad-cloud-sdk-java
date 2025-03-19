@@ -2,8 +2,8 @@
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.models.CreateQueueJob;
 import com.salad.cloud.sdk.models.QueueJob;
+import com.salad.cloud.sdk.models.QueueJobPrototype;
 
 public class Main {
 
@@ -15,14 +15,14 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    CreateQueueJob createQueueJob = CreateQueueJob
+    QueueJobPrototype queueJobPrototype = QueueJobPrototype
       .builder()
       .input(new Object())
       .metadata(new Object())
       .webhook("webhook")
       .build();
 
-    QueueJob response = saladCloudSdk.queues.createQueueJob("acme-corp", "dev-env", "fifo-queue", createQueueJob);
+    QueueJob response = saladCloudSdk.queues.createQueueJob("acme-corp", "dev-env", "fifo-queue", queueJobPrototype);
 
     System.out.println(response);
   }

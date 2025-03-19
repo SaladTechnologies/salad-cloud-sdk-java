@@ -6,6 +6,9 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * The job status
+ */
 @Getter
 @AllArgsConstructor
 public enum QueueJobStatus {

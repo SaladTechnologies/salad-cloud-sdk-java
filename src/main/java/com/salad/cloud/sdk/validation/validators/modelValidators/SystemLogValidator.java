@@ -4,6 +4,7 @@ import com.salad.cloud.sdk.models.SystemLog;
 import com.salad.cloud.sdk.validation.Violation;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.validators.NumericValidator;
+import com.salad.cloud.sdk.validation.validators.StringValidator;
 
 public class SystemLogValidator extends AbstractModelValidator<SystemLog> {
 
@@ -16,6 +17,14 @@ public class SystemLogValidator extends AbstractModelValidator<SystemLog> {
   @Override
   protected Violation[] validateModel(SystemLog systemLog) {
     return new ViolationAggregator()
+      .add(
+        new StringValidator("eventName")
+          .minLength(1)
+          .maxLength(255)
+          .pattern("^.*$")
+          .required()
+          .validate(systemLog.getEventName())
+      )
       .add(new NumericValidator<Long>("resourceCpu").min(1L).max(16L).optional().validate(systemLog.getResourceCpu()))
       .add(
         new NumericValidator<Long>("resourceMemory")

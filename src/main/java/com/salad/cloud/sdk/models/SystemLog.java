@@ -36,24 +36,11 @@ public class SystemLog {
   private String eventTime;
 
   /**
-   * The version instance ID
-   */
-  @NonNull
-  private String version;
-
-  /**
    * The number of CPUs
    */
   @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("resource_cpu")
   private Long resourceCpu;
-
-  /**
-   * The memory amount in MB
-   */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
-  @JsonProperty("resource_memory")
-  private Long resourceMemory;
 
   /**
    * The GPU class name
@@ -63,6 +50,13 @@ public class SystemLog {
   private String resourceGpuClass;
 
   /**
+   * The memory amount in MB
+   */
+  @JsonInclude(JsonInclude.Include.ALWAYS)
+  @JsonProperty("resource_memory")
+  private Long resourceMemory;
+
+  /**
    * The storage amount in bytes
    */
   @JsonInclude(JsonInclude.Include.ALWAYS)
@@ -70,13 +64,19 @@ public class SystemLog {
   private Long resourceStorageAmount;
 
   /**
-   * The unique instance ID
+   * The version instance ID
+   */
+  @NonNull
+  private String version;
+
+  /**
+   * The container group instance identifier.
    */
   @JsonProperty("instance_id")
   private String instanceId;
 
   /**
-   * The organization-specific machine ID
+   * The container group machine identifier.
    */
   @JsonProperty("machine_id")
   private String machineId;
@@ -130,11 +130,11 @@ public class SystemLog {
       return new SystemLog(
         eventName,
         eventTime,
-        version,
         resourceCpu,
-        resourceMemory,
         resourceGpuClass,
+        resourceMemory,
         resourceStorageAmount,
+        version,
         instanceId,
         machineId
       );
