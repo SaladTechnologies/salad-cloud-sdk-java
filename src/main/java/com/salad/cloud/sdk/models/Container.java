@@ -61,7 +61,7 @@ public class Container {
   /**
    * Configuration options for directing container logs to a logging provider. This schema enables you to specify a single logging destination for container output, supporting monitoring, debugging, and analytics use cases. Each provider has its own configuration parameters defined in the referenced schemas. Only one logging provider can be selected at a time.
    */
-  private ContainerLoggingConfiguration logging;
+  private ContainerLogging logging;
 
   /**
    * Size of the container in bytes.

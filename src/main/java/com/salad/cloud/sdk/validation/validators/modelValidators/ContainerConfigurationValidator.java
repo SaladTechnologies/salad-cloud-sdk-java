@@ -38,7 +38,7 @@ public class ContainerConfigurationValidator extends AbstractModelValidator<Cont
           .validate(containerConfiguration.getCommand())
       )
       .add(
-        new ContainerLoggingConfigurationValidator("logging").optional().validate(containerConfiguration.getLogging())
+        new ContainerConfigurationLoggingValidator("logging").optional().validate(containerConfiguration.getLogging())
       )
       .add(
         new ContainerRegistryAuthenticationValidator("registryAuthentication")

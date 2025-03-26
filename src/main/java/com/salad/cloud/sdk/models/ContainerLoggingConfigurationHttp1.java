@@ -19,7 +19,7 @@ import lombok.extern.jackson.Jacksonized;
 @ToString
 @EqualsAndHashCode
 @Jacksonized
-public class ContainerHttpLoggingConfiguration {
+public class ContainerLoggingConfigurationHttp1 {
 
   /**
    * The hostname or IP address of the HTTP logging endpoint
@@ -37,7 +37,7 @@ public class ContainerHttpLoggingConfiguration {
    * The format in which logs will be delivered
    */
   @NonNull
-  private Format format;
+  private ContainerHttpLoggingConfigurationFormat1 format;
 
   /**
    * Optional HTTP headers to include in log transmission requests
@@ -49,7 +49,7 @@ public class ContainerHttpLoggingConfiguration {
    * The compression algorithm to apply to logs before transmission
    */
   @NonNull
-  private Compression compression;
+  private ContainerHttpLoggingConfigurationCompression1 compression;
 
   /**
    * Optional username for HTTP authentication
@@ -70,24 +70,24 @@ public class ContainerHttpLoggingConfiguration {
   private String path;
 
   // Overwrite lombok builder methods
-  public static class ContainerHttpLoggingConfigurationBuilder {
+  public static class ContainerLoggingConfigurationHttp1Builder {
 
     /**
      * Flag to track if the headers property has been set.
      */
     private boolean headers$set = false;
 
-    public ContainerHttpLoggingConfigurationBuilder headers(List<ContainerLoggingHttpHeader> headers) {
+    public ContainerLoggingConfigurationHttp1Builder headers(List<ContainerLoggingHttpHeader> headers) {
       this.headers$set = true;
       this.headers = headers;
       return this;
     }
 
-    public ContainerHttpLoggingConfiguration build() {
+    public ContainerLoggingConfigurationHttp1 build() {
       if (!headers$set) {
         throw new IllegalStateException("headers is required");
       }
-      return new ContainerHttpLoggingConfiguration(host, port, format, headers, compression, user, password, path);
+      return new ContainerLoggingConfigurationHttp1(host, port, format, headers, compression, user, password, path);
     }
   }
 }

@@ -3,6 +3,7 @@ package com.salad.cloud.sdk.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.http.Environment;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
@@ -19,6 +20,7 @@ import com.salad.cloud.sdk.validation.validators.StringValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.ContainerGroupCreationRequestValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.ContainerGroupInstancePatchValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.ContainerGroupPatchValidator;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.MediaType;
@@ -89,7 +91,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -168,7 +170,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -249,7 +251,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -338,7 +340,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.PATCH,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -416,7 +418,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.DELETE,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -493,7 +495,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/start"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -570,7 +572,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/stop"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -651,7 +653,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -749,7 +751,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -860,7 +862,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.PATCH,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -956,7 +958,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/reallocate"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -1051,7 +1053,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/recreate"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -1146,7 +1148,7 @@ public class ContainerGroupsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/restart"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())

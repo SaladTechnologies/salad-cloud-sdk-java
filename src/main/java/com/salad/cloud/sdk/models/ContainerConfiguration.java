@@ -56,7 +56,7 @@ public class ContainerConfiguration {
   /**
    * Configuration options for directing container logs to a logging provider. This schema enables you to specify a single logging destination for container output, supporting monitoring, debugging, and analytics use cases. Each provider has its own configuration parameters defined in the referenced schemas. Only one logging provider can be selected at a time.
    */
-  private ContainerLoggingConfiguration logging;
+  private ContainerConfigurationLogging logging;
 
   /**
    * Specifies the priority level for container group execution, which determines resource allocation and scheduling precedence.

@@ -3,7 +3,6 @@ import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.models.AxiomLoggingConfiguration;
-import com.salad.cloud.sdk.models.Compression;
 import com.salad.cloud.sdk.models.ContainerGroup;
 import com.salad.cloud.sdk.models.ContainerGroupGRpcProbe;
 import com.salad.cloud.sdk.models.ContainerGroupHttpProbeConfiguration;
@@ -15,8 +14,9 @@ import com.salad.cloud.sdk.models.ContainerGroupProbeHttpHeader;
 import com.salad.cloud.sdk.models.ContainerGroupReadinessProbe;
 import com.salad.cloud.sdk.models.ContainerGroupStartupProbe;
 import com.salad.cloud.sdk.models.ContainerGroupTcpProbe;
-import com.salad.cloud.sdk.models.ContainerHttpLoggingConfiguration;
-import com.salad.cloud.sdk.models.ContainerLoggingConfiguration;
+import com.salad.cloud.sdk.models.ContainerHttpLoggingConfigurationCompression1;
+import com.salad.cloud.sdk.models.ContainerHttpLoggingConfigurationFormat1;
+import com.salad.cloud.sdk.models.ContainerLoggingConfigurationHttp1;
 import com.salad.cloud.sdk.models.ContainerLoggingHttpHeader;
 import com.salad.cloud.sdk.models.ContainerLoggingSplunkConfiguration;
 import com.salad.cloud.sdk.models.ContainerRegistryAuthentication;
@@ -29,13 +29,13 @@ import com.salad.cloud.sdk.models.ContainerResourceUpdateSchema;
 import com.salad.cloud.sdk.models.CountryCode;
 import com.salad.cloud.sdk.models.DatadogLoggingConfiguration;
 import com.salad.cloud.sdk.models.DatadogTagForContainerLogging;
-import com.salad.cloud.sdk.models.Format;
 import com.salad.cloud.sdk.models.HttpScheme;
 import com.salad.cloud.sdk.models.NewRelicLoggingConfiguration;
 import com.salad.cloud.sdk.models.QueueBasedAutoscalerConfiguration;
 import com.salad.cloud.sdk.models.TcpLoggingConfiguration;
 import com.salad.cloud.sdk.models.UpdateContainer;
 import com.salad.cloud.sdk.models.UpdateContainerGroupNetworking;
+import com.salad.cloud.sdk.models.UpdateContainerLogging;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -82,16 +82,16 @@ public class Main {
 
     List<ContainerLoggingHttpHeader> headersList = Arrays.asList(containerLoggingHttpHeader);
 
-    ContainerHttpLoggingConfiguration containerHttpLoggingConfiguration = ContainerHttpLoggingConfiguration
+    ContainerLoggingConfigurationHttp1 containerLoggingConfigurationHttp1 = ContainerLoggingConfigurationHttp1
       .builder()
       .host("host")
-      .port(43509L)
+      .port(55354L)
       .user("user")
       .password("password")
       .path("path")
-      .format(Format.JSON)
+      .format(ContainerHttpLoggingConfigurationFormat1.JSON)
       .headers(headersList)
-      .compression(Compression.NONE)
+      .compression(ContainerHttpLoggingConfigurationCompression1.NONE)
       .build();
 
     NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration
@@ -109,14 +109,14 @@ public class Main {
     TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration
       .builder()
       .host("host")
-      .port(35405L)
+      .port(44671L)
       .build();
 
-    ContainerLoggingConfiguration containerLoggingConfiguration = ContainerLoggingConfiguration
+    UpdateContainerLogging updateContainerLogging = UpdateContainerLogging
       .builder()
       .axiom(axiomLoggingConfiguration)
       .datadog(datadogLoggingConfiguration)
-      .http(containerHttpLoggingConfiguration)
+      .http(containerLoggingConfigurationHttp1)
       .newRelic(newRelicLoggingConfiguration)
       .splunk(containerLoggingSplunkConfiguration)
       .tcp(tcpLoggingConfiguration)
@@ -164,10 +164,10 @@ public class Main {
 
     ContainerResourceUpdateSchema containerResourceUpdateSchema = ContainerResourceUpdateSchema
       .builder()
-      .cpu(4L)
-      .memory(50175L)
+      .cpu(6L)
+      .memory(56406L)
       .gpuClasses(gpuClassesList)
-      .storageAmount(27536827537L)
+      .storageAmount(7030693392L)
       .build();
 
     UpdateContainer updateContainer = UpdateContainer
@@ -176,7 +176,7 @@ public class Main {
       .environmentVariables(new HashMap())
       .image("image")
       .imageCaching(true)
-      .logging(containerLoggingConfiguration)
+      .logging(updateContainerLogging)
       .priority(ContainerGroupPriority.HIGH)
       .registryAuthentication(containerRegistryAuthentication)
       .resources(containerResourceUpdateSchema)
@@ -186,7 +186,7 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(27606L)
+      .port(45473L)
       .build();
 
     List<String> commandList1 = Arrays.asList("command");
@@ -195,7 +195,7 @@ public class Main {
 
     ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe
       .builder()
-      .port(4792L)
+      .port(37648L)
       .service("service")
       .build();
 
@@ -211,11 +211,11 @@ public class Main {
       .builder()
       .headers(headersList1)
       .path("path")
-      .port(18942L)
+      .port(29069L)
       .scheme(HttpScheme.HTTP)
       .build();
 
-    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(47377L).build();
+    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(13817L).build();
 
     ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
       .builder()
@@ -223,7 +223,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(987L)
+      .initialDelaySeconds(670L)
       .periodSeconds(10L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -236,7 +236,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(479L)
+      .initialDelaySeconds(262L)
       .periodSeconds(1L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -249,7 +249,7 @@ public class Main {
       .failureThreshold(15L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(563L)
+      .initialDelaySeconds(1106L)
       .tcp(containerGroupTcpProbe)
       .periodSeconds(3L)
       .successThreshold(2L)
@@ -258,19 +258,19 @@ public class Main {
 
     QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration
       .builder()
-      .desiredQueueLength(2L)
-      .maxReplicas(219L)
-      .maxDownscalePerMinute(5L)
-      .maxUpscalePerMinute(16L)
-      .minReplicas(88L)
-      .pollingPeriod(680L)
+      .desiredQueueLength(53L)
+      .maxReplicas(291L)
+      .maxDownscalePerMinute(65L)
+      .maxUpscalePerMinute(100L)
+      .minReplicas(54L)
+      .pollingPeriod(140L)
       .build();
 
     ContainerGroupPatch containerGroupPatch = ContainerGroupPatch
       .builder()
-      .displayName("rukYe")
+      .displayName("Jjdnvuz")
       .container(updateContainer)
-      .replicas(476L)
+      .replicas(100L)
       .countryCodes(countryCodesList)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)

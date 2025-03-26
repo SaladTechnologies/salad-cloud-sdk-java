@@ -3,6 +3,7 @@ package com.salad.cloud.sdk.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.http.Environment;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
@@ -10,6 +11,7 @@ import com.salad.cloud.sdk.models.GpuClassesList;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.OkHttpClient;
@@ -63,7 +65,11 @@ public class OrganizationDataService extends BaseService {
           .validate(organizationName)
       )
       .validateAll();
-    return new RequestBuilder(HttpMethod.GET, this.config.getBaseUrl(), "organizations/{organization_name}/gpu-classes")
+    return new RequestBuilder(
+      HttpMethod.GET,
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
+      "organizations/{organization_name}/gpu-classes"
+    )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
       .setPathParameter("organization_name", organizationName)
       .build();

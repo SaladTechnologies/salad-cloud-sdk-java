@@ -3,8 +3,8 @@ import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.models.AxiomLoggingConfiguration;
-import com.salad.cloud.sdk.models.Compression;
 import com.salad.cloud.sdk.models.ContainerConfiguration;
+import com.salad.cloud.sdk.models.ContainerConfigurationLogging;
 import com.salad.cloud.sdk.models.ContainerGroup;
 import com.salad.cloud.sdk.models.ContainerGroupCreationRequest;
 import com.salad.cloud.sdk.models.ContainerGroupGRpcProbe;
@@ -17,8 +17,9 @@ import com.salad.cloud.sdk.models.ContainerGroupQueueConnection;
 import com.salad.cloud.sdk.models.ContainerGroupReadinessProbe;
 import com.salad.cloud.sdk.models.ContainerGroupStartupProbe;
 import com.salad.cloud.sdk.models.ContainerGroupTcpProbe;
-import com.salad.cloud.sdk.models.ContainerHttpLoggingConfiguration;
-import com.salad.cloud.sdk.models.ContainerLoggingConfiguration;
+import com.salad.cloud.sdk.models.ContainerHttpLoggingConfigurationCompression2;
+import com.salad.cloud.sdk.models.ContainerHttpLoggingConfigurationFormat2;
+import com.salad.cloud.sdk.models.ContainerLoggingConfigurationHttp2;
 import com.salad.cloud.sdk.models.ContainerLoggingHttpHeader;
 import com.salad.cloud.sdk.models.ContainerLoggingSplunkConfiguration;
 import com.salad.cloud.sdk.models.ContainerNetworkingProtocol;
@@ -34,7 +35,6 @@ import com.salad.cloud.sdk.models.CountryCode;
 import com.salad.cloud.sdk.models.CreateContainerGroupNetworking;
 import com.salad.cloud.sdk.models.DatadogLoggingConfiguration;
 import com.salad.cloud.sdk.models.DatadogTagForContainerLogging;
-import com.salad.cloud.sdk.models.Format;
 import com.salad.cloud.sdk.models.HttpScheme;
 import com.salad.cloud.sdk.models.NewRelicLoggingConfiguration;
 import com.salad.cloud.sdk.models.QueueBasedAutoscalerConfiguration;
@@ -86,16 +86,16 @@ public class Main {
 
     List<ContainerLoggingHttpHeader> headersList = Arrays.asList(containerLoggingHttpHeader);
 
-    ContainerHttpLoggingConfiguration containerHttpLoggingConfiguration = ContainerHttpLoggingConfiguration
+    ContainerLoggingConfigurationHttp2 containerLoggingConfigurationHttp2 = ContainerLoggingConfigurationHttp2
       .builder()
       .host("host")
-      .port(43509L)
+      .port(46840L)
       .user("user")
       .password("password")
       .path("path")
-      .format(Format.JSON)
+      .format(ContainerHttpLoggingConfigurationFormat2.JSON)
       .headers(headersList)
-      .compression(Compression.NONE)
+      .compression(ContainerHttpLoggingConfigurationCompression2.NONE)
       .build();
 
     NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration
@@ -113,14 +113,14 @@ public class Main {
     TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration
       .builder()
       .host("host")
-      .port(35405L)
+      .port(44671L)
       .build();
 
-    ContainerLoggingConfiguration containerLoggingConfiguration = ContainerLoggingConfiguration
+    ContainerConfigurationLogging containerConfigurationLogging = ContainerConfigurationLogging
       .builder()
       .axiom(axiomLoggingConfiguration)
       .datadog(datadogLoggingConfiguration)
-      .http(containerHttpLoggingConfiguration)
+      .http(containerLoggingConfigurationHttp2)
       .newRelic(newRelicLoggingConfiguration)
       .splunk(containerLoggingSplunkConfiguration)
       .tcp(tcpLoggingConfiguration)
@@ -168,10 +168,10 @@ public class Main {
 
     ContainerResourceRequirements containerResourceRequirements = ContainerResourceRequirements
       .builder()
-      .cpu(13L)
-      .memory(28311L)
+      .cpu(2L)
+      .memory(57018L)
       .gpuClasses(gpuClassesList)
-      .storageAmount(20719714697L)
+      .storageAmount(10190895817L)
       .build();
 
     ContainerConfiguration containerConfiguration = ContainerConfiguration
@@ -180,7 +180,7 @@ public class Main {
       .environmentVariables(new HashMap())
       .image("acme/:latest")
       .imageCaching(true)
-      .logging(containerLoggingConfiguration)
+      .logging(containerConfigurationLogging)
       .priority(ContainerGroupPriority.HIGH)
       .registryAuthentication(containerRegistryAuthentication)
       .resources(containerResourceRequirements)
@@ -194,7 +194,7 @@ public class Main {
 
     ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe
       .builder()
-      .port(4792L)
+      .port(37648L)
       .service("service")
       .build();
 
@@ -210,11 +210,11 @@ public class Main {
       .builder()
       .headers(headersList1)
       .path("path")
-      .port(18942L)
+      .port(29069L)
       .scheme(HttpScheme.HTTP)
       .build();
 
-    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(47377L).build();
+    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(13817L).build();
 
     ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
       .builder()
@@ -222,7 +222,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(987L)
+      .initialDelaySeconds(670L)
       .periodSeconds(10L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -237,24 +237,24 @@ public class Main {
       .port(60000L)
       .protocol(ContainerNetworkingProtocol.HTTP)
       .serverResponseTimeout(100000L)
-      .singleConnectionLimit(false)
+      .singleConnectionLimit(true)
       .build();
 
     QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration
       .builder()
-      .desiredQueueLength(2L)
-      .maxReplicas(219L)
-      .maxDownscalePerMinute(5L)
-      .maxUpscalePerMinute(16L)
-      .minReplicas(88L)
-      .pollingPeriod(680L)
+      .desiredQueueLength(53L)
+      .maxReplicas(291L)
+      .maxDownscalePerMinute(65L)
+      .maxUpscalePerMinute(100L)
+      .minReplicas(54L)
+      .pollingPeriod(140L)
       .build();
 
     ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection
       .builder()
       .path("path")
-      .port(39086L)
-      .queueName("dawtm7q4ohrrc63u35mpg4-370h--6se6eqezp-gj0")
+      .port(47568L)
+      .queueName("z1h-3z01x9")
       .build();
 
     ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe
@@ -263,7 +263,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(479L)
+      .initialDelaySeconds(262L)
       .periodSeconds(1L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -276,7 +276,7 @@ public class Main {
       .failureThreshold(15L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(563L)
+      .initialDelaySeconds(1106L)
       .tcp(containerGroupTcpProbe)
       .periodSeconds(3L)
       .successThreshold(2L)
@@ -285,17 +285,17 @@ public class Main {
 
     ContainerGroupCreationRequest containerGroupCreationRequest = ContainerGroupCreationRequest
       .builder()
-      .autostartPolicy(true)
+      .autostartPolicy(false)
       .container(containerConfiguration)
       .countryCodes(countryCodesList)
-      .displayName("QTB")
+      .displayName("9 Q592CH6F")
       .livenessProbe(containerGroupLivenessProbe)
       .name("name")
       .networking(createContainerGroupNetworking)
       .queueAutoscaler(queueBasedAutoscalerConfiguration)
       .queueConnection(containerGroupQueueConnection)
       .readinessProbe(containerGroupReadinessProbe)
-      .replicas(257L)
+      .replicas(284L)
       .restartPolicy(ContainerRestartPolicy.ALWAYS)
       .startupProbe(containerGroupStartupProbe)
       .build();

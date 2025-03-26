@@ -3,6 +3,7 @@ package com.salad.cloud.sdk.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.http.Environment;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
@@ -19,6 +20,7 @@ import com.salad.cloud.sdk.validation.validators.StringValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.InferenceEndpointJobPrototypeValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.ListInferenceEndpointJobsParametersValidator;
 import com.salad.cloud.sdk.validation.validators.modelValidators.ListInferenceEndpointsParametersValidator;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
 import okhttp3.OkHttpClient;
@@ -85,7 +87,7 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/inference-endpoints"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -153,7 +155,7 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -228,7 +230,7 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -317,7 +319,7 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.POST,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -392,7 +394,7 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.GET,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
@@ -463,7 +465,7 @@ public class InferenceEndpointsService extends BaseService {
       .validateAll();
     return new RequestBuilder(
       HttpMethod.DELETE,
-      this.config.getBaseUrl(),
+      Optional.ofNullable(this.config.getBaseUrl()).orElse(Environment.DEFAULT.getUrl()),
       "organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}"
     )
       .setApiKeyAuth(this.config.getApiKeyAuthConfig())
