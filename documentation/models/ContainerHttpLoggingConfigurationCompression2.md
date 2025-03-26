@@ -1,4 +1,4 @@
-# Compression
+# ContainerHttpLoggingConfigurationCompression2
 
 The compression algorithm to apply to logs before transmission
 

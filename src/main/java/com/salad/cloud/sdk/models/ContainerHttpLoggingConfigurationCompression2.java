@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum Compression {
+public enum ContainerHttpLoggingConfigurationCompression2 {
   NONE("none"),
   GZIP("gzip");
 
@@ -19,7 +19,11 @@ public enum Compression {
   private final String value;
 
   @JsonCreator
-  public static Compression fromValue(String value) {
-    return Arrays.stream(Compression.values()).filter(item -> item.value.equals(value)).findFirst().orElse(null);
+  public static ContainerHttpLoggingConfigurationCompression2 fromValue(String value) {
+    return Arrays
+      .stream(ContainerHttpLoggingConfigurationCompression2.values())
+      .filter(item -> item.value.equals(value))
+      .findFirst()
+      .orElse(null);
   }
 }

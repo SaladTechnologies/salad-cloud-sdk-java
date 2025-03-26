@@ -32,7 +32,7 @@ public class UpdateContainerValidator extends AbstractModelValidator<UpdateConta
           .optional()
           .validate(updateContainer.getImage())
       )
-      .add(new ContainerLoggingConfigurationValidator("logging").optional().validate(updateContainer.getLogging()))
+      .add(new UpdateContainerLoggingValidator("logging").optional().validate(updateContainer.getLogging()))
       .add(
         new ContainerRegistryAuthenticationValidator("registryAuthentication")
           .optional()

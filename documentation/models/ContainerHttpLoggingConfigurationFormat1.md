@@ -1,4 +1,4 @@
-# Format
+# ContainerHttpLoggingConfigurationFormat1
 
 The format in which logs will be delivered
 

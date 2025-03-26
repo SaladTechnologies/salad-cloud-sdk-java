@@ -36,13 +36,13 @@ public class ContainerValidator extends AbstractModelValidator<Container> {
       .add(new ContainerResourceRequirementsValidator("resources").required().validate(container.getResources()))
       .add(
         new StringValidator("hash")
-          .minLength(64)
-          .maxLength(64)
-          .pattern("^[a-fA-F0-9]{64}$")
+          .minLength(47)
+          .maxLength(135)
+          .pattern("^sha\\d{1,3}:[a-fA-F0-9]{40,135}$")
           .optional()
           .validate(container.getHash())
       )
-      .add(new ContainerLoggingConfigurationValidator("logging").optional().validate(container.getLogging()))
+      .add(new ContainerLoggingValidator("logging").optional().validate(container.getLogging()))
       .add(
         new NumericValidator<Long>("size").min(0L).max(9223372036854775807L).optional().validate(container.getSize())
       )

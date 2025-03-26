@@ -17,7 +17,7 @@ import lombok.extern.jackson.Jacksonized;
 @ToString
 @EqualsAndHashCode
 @Jacksonized
-public class ContainerLoggingConfiguration {
+public class UpdateContainerLogging {
 
   /**
    * Configuration settings for integrating container logs with the Axiom logging service. When specified, container logs will be forwarded to the Axiom instance defined by these parameters.
@@ -32,7 +32,7 @@ public class ContainerLoggingConfiguration {
   /**
    * Configuration for sending container logs to an HTTP endpoint. Defines how logs are formatted, compressed, and transmitted.
    */
-  private ContainerHttpLoggingConfiguration http;
+  private ContainerLoggingConfigurationHttp1 http;
 
   /**
    * Configuration for sending container logs to New Relic's log management platform.

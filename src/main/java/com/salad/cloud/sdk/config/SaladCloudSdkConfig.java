@@ -13,9 +13,7 @@ public class SaladCloudSdkConfig {
   @Builder.Default
   private String userAgent = "sdk/1.0.0";
 
-  @NonNull
-  @Builder.Default
-  private String baseUrl = Environment.DEFAULT.getUrl();
+  private String baseUrl;
 
   @NonNull
   @Builder.Default

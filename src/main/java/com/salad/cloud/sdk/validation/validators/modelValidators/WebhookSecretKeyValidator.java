@@ -18,9 +18,9 @@ public class WebhookSecretKeyValidator extends AbstractModelValidator<WebhookSec
     return new ViolationAggregator()
       .add(
         new StringValidator("secretKey")
-          .minLength(8)
-          .maxLength(64)
-          .pattern("^.*$")
+          .minLength(44)
+          .maxLength(172)
+          .pattern("^[+/=0-9A-Za-z]{44,172}$")
           .required()
           .validate(webhookSecretKey.getSecretKey())
       )
