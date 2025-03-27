@@ -45,8 +45,11 @@ public class ContainerLoggingConfigurationHttp1 {
   @JsonInclude(JsonInclude.Include.ALWAYS)
   private List<ContainerLoggingHttpHeader> headers;
 
+  /**
+   * The compression algorithm to apply to logs before transmission
+   */
   @NonNull
-  private Object compression;
+  private ContainerLoggingHttpCompression compression;
 
   /**
    * Optional username for HTTP authentication

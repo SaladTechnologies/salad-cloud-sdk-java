@@ -15,6 +15,7 @@ import com.salad.cloud.sdk.models.ContainerGroupReadinessProbe;
 import com.salad.cloud.sdk.models.ContainerGroupStartupProbe;
 import com.salad.cloud.sdk.models.ContainerGroupTcpProbe;
 import com.salad.cloud.sdk.models.ContainerLoggingConfigurationHttp1;
+import com.salad.cloud.sdk.models.ContainerLoggingHttpCompression;
 import com.salad.cloud.sdk.models.ContainerLoggingHttpFormat;
 import com.salad.cloud.sdk.models.ContainerLoggingHttpHeader;
 import com.salad.cloud.sdk.models.ContainerLoggingSplunkConfiguration;
@@ -84,13 +85,13 @@ public class Main {
     ContainerLoggingConfigurationHttp1 containerLoggingConfigurationHttp1 = ContainerLoggingConfigurationHttp1
       .builder()
       .host("host")
-      .port(55354L)
+      .port(53608L)
       .user("user")
       .password("password")
       .path("path")
       .format(ContainerLoggingHttpFormat.JSON)
       .headers(headersList)
-      .compression(new Object())
+      .compression(ContainerLoggingHttpCompression.NONE)
       .build();
 
     NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration
@@ -108,7 +109,7 @@ public class Main {
     TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration
       .builder()
       .host("host")
-      .port(44671L)
+      .port(64046L)
       .build();
 
     UpdateContainerLogging updateContainerLogging = UpdateContainerLogging
@@ -163,10 +164,10 @@ public class Main {
 
     ContainerResourceUpdateSchema containerResourceUpdateSchema = ContainerResourceUpdateSchema
       .builder()
-      .cpu(6L)
-      .memory(56406L)
+      .cpu(7L)
+      .memory(28846L)
       .gpuClasses(gpuClassesList)
-      .storageAmount(7030693392L)
+      .storageAmount(47916426548L)
       .build();
 
     UpdateContainer updateContainer = UpdateContainer
@@ -185,7 +186,7 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(45473L)
+      .port(47990L)
       .build();
 
     List<String> commandList1 = Arrays.asList("command");
@@ -194,7 +195,7 @@ public class Main {
 
     ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe
       .builder()
-      .port(37648L)
+      .port(7208L)
       .service("service")
       .build();
 
@@ -210,11 +211,11 @@ public class Main {
       .builder()
       .headers(headersList1)
       .path("path")
-      .port(29069L)
+      .port(58428L)
       .scheme(HttpScheme.HTTP)
       .build();
 
-    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(13817L).build();
+    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(28778L).build();
 
     ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
       .builder()
@@ -222,7 +223,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(670L)
+      .initialDelaySeconds(140L)
       .periodSeconds(10L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -235,7 +236,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(262L)
+      .initialDelaySeconds(977L)
       .periodSeconds(1L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -248,7 +249,7 @@ public class Main {
       .failureThreshold(15L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(1106L)
+      .initialDelaySeconds(604L)
       .tcp(containerGroupTcpProbe)
       .periodSeconds(3L)
       .successThreshold(2L)
@@ -257,19 +258,19 @@ public class Main {
 
     QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration
       .builder()
-      .desiredQueueLength(53L)
-      .maxReplicas(291L)
-      .maxDownscalePerMinute(65L)
-      .maxUpscalePerMinute(100L)
-      .minReplicas(54L)
-      .pollingPeriod(140L)
+      .desiredQueueLength(100L)
+      .maxReplicas(85L)
+      .maxDownscalePerMinute(26L)
+      .maxUpscalePerMinute(75L)
+      .minReplicas(40L)
+      .pollingPeriod(852L)
       .build();
 
     ContainerGroupPatch containerGroupPatch = ContainerGroupPatch
       .builder()
-      .displayName("Jjdnvuz")
+      .displayName("F8")
       .container(updateContainer)
-      .replicas(100L)
+      .replicas(386L)
       .countryCodes(countryCodesList)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
