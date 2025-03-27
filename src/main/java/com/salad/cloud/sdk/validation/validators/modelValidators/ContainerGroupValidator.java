@@ -22,7 +22,6 @@ public class ContainerGroupValidator extends AbstractModelValidator<ContainerGro
       .add(new ContainerValidator("container").required().validate(containerGroup.getContainer()))
       .add(
         new ListValidator<CountryCode>("countryCodes")
-          .minLength(1)
           .maxLength(500)
           .required()
           .validate(containerGroup.getCountryCodes())

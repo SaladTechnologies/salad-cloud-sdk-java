@@ -17,9 +17,8 @@ import com.salad.cloud.sdk.models.ContainerGroupQueueConnection;
 import com.salad.cloud.sdk.models.ContainerGroupReadinessProbe;
 import com.salad.cloud.sdk.models.ContainerGroupStartupProbe;
 import com.salad.cloud.sdk.models.ContainerGroupTcpProbe;
-import com.salad.cloud.sdk.models.ContainerHttpLoggingConfigurationCompression2;
-import com.salad.cloud.sdk.models.ContainerHttpLoggingConfigurationFormat2;
 import com.salad.cloud.sdk.models.ContainerLoggingConfigurationHttp2;
+import com.salad.cloud.sdk.models.ContainerLoggingHttpFormat;
 import com.salad.cloud.sdk.models.ContainerLoggingHttpHeader;
 import com.salad.cloud.sdk.models.ContainerLoggingSplunkConfiguration;
 import com.salad.cloud.sdk.models.ContainerNetworkingProtocol;
@@ -93,9 +92,9 @@ public class Main {
       .user("user")
       .password("password")
       .path("path")
-      .format(ContainerHttpLoggingConfigurationFormat2.JSON)
+      .format(ContainerLoggingHttpFormat.JSON)
       .headers(headersList)
-      .compression(ContainerHttpLoggingConfigurationCompression2.NONE)
+      .compression(new Object())
       .build();
 
     NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration
