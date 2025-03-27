@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
@@ -20,26 +21,16 @@ import lombok.extern.jackson.Jacksonized;
 public class ContainerGroupsQuotas {
 
   /**
-   * The maximum number of container groups that can be created
-   */
-  @JsonProperty("max_created_container_groups")
-  private Long maxCreatedContainerGroups;
-
-  /**
    * The maximum number of replicas that can be created for a container group
    */
-  @JsonProperty("container_instance_quota")
-  private Long containerInstanceQuota;
-
-  /**
-   * The maximum number of replicas that can be created for a container group
-   */
-  @JsonProperty("container_replica_quota")
-  private Long containerReplicaQuota;
+  @NonNull
+  @JsonProperty("container_replicas_quota")
+  private Long containerReplicasQuota;
 
   /**
    * The number of replicas that are currently in use
    */
+  @NonNull
   @JsonProperty("container_replicas_used")
   private Long containerReplicasUsed;
 

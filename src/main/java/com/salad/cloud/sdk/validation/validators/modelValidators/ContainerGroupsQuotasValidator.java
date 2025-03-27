@@ -17,31 +17,17 @@ public class ContainerGroupsQuotasValidator extends AbstractModelValidator<Conta
   protected Violation[] validateModel(ContainerGroupsQuotas containerGroupsQuotas) {
     return new ViolationAggregator()
       .add(
-        new NumericValidator<Long>("maxCreatedContainerGroups")
-          .min(0L)
-          .max(10000L)
-          .optional()
-          .validate(containerGroupsQuotas.getMaxCreatedContainerGroups())
-      )
-      .add(
-        new NumericValidator<Long>("containerInstanceQuota")
+        new NumericValidator<Long>("containerReplicasQuota")
           .min(0L)
           .max(500L)
-          .optional()
-          .validate(containerGroupsQuotas.getContainerInstanceQuota())
-      )
-      .add(
-        new NumericValidator<Long>("containerReplicaQuota")
-          .min(0L)
-          .max(500L)
-          .optional()
-          .validate(containerGroupsQuotas.getContainerReplicaQuota())
+          .required()
+          .validate(containerGroupsQuotas.getContainerReplicasQuota())
       )
       .add(
         new NumericValidator<Long>("containerReplicasUsed")
           .min(0L)
           .max(500L)
-          .optional()
+          .required()
           .validate(containerGroupsQuotas.getContainerReplicasUsed())
       )
       .add(

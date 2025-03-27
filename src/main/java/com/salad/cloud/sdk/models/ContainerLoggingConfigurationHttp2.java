@@ -37,13 +37,10 @@ public class ContainerLoggingConfigurationHttp2 {
    * The format in which logs will be delivered
    */
   @NonNull
-  private ContainerHttpLoggingConfigurationFormat2 format;
+  private ContainerLoggingHttpFormat format;
 
-  /**
-   * The compression algorithm to apply to logs before transmission
-   */
   @NonNull
-  private ContainerHttpLoggingConfigurationCompression2 compression;
+  private Object compression;
 
   /**
    * Optional username for HTTP authentication

@@ -37,7 +37,7 @@ public class ContainerLoggingConfigurationHttp1 {
    * The format in which logs will be delivered
    */
   @NonNull
-  private ContainerHttpLoggingConfigurationFormat1 format;
+  private ContainerLoggingHttpFormat format;
 
   /**
    * Optional HTTP headers to include in log transmission requests
@@ -45,11 +45,8 @@ public class ContainerLoggingConfigurationHttp1 {
   @JsonInclude(JsonInclude.Include.ALWAYS)
   private List<ContainerLoggingHttpHeader> headers;
 
-  /**
-   * The compression algorithm to apply to logs before transmission
-   */
   @NonNull
-  private ContainerHttpLoggingConfigurationCompression1 compression;
+  private Object compression;
 
   /**
    * Optional username for HTTP authentication

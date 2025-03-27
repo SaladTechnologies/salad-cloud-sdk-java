@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ContainerHttpLoggingConfigurationFormat1 {
+public enum ContainerLoggingHttpFormat {
   JSON("json"),
   JSON_LINES("json_lines");
 
@@ -19,9 +19,9 @@ public enum ContainerHttpLoggingConfigurationFormat1 {
   private final String value;
 
   @JsonCreator
-  public static ContainerHttpLoggingConfigurationFormat1 fromValue(String value) {
+  public static ContainerLoggingHttpFormat fromValue(String value) {
     return Arrays
-      .stream(ContainerHttpLoggingConfigurationFormat1.values())
+      .stream(ContainerLoggingHttpFormat.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);
