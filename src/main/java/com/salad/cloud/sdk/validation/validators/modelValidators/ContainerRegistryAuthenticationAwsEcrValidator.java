@@ -20,7 +20,7 @@ public class ContainerRegistryAuthenticationAwsEcrValidator
       .add(
         new StringValidator("accessKeyId")
           .minLength(1)
-          .maxLength(1000)
+          .maxLength(10000)
           .pattern("^.*$")
           .required()
           .validate(containerRegistryAuthenticationAwsEcr.getAccessKeyId())
@@ -28,7 +28,7 @@ public class ContainerRegistryAuthenticationAwsEcrValidator
       .add(
         new StringValidator("secretAccessKey")
           .minLength(1)
-          .maxLength(1000)
+          .maxLength(10000)
           .pattern("^.*$")
           .required()
           .validate(containerRegistryAuthenticationAwsEcr.getSecretAccessKey())

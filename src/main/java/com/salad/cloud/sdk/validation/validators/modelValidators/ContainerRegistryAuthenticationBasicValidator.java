@@ -20,7 +20,7 @@ public class ContainerRegistryAuthenticationBasicValidator
       .add(
         new StringValidator("username")
           .minLength(1)
-          .maxLength(1000)
+          .maxLength(10000)
           .pattern("^.*$")
           .required()
           .validate(containerRegistryAuthenticationBasic.getUsername())
@@ -28,7 +28,7 @@ public class ContainerRegistryAuthenticationBasicValidator
       .add(
         new StringValidator("password")
           .minLength(1)
-          .maxLength(1000)
+          .maxLength(10000)
           .pattern("^.*$")
           .required()
           .validate(containerRegistryAuthenticationBasic.getPassword())

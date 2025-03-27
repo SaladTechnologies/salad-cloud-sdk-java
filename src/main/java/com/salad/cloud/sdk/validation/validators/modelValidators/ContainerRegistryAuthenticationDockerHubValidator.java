@@ -22,7 +22,7 @@ public class ContainerRegistryAuthenticationDockerHubValidator
       .add(
         new StringValidator("username")
           .minLength(1)
-          .maxLength(1000)
+          .maxLength(10000)
           .pattern("^.*$")
           .required()
           .validate(containerRegistryAuthenticationDockerHub.getUsername())
@@ -30,7 +30,7 @@ public class ContainerRegistryAuthenticationDockerHubValidator
       .add(
         new StringValidator("personalAccessToken")
           .minLength(1)
-          .maxLength(1000)
+          .maxLength(10000)
           .pattern("^.*$")
           .required()
           .validate(containerRegistryAuthenticationDockerHub.getPersonalAccessToken())
