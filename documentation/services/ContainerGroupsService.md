@@ -174,7 +174,7 @@ public class Main {
     ContainerLoggingConfigurationHttp2 containerLoggingConfigurationHttp2 = ContainerLoggingConfigurationHttp2
       .builder()
       .host("host")
-      .port(14193L)
+      .port(46840L)
       .user("user")
       .password("password")
       .path("path")
@@ -198,7 +198,7 @@ public class Main {
     TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration
       .builder()
       .host("host")
-      .port(64046L)
+      .port(44671L)
       .build();
 
     ContainerConfigurationLogging containerConfigurationLogging = ContainerConfigurationLogging
@@ -253,10 +253,10 @@ public class Main {
 
     ContainerResourceRequirements containerResourceRequirements = ContainerResourceRequirements
       .builder()
-      .cpu(13L)
-      .memory(55064L)
+      .cpu(2L)
+      .memory(57018L)
       .gpuClasses(gpuClassesList)
-      .storageAmount(38884096876L)
+      .storageAmount(10190895817L)
       .build();
 
     ContainerConfiguration containerConfiguration = ContainerConfiguration
@@ -279,7 +279,7 @@ public class Main {
 
     ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe
       .builder()
-      .port(7208L)
+      .port(37648L)
       .service("service")
       .build();
 
@@ -295,11 +295,11 @@ public class Main {
       .builder()
       .headers(headersList1)
       .path("path")
-      .port(58428L)
+      .port(29069L)
       .scheme(HttpScheme.HTTP)
       .build();
 
-    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(28778L).build();
+    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(13817L).build();
 
     ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
       .builder()
@@ -307,7 +307,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(140L)
+      .initialDelaySeconds(670L)
       .periodSeconds(10L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -327,19 +327,19 @@ public class Main {
 
     QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration
       .builder()
-      .desiredQueueLength(100L)
-      .maxReplicas(85L)
-      .maxDownscalePerMinute(26L)
-      .maxUpscalePerMinute(75L)
-      .minReplicas(40L)
-      .pollingPeriod(852L)
+      .desiredQueueLength(53L)
+      .maxReplicas(291L)
+      .maxDownscalePerMinute(65L)
+      .maxUpscalePerMinute(100L)
+      .minReplicas(54L)
+      .pollingPeriod(140L)
       .build();
 
     ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection
       .builder()
       .path("path")
-      .port(2041L)
-      .queueName("trsiojso672vyi")
+      .port(47568L)
+      .queueName("z1h-3z01x9")
       .build();
 
     ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe
@@ -348,7 +348,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(977L)
+      .initialDelaySeconds(262L)
       .periodSeconds(1L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -361,7 +361,7 @@ public class Main {
       .failureThreshold(15L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(604L)
+      .initialDelaySeconds(1106L)
       .tcp(containerGroupTcpProbe)
       .periodSeconds(3L)
       .successThreshold(2L)
@@ -373,14 +373,14 @@ public class Main {
       .autostartPolicy(false)
       .container(containerConfiguration)
       .countryCodes(countryCodesList)
-      .displayName("nhp71 k-e")
+      .displayName("9 Q592CH6F")
       .livenessProbe(containerGroupLivenessProbe)
       .name("name")
       .networking(createContainerGroupNetworking)
       .queueAutoscaler(queueBasedAutoscalerConfiguration)
       .queueConnection(containerGroupQueueConnection)
       .readinessProbe(containerGroupReadinessProbe)
-      .replicas(363L)
+      .replicas(284L)
       .restartPolicy(ContainerRestartPolicy.ALWAYS)
       .startupProbe(containerGroupStartupProbe)
       .build();
@@ -551,7 +551,7 @@ public class Main {
     ContainerLoggingConfigurationHttp1 containerLoggingConfigurationHttp1 = ContainerLoggingConfigurationHttp1
       .builder()
       .host("host")
-      .port(53608L)
+      .port(55354L)
       .user("user")
       .password("password")
       .path("path")
@@ -575,7 +575,7 @@ public class Main {
     TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration
       .builder()
       .host("host")
-      .port(64046L)
+      .port(44671L)
       .build();
 
     UpdateContainerLogging updateContainerLogging = UpdateContainerLogging
@@ -630,10 +630,10 @@ public class Main {
 
     ContainerResourceUpdateSchema containerResourceUpdateSchema = ContainerResourceUpdateSchema
       .builder()
-      .cpu(7L)
-      .memory(28846L)
+      .cpu(6L)
+      .memory(56406L)
       .gpuClasses(gpuClassesList)
-      .storageAmount(47916426548L)
+      .storageAmount(7030693392L)
       .build();
 
     UpdateContainer updateContainer = UpdateContainer
@@ -652,7 +652,7 @@ public class Main {
 
     UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
       .builder()
-      .port(47990L)
+      .port(45473L)
       .build();
 
     List<String> commandList1 = Arrays.asList("command");
@@ -661,7 +661,7 @@ public class Main {
 
     ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe
       .builder()
-      .port(7208L)
+      .port(37648L)
       .service("service")
       .build();
 
@@ -677,11 +677,11 @@ public class Main {
       .builder()
       .headers(headersList1)
       .path("path")
-      .port(58428L)
+      .port(29069L)
       .scheme(HttpScheme.HTTP)
       .build();
 
-    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(28778L).build();
+    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(13817L).build();
 
     ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
       .builder()
@@ -689,7 +689,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(140L)
+      .initialDelaySeconds(670L)
       .periodSeconds(10L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -702,7 +702,7 @@ public class Main {
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(977L)
+      .initialDelaySeconds(262L)
       .periodSeconds(1L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
@@ -715,7 +715,7 @@ public class Main {
       .failureThreshold(15L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(604L)
+      .initialDelaySeconds(1106L)
       .tcp(containerGroupTcpProbe)
       .periodSeconds(3L)
       .successThreshold(2L)
@@ -724,19 +724,19 @@ public class Main {
 
     QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration
       .builder()
-      .desiredQueueLength(100L)
-      .maxReplicas(85L)
-      .maxDownscalePerMinute(26L)
-      .maxUpscalePerMinute(75L)
-      .minReplicas(40L)
-      .pollingPeriod(852L)
+      .desiredQueueLength(53L)
+      .maxReplicas(291L)
+      .maxDownscalePerMinute(65L)
+      .maxUpscalePerMinute(100L)
+      .minReplicas(54L)
+      .pollingPeriod(140L)
       .build();
 
     ContainerGroupPatch containerGroupPatch = ContainerGroupPatch
       .builder()
-      .displayName("F8")
+      .displayName("Jjdnvuz")
       .container(updateContainer)
-      .replicas(386L)
+      .replicas(100L)
       .countryCodes(countryCodesList)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)
@@ -1014,7 +1014,7 @@ public class Main {
 
     ContainerGroupInstancePatch containerGroupInstancePatch = ContainerGroupInstancePatch
       .builder()
-      .deletionCost(61570L)
+      .deletionCost(82294L)
       .build();
 
     ContainerGroupInstance response = saladCloudSdk.containerGroups.updateContainerGroupInstance(

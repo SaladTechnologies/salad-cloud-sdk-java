@@ -15,7 +15,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueuePatch queuePatch = QueuePatch.builder().displayName("0SG").description("description").build();
+    QueuePatch queuePatch = QueuePatch.builder().displayName("QqN5Ecnfeq").description("description").build();
 
     Queue response = saladCloudSdk.queues.updateQueue("acme-corp", "dev-env", "fifo-queue", queuePatch);
 

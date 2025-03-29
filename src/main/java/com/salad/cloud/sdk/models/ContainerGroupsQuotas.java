@@ -37,21 +37,18 @@ public class ContainerGroupsQuotas {
   /**
    * The maximum number of container group reallocations per minute
    */
-  @Builder.Default
   @JsonProperty("max_container_group_reallocations_per_minute")
-  private Long maxContainerGroupReallocationsPerMinute = 10L;
+  private Long maxContainerGroupReallocationsPerMinute;
 
   /**
    * The maximum number of container group recreates per minute
    */
-  @Builder.Default
   @JsonProperty("max_container_group_recreates_per_minute")
-  private Long maxContainerGroupRecreatesPerMinute = 10L;
+  private Long maxContainerGroupRecreatesPerMinute;
 
   /**
    * The maximum number of container group restarts per minute
    */
-  @Builder.Default
   @JsonProperty("max_container_group_restarts_per_minute")
-  private Long maxContainerGroupRestartsPerMinute = 10L;
+  private Long maxContainerGroupRestartsPerMinute;
 }

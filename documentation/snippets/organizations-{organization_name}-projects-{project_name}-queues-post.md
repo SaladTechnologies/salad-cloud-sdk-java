@@ -18,7 +18,7 @@ public class Main {
     QueuePrototype queuePrototype = QueuePrototype
       .builder()
       .name("name")
-      .displayName("GSe")
+      .displayName("WYAV3y")
       .description("description")
       .build();
 

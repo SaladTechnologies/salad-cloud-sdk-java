@@ -21,7 +21,6 @@ public class ContainerRegistryAuthenticationGcpGcrValidator
         new StringValidator("serviceKey")
           .minLength(1)
           .maxLength(10000)
-          .pattern("^.*$")
           .required()
           .validate(containerRegistryAuthenticationGcpGcr.getServiceKey())
       )
