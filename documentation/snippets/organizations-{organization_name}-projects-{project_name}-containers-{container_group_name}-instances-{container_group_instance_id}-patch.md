@@ -17,7 +17,7 @@ public class Main {
 
     ContainerGroupInstancePatch containerGroupInstancePatch = ContainerGroupInstancePatch
       .builder()
-      .deletionCost(61570L)
+      .deletionCost(82294L)
       .build();
 
     ContainerGroupInstance response = saladCloudSdk.containerGroups.updateContainerGroupInstance(
