@@ -36,7 +36,7 @@ public class SystemLogValidator extends AbstractModelValidator<SystemLog> {
       .add(
         new NumericValidator<Long>("resourceStorageAmount")
           .min(1073741824L)
-          .max(53687091200L)
+          .max(268435456000L)
           .optional()
           .validate(systemLog.getResourceStorageAmount())
       )

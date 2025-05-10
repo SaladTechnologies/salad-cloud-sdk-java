@@ -43,8 +43,7 @@ import com.salad.cloud.sdk.models.QueueCollection;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -89,17 +88,15 @@ import com.salad.cloud.sdk.models.QueuePrototype;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueuePrototype queuePrototype = QueuePrototype
-      .builder()
+    QueuePrototype queuePrototype = QueuePrototype.builder()
       .name("name")
-      .displayName("WYAV3y")
+      .displayName("7k")
       .description("description")
       .build();
 
@@ -141,8 +138,7 @@ import com.salad.cloud.sdk.models.Queue;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -188,14 +184,13 @@ import com.salad.cloud.sdk.models.QueuePatch;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueuePatch queuePatch = QueuePatch.builder().displayName("QqN5Ecnfeq").description("description").build();
+    QueuePatch queuePatch = QueuePatch.builder().displayName("NGyUF9wajJ").description("description").build();
 
     Queue response = saladCloudSdk.queues.updateQueue("acme-corp", "dev-env", "fifo-queue", queuePatch);
 
@@ -230,8 +225,7 @@ import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -275,8 +269,7 @@ import com.salad.cloud.sdk.models.QueueJobCollection;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -329,15 +322,13 @@ import com.salad.cloud.sdk.models.QueueJobPrototype;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueueJobPrototype queueJobPrototype = QueueJobPrototype
-      .builder()
+    QueueJobPrototype queueJobPrototype = QueueJobPrototype.builder()
       .input(new Object())
       .metadata(new Object())
       .webhook("webhook")
@@ -382,8 +373,7 @@ import com.salad.cloud.sdk.models.QueueJob;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -428,8 +418,7 @@ import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 

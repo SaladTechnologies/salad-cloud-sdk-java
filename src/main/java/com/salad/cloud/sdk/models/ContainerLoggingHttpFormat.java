@@ -20,8 +20,7 @@ public enum ContainerLoggingHttpFormat {
 
   @JsonCreator
   public static ContainerLoggingHttpFormat fromValue(String value) {
-    return Arrays
-      .stream(ContainerLoggingHttpFormat.values())
+    return Arrays.stream(ContainerLoggingHttpFormat.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

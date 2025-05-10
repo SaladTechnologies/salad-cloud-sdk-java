@@ -23,8 +23,7 @@ public enum TheContainerGroupInstanceState {
 
   @JsonCreator
   public static TheContainerGroupInstanceState fromValue(String value) {
-    return Arrays
-      .stream(TheContainerGroupInstanceState.values())
+    return Arrays.stream(TheContainerGroupInstanceState.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

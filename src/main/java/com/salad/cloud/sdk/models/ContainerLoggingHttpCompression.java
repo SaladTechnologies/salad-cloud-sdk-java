@@ -20,8 +20,7 @@ public enum ContainerLoggingHttpCompression {
 
   @JsonCreator
   public static ContainerLoggingHttpCompression fromValue(String value) {
-    return Arrays
-      .stream(ContainerLoggingHttpCompression.values())
+    return Arrays.stream(ContainerLoggingHttpCompression.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

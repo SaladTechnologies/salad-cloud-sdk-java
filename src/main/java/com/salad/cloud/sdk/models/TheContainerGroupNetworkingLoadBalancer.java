@@ -20,8 +20,7 @@ public enum TheContainerGroupNetworkingLoadBalancer {
 
   @JsonCreator
   public static TheContainerGroupNetworkingLoadBalancer fromValue(String value) {
-    return Arrays
-      .stream(TheContainerGroupNetworkingLoadBalancer.values())
+    return Arrays.stream(TheContainerGroupNetworkingLoadBalancer.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

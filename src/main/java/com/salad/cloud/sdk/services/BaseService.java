@@ -2,6 +2,7 @@ package com.salad.cloud.sdk.services;
 
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.http.Environment;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import okhttp3.Call;
@@ -21,6 +22,14 @@ public class BaseService {
     this.config = config;
   }
 
+  public void setBaseUrl(String baseUrl) {
+    this.config.setBaseUrl(baseUrl);
+  }
+
+  public void setEnvironment(Environment environment) {
+    this.config.setEnvironment(environment);
+  }
+
   protected Response execute(Request request) throws ApiException {
     Response response;
     try {
@@ -37,8 +46,7 @@ public class BaseService {
 
   protected CompletableFuture<Response> executeAsync(Request request) {
     CompletableFuture<Response> future = new CompletableFuture<>();
-    this.httpClient.newCall(request)
-      .enqueue(
+    this.httpClient.newCall(request).enqueue(
         new Callback() {
           @Override
           public void onResponse(@NotNull Call call, @NotNull Response response) {

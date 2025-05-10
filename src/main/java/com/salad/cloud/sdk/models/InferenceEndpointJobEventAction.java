@@ -23,8 +23,7 @@ public enum InferenceEndpointJobEventAction {
 
   @JsonCreator
   public static InferenceEndpointJobEventAction fromValue(String value) {
-    return Arrays
-      .stream(InferenceEndpointJobEventAction.values())
+    return Arrays.stream(InferenceEndpointJobEventAction.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

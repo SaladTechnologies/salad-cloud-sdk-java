@@ -22,8 +22,7 @@ public enum ContainerGroupPriority {
 
   @JsonCreator
   public static ContainerGroupPriority fromValue(String value) {
-    return Arrays
-      .stream(ContainerGroupPriority.values())
+    return Arrays.stream(ContainerGroupPriority.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

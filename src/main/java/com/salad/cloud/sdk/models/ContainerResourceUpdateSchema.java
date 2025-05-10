@@ -41,7 +41,7 @@ public class ContainerResourceUpdateSchema {
   private List<String> gpuClasses;
 
   /**
-   * The amount of storage to allocate to the container in bytes (between 1GB and 50GB).
+   * The amount of storage to allocate to the container in bytes (between 1GB and 250GB).
    */
   @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("storage_amount")

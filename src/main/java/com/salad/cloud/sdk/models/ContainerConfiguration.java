@@ -30,10 +30,10 @@ public class ContainerConfiguration {
   private String image;
 
   /**
-   * Specifies the resource requirements for a container.
+   * Specifies the resource requirements for creating a container.
    */
   @NonNull
-  private ContainerResourceRequirements resources;
+  private CreateContainerResourceRequirements resources;
 
   /**
    * Pass a command (and optional arguments) to override the ENTRYPOINT and CMD of a container image. Each element in the array represents a command segment or argument.

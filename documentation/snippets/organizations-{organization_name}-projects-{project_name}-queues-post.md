@@ -8,17 +8,15 @@ import com.salad.cloud.sdk.models.QueuePrototype;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueuePrototype queuePrototype = QueuePrototype
-      .builder()
+    QueuePrototype queuePrototype = QueuePrototype.builder()
       .name("name")
-      .displayName("WYAV3y")
+      .displayName("7k")
       .description("description")
       .build();
 

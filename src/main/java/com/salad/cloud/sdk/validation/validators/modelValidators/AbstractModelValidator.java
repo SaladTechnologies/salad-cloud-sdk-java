@@ -29,8 +29,7 @@ public abstract class AbstractModelValidator<T> extends AbstractValidator<T> {
       return violations;
     }
 
-    return Arrays
-      .stream(violations)
+    return Arrays.stream(violations)
       .map(violation -> {
         String newPath = violation.getPath().isEmpty()
           ? getFieldName()

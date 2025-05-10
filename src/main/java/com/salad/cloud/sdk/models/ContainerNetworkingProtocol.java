@@ -19,8 +19,7 @@ public enum ContainerNetworkingProtocol {
 
   @JsonCreator
   public static ContainerNetworkingProtocol fromValue(String value) {
-    return Arrays
-      .stream(ContainerNetworkingProtocol.values())
+    return Arrays.stream(ContainerNetworkingProtocol.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

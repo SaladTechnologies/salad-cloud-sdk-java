@@ -11,7 +11,7 @@ import lombok.With;
 import lombok.extern.jackson.Jacksonized;
 
 /**
- * Specifies the resource requirements for a container.
+ * Specifies the resource requirements for creating a container.
  */
 @Data
 @Builder
@@ -19,7 +19,7 @@ import lombok.extern.jackson.Jacksonized;
 @ToString
 @EqualsAndHashCode
 @Jacksonized
-public class ContainerResourceRequirements {
+public class CreateContainerResourceRequirements {
 
   /**
    * The number of CPU cores required by the container. Must be between 1 and 16.
@@ -36,7 +36,6 @@ public class ContainerResourceRequirements {
   /**
    * A list of GPU class UUIDs required by the container. Can be null if no GPU is required.
    */
-  @NonNull
   @JsonProperty("gpu_classes")
   private List<String> gpuClasses;
 

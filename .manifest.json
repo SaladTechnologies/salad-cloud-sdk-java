@@ -1,8 +1,8 @@
 {
-  "liblabVersion": "2.25.1",
-  "date": "2025-03-29T05:58:53.001Z",
+  "liblabVersion": "2.25.14",
+  "date": "2025-05-10T22:51:26.087Z",
   "config": {
-    "apiId": 1950,
+    "apiId": 2164,
     "sdkName": "salad-cloud-sdk",
     "sdkVersion": "0.9.0-alpha.13",
     "languages": ["java"],
@@ -370,6 +370,7 @@
         "generateEnumAs": "enum"
       }
     },
+    "mcpServer": false,
     "publishing": {
       "githubOrg": "SaladTechnologies"
     },
@@ -460,7 +461,7 @@
       }
     ],
     "apiName": "SaladCloud API",
-    "apiVersion": "0.9.0-alpha.12",
+    "apiVersion": "0.9.0-alpha.13",
     "authentication": {
       "apiKey": {
         "header": "Salad-Api-Key"
@@ -536,7 +537,8 @@
       "rawQueries": [],
       "queriesData": []
     },
-    "ai": false
+    "ai": false,
+    "specType": "openapi"
   },
   "files": [
     "pom.xml",
@@ -662,6 +664,7 @@
     "documentation/models/CreateContainerGroupNetworking.md",
     "documentation/models/ContainerConfigurationLogging.md",
     "documentation/models/ContainerRegistryAuthentication.md",
+    "documentation/models/CreateContainerResourceRequirements.md",
     "documentation/models/ContainerLoggingConfigurationHttp2.md",
     "documentation/models/ContainerRegistryAuthenticationAwsEcr.md",
     "documentation/models/ContainerRegistryAuthenticationBasic.md",
@@ -743,6 +746,7 @@
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/ContainerGroupProbeHttpHeaderValidator.java",
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/ContainerConfigurationValidator.java",
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/CreateContainerGroupNetworkingValidator.java",
+    "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/CreateContainerResourceRequirementsValidator.java",
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/ContainerConfigurationLoggingValidator.java",
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/ContainerRegistryAuthenticationValidator.java",
     "src/main/java/com/salad/cloud/sdk/validation/validators/modelValidators/ContainerLoggingConfigurationHttp2Validator.java",
@@ -769,6 +773,7 @@
     ".idea/encoding.xml",
     ".idea/jarRepositories.xml",
     "src/main/java/com/salad/cloud/sdk/http/util/RequestBuilder.java",
+    "examples/README.md",
     "src/main/java/com/salad/cloud/sdk/models/CountryCode.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerGroupPriority.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerRestartPolicy.java",
@@ -830,7 +835,9 @@
     "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointCollection.java",
     "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJobCollection.java",
     "src/main/java/com/salad/cloud/sdk/models/InferenceEndpointJobPrototype.java",
+    "src/main/java/com/salad/cloud/sdk/models/ContainerResourceRequirements.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerGroupInstanceStatusCount.java",
+    "src/main/java/com/salad/cloud/sdk/models/CreateContainerResourceRequirements.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerResourceUpdateSchema.java",
     "src/main/java/com/salad/cloud/sdk/models/GpuClass.java",
     "src/main/java/com/salad/cloud/sdk/models/GpuClassPrice.java",
@@ -841,7 +848,6 @@
     "src/main/java/com/salad/cloud/sdk/models/ContainerGroupsQuotas.java",
     "src/main/java/com/salad/cloud/sdk/models/QueueBasedAutoscalerConfiguration.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerLogging.java",
-    "src/main/java/com/salad/cloud/sdk/models/ContainerResourceRequirements.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerGroupHttpProbeConfiguration.java",
     "src/main/java/com/salad/cloud/sdk/models/ContainerConfigurationLogging.java",
     "src/main/java/com/salad/cloud/sdk/models/UpdateContainerLogging.java",
