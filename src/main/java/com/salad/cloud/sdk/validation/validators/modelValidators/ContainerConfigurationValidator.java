@@ -26,7 +26,7 @@ public class ContainerConfigurationValidator extends AbstractModelValidator<Cont
           .validate(containerConfiguration.getImage())
       )
       .add(
-        new ContainerResourceRequirementsValidator("resources")
+        new CreateContainerResourceRequirementsValidator("resources")
           .required()
           .validate(containerConfiguration.getResources())
       )

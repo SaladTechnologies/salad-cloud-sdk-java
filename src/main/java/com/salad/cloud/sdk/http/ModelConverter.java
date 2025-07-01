@@ -7,13 +7,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.openapitools.jackson.nullable.JsonNullableModule;
 
 public final class ModelConverter {
 
   private static final ObjectMapper mapper = new ObjectMapper();
 
   static {
-    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    mapper.setSerializationInclusion(JsonInclude.Include.NON_ABSENT);
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -21,6 +22,7 @@ public final class ModelConverter {
     mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
     mapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
     mapper.enable(DeserializationFeature.USE_LONG_FOR_INTS);
+    mapper.registerModule(new JsonNullableModule());
   }
 
   private ModelConverter() {}

@@ -41,15 +41,13 @@ import com.salad.cloud.sdk.models.ListInferenceEndpointsParameters;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ListInferenceEndpointsParameters requestParameters = ListInferenceEndpointsParameters
-      .builder()
+    ListInferenceEndpointsParameters requestParameters = ListInferenceEndpointsParameters.builder()
       .page(1L)
       .pageSize(1L)
       .build();
@@ -94,8 +92,7 @@ import com.salad.cloud.sdk.models.InferenceEndpoint;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -140,15 +137,13 @@ import com.salad.cloud.sdk.models.ListInferenceEndpointJobsParameters;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ListInferenceEndpointJobsParameters requestParameters = ListInferenceEndpointJobsParameters
-      .builder()
+    ListInferenceEndpointJobsParameters requestParameters = ListInferenceEndpointJobsParameters.builder()
       .page(1L)
       .pageSize(1L)
       .build();
@@ -196,15 +191,13 @@ import com.salad.cloud.sdk.models.InferenceEndpointJobPrototype;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    InferenceEndpointJobPrototype inferenceEndpointJobPrototype = InferenceEndpointJobPrototype
-      .builder()
+    InferenceEndpointJobPrototype inferenceEndpointJobPrototype = InferenceEndpointJobPrototype.builder()
       .input(new Object())
       .metadata(new Object())
       .webhookUrl("https://webhook.example.com/events")
@@ -252,8 +245,7 @@ import com.salad.cloud.sdk.models.InferenceEndpointJob;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -296,8 +288,7 @@ import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 

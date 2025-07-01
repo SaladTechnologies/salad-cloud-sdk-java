@@ -24,8 +24,7 @@ public enum ContainerGroupStatus {
 
   @JsonCreator
   public static ContainerGroupStatus fromValue(String value) {
-    return Arrays
-      .stream(ContainerGroupStatus.values())
+    return Arrays.stream(ContainerGroupStatus.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

@@ -1,5 +1,6 @@
 package com.salad.cloud.sdk.http.serialization;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salad.cloud.sdk.json.TypeUtils;
@@ -9,12 +10,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.SneakyThrows;
+import org.openapitools.jackson.nullable.JsonNullableModule;
 
 public class Util {
 
+  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+  static {
+    OBJECT_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_ABSENT);
+    OBJECT_MAPPER.registerModule(new JsonNullableModule());
+  }
+
   public static Map<String, Object> getPropertiesWithJsonPropertyNames(Object value) {
-    ObjectMapper objectMapper = new ObjectMapper();
-    Map<String, Object> properties = objectMapper.convertValue(value, new TypeReference<Map<String, Object>>() {});
+    Map<String, Object> properties = OBJECT_MAPPER.convertValue(value, new TypeReference<Map<String, Object>>() {});
 
     // Use the json property name if it exists, otherwise use the regular property name
     return properties

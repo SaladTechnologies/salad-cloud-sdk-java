@@ -1,6 +1,8 @@
 package com.salad.cloud.sdk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +11,7 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Configuration for sending container logs to an HTTP endpoint. Defines how logs are formatted, compressed, and transmitted.
@@ -54,20 +57,35 @@ public class ContainerLoggingConfigurationHttp1 {
   /**
    * Optional username for HTTP authentication
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
-  private String user;
+  @JsonProperty("user")
+  private JsonNullable<String> user;
 
   /**
    * Optional password for HTTP authentication
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
-  private String password;
+  @JsonProperty("password")
+  private JsonNullable<String> password;
 
   /**
    * Optional URL path for the HTTP endpoint
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
-  private String path;
+  @JsonProperty("path")
+  private JsonNullable<String> path;
+
+  @JsonIgnore
+  public String getUser() {
+    return user.orElse(null);
+  }
+
+  @JsonIgnore
+  public String getPassword() {
+    return password.orElse(null);
+  }
+
+  @JsonIgnore
+  public String getPath() {
+    return path.orElse(null);
+  }
 
   // Overwrite lombok builder methods
   public static class ContainerLoggingConfigurationHttp1Builder {
@@ -80,6 +98,30 @@ public class ContainerLoggingConfigurationHttp1 {
     public ContainerLoggingConfigurationHttp1Builder headers(List<ContainerLoggingHttpHeader> headers) {
       this.headers$set = true;
       this.headers = headers;
+      return this;
+    }
+
+    private JsonNullable<String> user = JsonNullable.undefined();
+
+    @JsonProperty("user")
+    public ContainerLoggingConfigurationHttp1Builder user(String value) {
+      this.user = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<String> password = JsonNullable.undefined();
+
+    @JsonProperty("password")
+    public ContainerLoggingConfigurationHttp1Builder password(String value) {
+      this.password = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<String> path = JsonNullable.undefined();
+
+    @JsonProperty("path")
+    public ContainerLoggingConfigurationHttp1Builder path(String value) {
+      this.path = JsonNullable.of(value);
       return this;
     }
 

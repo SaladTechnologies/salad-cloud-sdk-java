@@ -2,7 +2,8 @@ package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.exceptions.ApiError;
+import com.salad.cloud.sdk.exceptions.ProblemDetailsException;
 import com.salad.cloud.sdk.http.Environment;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
@@ -14,6 +15,7 @@ import com.salad.cloud.sdk.models.InferenceEndpointJobCollection;
 import com.salad.cloud.sdk.models.InferenceEndpointJobPrototype;
 import com.salad.cloud.sdk.models.ListInferenceEndpointJobsParameters;
 import com.salad.cloud.sdk.models.ListInferenceEndpointsParameters;
+import com.salad.cloud.sdk.models.ProblemDetails;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
@@ -46,7 +48,12 @@ public class InferenceEndpointsService extends BaseService {
   public InferenceEndpointCollection listInferenceEndpoints(
     @NonNull String organizationName,
     @NonNull ListInferenceEndpointsParameters requestParameters
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<InferenceEndpointCollection>() {});
@@ -62,7 +69,12 @@ public class InferenceEndpointsService extends BaseService {
   public CompletableFuture<InferenceEndpointCollection> listInferenceEndpointsAsync(
     @NonNull String organizationName,
     @NonNull ListInferenceEndpointsParameters requestParameters
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->
@@ -107,7 +119,11 @@ public class InferenceEndpointsService extends BaseService {
   public InferenceEndpoint getInferenceEndpoint(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetInferenceEndpointRequest(organizationName, inferenceEndpointName);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<InferenceEndpoint>() {});
@@ -123,7 +139,11 @@ public class InferenceEndpointsService extends BaseService {
   public CompletableFuture<InferenceEndpoint> getInferenceEndpointAsync(
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetInferenceEndpointRequest(organizationName, inferenceEndpointName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->
@@ -176,7 +196,12 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull ListInferenceEndpointJobsParameters requestParameters
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildListInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     Response response = this.execute(request);
@@ -195,7 +220,12 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull ListInferenceEndpointJobsParameters requestParameters
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildListInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
@@ -253,7 +283,12 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull InferenceEndpointJobPrototype inferenceEndpointJobPrototype
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildCreateInferenceEndpointJobRequest(
           organizationName,
@@ -276,7 +311,12 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull InferenceEndpointJobPrototype inferenceEndpointJobPrototype
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildCreateInferenceEndpointJobRequest(
           organizationName,
@@ -341,7 +381,11 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildGetInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     Response response = this.execute(request);
@@ -360,7 +404,11 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildGetInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
@@ -416,7 +464,12 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildDeleteInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     this.execute(request);
@@ -434,7 +487,12 @@ public class InferenceEndpointsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String inferenceEndpointName,
     @NonNull String inferenceEndpointJobId
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(401, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildDeleteInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     return this.executeAsync(request).thenApplyAsync(response -> null);

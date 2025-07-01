@@ -43,8 +43,7 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -52,40 +51,35 @@ public class Main {
 
     List<String> commandList = Arrays.asList("command");
 
-    AxiomLoggingConfiguration axiomLoggingConfiguration = AxiomLoggingConfiguration
-      .builder()
+    AxiomLoggingConfiguration axiomLoggingConfiguration = AxiomLoggingConfiguration.builder()
       .host("host")
       .apiToken("api_token")
       .dataset("dataset")
       .build();
 
-    DatadogTagForContainerLogging datadogTagForContainerLogging = DatadogTagForContainerLogging
-      .builder()
+    DatadogTagForContainerLogging datadogTagForContainerLogging = DatadogTagForContainerLogging.builder()
       .name("name")
       .value("value")
       .build();
 
     List<DatadogTagForContainerLogging> tagsList = Arrays.asList(datadogTagForContainerLogging);
 
-    DatadogLoggingConfiguration datadogLoggingConfiguration = DatadogLoggingConfiguration
-      .builder()
+    DatadogLoggingConfiguration datadogLoggingConfiguration = DatadogLoggingConfiguration.builder()
       .host("host")
       .apiKey("api_key")
       .tags(tagsList)
       .build();
 
-    ContainerLoggingHttpHeader containerLoggingHttpHeader = ContainerLoggingHttpHeader
-      .builder()
+    ContainerLoggingHttpHeader containerLoggingHttpHeader = ContainerLoggingHttpHeader.builder()
       .name("name")
       .value("value")
       .build();
 
     List<ContainerLoggingHttpHeader> headersList = Arrays.asList(containerLoggingHttpHeader);
 
-    ContainerLoggingConfigurationHttp1 containerLoggingConfigurationHttp1 = ContainerLoggingConfigurationHttp1
-      .builder()
+    ContainerLoggingConfigurationHttp1 containerLoggingConfigurationHttp1 = ContainerLoggingConfigurationHttp1.builder()
       .host("host")
-      .port(55354L)
+      .port(34677L)
       .user("user")
       .password("password")
       .path("path")
@@ -94,26 +88,20 @@ public class Main {
       .compression(ContainerLoggingHttpCompression.NONE)
       .build();
 
-    NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration
-      .builder()
+    NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration.builder()
       .host("host")
       .ingestionKey("ingestion_key")
       .build();
 
-    ContainerLoggingSplunkConfiguration containerLoggingSplunkConfiguration = ContainerLoggingSplunkConfiguration
-      .builder()
+    ContainerLoggingSplunkConfiguration containerLoggingSplunkConfiguration =
+      ContainerLoggingSplunkConfiguration.builder().host("host").token("token").build();
+
+    TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration.builder()
       .host("host")
-      .token("token")
+      .port(21602L)
       .build();
 
-    TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration
-      .builder()
-      .host("host")
-      .port(44671L)
-      .build();
-
-    UpdateContainerLogging updateContainerLogging = UpdateContainerLogging
-      .builder()
+    UpdateContainerLogging updateContainerLogging = UpdateContainerLogging.builder()
       .axiom(axiomLoggingConfiguration)
       .datadog(datadogLoggingConfiguration)
       .http(containerLoggingConfigurationHttp1)
@@ -122,37 +110,28 @@ public class Main {
       .tcp(tcpLoggingConfiguration)
       .build();
 
-    ContainerRegistryAuthenticationAwsEcr containerRegistryAuthenticationAwsEcr = ContainerRegistryAuthenticationAwsEcr
-      .builder()
-      .accessKeyId("access_key_id")
-      .secretAccessKey("secret_access_key")
-      .build();
+    ContainerRegistryAuthenticationAwsEcr containerRegistryAuthenticationAwsEcr =
+      ContainerRegistryAuthenticationAwsEcr.builder()
+        .accessKeyId("access_key_id")
+        .secretAccessKey("secret_access_key")
+        .build();
 
-    ContainerRegistryAuthenticationBasic containerRegistryAuthenticationBasic = ContainerRegistryAuthenticationBasic
-      .builder()
-      .username("username")
-      .password("password")
-      .build();
+    ContainerRegistryAuthenticationBasic containerRegistryAuthenticationBasic =
+      ContainerRegistryAuthenticationBasic.builder().username("username").password("password").build();
 
     ContainerRegistryAuthenticationDockerHub containerRegistryAuthenticationDockerHub =
-      ContainerRegistryAuthenticationDockerHub
-        .builder()
+      ContainerRegistryAuthenticationDockerHub.builder()
         .username("username")
         .personalAccessToken("personal_access_token")
         .build();
 
-    ContainerRegistryAuthenticationGcpGar containerRegistryAuthenticationGcpGar = ContainerRegistryAuthenticationGcpGar
-      .builder()
-      .serviceKey("service_key")
-      .build();
+    ContainerRegistryAuthenticationGcpGar containerRegistryAuthenticationGcpGar =
+      ContainerRegistryAuthenticationGcpGar.builder().serviceKey("service_key").build();
 
-    ContainerRegistryAuthenticationGcpGcr containerRegistryAuthenticationGcpGcr = ContainerRegistryAuthenticationGcpGcr
-      .builder()
-      .serviceKey("service_key")
-      .build();
+    ContainerRegistryAuthenticationGcpGcr containerRegistryAuthenticationGcpGcr =
+      ContainerRegistryAuthenticationGcpGcr.builder().serviceKey("service_key").build();
 
-    ContainerRegistryAuthentication containerRegistryAuthentication = ContainerRegistryAuthentication
-      .builder()
+    ContainerRegistryAuthentication containerRegistryAuthentication = ContainerRegistryAuthentication.builder()
       .awsEcr(containerRegistryAuthenticationAwsEcr)
       .basic(containerRegistryAuthenticationBasic)
       .dockerHub(containerRegistryAuthenticationDockerHub)
@@ -162,16 +141,15 @@ public class Main {
 
     List<String> gpuClassesList = Arrays.asList("gpu_classes");
 
-    ContainerResourceUpdateSchema containerResourceUpdateSchema = ContainerResourceUpdateSchema
-      .builder()
-      .cpu(6L)
-      .memory(56406L)
+    ContainerResourceUpdateSchema containerResourceUpdateSchema = ContainerResourceUpdateSchema.builder()
+      .cpu(2L)
+      .memory(4272L)
       .gpuClasses(gpuClassesList)
-      .storageAmount(7030693392L)
+      .storageAmount(47962159632L)
+      .shmSize(64L)
       .build();
 
-    UpdateContainer updateContainer = UpdateContainer
-      .builder()
+    UpdateContainer updateContainer = UpdateContainer.builder()
       .command(commandList)
       .environmentVariables(new HashMap())
       .image("image")
@@ -184,93 +162,85 @@ public class Main {
 
     List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
 
-    UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking
-      .builder()
-      .port(45473L)
+    UpdateContainerGroupNetworking updateContainerGroupNetworking = UpdateContainerGroupNetworking.builder()
+      .port(17663L)
       .build();
 
     List<String> commandList1 = Arrays.asList("command");
 
     ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder().command(commandList1).build();
 
-    ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe
-      .builder()
-      .port(37648L)
+    ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe.builder()
+      .port(28667L)
       .service("service")
       .build();
 
-    ContainerGroupProbeHttpHeader containerGroupProbeHttpHeader = ContainerGroupProbeHttpHeader
-      .builder()
+    ContainerGroupProbeHttpHeader containerGroupProbeHttpHeader = ContainerGroupProbeHttpHeader.builder()
       .name("name")
       .value("value")
       .build();
 
     List<ContainerGroupProbeHttpHeader> headersList1 = Arrays.asList(containerGroupProbeHttpHeader);
 
-    ContainerGroupHttpProbeConfiguration containerGroupHttpProbeConfiguration = ContainerGroupHttpProbeConfiguration
-      .builder()
-      .headers(headersList1)
-      .path("path")
-      .port(29069L)
-      .scheme(HttpScheme.HTTP)
-      .build();
+    ContainerGroupHttpProbeConfiguration containerGroupHttpProbeConfiguration =
+      ContainerGroupHttpProbeConfiguration.builder()
+        .headers(headersList1)
+        .path("path")
+        .port(53414L)
+        .scheme(HttpScheme.HTTP)
+        .build();
 
-    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(13817L).build();
+    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(62611L).build();
 
-    ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe
-      .builder()
+    ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe.builder()
       .exec(containerGroupProbeExec)
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(670L)
+      .initialDelaySeconds(67L)
       .periodSeconds(10L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
       .timeoutSeconds(30L)
       .build();
 
-    ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe
-      .builder()
+    ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe.builder()
       .exec(containerGroupProbeExec)
       .failureThreshold(3L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(262L)
+      .initialDelaySeconds(226L)
       .periodSeconds(1L)
       .successThreshold(1L)
       .tcp(containerGroupTcpProbe)
       .timeoutSeconds(1L)
       .build();
 
-    ContainerGroupStartupProbe containerGroupStartupProbe = ContainerGroupStartupProbe
-      .builder()
+    ContainerGroupStartupProbe containerGroupStartupProbe = ContainerGroupStartupProbe.builder()
       .exec(containerGroupProbeExec)
       .failureThreshold(15L)
       .grpc(containerGroupGRpcProbe)
       .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(1106L)
+      .initialDelaySeconds(1058L)
       .tcp(containerGroupTcpProbe)
       .periodSeconds(3L)
       .successThreshold(2L)
       .timeoutSeconds(10L)
       .build();
 
-    QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration
-      .builder()
-      .desiredQueueLength(53L)
-      .maxReplicas(291L)
-      .maxDownscalePerMinute(65L)
-      .maxUpscalePerMinute(100L)
-      .minReplicas(54L)
-      .pollingPeriod(140L)
+    QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration.builder()
+      .desiredQueueLength(22L)
+      .maxReplicas(462L)
+      .maxDownscalePerMinute(26L)
+      .maxUpscalePerMinute(52L)
+      .minReplicas(82L)
+      .pollingPeriod(509L)
       .build();
 
-    ContainerGroupPatch containerGroupPatch = ContainerGroupPatch
-      .builder()
-      .displayName("Jjdnvuz")
+    ContainerGroupPatch containerGroupPatch = ContainerGroupPatch.builder()
+      .displayName("e2ajyqqvL")
       .container(updateContainer)
-      .replicas(100L)
+      .replicas(436L)
       .countryCodes(countryCodesList)
       .networking(updateContainerGroupNetworking)
       .livenessProbe(containerGroupLivenessProbe)

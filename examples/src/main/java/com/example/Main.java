@@ -3,14 +3,13 @@ package com.example;
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.exceptions.ApiError;
 import com.salad.cloud.sdk.models.Quotas;
 
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -20,7 +19,7 @@ public class Main {
       Quotas response = saladCloudSdk.quotas.getQuotas("acme-corp");
 
       System.out.println(response);
-    } catch (ApiException e) {
+    } catch (ApiError e) {
       e.printStackTrace();
     }
 

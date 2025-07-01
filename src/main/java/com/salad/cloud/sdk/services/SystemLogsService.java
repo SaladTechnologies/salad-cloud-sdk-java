@@ -2,11 +2,13 @@ package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.exceptions.ApiError;
+import com.salad.cloud.sdk.exceptions.ProblemDetailsException;
 import com.salad.cloud.sdk.http.Environment;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
+import com.salad.cloud.sdk.models.ProblemDetails;
 import com.salad.cloud.sdk.models.SystemLogList;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
@@ -39,7 +41,9 @@ public class SystemLogsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetSystemLogsRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<SystemLogList>() {});
@@ -57,7 +61,9 @@ public class SystemLogsService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String containerGroupName
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetSystemLogsRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->

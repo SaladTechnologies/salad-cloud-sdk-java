@@ -7,6 +7,7 @@ import com.salad.cloud.sdk.http.interceptors.DefaultHeadersInterceptor;
 import com.salad.cloud.sdk.http.interceptors.RetryInterceptor;
 import com.salad.cloud.sdk.services.ContainerGroupsService;
 import com.salad.cloud.sdk.services.InferenceEndpointsService;
+import com.salad.cloud.sdk.services.LogsService;
 import com.salad.cloud.sdk.services.OrganizationDataService;
 import com.salad.cloud.sdk.services.QueuesService;
 import com.salad.cloud.sdk.services.QuotasService;
@@ -27,6 +28,7 @@ public class SaladCloudSdk {
   public final InferenceEndpointsService inferenceEndpoints;
   public final OrganizationDataService organizationData;
   public final WebhookSecretKeyService webhookSecretKey;
+  public final LogsService logs;
 
   private final SaladCloudSdkConfig config;
 
@@ -52,6 +54,7 @@ public class SaladCloudSdk {
     this.inferenceEndpoints = new InferenceEndpointsService(httpClient, config);
     this.organizationData = new OrganizationDataService(httpClient, config);
     this.webhookSecretKey = new WebhookSecretKeyService(httpClient, config);
+    this.logs = new LogsService(httpClient, config);
   }
 
   public void setEnvironment(Environment environment) {

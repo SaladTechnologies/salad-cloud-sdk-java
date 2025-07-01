@@ -1,9 +1,20 @@
 package com.salad.cloud.sdk.services;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.exceptions.ApiError;
+import com.salad.cloud.sdk.http.Environment;
+import com.salad.cloud.sdk.http.ModelConverter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.net.SocketTimeoutException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -13,38 +24,149 @@ import org.jetbrains.annotations.NotNull;
 
 public class BaseService {
 
+  private static final Logger logger = Logger.getLogger(BaseService.class.getName());
   protected OkHttpClient httpClient;
   protected SaladCloudSdkConfig config;
+  protected Map<Integer, ErrorMapping<?>> errorMappings;
+
+  private static class ErrorMapping<T> {
+
+    private final Class<T> modelClass;
+    private final Class<? extends ApiError> exceptionClass;
+
+    public ErrorMapping(Class<T> modelClass, Class<? extends ApiError> exceptionClass) {
+      this.modelClass = modelClass;
+      this.exceptionClass = exceptionClass;
+    }
+  }
 
   public BaseService(OkHttpClient httpClient, SaladCloudSdkConfig config) {
     this.httpClient = httpClient;
     this.config = config;
+    this.errorMappings = new HashMap<>();
   }
 
-  protected Response execute(Request request) throws ApiException {
+  public void setBaseUrl(String baseUrl) {
+    this.config.setBaseUrl(baseUrl);
+  }
+
+  public void setEnvironment(Environment environment) {
+    this.config.setEnvironment(environment);
+  }
+
+  protected <T> void addErrorMapping(int status, Class<T> modelClass, Class<? extends ApiError> exceptionClass) {
+    this.errorMappings.put(status, new ErrorMapping<>(modelClass, exceptionClass));
+  }
+
+  private String extractErrorMessage(Response response, Object errorModel) {
+    String message = null;
+
+    if (errorModel != null) {
+      try {
+        message = (String) errorModel.getClass().getMethod("getMessage").invoke(errorModel);
+      } catch (Exception e) {
+        // Ignore if getMessage doesn't exist or fails
+      }
+    }
+
+    if (Objects.isNull(message) || message.trim().isEmpty()) {
+      message = response.message();
+    }
+
+    if (Objects.isNull(message) || message.trim().isEmpty()) {
+      message = String.format("%d error in request to: %s", response.code(), response.request().url());
+    }
+
+    return message;
+  }
+
+  protected Response execute(Request request) throws ApiError {
     Response response;
     try {
       response = this.httpClient.newCall(request).execute();
     } catch (IOException e) {
-      throw new ApiException(e.getMessage());
+      if (e instanceof SocketTimeoutException) {
+        throw new ApiError("Request timed out", 408, null);
+      }
+      throw new ApiError(e.getMessage(), 0, null);
     }
+
     if (response.isSuccessful()) {
       return response;
-    } else {
-      throw new ApiException(response.code());
     }
+
+    // Handle error response
+    ErrorMapping<?> errorMapping = this.errorMappings.get(response.code());
+    if (errorMapping != null) {
+      Object errorModel = null;
+      try {
+        errorModel = ModelConverter.convert(response, errorMapping.modelClass);
+      } catch (Exception e) {
+        logger.log(Level.WARNING, "Failed to deserialize error response to " + errorMapping.modelClass.getName(), e);
+      }
+
+      if (errorModel != null) {
+        try {
+          Constructor<? extends ApiError> constructor = errorMapping.exceptionClass.getConstructor(
+            errorMapping.modelClass,
+            String.class,
+            int.class,
+            Response.class
+          );
+          String message = extractErrorMessage(response, errorModel);
+          throw constructor.newInstance(errorModel, message, response.code(), response);
+        } catch (ReflectiveOperationException e) {
+          logger.log(
+            Level.WARNING,
+            "Failed to create exception instance for " + errorMapping.exceptionClass.getName(),
+            e
+          );
+        }
+      }
+    }
+
+    // If no specific error model is mapped or conversion failed, throw generic ApiError
+    throw new ApiError(extractErrorMessage(response, null), response.code(), response);
   }
 
   protected CompletableFuture<Response> executeAsync(Request request) {
     CompletableFuture<Response> future = new CompletableFuture<>();
-    this.httpClient.newCall(request)
-      .enqueue(
+    this.httpClient.newCall(request).enqueue(
         new Callback() {
           @Override
           public void onResponse(@NotNull Call call, @NotNull Response response) {
             if (!response.isSuccessful()) {
-              ApiException apiException = new ApiException(response.code());
-              future.completeExceptionally(apiException);
+              // Handle error response
+              ErrorMapping<?> errorMapping = errorMappings.get(response.code());
+              if (errorMapping != null) {
+                try {
+                  Object errorModel = ModelConverter.convert(response, errorMapping.modelClass);
+                  if (errorModel != null) {
+                    // Use reflection to create the exception
+                    Constructor<? extends ApiError> constructor = errorMapping.exceptionClass.getConstructor(
+                      errorMapping.modelClass,
+                      String.class,
+                      int.class,
+                      Response.class
+                    );
+                    String message = extractErrorMessage(response, errorModel);
+                    future.completeExceptionally(
+                      constructor.newInstance(errorModel, message, response.code(), response)
+                    );
+                    return;
+                  }
+                } catch (Exception e) {
+                  logger.log(
+                    Level.WARNING,
+                    "Failed to deserialize error response to " + errorMapping.modelClass.getName(),
+                    e
+                  );
+                }
+              }
+
+              // If no specific error model is mapped or conversion failed, throw generic ApiError
+              ApiError error = new ApiError(extractErrorMessage(response, null), response.code(), response);
+              future.completeExceptionally(error);
               return;
             }
 
@@ -53,8 +175,13 @@ public class BaseService {
 
           @Override
           public void onFailure(@NotNull Call call, @NotNull IOException e) {
-            ApiException apiException = new ApiException(e.getMessage());
-            future.completeExceptionally(apiException);
+            if (e instanceof SocketTimeoutException) {
+              ApiError error = new ApiError("Request timed out", 408, null);
+              future.completeExceptionally(error);
+            } else {
+              ApiError error = new ApiError(e.getMessage(), 0, null);
+              future.completeExceptionally(error);
+            }
           }
         }
       );

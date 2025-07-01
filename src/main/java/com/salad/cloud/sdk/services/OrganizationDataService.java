@@ -2,12 +2,14 @@ package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.exceptions.ApiError;
+import com.salad.cloud.sdk.exceptions.ProblemDetailsException;
 import com.salad.cloud.sdk.http.Environment;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
 import com.salad.cloud.sdk.models.GpuClassesList;
+import com.salad.cloud.sdk.models.ProblemDetails;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.exceptions.ValidationException;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
@@ -33,7 +35,9 @@ public class OrganizationDataService extends BaseService {
    * @param organizationName String Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
    * @return response of {@code GpuClassesList}
    */
-  public GpuClassesList listGpuClasses(@NonNull String organizationName) throws ApiException, ValidationException {
+  public GpuClassesList listGpuClasses(@NonNull String organizationName) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListGpuClassesRequest(organizationName);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<GpuClassesList>() {});
@@ -46,7 +50,9 @@ public class OrganizationDataService extends BaseService {
    * @return response of {@code CompletableFuture<GpuClassesList>}
    */
   public CompletableFuture<GpuClassesList> listGpuClassesAsync(@NonNull String organizationName)
-    throws ApiException, ValidationException {
+    throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListGpuClassesRequest(organizationName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->

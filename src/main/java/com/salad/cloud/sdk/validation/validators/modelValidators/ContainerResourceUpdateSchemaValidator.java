@@ -36,9 +36,16 @@ public class ContainerResourceUpdateSchemaValidator extends AbstractModelValidat
       .add(
         new NumericValidator<Long>("storageAmount")
           .min(1073741824L)
-          .max(53687091200L)
+          .max(268435456000L)
           .optional()
           .validate(containerResourceUpdateSchema.getStorageAmount())
+      )
+      .add(
+        new NumericValidator<Long>("shmSize")
+          .min(64L)
+          .max(2147483647L)
+          .optional()
+          .validate(containerResourceUpdateSchema.getShmSize())
       )
       .aggregate();
   }

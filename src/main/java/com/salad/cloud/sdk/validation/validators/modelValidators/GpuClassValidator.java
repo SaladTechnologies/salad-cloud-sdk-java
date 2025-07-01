@@ -5,6 +5,7 @@ import com.salad.cloud.sdk.models.GpuClassPrice;
 import com.salad.cloud.sdk.validation.Violation;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.validators.ListValidator;
+import com.salad.cloud.sdk.validation.validators.NumericValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
 
 public class GpuClassValidator extends AbstractModelValidator<GpuClass> {
@@ -34,6 +35,9 @@ public class GpuClassValidator extends AbstractModelValidator<GpuClass> {
           .required()
           .validate(gpuClass.getPrices())
       )
+      .add(new NumericValidator<Long>("minVcpu").min(0L).optional().validate(gpuClass.getMinVcpu()))
+      .add(new NumericValidator<Long>("minRam").min(0L).optional().validate(gpuClass.getMinRam()))
+      .add(new NumericValidator<Long>("minStorage").min(0L).optional().validate(gpuClass.getMinStorage()))
       .aggregate();
   }
 }

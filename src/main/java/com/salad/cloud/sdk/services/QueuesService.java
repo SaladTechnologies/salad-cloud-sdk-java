@@ -2,12 +2,14 @@ package com.salad.cloud.sdk.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.exceptions.ApiError;
+import com.salad.cloud.sdk.exceptions.ProblemDetailsException;
 import com.salad.cloud.sdk.http.Environment;
 import com.salad.cloud.sdk.http.HttpMethod;
 import com.salad.cloud.sdk.http.ModelConverter;
 import com.salad.cloud.sdk.http.util.RequestBuilder;
 import com.salad.cloud.sdk.models.ListQueueJobsParameters;
+import com.salad.cloud.sdk.models.ProblemDetails;
 import com.salad.cloud.sdk.models.Queue;
 import com.salad.cloud.sdk.models.QueueCollection;
 import com.salad.cloud.sdk.models.QueueJob;
@@ -47,7 +49,9 @@ public class QueuesService extends BaseService {
    * @return response of {@code QueueCollection}
    */
   public QueueCollection listQueues(@NonNull String organizationName, @NonNull String projectName)
-    throws ApiException, ValidationException {
+    throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<QueueCollection>() {});
@@ -63,7 +67,9 @@ public class QueuesService extends BaseService {
   public CompletableFuture<QueueCollection> listQueuesAsync(
     @NonNull String organizationName,
     @NonNull String projectName
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->
@@ -114,7 +120,10 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull QueuePrototype queuePrototype
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueRequest(organizationName, projectName, queuePrototype);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<Queue>() {});
@@ -132,7 +141,10 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull QueuePrototype queuePrototype
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueRequest(organizationName, projectName, queuePrototype);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Queue>() {}));
@@ -183,7 +195,9 @@ public class QueuesService extends BaseService {
    * @return response of {@code Queue}
    */
   public Queue getQueue(@NonNull String organizationName, @NonNull String projectName, @NonNull String queueName)
-    throws ApiException, ValidationException {
+    throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueRequest(organizationName, projectName, queueName);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<Queue>() {});
@@ -201,7 +215,9 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueRequest(organizationName, projectName, queueName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Queue>() {}));
@@ -264,7 +280,10 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull QueuePatch queuePatch
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, queuePatch);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<Queue>() {});
@@ -284,7 +303,10 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull QueuePatch queuePatch
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, queuePatch);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Queue>() {}));
@@ -345,7 +367,9 @@ public class QueuesService extends BaseService {
    * @return response of {@code void}
    */
   public void deleteQueue(@NonNull String organizationName, @NonNull String projectName, @NonNull String queueName)
-    throws ApiException, ValidationException {
+    throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteQueueRequest(organizationName, projectName, queueName);
     this.execute(request);
   }
@@ -362,7 +386,9 @@ public class QueuesService extends BaseService {
     @NonNull String organizationName,
     @NonNull String projectName,
     @NonNull String queueName
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteQueueRequest(organizationName, projectName, queueName);
     return this.executeAsync(request).thenApplyAsync(response -> null);
   }
@@ -424,7 +450,9 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull ListQueueJobsParameters requestParameters
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<QueueJobCollection>() {});
@@ -444,7 +472,9 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull ListQueueJobsParameters requestParameters
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response ->
@@ -513,7 +543,10 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull QueueJobPrototype queueJobPrototype
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, queueJobPrototype);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<QueueJob>() {});
@@ -533,7 +566,10 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull QueueJobPrototype queueJobPrototype
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, queueJobPrototype);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<QueueJob>() {})
@@ -600,7 +636,9 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     Response response = this.execute(request);
     return ModelConverter.convert(response, new TypeReference<QueueJob>() {});
@@ -620,7 +658,9 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<QueueJob>() {})
@@ -686,7 +726,9 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     this.execute(request);
   }
@@ -705,7 +747,9 @@ public class QueuesService extends BaseService {
     @NonNull String projectName,
     @NonNull String queueName,
     @NonNull String queueJobId
-  ) throws ApiException, ValidationException {
+  ) throws ApiError, ValidationException {
+    this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
+    this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     return this.executeAsync(request).thenApplyAsync(response -> null);
   }
