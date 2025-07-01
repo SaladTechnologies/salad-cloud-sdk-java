@@ -30,15 +30,22 @@ public class ContainerResourceRequirementsValidator extends AbstractModelValidat
       .add(
         new ListValidator<String>("gpuClasses")
           .maxLength(100)
-          .optional()
+          .required()
           .validate(containerResourceRequirements.getGpuClasses())
       )
       .add(
         new NumericValidator<Long>("storageAmount")
           .min(1073741824L)
-          .max(53687091200L)
+          .max(268435456000L)
           .optional()
           .validate(containerResourceRequirements.getStorageAmount())
+      )
+      .add(
+        new NumericValidator<Long>("shmSize")
+          .min(64L)
+          .max(2147483647L)
+          .optional()
+          .validate(containerResourceRequirements.getShmSize())
       )
       .aggregate();
   }

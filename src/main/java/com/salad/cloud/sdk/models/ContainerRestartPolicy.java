@@ -21,8 +21,7 @@ public enum ContainerRestartPolicy {
 
   @JsonCreator
   public static ContainerRestartPolicy fromValue(String value) {
-    return Arrays
-      .stream(ContainerRestartPolicy.values())
+    return Arrays.stream(ContainerRestartPolicy.values())
       .filter(item -> item.value.equals(value))
       .findFirst()
       .orElse(null);

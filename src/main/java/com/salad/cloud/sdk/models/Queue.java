@@ -1,5 +1,6 @@
 package com.salad.cloud.sdk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Represents a queue.
@@ -64,5 +66,26 @@ public class Queue {
   /**
    * The description. This may be used as a space for notes or other information about the queue.
    */
-  private String description;
+  @JsonProperty("description")
+  private JsonNullable<String> description;
+
+  @JsonIgnore
+  public String getDescription() {
+    return description.orElse(null);
+  }
+
+  // Overwrite lombok builder methods
+  public static class QueueBuilder {
+
+    private JsonNullable<String> description = JsonNullable.undefined();
+
+    @JsonProperty("description")
+    public QueueBuilder description(String value) {
+      if (value == null) {
+        throw new IllegalStateException("description cannot be null");
+      }
+      this.description = JsonNullable.of(value);
+      return this;
+    }
+  }
 }

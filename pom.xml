@@ -8,7 +8,7 @@
 
     <groupId>com.salad.cloud</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.9.0-alpha.13</version>
+    <version>0.9.0-alpha.14</version>
 
     <!-- See https://central.sonatype.org/publish/requirements/#project-name-description-and-url -->
     <name>${project.groupId}:${project.artifactId}</name>
@@ -67,6 +67,11 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>4.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
         </dependency>
     </dependencies>
 

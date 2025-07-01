@@ -86,6 +86,7 @@ public class ContainerGroupValidator extends AbstractModelValidator<ContainerGro
           .optional()
           .validate(containerGroup.getReadinessProbe())
       )
+      .add(new StringValidator("readme").minLength(2).maxLength(65000).optional().validate(containerGroup.getReadme()))
       .add(
         new ContainerGroupStartupProbeValidator("startupProbe").optional().validate(containerGroup.getStartupProbe())
       )

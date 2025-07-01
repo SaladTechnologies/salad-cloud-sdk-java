@@ -1,5 +1,6 @@
 package com.salad.cloud.sdk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Represents a workload error
@@ -64,5 +66,25 @@ public class WorkloadError {
    * The timestamp when the workload started execution, or null if it failed before starting
    */
   @JsonProperty("started_at")
-  private String startedAt;
+  private JsonNullable<String> startedAt;
+
+  @JsonIgnore
+  public String getStartedAt() {
+    return startedAt.orElse(null);
+  }
+
+  // Overwrite lombok builder methods
+  public static class WorkloadErrorBuilder {
+
+    private JsonNullable<String> startedAt = JsonNullable.undefined();
+
+    @JsonProperty("started_at")
+    public WorkloadErrorBuilder startedAt(String value) {
+      if (value == null) {
+        throw new IllegalStateException("startedAt cannot be null");
+      }
+      this.startedAt = JsonNullable.of(value);
+      return this;
+    }
+  }
 }

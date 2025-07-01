@@ -8,15 +8,13 @@ import com.salad.cloud.sdk.models.ListInferenceEndpointsParameters;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    ListInferenceEndpointsParameters requestParameters = ListInferenceEndpointsParameters
-      .builder()
+    ListInferenceEndpointsParameters requestParameters = ListInferenceEndpointsParameters.builder()
       .page(1L)
       .pageSize(1L)
       .build();

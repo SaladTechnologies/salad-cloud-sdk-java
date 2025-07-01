@@ -8,15 +8,13 @@ import com.salad.cloud.sdk.models.QueueJobPrototype;
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueueJobPrototype queueJobPrototype = QueueJobPrototype
-      .builder()
+    QueueJobPrototype queueJobPrototype = QueueJobPrototype.builder()
       .input(new Object())
       .metadata(new Object())
       .webhook("webhook")

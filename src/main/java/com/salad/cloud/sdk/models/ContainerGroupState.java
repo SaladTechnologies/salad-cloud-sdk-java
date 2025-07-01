@@ -1,6 +1,6 @@
 package com.salad.cloud.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +9,7 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Represents the operational state of a container group during its lifecycle, including timing information, status, and instance distribution metrics. This state captures the current execution status, start and finish times, and provides visibility into the operational health across instances.
@@ -51,6 +52,23 @@ public class ContainerGroupState {
   /**
    * Optional textual description or notes about the current state of the container group
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
-  private String description;
+  @JsonProperty("description")
+  private JsonNullable<String> description;
+
+  @JsonIgnore
+  public String getDescription() {
+    return description.orElse(null);
+  }
+
+  // Overwrite lombok builder methods
+  public static class ContainerGroupStateBuilder {
+
+    private JsonNullable<String> description = JsonNullable.undefined();
+
+    @JsonProperty("description")
+    public ContainerGroupStateBuilder description(String value) {
+      this.description = JsonNullable.of(value);
+      return this;
+    }
+  }
 }

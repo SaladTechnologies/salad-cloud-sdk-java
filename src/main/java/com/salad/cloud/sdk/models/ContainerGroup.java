@@ -1,5 +1,6 @@
 package com.salad.cloud.sdk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -10,6 +11,7 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * A container group definition that represents a scalable set of identical containers running as a distributed service
@@ -131,40 +133,76 @@ public class ContainerGroup {
   /**
    * Defines a liveness probe for container groups that determines when to restart a container if it becomes unhealthy
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("liveness_probe")
-  private ContainerGroupLivenessProbe livenessProbe;
+  private JsonNullable<ContainerGroupLivenessProbe> livenessProbe;
 
   /**
    * Network configuration for container groups that defines connectivity, routing, and access control settings
    */
-  private ContainerGroupNetworkingConfiguration networking;
+  @JsonProperty("networking")
+  private JsonNullable<ContainerGroupNetworkingConfiguration> networking;
 
   /**
    * Defines configuration for automatically scaling container instances based on queue length. The autoscaler monitors a queue and adjusts the number of running replicas to maintain the desired queue length.
    */
   @JsonProperty("queue_autoscaler")
-  private QueueBasedAutoscalerConfiguration queueAutoscaler;
+  private JsonNullable<QueueBasedAutoscalerConfiguration> queueAutoscaler;
 
   /**
    * Configuration for connecting a container group to a message queue system, enabling asynchronous communication between services.
    */
   @JsonProperty("queue_connection")
-  private ContainerGroupQueueConnection queueConnection;
+  private JsonNullable<ContainerGroupQueueConnection> queueConnection;
 
   /**
    * Defines how to check if a container is ready to serve traffic. The readiness probe determines whether the container's application is ready to accept traffic. If the readiness probe fails, the container is considered not ready and traffic will not be sent to it.
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("readiness_probe")
-  private ContainerGroupReadinessProbe readinessProbe;
+  private JsonNullable<ContainerGroupReadinessProbe> readinessProbe;
+
+  @JsonProperty("readme")
+  private JsonNullable<String> readme;
 
   /**
    * Defines a probe that checks if a container application has started successfully. Startup probes help prevent applications from being prematurely marked as unhealthy during initialization. The probe can use HTTP requests, TCP connections, gRPC calls, or shell commands to determine startup status.
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
   @JsonProperty("startup_probe")
-  private ContainerGroupStartupProbe startupProbe;
+  private JsonNullable<ContainerGroupStartupProbe> startupProbe;
+
+  @JsonIgnore
+  public ContainerGroupLivenessProbe getLivenessProbe() {
+    return livenessProbe.orElse(null);
+  }
+
+  @JsonIgnore
+  public ContainerGroupNetworkingConfiguration getNetworking() {
+    return networking.orElse(null);
+  }
+
+  @JsonIgnore
+  public QueueBasedAutoscalerConfiguration getQueueAutoscaler() {
+    return queueAutoscaler.orElse(null);
+  }
+
+  @JsonIgnore
+  public ContainerGroupQueueConnection getQueueConnection() {
+    return queueConnection.orElse(null);
+  }
+
+  @JsonIgnore
+  public ContainerGroupReadinessProbe getReadinessProbe() {
+    return readinessProbe.orElse(null);
+  }
+
+  @JsonIgnore
+  public String getReadme() {
+    return readme.orElse(null);
+  }
+
+  @JsonIgnore
+  public ContainerGroupStartupProbe getStartupProbe() {
+    return startupProbe.orElse(null);
+  }
 
   // Overwrite lombok builder methods
   public static class ContainerGroupBuilder {
@@ -177,6 +215,74 @@ public class ContainerGroup {
     public ContainerGroupBuilder priority(ContainerGroupPriority priority) {
       this.priority$set = true;
       this.priority = priority;
+      return this;
+    }
+
+    private JsonNullable<ContainerGroupLivenessProbe> livenessProbe = JsonNullable.undefined();
+
+    @JsonProperty("liveness_probe")
+    public ContainerGroupBuilder livenessProbe(ContainerGroupLivenessProbe value) {
+      this.livenessProbe = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<ContainerGroupNetworkingConfiguration> networking = JsonNullable.undefined();
+
+    @JsonProperty("networking")
+    public ContainerGroupBuilder networking(ContainerGroupNetworkingConfiguration value) {
+      if (value == null) {
+        throw new IllegalStateException("networking cannot be null");
+      }
+      this.networking = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<QueueBasedAutoscalerConfiguration> queueAutoscaler = JsonNullable.undefined();
+
+    @JsonProperty("queue_autoscaler")
+    public ContainerGroupBuilder queueAutoscaler(QueueBasedAutoscalerConfiguration value) {
+      if (value == null) {
+        throw new IllegalStateException("queueAutoscaler cannot be null");
+      }
+      this.queueAutoscaler = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<ContainerGroupQueueConnection> queueConnection = JsonNullable.undefined();
+
+    @JsonProperty("queue_connection")
+    public ContainerGroupBuilder queueConnection(ContainerGroupQueueConnection value) {
+      if (value == null) {
+        throw new IllegalStateException("queueConnection cannot be null");
+      }
+      this.queueConnection = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<ContainerGroupReadinessProbe> readinessProbe = JsonNullable.undefined();
+
+    @JsonProperty("readiness_probe")
+    public ContainerGroupBuilder readinessProbe(ContainerGroupReadinessProbe value) {
+      this.readinessProbe = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<String> readme = JsonNullable.undefined();
+
+    @JsonProperty("readme")
+    public ContainerGroupBuilder readme(String value) {
+      if (value == null) {
+        throw new IllegalStateException("readme cannot be null");
+      }
+      this.readme = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<ContainerGroupStartupProbe> startupProbe = JsonNullable.undefined();
+
+    @JsonProperty("startup_probe")
+    public ContainerGroupBuilder startupProbe(ContainerGroupStartupProbe value) {
+      this.startupProbe = JsonNullable.of(value);
       return this;
     }
 
@@ -206,6 +312,7 @@ public class ContainerGroup {
         queueAutoscaler,
         queueConnection,
         readinessProbe,
+        readme,
         startupProbe
       );
     }

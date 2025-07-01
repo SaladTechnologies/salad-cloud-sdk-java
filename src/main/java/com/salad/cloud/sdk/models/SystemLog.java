@@ -1,5 +1,6 @@
 package com.salad.cloud.sdk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Represents a system log
@@ -73,13 +75,23 @@ public class SystemLog {
    * The container group instance identifier.
    */
   @JsonProperty("instance_id")
-  private String instanceId;
+  private JsonNullable<String> instanceId;
 
   /**
    * The container group machine identifier.
    */
   @JsonProperty("machine_id")
-  private String machineId;
+  private JsonNullable<String> machineId;
+
+  @JsonIgnore
+  public String getInstanceId() {
+    return instanceId.orElse(null);
+  }
+
+  @JsonIgnore
+  public String getMachineId() {
+    return machineId.orElse(null);
+  }
 
   // Overwrite lombok builder methods
   public static class SystemLogBuilder {
@@ -114,6 +126,28 @@ public class SystemLog {
     public SystemLogBuilder resourceStorageAmount(Long resourceStorageAmount) {
       this.resourceStorageAmount$set = true;
       this.resourceStorageAmount = resourceStorageAmount;
+      return this;
+    }
+
+    private JsonNullable<String> instanceId = JsonNullable.undefined();
+
+    @JsonProperty("instance_id")
+    public SystemLogBuilder instanceId(String value) {
+      if (value == null) {
+        throw new IllegalStateException("instanceId cannot be null");
+      }
+      this.instanceId = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<String> machineId = JsonNullable.undefined();
+
+    @JsonProperty("machine_id")
+    public SystemLogBuilder machineId(String value) {
+      if (value == null) {
+        throw new IllegalStateException("machineId cannot be null");
+      }
+      this.machineId = JsonNullable.of(value);
       return this;
     }
 

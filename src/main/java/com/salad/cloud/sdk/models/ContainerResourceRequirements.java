@@ -1,6 +1,6 @@
 package com.salad.cloud.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import lombok.Builder;
@@ -10,6 +10,7 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.With;
 import lombok.extern.jackson.Jacksonized;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Specifies the resource requirements for a container.
@@ -37,35 +38,55 @@ public class ContainerResourceRequirements {
   /**
    * A list of GPU class UUIDs required by the container. Can be null if no GPU is required.
    */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
+  @NonNull
   @JsonProperty("gpu_classes")
   private List<String> gpuClasses;
 
   /**
-   * The amount of storage (in bytes) required by the container. Must be between 1 GB (1073741824 bytes) and 50 GB (53687091200 bytes).
+   * The amount of storage (in bytes) required by the container. Must be between 1 GB (1073741824 bytes) and 250 GB (268435456000 bytes).
    */
   @JsonProperty("storage_amount")
-  private Long storageAmount;
+  private JsonNullable<Long> storageAmount;
+
+  /**
+   * The size of the shared memory (/dev/shm) in MB. If not specified, defaults to 64MB.
+   */
+  @JsonProperty("shm_size")
+  private JsonNullable<Long> shmSize;
+
+  @JsonIgnore
+  public Long getStorageAmount() {
+    return storageAmount.orElse(null);
+  }
+
+  @JsonIgnore
+  public Long getShmSize() {
+    return shmSize.orElse(null);
+  }
 
   // Overwrite lombok builder methods
   public static class ContainerResourceRequirementsBuilder {
 
-    /**
-     * Flag to track if the gpuClasses property has been set.
-     */
-    private boolean gpuClasses$set = false;
+    private JsonNullable<Long> storageAmount = JsonNullable.undefined();
 
-    public ContainerResourceRequirementsBuilder gpuClasses(List<String> gpuClasses) {
-      this.gpuClasses$set = true;
-      this.gpuClasses = gpuClasses;
+    @JsonProperty("storage_amount")
+    public ContainerResourceRequirementsBuilder storageAmount(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("storageAmount cannot be null");
+      }
+      this.storageAmount = JsonNullable.of(value);
       return this;
     }
 
-    public ContainerResourceRequirements build() {
-      if (!gpuClasses$set) {
-        throw new IllegalStateException("gpuClasses is required");
+    private JsonNullable<Long> shmSize = JsonNullable.of(64L);
+
+    @JsonProperty("shm_size")
+    public ContainerResourceRequirementsBuilder shmSize(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("shmSize cannot be null");
       }
-      return new ContainerResourceRequirements(cpu, memory, gpuClasses, storageAmount);
+      this.shmSize = JsonNullable.of(value);
+      return this;
     }
   }
 }

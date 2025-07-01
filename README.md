@@ -1,4 +1,4 @@
-# SaladCloudSdk Java SDK 0.9.0-alpha.13
+# SaladCloudSdk Java SDK 0.9.0-alpha.14
 
 Welcome to the SaladCloudSdk SDK documentation. This guide will help you get started with integrating and using the SaladCloudSdk SDK in your project.
 
@@ -6,8 +6,8 @@ Welcome to the SaladCloudSdk SDK documentation. This guide will help you get sta
 
 ## Versions
 
-- API version: `0.9.0-alpha.12`
-- SDK version: `0.9.0-alpha.13`
+- API version: `0.9.0-alpha.14`
+- SDK version: `0.9.0-alpha.14`
 
 ## About the API
 
@@ -40,14 +40,14 @@ If you use Maven, place the following within the _dependency_ tag in your `pom.x
 <dependency>
     <groupId>com.salad.cloud</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.9.0-alpha.13</version>
+    <version>0.9.0-alpha.14</version>
 </dependency>
 ```
 
 If you use Gradle, paste the next line inside the _dependencies_ block of your `build.gradle` file:
 
 ```Gradle
-implementation group: com.salad.cloud, name: sdk, version: 0.9.0-alpha.13
+implementation group: com.salad.cloud, name: sdk, version: 0.9.0-alpha.14
 ```
 
 If you use JAR files, package the SDK by running the following command:
@@ -76,8 +76,7 @@ import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
 public class Main {
 
   public static void main(String[] args) {
-    ApiKeyAuthConfig apiKeyAuthConfig = ApiKeyAuthConfig
-      .builder()
+    ApiKeyAuthConfig apiKeyAuthConfig = ApiKeyAuthConfig.builder()
       .apiKey("YOUR_API_KEY")
       .apiKeyHeader("YOUR_API_KEY_HEADER")
       .build();
@@ -123,14 +122,13 @@ Below is a comprehensive example demonstrating how to authenticate and call a si
 import com.salad.cloud.sdk.SaladCloudSdk;
 import com.salad.cloud.sdk.config.ApiKeyAuthConfig;
 import com.salad.cloud.sdk.config.SaladCloudSdkConfig;
-import com.salad.cloud.sdk.exceptions.ApiException;
+import com.salad.cloud.sdk.exceptions.ApiError;
 import com.salad.cloud.sdk.models.Quotas;
 
 public class Main {
 
   public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig
-      .builder()
+    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
       .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
       .build();
 
@@ -140,7 +138,7 @@ public class Main {
       Quotas response = saladCloudSdk.quotas.getQuotas("acme-corp");
 
       System.out.println(response);
-    } catch (ApiException e) {
+    } catch (ApiError e) {
       e.printStackTrace();
     }
 
@@ -167,6 +165,7 @@ The SDK provides various services to interact with the API.
 | [InferenceEndpointsService](documentation/services/InferenceEndpointsService.md) |
 | [OrganizationDataService](documentation/services/OrganizationDataService.md)     |
 | [WebhookSecretKeyService](documentation/services/WebhookSecretKeyService.md)     |
+| [LogsService](documentation/services/LogsService.md)                             |
 
 </details>
 
@@ -203,6 +202,8 @@ The SDK includes several models that represent the data structures used in API r
 | [InferenceEndpointJob](documentation/models/InferenceEndpointJob.md)                                         | Represents a inference endpoint job                                                                                                                                                                                                                                                                                                                                   |
 | [GpuClassesList](documentation/models/GpuClassesList.md)                                                     | Represents a list of GPU classes                                                                                                                                                                                                                                                                                                                                      |
 | [WebhookSecretKey](documentation/models/WebhookSecretKey.md)                                                 | Represents a webhook secret key                                                                                                                                                                                                                                                                                                                                       |
+| [LogEntryQuery](documentation/models/LogEntryQuery.md)                                                       | Represents a query for logs                                                                                                                                                                                                                                                                                                                                           |
+| [LogEntryCollection](documentation/models/LogEntryCollection.md)                                             | Represents a page of organization logs                                                                                                                                                                                                                                                                                                                                |
 | [Container](documentation/models/Container.md)                                                               | Represents a container with its configuration and resource requirements.                                                                                                                                                                                                                                                                                              |
 | [CountryCode](documentation/models/CountryCode.md)                                                           | ISO 3166-1 alpha-2 country codes                                                                                                                                                                                                                                                                                                                                      |
 | [ContainerGroupState](documentation/models/ContainerGroupState.md)                                           | Represents the operational state of a container group during its lifecycle, including timing information, status, and instance distribution metrics. This state captures the current execution status, start and finish times, and provides visibility into the operational health across instances.                                                                  |
@@ -240,6 +241,7 @@ The SDK includes several models that represent the data structures used in API r
 | [CreateContainerGroupNetworking](documentation/models/CreateContainerGroupNetworking.md)                     | Network configuration for container groups specifying connectivity parameters, including authentication, protocol, and timeout settings                                                                                                                                                                                                                               |
 | [ContainerConfigurationLogging](documentation/models/ContainerConfigurationLogging.md)                       | Configuration options for directing container logs to a logging provider. This schema enables you to specify a single logging destination for container output, supporting monitoring, debugging, and analytics use cases. Each provider has its own configuration parameters defined in the referenced schemas. Only one logging provider can be selected at a time. |
 | [ContainerRegistryAuthentication](documentation/models/ContainerRegistryAuthentication.md)                   | Authentication configuration for various container registry types, including AWS ECR, Docker Hub, GCP GAR, GCP GCR, and basic authentication.                                                                                                                                                                                                                         |
+| [CreateContainerResourceRequirements](documentation/models/CreateContainerResourceRequirements.md)           | Specifies the resource requirements for creating a container.                                                                                                                                                                                                                                                                                                         |
 | [ContainerLoggingConfigurationHttp2](documentation/models/ContainerLoggingConfigurationHttp2.md)             | Configuration for sending container logs to an HTTP endpoint. Defines how logs are formatted, compressed, and transmitted.                                                                                                                                                                                                                                            |
 | [ContainerRegistryAuthenticationAwsEcr](documentation/models/ContainerRegistryAuthenticationAwsEcr.md)       | Authentication details for AWS Elastic Container Registry (ECR)                                                                                                                                                                                                                                                                                                       |
 | [ContainerRegistryAuthenticationBasic](documentation/models/ContainerRegistryAuthenticationBasic.md)         | Basic username and password authentication for generic container registries                                                                                                                                                                                                                                                                                           |
@@ -260,9 +262,14 @@ The SDK includes several models that represent the data structures used in API r
 | [InferenceEndpointJobEventAction](documentation/models/InferenceEndpointJobEventAction.md)                   | The action that was taken on the inference endpoint job.                                                                                                                                                                                                                                                                                                              |
 | [GpuClass](documentation/models/GpuClass.md)                                                                 | Represents a GPU Class                                                                                                                                                                                                                                                                                                                                                |
 | [GpuClassPrice](documentation/models/GpuClassPrice.md)                                                       | Represents the price of a GPU class for a given container group priority                                                                                                                                                                                                                                                                                              |
+| [LogEntryQuerySortOrder](documentation/models/LogEntryQuerySortOrder.md)                                     | The sort order of the log entries. `asc` will sort the log entries in chronological order. `desc` will sort the log entries in reverse chronological order.                                                                                                                                                                                                           |
+| [LogEntry](documentation/models/LogEntry.md)                                                                 |                                                                                                                                                                                                                                                                                                                                                                       |
+| [LogEntryResource](documentation/models/LogEntryResource.md)                                                 | The resource associated with the log entry                                                                                                                                                                                                                                                                                                                            |
+| [LogEntrySeverity](documentation/models/LogEntrySeverity.md)                                                 | The severity level of the log entry                                                                                                                                                                                                                                                                                                                                   |
 | [ListQueueJobsParameters](documentation/models/ListQueueJobsParameters.md)                                   |                                                                                                                                                                                                                                                                                                                                                                       |
 | [ListInferenceEndpointsParameters](documentation/models/ListInferenceEndpointsParameters.md)                 |                                                                                                                                                                                                                                                                                                                                                                       |
 | [ListInferenceEndpointJobsParameters](documentation/models/ListInferenceEndpointJobsParameters.md)           |                                                                                                                                                                                                                                                                                                                                                                       |
+| [ProblemDetails](documentation/models/ProblemDetails.md)                                                     | Represents an API error                                                                                                                                                                                                                                                                                                                                               |
 
 </details>
 
