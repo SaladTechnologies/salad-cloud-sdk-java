@@ -49,7 +49,7 @@ public class ContainerResourceRequirements {
   private JsonNullable<Long> storageAmount;
 
   /**
-   * The size of the shared memory (/dev/shm) in MB. If not specified, defaults to 64MB.
+   * The size of the shared memory (/dev/shm) in MB. If not specified, defaults to 1024MB.
    */
   @JsonProperty("shm_size")
   private JsonNullable<Long> shmSize;

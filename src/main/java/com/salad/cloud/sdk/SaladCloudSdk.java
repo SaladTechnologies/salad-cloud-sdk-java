@@ -13,7 +13,6 @@ import com.salad.cloud.sdk.services.QueuesService;
 import com.salad.cloud.sdk.services.QuotasService;
 import com.salad.cloud.sdk.services.SystemLogsService;
 import com.salad.cloud.sdk.services.WebhookSecretKeyService;
-import com.salad.cloud.sdk.services.WorkloadErrorsService;
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 
@@ -21,7 +20,6 @@ import okhttp3.OkHttpClient;
 public class SaladCloudSdk {
 
   public final ContainerGroupsService containerGroups;
-  public final WorkloadErrorsService workloadErrors;
   public final SystemLogsService systemLogs;
   public final QueuesService queues;
   public final QuotasService quotas;
@@ -47,7 +45,6 @@ public class SaladCloudSdk {
       .build();
 
     this.containerGroups = new ContainerGroupsService(httpClient, config);
-    this.workloadErrors = new WorkloadErrorsService(httpClient, config);
     this.systemLogs = new SystemLogsService(httpClient, config);
     this.queues = new QueuesService(httpClient, config);
     this.quotas = new QuotasService(httpClient, config);

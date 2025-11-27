@@ -23,7 +23,7 @@ public class QueueJobValidator extends AbstractModelValidator<QueueJob> {
         new StringValidator("webhook")
           .minLength(20)
           .maxLength(27)
-          .pattern("^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}(\\\\.\\\\d+)?(Z|[+-]\\\\d{2}:\\\\d{2})$")
+          .pattern("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$")
           .optional()
           .validate(queueJob.getWebhook())
       )

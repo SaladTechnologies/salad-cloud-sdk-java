@@ -56,7 +56,8 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<InferenceEndpointCollection>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpointCollection>() {});
   }
 
   /**
@@ -77,9 +78,10 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<InferenceEndpointCollection>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpointCollection>() {});
+    });
   }
 
   private Request buildListInferenceEndpointsRequest(
@@ -126,7 +128,8 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetInferenceEndpointRequest(organizationName, inferenceEndpointName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<InferenceEndpoint>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpoint>() {});
   }
 
   /**
@@ -146,9 +149,10 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetInferenceEndpointRequest(organizationName, inferenceEndpointName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<InferenceEndpoint>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpoint>() {});
+    });
   }
 
   private Request buildGetInferenceEndpointRequest(
@@ -205,7 +209,8 @@ public class InferenceEndpointsService extends BaseService {
     Request request =
       this.buildListInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<InferenceEndpointJobCollection>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpointJobCollection>() {});
   }
 
   /**
@@ -229,9 +234,10 @@ public class InferenceEndpointsService extends BaseService {
     Request request =
       this.buildListInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<InferenceEndpointJobCollection>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpointJobCollection>() {});
+    });
   }
 
   private Request buildListInferenceEndpointJobsRequest(
@@ -296,7 +302,8 @@ public class InferenceEndpointsService extends BaseService {
           inferenceEndpointJobPrototype
         );
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<InferenceEndpointJob>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpointJob>() {});
   }
 
   /**
@@ -324,9 +331,10 @@ public class InferenceEndpointsService extends BaseService {
           inferenceEndpointJobPrototype
         );
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<InferenceEndpointJob>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpointJob>() {});
+    });
   }
 
   private Request buildCreateInferenceEndpointJobRequest(
@@ -389,7 +397,8 @@ public class InferenceEndpointsService extends BaseService {
     Request request =
       this.buildGetInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<InferenceEndpointJob>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpointJob>() {});
   }
 
   /**
@@ -412,9 +421,10 @@ public class InferenceEndpointsService extends BaseService {
     Request request =
       this.buildGetInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<InferenceEndpointJob>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<InferenceEndpointJob>() {});
+    });
   }
 
   private Request buildGetInferenceEndpointJobRequest(

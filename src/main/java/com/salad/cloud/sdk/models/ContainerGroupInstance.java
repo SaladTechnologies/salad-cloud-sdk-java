@@ -55,6 +55,24 @@ public class ContainerGroupInstance {
   private Long version;
 
   /**
+   * The SSH IP address of the container group instance
+   */
+  @JsonProperty("ssh_ip")
+  private JsonNullable<String> sshIp;
+
+  /**
+   * The SSH port of the container group instance
+   */
+  @JsonProperty("ssh_port")
+  private JsonNullable<Long> sshPort;
+
+  /**
+   * The SSH host key fingerprint of the container group instance
+   */
+  @JsonProperty("ssh_host_key_fingerprint")
+  private JsonNullable<String> sshHostKeyFingerprint;
+
+  /**
    * Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function. If no readiness probe is defined, this will be true once the instance is fully started.
    */
   @JsonProperty("ready")
@@ -73,6 +91,21 @@ public class ContainerGroupInstance {
   private JsonNullable<Long> deletionCost;
 
   @JsonIgnore
+  public String getSshIp() {
+    return sshIp.orElse(null);
+  }
+
+  @JsonIgnore
+  public Long getSshPort() {
+    return sshPort.orElse(null);
+  }
+
+  @JsonIgnore
+  public String getSshHostKeyFingerprint() {
+    return sshHostKeyFingerprint.orElse(null);
+  }
+
+  @JsonIgnore
   public Boolean getReady() {
     return ready.orElse(null);
   }
@@ -89,6 +122,39 @@ public class ContainerGroupInstance {
 
   // Overwrite lombok builder methods
   public static class ContainerGroupInstanceBuilder {
+
+    private JsonNullable<String> sshIp = JsonNullable.undefined();
+
+    @JsonProperty("ssh_ip")
+    public ContainerGroupInstanceBuilder sshIp(String value) {
+      if (value == null) {
+        throw new IllegalStateException("sshIp cannot be null");
+      }
+      this.sshIp = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> sshPort = JsonNullable.of(22L);
+
+    @JsonProperty("ssh_port")
+    public ContainerGroupInstanceBuilder sshPort(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("sshPort cannot be null");
+      }
+      this.sshPort = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<String> sshHostKeyFingerprint = JsonNullable.undefined();
+
+    @JsonProperty("ssh_host_key_fingerprint")
+    public ContainerGroupInstanceBuilder sshHostKeyFingerprint(String value) {
+      if (value == null) {
+        throw new IllegalStateException("sshHostKeyFingerprint cannot be null");
+      }
+      this.sshHostKeyFingerprint = JsonNullable.of(value);
+      return this;
+    }
 
     private JsonNullable<Boolean> ready = JsonNullable.undefined();
 

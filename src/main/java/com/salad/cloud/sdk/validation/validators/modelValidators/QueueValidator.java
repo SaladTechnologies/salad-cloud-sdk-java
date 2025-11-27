@@ -5,6 +5,7 @@ import com.salad.cloud.sdk.models.Queue;
 import com.salad.cloud.sdk.validation.Violation;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.validators.ListValidator;
+import com.salad.cloud.sdk.validation.validators.NumericValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
 
 public class QueueValidator extends AbstractModelValidator<Queue> {
@@ -43,6 +44,13 @@ public class QueueValidator extends AbstractModelValidator<Queue> {
       )
       .add(
         new StringValidator("description").maxLength(500).pattern("^.*$").optional().validate(queue.getDescription())
+      )
+      .add(
+        new NumericValidator<Long>("currentQueueLength")
+          .min(0L)
+          .max(2147483647L)
+          .optional()
+          .validate(queue.getCurrentQueueLength())
       )
       .aggregate();
   }

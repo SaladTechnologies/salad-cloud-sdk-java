@@ -40,7 +40,8 @@ public class WebhookSecretKeyService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetWebhookSecretKeyRequest(organizationName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<WebhookSecretKey>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<WebhookSecretKey>() {});
   }
 
   /**
@@ -55,9 +56,10 @@ public class WebhookSecretKeyService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetWebhookSecretKeyRequest(organizationName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<WebhookSecretKey>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<WebhookSecretKey>() {});
+    });
   }
 
   private Request buildGetWebhookSecretKeyRequest(@NonNull String organizationName) throws ValidationException {
@@ -93,7 +95,8 @@ public class WebhookSecretKeyService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateWebhookSecretKeyRequest(organizationName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<WebhookSecretKey>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<WebhookSecretKey>() {});
   }
 
   /**
@@ -108,9 +111,10 @@ public class WebhookSecretKeyService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateWebhookSecretKeyRequest(organizationName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<WebhookSecretKey>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<WebhookSecretKey>() {});
+    });
   }
 
   private Request buildUpdateWebhookSecretKeyRequest(@NonNull String organizationName) throws ValidationException {

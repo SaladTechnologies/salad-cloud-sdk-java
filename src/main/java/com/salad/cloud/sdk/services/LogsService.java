@@ -47,7 +47,8 @@ public class LogsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildQueryLogEntriesRequest(organizationName, logEntryQuery);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<LogEntryCollection>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<LogEntryCollection>() {});
   }
 
   /**
@@ -68,9 +69,10 @@ public class LogsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildQueryLogEntriesRequest(organizationName, logEntryQuery);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<LogEntryCollection>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<LogEntryCollection>() {});
+    });
   }
 
   private Request buildQueryLogEntriesRequest(@NonNull String organizationName, @NonNull LogEntryQuery logEntryQuery)

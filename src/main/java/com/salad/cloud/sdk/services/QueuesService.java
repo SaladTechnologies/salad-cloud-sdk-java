@@ -54,7 +54,8 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<QueueCollection>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<QueueCollection>() {});
   }
 
   /**
@@ -72,9 +73,10 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<QueueCollection>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<QueueCollection>() {});
+    });
   }
 
   private Request buildListQueuesRequest(@NonNull String organizationName, @NonNull String projectName)
@@ -126,7 +128,8 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueRequest(organizationName, projectName, queuePrototype);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<Queue>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<Queue>() {});
   }
 
   /**
@@ -147,7 +150,10 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueRequest(organizationName, projectName, queuePrototype);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Queue>() {}));
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<Queue>() {});
+    });
   }
 
   private Request buildCreateQueueRequest(
@@ -200,7 +206,8 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueRequest(organizationName, projectName, queueName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<Queue>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<Queue>() {});
   }
 
   /**
@@ -220,7 +227,10 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueRequest(organizationName, projectName, queueName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Queue>() {}));
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<Queue>() {});
+    });
   }
 
   private Request buildGetQueueRequest(
@@ -286,7 +296,8 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, queuePatch);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<Queue>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<Queue>() {});
   }
 
   /**
@@ -309,7 +320,10 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, queuePatch);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Queue>() {}));
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<Queue>() {});
+    });
   }
 
   private Request buildUpdateQueueRequest(
@@ -455,7 +469,8 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<QueueJobCollection>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<QueueJobCollection>() {});
   }
 
   /**
@@ -477,9 +492,10 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<QueueJobCollection>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<QueueJobCollection>() {});
+    });
   }
 
   private Request buildListQueueJobsRequest(
@@ -549,7 +565,8 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, queueJobPrototype);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<QueueJob>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<QueueJob>() {});
   }
 
   /**
@@ -572,8 +589,10 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, queueJobPrototype);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<QueueJob>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<QueueJob>() {});
+    });
   }
 
   private Request buildCreateQueueJobRequest(
@@ -641,7 +660,8 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<QueueJob>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<QueueJob>() {});
   }
 
   /**
@@ -663,8 +683,10 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<QueueJob>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<QueueJob>() {});
+    });
   }
 
   private Request buildGetQueueJobRequest(

@@ -35,9 +35,13 @@ public class GpuClassValidator extends AbstractModelValidator<GpuClass> {
           .required()
           .validate(gpuClass.getPrices())
       )
+      .add(new NumericValidator<Long>("gpuCount").min(1L).max(512L).optional().validate(gpuClass.getGpuCount()))
       .add(new NumericValidator<Long>("minVcpu").min(0L).optional().validate(gpuClass.getMinVcpu()))
+      .add(new NumericValidator<Long>("maxVcpu").min(0L).optional().validate(gpuClass.getMaxVcpu()))
       .add(new NumericValidator<Long>("minRam").min(0L).optional().validate(gpuClass.getMinRam()))
+      .add(new NumericValidator<Long>("maxRam").min(0L).optional().validate(gpuClass.getMaxRam()))
       .add(new NumericValidator<Long>("minStorage").min(0L).optional().validate(gpuClass.getMinStorage()))
+      .add(new NumericValidator<Long>("maxStorage").min(0L).optional().validate(gpuClass.getMaxStorage()))
       .aggregate();
   }
 }

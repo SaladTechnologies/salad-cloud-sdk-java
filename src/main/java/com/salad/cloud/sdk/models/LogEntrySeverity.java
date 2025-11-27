@@ -12,6 +12,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum LogEntrySeverity {
+  DEFAULT_("default"),
   DEBUG("debug"),
   INFO("info"),
   NOTICE("notice"),

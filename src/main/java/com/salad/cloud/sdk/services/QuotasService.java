@@ -40,7 +40,8 @@ public class QuotasService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQuotasRequest(organizationName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<Quotas>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<Quotas>() {});
   }
 
   /**
@@ -55,7 +56,10 @@ public class QuotasService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQuotasRequest(organizationName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response -> ModelConverter.convert(response, new TypeReference<Quotas>() {}));
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<Quotas>() {});
+    });
   }
 
   private Request buildGetQuotasRequest(@NonNull String organizationName) throws ValidationException {

@@ -51,7 +51,8 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListContainerGroupsRequest(organizationName, projectName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<ContainerGroupCollection>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroupCollection>() {});
   }
 
   /**
@@ -68,9 +69,10 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListContainerGroupsRequest(organizationName, projectName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<ContainerGroupCollection>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroupCollection>() {});
+    });
   }
 
   private Request buildListContainerGroupsRequest(@NonNull String organizationName, @NonNull String projectName)
@@ -123,7 +125,8 @@ public class ContainerGroupsService extends BaseService {
     Request request =
       this.buildCreateContainerGroupRequest(organizationName, projectName, containerGroupCreationRequest);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<ContainerGroup>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroup>() {});
   }
 
   /**
@@ -145,9 +148,10 @@ public class ContainerGroupsService extends BaseService {
     Request request =
       this.buildCreateContainerGroupRequest(organizationName, projectName, containerGroupCreationRequest);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<ContainerGroup>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroup>() {});
+    });
   }
 
   private Request buildCreateContainerGroupRequest(
@@ -207,7 +211,8 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetContainerGroupRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<ContainerGroup>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroup>() {});
   }
 
   /**
@@ -227,9 +232,10 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetContainerGroupRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<ContainerGroup>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroup>() {});
+    });
   }
 
   private Request buildGetContainerGroupRequest(
@@ -297,7 +303,8 @@ public class ContainerGroupsService extends BaseService {
     Request request =
       this.buildUpdateContainerGroupRequest(organizationName, projectName, containerGroupName, containerGroupPatch);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<ContainerGroup>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroup>() {});
   }
 
   /**
@@ -322,9 +329,10 @@ public class ContainerGroupsService extends BaseService {
     Request request =
       this.buildUpdateContainerGroupRequest(organizationName, projectName, containerGroupName, containerGroupPatch);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<ContainerGroup>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroup>() {});
+    });
   }
 
   private Request buildUpdateContainerGroupRequest(
@@ -639,7 +647,8 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListContainerGroupInstancesRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<ContainerGroupInstanceCollection>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroupInstanceCollection>() {});
   }
 
   /**
@@ -659,9 +668,10 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListContainerGroupInstancesRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<ContainerGroupInstanceCollection>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroupInstanceCollection>() {});
+    });
   }
 
   private Request buildListContainerGroupInstancesRequest(
@@ -732,7 +742,8 @@ public class ContainerGroupsService extends BaseService {
           containerGroupInstanceId
         );
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<ContainerGroupInstance>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroupInstance>() {});
   }
 
   /**
@@ -760,9 +771,10 @@ public class ContainerGroupsService extends BaseService {
           containerGroupInstanceId
         );
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<ContainerGroupInstance>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroupInstance>() {});
+    });
   }
 
   private Request buildGetContainerGroupInstanceRequest(
@@ -840,7 +852,8 @@ public class ContainerGroupsService extends BaseService {
           containerGroupInstancePatch
         );
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<ContainerGroupInstance>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroupInstance>() {});
   }
 
   /**
@@ -873,9 +886,10 @@ public class ContainerGroupsService extends BaseService {
           containerGroupInstancePatch
         );
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<ContainerGroupInstance>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<ContainerGroupInstance>() {});
+    });
   }
 
   private Request buildUpdateContainerGroupInstanceRequest(

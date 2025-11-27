@@ -4,6 +4,7 @@ import com.salad.cloud.sdk.models.ContainerGroupInstance;
 import com.salad.cloud.sdk.validation.Violation;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.validators.NumericValidator;
+import com.salad.cloud.sdk.validation.validators.StringValidator;
 
 public class ContainerGroupInstanceValidator extends AbstractModelValidator<ContainerGroupInstance> {
 
@@ -22,6 +23,20 @@ public class ContainerGroupInstanceValidator extends AbstractModelValidator<Cont
           .max(2147483647L)
           .required()
           .validate(containerGroupInstance.getVersion())
+      )
+      .add(
+        new NumericValidator<Long>("sshPort")
+          .min(1L)
+          .max(65535L)
+          .optional()
+          .validate(containerGroupInstance.getSshPort())
+      )
+      .add(
+        new StringValidator("sshHostKeyFingerprint")
+          .minLength(1)
+          .maxLength(256)
+          .optional()
+          .validate(containerGroupInstance.getSshHostKeyFingerprint())
       )
       .add(
         new NumericValidator<Long>("deletionCost")

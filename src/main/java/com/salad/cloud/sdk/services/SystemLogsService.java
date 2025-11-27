@@ -46,7 +46,8 @@ public class SystemLogsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetSystemLogsRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
-    return ModelConverter.convert(response, new TypeReference<SystemLogList>() {});
+    byte[] bodyBytes = ModelConverter.readBytes(response);
+    return ModelConverter.convert(bodyBytes, new TypeReference<SystemLogList>() {});
   }
 
   /**
@@ -66,9 +67,10 @@ public class SystemLogsService extends BaseService {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetSystemLogsRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
-    return futureResponse.thenApplyAsync(response ->
-      ModelConverter.convert(response, new TypeReference<SystemLogList>() {})
-    );
+    return futureResponse.thenApplyAsync(response -> {
+      byte[] bodyBytes = ModelConverter.readBytes(response);
+      return ModelConverter.convert(bodyBytes, new TypeReference<SystemLogList>() {});
+    });
   }
 
   private Request buildGetSystemLogsRequest(

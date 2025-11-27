@@ -54,6 +54,12 @@ public class GpuClass {
   private JsonNullable<GpuClassType> gpuClassType;
 
   /**
+   * The number of GPUs in the cluster
+   */
+  @JsonProperty("gpu_count")
+  private JsonNullable<Long> gpuCount;
+
+  /**
    * The minimum vCPU count
    */
   @JsonProperty("min_vcpu")
@@ -66,25 +72,25 @@ public class GpuClass {
   private JsonNullable<Long> maxVcpu;
 
   /**
-   * The minimum RAM amount in GB
+   * The minimum RAM amount in MB
    */
   @JsonProperty("min_ram")
   private JsonNullable<Long> minRam;
 
   /**
-   * The maximum RAM amount in GB
+   * The maximum RAM amount in MB
    */
   @JsonProperty("max_ram")
   private JsonNullable<Long> maxRam;
 
   /**
-   * The minimum storage amount in GB
+   * The minimum storage amount in bytes
    */
   @JsonProperty("min_storage")
   private JsonNullable<Long> minStorage;
 
   /**
-   * The maximum storage amount in GB
+   * The maximum storage amount in bytes
    */
   @JsonProperty("max_storage")
   private JsonNullable<Long> maxStorage;
@@ -97,6 +103,11 @@ public class GpuClass {
   @JsonIgnore
   public GpuClassType getGpuClassType() {
     return gpuClassType.orElse(null);
+  }
+
+  @JsonIgnore
+  public Long getGpuCount() {
+    return gpuCount.orElse(null);
   }
 
   @JsonIgnore
@@ -151,6 +162,17 @@ public class GpuClass {
         throw new IllegalStateException("gpuClassType cannot be null");
       }
       this.gpuClassType = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> gpuCount = JsonNullable.undefined();
+
+    @JsonProperty("gpu_count")
+    public GpuClassBuilder gpuCount(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("gpuCount cannot be null");
+      }
+      this.gpuCount = JsonNullable.of(value);
       return this;
     }
 

@@ -69,9 +69,20 @@ public class Queue {
   @JsonProperty("description")
   private JsonNullable<String> description;
 
+  /**
+   * The current length of the queue
+   */
+  @JsonProperty("current_queue_length")
+  private JsonNullable<Long> currentQueueLength;
+
   @JsonIgnore
   public String getDescription() {
     return description.orElse(null);
+  }
+
+  @JsonIgnore
+  public Long getCurrentQueueLength() {
+    return currentQueueLength.orElse(null);
   }
 
   // Overwrite lombok builder methods
@@ -85,6 +96,17 @@ public class Queue {
         throw new IllegalStateException("description cannot be null");
       }
       this.description = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> currentQueueLength = JsonNullable.undefined();
+
+    @JsonProperty("current_queue_length")
+    public QueueBuilder currentQueueLength(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("currentQueueLength cannot be null");
+      }
+      this.currentQueueLength = JsonNullable.of(value);
       return this;
     }
   }

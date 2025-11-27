@@ -23,13 +23,13 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class ContainerResourceUpdateSchema {
 
   /**
-   * The number of CPU cores to allocate to the container (between 1 and 16 cores).
+   * The number of CPU cores to allocate to the container (between 1 and 1024).
    */
   @JsonProperty("cpu")
   private JsonNullable<Long> cpu;
 
   /**
-   * The amount of memory to allocate to the container in megabytes (between 1024MB and 61440MB).
+   * The amount of memory to allocate to the container in megabytes (between 1024 and 1073741824).
    */
   @JsonProperty("memory")
   private JsonNullable<Long> memory;
@@ -41,13 +41,13 @@ public class ContainerResourceUpdateSchema {
   private JsonNullable<List<String>> gpuClasses;
 
   /**
-   * The amount of storage to allocate to the container in bytes (between 1GB and 250GB).
+   * The amount of storage to allocate to the container in bytes (between 1 GB and 1 PB).
    */
   @JsonProperty("storage_amount")
   private JsonNullable<Long> storageAmount;
 
   /**
-   * The size of the shared memory (/dev/shm) in MB. If not specified, defaults to 64MB.
+   * The amount of shared memory to allocate to the container via `/dev/shm` in megabytes (between 64 and 1073741824). If not specified, defaults to 64 MB.
    */
   @JsonProperty("shm_size")
   private JsonNullable<Long> shmSize;

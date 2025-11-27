@@ -21,14 +21,14 @@ public class CreateContainerResourceRequirementsValidator
       .add(
         new NumericValidator<Long>("cpu")
           .min(1L)
-          .max(16L)
+          .max(1024L)
           .required()
           .validate(createContainerResourceRequirements.getCpu())
       )
       .add(
         new NumericValidator<Long>("memory")
           .min(1024L)
-          .max(61440L)
+          .max(1073741824L)
           .required()
           .validate(createContainerResourceRequirements.getMemory())
       )
@@ -41,14 +41,14 @@ public class CreateContainerResourceRequirementsValidator
       .add(
         new NumericValidator<Long>("storageAmount")
           .min(1073741824L)
-          .max(268435456000L)
+          .max(1125899906842624L)
           .optional()
           .validate(createContainerResourceRequirements.getStorageAmount())
       )
       .add(
         new NumericValidator<Long>("shmSize")
           .min(64L)
-          .max(2147483647L)
+          .max(1073741824L)
           .optional()
           .validate(createContainerResourceRequirements.getShmSize())
       )
