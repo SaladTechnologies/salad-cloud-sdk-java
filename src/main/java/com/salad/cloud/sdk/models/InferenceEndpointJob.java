@@ -24,6 +24,19 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class InferenceEndpointJob {
 
   /**
+   * The time the job was created.
+   */
+  @NonNull
+  @JsonProperty("create_time")
+  private String createTime;
+
+  /**
+   * The list of events.
+   */
+  @NonNull
+  private List<InferenceEndpointJobEvent> events;
+
+  /**
    * The inference endpoint job identifier.
    */
   @NonNull
@@ -37,6 +50,12 @@ public class InferenceEndpointJob {
   private String inferenceEndpointName;
 
   /**
+   * The job input. May be any valid JSON.
+   */
+  @NonNull
+  private Object input;
+
+  /**
    * The organization name.
    */
   @NonNull
@@ -44,29 +63,10 @@ public class InferenceEndpointJob {
   private String organizationName;
 
   /**
-   * The job input. May be any valid JSON.
-   */
-  @NonNull
-  private Object input;
-
-  /**
    * The current status.
    */
   @NonNull
   private Status status;
-
-  /**
-   * The list of events.
-   */
-  @NonNull
-  private List<InferenceEndpointJobEvent> events;
-
-  /**
-   * The time the job was created.
-   */
-  @NonNull
-  @JsonProperty("create_time")
-  private String createTime;
 
   /**
    * The time the job was last updated.
@@ -82,6 +82,12 @@ public class InferenceEndpointJob {
   private JsonNullable<Object> metadata;
 
   /**
+   * The job output. May be any valid JSON.
+   */
+  @JsonProperty("output")
+  private JsonNullable<Object> output;
+
+  /**
    * The webhook URL called when the job completes.
    */
   @JsonProperty("webhook")
@@ -93,15 +99,14 @@ public class InferenceEndpointJob {
   @JsonProperty("webhook_url")
   private JsonNullable<String> webhookUrl;
 
-  /**
-   * The job output. May be any valid JSON.
-   */
-  @JsonProperty("output")
-  private JsonNullable<Object> output;
-
   @JsonIgnore
   public Object getMetadata() {
     return metadata.orElse(null);
+  }
+
+  @JsonIgnore
+  public Object getOutput() {
+    return output.orElse(null);
   }
 
   @JsonIgnore
@@ -112,11 +117,6 @@ public class InferenceEndpointJob {
   @JsonIgnore
   public String getWebhookUrl() {
     return webhookUrl.orElse(null);
-  }
-
-  @JsonIgnore
-  public Object getOutput() {
-    return output.orElse(null);
   }
 
   // Overwrite lombok builder methods
@@ -130,6 +130,17 @@ public class InferenceEndpointJob {
         throw new IllegalStateException("metadata cannot be null");
       }
       this.metadata = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Object> output = JsonNullable.undefined();
+
+    @JsonProperty("output")
+    public InferenceEndpointJobBuilder output(Object value) {
+      if (value == null) {
+        throw new IllegalStateException("output cannot be null");
+      }
+      this.output = JsonNullable.of(value);
       return this;
     }
 
@@ -152,17 +163,6 @@ public class InferenceEndpointJob {
         throw new IllegalStateException("webhookUrl cannot be null");
       }
       this.webhookUrl = JsonNullable.of(value);
-      return this;
-    }
-
-    private JsonNullable<Object> output = JsonNullable.undefined();
-
-    @JsonProperty("output")
-    public InferenceEndpointJobBuilder output(Object value) {
-      if (value == null) {
-        throw new IllegalStateException("output cannot be null");
-      }
-      this.output = JsonNullable.of(value);
       return this;
     }
   }

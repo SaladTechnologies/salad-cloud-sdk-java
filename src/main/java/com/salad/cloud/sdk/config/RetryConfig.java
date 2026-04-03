@@ -9,6 +9,11 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Configuration for automatic retry behavior on failed requests.
+ * Defines retry limits, backoff strategy, and conditions for retrying requests.
+ * Uses builder pattern for flexible configuration with sensible defaults.
+ */
 @Data
 @Builder
 public class RetryConfig {

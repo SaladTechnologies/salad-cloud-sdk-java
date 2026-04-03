@@ -20,14 +20,14 @@ import lombok.extern.jackson.Jacksonized;
 public class ContainerRegistryAuthenticationBasic {
 
   /**
-   * Username for registry authentication
-   */
-  @NonNull
-  private String username;
-
-  /**
    * Password for registry authentication
    */
   @NonNull
   private String password;
+
+  /**
+   * Username for registry authentication
+   */
+  @NonNull
+  private String username;
 }

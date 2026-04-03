@@ -24,6 +24,19 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class QueueJob {
 
   /**
+   * The job creation time
+   */
+  @NonNull
+  @JsonProperty("create_time")
+  private String createTime;
+
+  /**
+   * The job events
+   */
+  @NonNull
+  private List<QueueJobEvent> events;
+
+  /**
    * The job identifier
    */
   @NonNull
@@ -42,19 +55,6 @@ public class QueueJob {
   private QueueJobStatus status;
 
   /**
-   * The job events
-   */
-  @NonNull
-  private List<QueueJobEvent> events;
-
-  /**
-   * The job creation time
-   */
-  @NonNull
-  @JsonProperty("create_time")
-  private String createTime;
-
-  /**
    * The job update time
    */
   @NonNull
@@ -68,16 +68,16 @@ public class QueueJob {
   private JsonNullable<Object> metadata;
 
   /**
-   * The webhook URL to notify when the job completes
-   */
-  @JsonProperty("webhook")
-  private JsonNullable<String> webhook;
-
-  /**
    * The job output. May be any valid JSON.
    */
   @JsonProperty("output")
   private JsonNullable<Object> output;
+
+  /**
+   * The webhook URL to notify when the job completes
+   */
+  @JsonProperty("webhook")
+  private JsonNullable<String> webhook;
 
   @JsonIgnore
   public Object getMetadata() {
@@ -85,13 +85,13 @@ public class QueueJob {
   }
 
   @JsonIgnore
-  public String getWebhook() {
-    return webhook.orElse(null);
+  public Object getOutput() {
+    return output.orElse(null);
   }
 
   @JsonIgnore
-  public Object getOutput() {
-    return output.orElse(null);
+  public String getWebhook() {
+    return webhook.orElse(null);
   }
 
   // Overwrite lombok builder methods
@@ -108,17 +108,6 @@ public class QueueJob {
       return this;
     }
 
-    private JsonNullable<String> webhook = JsonNullable.undefined();
-
-    @JsonProperty("webhook")
-    public QueueJobBuilder webhook(String value) {
-      if (value == null) {
-        throw new IllegalStateException("webhook cannot be null");
-      }
-      this.webhook = JsonNullable.of(value);
-      return this;
-    }
-
     private JsonNullable<Object> output = JsonNullable.undefined();
 
     @JsonProperty("output")
@@ -127,6 +116,17 @@ public class QueueJob {
         throw new IllegalStateException("output cannot be null");
       }
       this.output = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<String> webhook = JsonNullable.undefined();
+
+    @JsonProperty("webhook")
+    public QueueJobBuilder webhook(String value) {
+      if (value == null) {
+        throw new IllegalStateException("webhook cannot be null");
+      }
+      this.webhook = JsonNullable.of(value);
       return this;
     }
   }

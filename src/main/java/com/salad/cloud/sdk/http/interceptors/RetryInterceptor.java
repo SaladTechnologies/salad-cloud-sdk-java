@@ -8,11 +8,23 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * OkHttp interceptor that automatically retries failed HTTP requests.
+ * Supports configurable retry attempts, backoff delays, and specific status codes or exceptions to retry.
+ */
 @AllArgsConstructor
 public class RetryInterceptor implements Interceptor {
 
   private RetryConfig config;
 
+  /**
+   * Intercepts an HTTP request and retries it according to the configured retry policy.
+   * Implements exponential backoff between retry attempts.
+   *
+   * @param chain The OkHttp interceptor chain
+   * @return The HTTP response from a successful attempt
+   * @throws IOException if all retry attempts fail or a non-retryable exception occurs
+   */
   @Override
   public Response intercept(Chain chain) throws IOException {
     Request request = chain.request();
@@ -48,11 +60,23 @@ public class RetryInterceptor implements Interceptor {
     return response;
   }
 
+  /**
+   * Calculates the delay before the next retry attempt using exponential backoff.
+   *
+   * @param tryCount The current retry attempt number (1-indexed)
+   * @return The delay in milliseconds, capped at the configured maximum delay
+   */
   private int calculateDelay(int tryCount) {
     final int delay = (int) (config.getInitialDelay() * Math.pow(config.getBackoffFactor(), tryCount - 1));
     return Math.min(delay, config.getMaxDelay());
   }
 
+  /**
+   * Determines if a response should be retried based on status code and HTTP method.
+   *
+   * @param response The HTTP response to check
+   * @return true if the response should be retried, false otherwise
+   */
   private boolean isRetryable(Response response) {
     final boolean isRetryableStatusCode = config.getStatusCodesToRetry().contains(response.code());
     final boolean isRetryableMethod = config

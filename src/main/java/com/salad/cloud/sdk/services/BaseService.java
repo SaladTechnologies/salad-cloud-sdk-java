@@ -22,13 +22,24 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Base service class that all API service classes extend.
+ * Provides common functionality including HTTP request execution, error handling,
+ * and configuration management.
+ */
 public class BaseService {
 
   private static final Logger logger = Logger.getLogger(BaseService.class.getName());
   protected OkHttpClient httpClient;
   protected SaladCloudSdkConfig config;
   protected Map<Integer, ErrorMapping<?>> errorMappings;
+  protected ErrorMapping<?> defaultErrorMapping;
 
+  /**
+   * Internal class for mapping HTTP status codes to error models and exception types.
+   *
+   * @param <T> The error model type
+   */
   private static class ErrorMapping<T> {
 
     private final Class<T> modelClass;
@@ -40,24 +51,72 @@ public class BaseService {
     }
   }
 
+  /**
+   * Constructs a new BaseService instance.
+   *
+   * @param httpClient The HTTP client to use for making requests
+   * @param config The SDK configuration
+   */
   public BaseService(OkHttpClient httpClient, SaladCloudSdkConfig config) {
     this.httpClient = httpClient;
     this.config = config;
     this.errorMappings = new HashMap<>();
   }
 
+  /**
+   * Sets the base URL for API requests.
+   *
+   * @param baseUrl The base URL to use
+   */
   public void setBaseUrl(String baseUrl) {
     this.config.setBaseUrl(baseUrl);
   }
 
+  /**
+   * Sets the environment for API requests.
+   *
+   * @param environment The environment to use (e.g., DEFAULT, PRODUCTION, STAGING)
+   */
   public void setEnvironment(Environment environment) {
     this.config.setEnvironment(environment);
   }
 
+  /**
+   * Registers an error mapping for a specific HTTP status code.
+   * When a response with this status is received, the SDK will deserialize the error
+   * response to the specified model class and throw the specified exception type.
+   *
+   * @param <T> The error model type
+   * @param status The HTTP status code to map
+   * @param modelClass The class to deserialize the error response into
+   * @param exceptionClass The exception class to throw
+   */
   protected <T> void addErrorMapping(int status, Class<T> modelClass, Class<? extends ApiError> exceptionClass) {
     this.errorMappings.put(status, new ErrorMapping<>(modelClass, exceptionClass));
   }
 
+  /**
+   * Registers a default error mapping for unmapped HTTP status codes.
+   * When a response with an unmapped status is received the SDK will deserialize the error
+   * response to the specified model class and throw the specified exception type.
+   *
+   * @param <T> The error model type
+   * @param modelClass The class to deserialize the error response into
+   * @param exceptionClass The exception class to throw
+   */
+  protected <T> void addDefaultErrorMapping(Class<T> modelClass, Class<? extends ApiError> exceptionClass) {
+    this.defaultErrorMapping = new ErrorMapping<>(modelClass, exceptionClass);
+  }
+
+  /**
+   * Extracts an error message from a response and optional error model.
+   * Attempts to get the message from the error model's getMessage() method,
+   * falls back to the response message, or constructs a message from the status code and URL.
+   *
+   * @param response The HTTP response
+   * @param errorModel The deserialized error model (may be null)
+   * @return The extracted or constructed error message
+   */
   private String extractErrorMessage(Response response, Object errorModel) {
     String message = null;
 
@@ -80,6 +139,14 @@ public class BaseService {
     return message;
   }
 
+  /**
+   * Executes an HTTP request synchronously.
+   * Handles error responses by checking error mappings and throwing appropriate exceptions.
+   *
+   * @param request The HTTP request to execute
+   * @return The HTTP response if successful
+   * @throws ApiError if the request fails or returns an error status code
+   */
   protected Response execute(Request request) throws ApiError {
     Response response;
     try {
@@ -96,7 +163,7 @@ public class BaseService {
     }
 
     // Handle error response
-    ErrorMapping<?> errorMapping = this.errorMappings.get(response.code());
+    ErrorMapping<?> errorMapping = this.errorMappings.getOrDefault(response.code(), this.defaultErrorMapping);
     if (errorMapping != null) {
       Object errorModel = null;
       try {
@@ -129,6 +196,14 @@ public class BaseService {
     throw new ApiError(extractErrorMessage(response, null), response.code(), response);
   }
 
+  /**
+   * Executes an HTTP request asynchronously.
+   * Returns a CompletableFuture that completes with the response or completes exceptionally
+   * if an error occurs. Handles error responses by checking error mappings.
+   *
+   * @param request The HTTP request to execute
+   * @return A CompletableFuture that completes with the HTTP response
+   */
   protected CompletableFuture<Response> executeAsync(Request request) {
     CompletableFuture<Response> future = new CompletableFuture<>();
     this.httpClient.newCall(request).enqueue(

@@ -24,6 +24,18 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class ContainerLoggingConfigurationHttp2 {
 
   /**
+   * The compression algorithm to apply to logs before transmission
+   */
+  @NonNull
+  private ContainerLoggingHttpCompression compression;
+
+  /**
+   * The format in which logs will be delivered
+   */
+  @NonNull
+  private ContainerLoggingHttpFormat format;
+
+  /**
    * The hostname or IP address of the HTTP logging endpoint
    */
   @NonNull
@@ -36,22 +48,10 @@ public class ContainerLoggingConfigurationHttp2 {
   private Long port;
 
   /**
-   * The format in which logs will be delivered
+   * Optional HTTP headers to include in log transmission requests
    */
-  @NonNull
-  private ContainerLoggingHttpFormat format;
-
-  /**
-   * The compression algorithm to apply to logs before transmission
-   */
-  @NonNull
-  private ContainerLoggingHttpCompression compression;
-
-  /**
-   * Optional username for HTTP authentication
-   */
-  @JsonProperty("user")
-  private JsonNullable<String> user;
+  @JsonProperty("headers")
+  private JsonNullable<List<ContainerLoggingHttpHeader>> headers;
 
   /**
    * Optional password for HTTP authentication
@@ -66,14 +66,14 @@ public class ContainerLoggingConfigurationHttp2 {
   private JsonNullable<String> path;
 
   /**
-   * Optional HTTP headers to include in log transmission requests
+   * Optional username for HTTP authentication
    */
-  @JsonProperty("headers")
-  private JsonNullable<List<ContainerLoggingHttpHeader>> headers;
+  @JsonProperty("user")
+  private JsonNullable<String> user;
 
   @JsonIgnore
-  public String getUser() {
-    return user.orElse(null);
+  public List<ContainerLoggingHttpHeader> getHeaders() {
+    return headers.orElse(null);
   }
 
   @JsonIgnore
@@ -87,18 +87,21 @@ public class ContainerLoggingConfigurationHttp2 {
   }
 
   @JsonIgnore
-  public List<ContainerLoggingHttpHeader> getHeaders() {
-    return headers.orElse(null);
+  public String getUser() {
+    return user.orElse(null);
   }
 
   // Overwrite lombok builder methods
   public static class ContainerLoggingConfigurationHttp2Builder {
 
-    private JsonNullable<String> user = JsonNullable.undefined();
+    private JsonNullable<List<ContainerLoggingHttpHeader>> headers = JsonNullable.undefined();
 
-    @JsonProperty("user")
-    public ContainerLoggingConfigurationHttp2Builder user(String value) {
-      this.user = JsonNullable.of(value);
+    @JsonProperty("headers")
+    public ContainerLoggingConfigurationHttp2Builder headers(List<ContainerLoggingHttpHeader> value) {
+      if (value == null) {
+        throw new IllegalStateException("headers cannot be null");
+      }
+      this.headers = JsonNullable.of(value);
       return this;
     }
 
@@ -118,14 +121,11 @@ public class ContainerLoggingConfigurationHttp2 {
       return this;
     }
 
-    private JsonNullable<List<ContainerLoggingHttpHeader>> headers = JsonNullable.undefined();
+    private JsonNullable<String> user = JsonNullable.undefined();
 
-    @JsonProperty("headers")
-    public ContainerLoggingConfigurationHttp2Builder headers(List<ContainerLoggingHttpHeader> value) {
-      if (value == null) {
-        throw new IllegalStateException("headers cannot be null");
-      }
-      this.headers = JsonNullable.of(value);
+    @JsonProperty("user")
+    public ContainerLoggingConfigurationHttp2Builder user(String value) {
+      this.user = JsonNullable.of(value);
       return this;
     }
   }

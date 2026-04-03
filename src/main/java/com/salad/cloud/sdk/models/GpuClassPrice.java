@@ -21,16 +21,16 @@ import lombok.extern.jackson.Jacksonized;
 public class GpuClassPrice {
 
   /**
-   * Specifies the priority level for container group execution, which determines resource allocation and scheduling precedence.
-   */
-  @JsonInclude(JsonInclude.Include.ALWAYS)
-  private ContainerGroupPriority priority;
-
-  /**
    * The price
    */
   @NonNull
   private String price;
+
+  /**
+   * Specifies the priority level for container group execution, which determines resource allocation and scheduling precedence.
+   */
+  @JsonInclude(JsonInclude.Include.ALWAYS)
+  private ContainerGroupPriority priority;
 
   // Overwrite lombok builder methods
   public static class GpuClassPriceBuilder {
@@ -50,7 +50,7 @@ public class GpuClassPrice {
       if (!priority$set) {
         throw new IllegalStateException("priority is required");
       }
-      return new GpuClassPrice(priority, price);
+      return new GpuClassPrice(price, priority);
     }
   }
 }

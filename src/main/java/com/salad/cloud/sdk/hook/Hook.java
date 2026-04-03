@@ -4,7 +4,11 @@ import java.util.Map;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/** Liblab Hook interface */
+/**
+ * Hook interface for intercepting and customizing SDK HTTP requests and responses.
+ * Implement this interface to add custom logic before requests, after responses, or during errors.
+ * Hooks are executed by the HookInterceptor in the OkHttp client chain.
+ */
 public interface Hook {
   /**
    * Is called before the request is made to the API

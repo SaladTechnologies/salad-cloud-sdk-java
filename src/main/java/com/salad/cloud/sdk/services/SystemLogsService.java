@@ -25,6 +25,12 @@ import okhttp3.Response;
  */
 public class SystemLogsService extends BaseService {
 
+  /**
+   * Constructs a new instance of SystemLogsService.
+   *
+   * @param httpClient The HTTP client to use for requests
+   * @param config The SDK configuration
+   */
   public SystemLogsService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
     super(httpClient, config);
   }
@@ -44,6 +50,7 @@ public class SystemLogsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetSystemLogsRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -65,6 +72,7 @@ public class SystemLogsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetSystemLogsRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {

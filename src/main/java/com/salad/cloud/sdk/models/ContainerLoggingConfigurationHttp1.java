@@ -25,16 +25,10 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class ContainerLoggingConfigurationHttp1 {
 
   /**
-   * The hostname or IP address of the HTTP logging endpoint
+   * The compression algorithm to apply to logs before transmission
    */
   @NonNull
-  private String host;
-
-  /**
-   * The port number of the HTTP logging endpoint (1-65535)
-   */
-  @NonNull
-  private Long port;
+  private ContainerLoggingHttpCompression compression;
 
   /**
    * The format in which logs will be delivered
@@ -49,16 +43,16 @@ public class ContainerLoggingConfigurationHttp1 {
   private List<ContainerLoggingHttpHeader> headers;
 
   /**
-   * The compression algorithm to apply to logs before transmission
+   * The hostname or IP address of the HTTP logging endpoint
    */
   @NonNull
-  private ContainerLoggingHttpCompression compression;
+  private String host;
 
   /**
-   * Optional username for HTTP authentication
+   * The port number of the HTTP logging endpoint (1-65535)
    */
-  @JsonProperty("user")
-  private JsonNullable<String> user;
+  @NonNull
+  private Long port;
 
   /**
    * Optional password for HTTP authentication
@@ -72,10 +66,11 @@ public class ContainerLoggingConfigurationHttp1 {
   @JsonProperty("path")
   private JsonNullable<String> path;
 
-  @JsonIgnore
-  public String getUser() {
-    return user.orElse(null);
-  }
+  /**
+   * Optional username for HTTP authentication
+   */
+  @JsonProperty("user")
+  private JsonNullable<String> user;
 
   @JsonIgnore
   public String getPassword() {
@@ -85,6 +80,11 @@ public class ContainerLoggingConfigurationHttp1 {
   @JsonIgnore
   public String getPath() {
     return path.orElse(null);
+  }
+
+  @JsonIgnore
+  public String getUser() {
+    return user.orElse(null);
   }
 
   // Overwrite lombok builder methods
@@ -98,14 +98,6 @@ public class ContainerLoggingConfigurationHttp1 {
     public ContainerLoggingConfigurationHttp1Builder headers(List<ContainerLoggingHttpHeader> headers) {
       this.headers$set = true;
       this.headers = headers;
-      return this;
-    }
-
-    private JsonNullable<String> user = JsonNullable.undefined();
-
-    @JsonProperty("user")
-    public ContainerLoggingConfigurationHttp1Builder user(String value) {
-      this.user = JsonNullable.of(value);
       return this;
     }
 
@@ -125,11 +117,19 @@ public class ContainerLoggingConfigurationHttp1 {
       return this;
     }
 
+    private JsonNullable<String> user = JsonNullable.undefined();
+
+    @JsonProperty("user")
+    public ContainerLoggingConfigurationHttp1Builder user(String value) {
+      this.user = JsonNullable.of(value);
+      return this;
+    }
+
     public ContainerLoggingConfigurationHttp1 build() {
       if (!headers$set) {
         throw new IllegalStateException("headers is required");
       }
-      return new ContainerLoggingConfigurationHttp1(host, port, format, headers, compression, user, password, path);
+      return new ContainerLoggingConfigurationHttp1(compression, format, headers, host, port, password, path, user);
     }
   }
 }

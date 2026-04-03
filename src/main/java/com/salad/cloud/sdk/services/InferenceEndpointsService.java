@@ -34,6 +34,12 @@ import okhttp3.Response;
  */
 public class InferenceEndpointsService extends BaseService {
 
+  /**
+   * Constructs a new instance of InferenceEndpointsService.
+   *
+   * @param httpClient The HTTP client to use for requests
+   * @param config The SDK configuration
+   */
   public InferenceEndpointsService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
     super(httpClient, config);
   }
@@ -54,6 +60,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -76,6 +83,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListInferenceEndpointsRequest(organizationName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -126,6 +134,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetInferenceEndpointRequest(organizationName, inferenceEndpointName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -147,6 +156,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetInferenceEndpointRequest(organizationName, inferenceEndpointName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -206,6 +216,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildListInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     Response response = this.execute(request);
@@ -231,6 +242,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildListInferenceEndpointJobsRequest(organizationName, inferenceEndpointName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
@@ -295,6 +307,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildCreateInferenceEndpointJobRequest(
           organizationName,
@@ -324,6 +337,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildCreateInferenceEndpointJobRequest(
           organizationName,
@@ -394,6 +408,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildGetInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     Response response = this.execute(request);
@@ -418,6 +433,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildGetInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
@@ -480,6 +496,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildDeleteInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     this.execute(request);
@@ -503,6 +520,7 @@ public class InferenceEndpointsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildDeleteInferenceEndpointJobRequest(organizationName, inferenceEndpointName, inferenceEndpointJobId);
     return this.executeAsync(request).thenApplyAsync(response -> null);

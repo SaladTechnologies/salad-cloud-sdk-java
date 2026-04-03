@@ -23,17 +23,17 @@ import lombok.extern.jackson.Jacksonized;
 public class DatadogLoggingConfiguration {
 
   /**
-   * The Datadog intake server host URL where logs will be sent.
-   */
-  @NonNull
-  private String host;
-
-  /**
    * The Datadog API key used for authentication when sending logs.
    */
   @NonNull
   @JsonProperty("api_key")
   private String apiKey;
+
+  /**
+   * The Datadog intake server host URL where logs will be sent.
+   */
+  @NonNull
+  private String host;
 
   /**
    * Optional metadata tags to attach to logs for filtering and categorization in Datadog.
@@ -59,7 +59,7 @@ public class DatadogLoggingConfiguration {
       if (!tags$set) {
         throw new IllegalStateException("tags is required");
       }
-      return new DatadogLoggingConfiguration(host, apiKey, tags);
+      return new DatadogLoggingConfiguration(apiKey, host, tags);
     }
   }
 }

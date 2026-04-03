@@ -30,12 +30,6 @@ public class ContainerResourceRequirements {
   private Long cpu;
 
   /**
-   * The amount of memory (in MB) required by the container. Must be between 1024 MB and 61440 MB.
-   */
-  @NonNull
-  private Long memory;
-
-  /**
    * A list of GPU class UUIDs required by the container. Can be null if no GPU is required.
    */
   @NonNull
@@ -43,10 +37,10 @@ public class ContainerResourceRequirements {
   private List<String> gpuClasses;
 
   /**
-   * The amount of storage (in bytes) required by the container. Must be between 1 GB (1073741824 bytes) and 250 GB (268435456000 bytes).
+   * The amount of memory (in MB) required by the container. Must be between 1024 MB and 61440 MB.
    */
-  @JsonProperty("storage_amount")
-  private JsonNullable<Long> storageAmount;
+  @NonNull
+  private Long memory;
 
   /**
    * The size of the shared memory (/dev/shm) in MB. If not specified, defaults to 1024MB.
@@ -54,29 +48,24 @@ public class ContainerResourceRequirements {
   @JsonProperty("shm_size")
   private JsonNullable<Long> shmSize;
 
-  @JsonIgnore
-  public Long getStorageAmount() {
-    return storageAmount.orElse(null);
-  }
+  /**
+   * The amount of storage (in bytes) required by the container. Must be between 1 GB (1073741824 bytes) and 250 GB (268435456000 bytes).
+   */
+  @JsonProperty("storage_amount")
+  private JsonNullable<Long> storageAmount;
 
   @JsonIgnore
   public Long getShmSize() {
     return shmSize.orElse(null);
   }
 
+  @JsonIgnore
+  public Long getStorageAmount() {
+    return storageAmount.orElse(null);
+  }
+
   // Overwrite lombok builder methods
   public static class ContainerResourceRequirementsBuilder {
-
-    private JsonNullable<Long> storageAmount = JsonNullable.undefined();
-
-    @JsonProperty("storage_amount")
-    public ContainerResourceRequirementsBuilder storageAmount(Long value) {
-      if (value == null) {
-        throw new IllegalStateException("storageAmount cannot be null");
-      }
-      this.storageAmount = JsonNullable.of(value);
-      return this;
-    }
 
     private JsonNullable<Long> shmSize = JsonNullable.of(64L);
 
@@ -86,6 +75,17 @@ public class ContainerResourceRequirements {
         throw new IllegalStateException("shmSize cannot be null");
       }
       this.shmSize = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> storageAmount = JsonNullable.undefined();
+
+    @JsonProperty("storage_amount")
+    public ContainerResourceRequirementsBuilder storageAmount(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("storageAmount cannot be null");
+      }
+      this.storageAmount = JsonNullable.of(value);
       return this;
     }
   }

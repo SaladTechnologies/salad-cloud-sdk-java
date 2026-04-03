@@ -21,10 +21,37 @@ import lombok.extern.jackson.Jacksonized;
 public class InferenceEndpoint {
 
   /**
+   * The detailed description of the resource.
+   */
+  @NonNull
+  private String description;
+
+  /**
+   * The display-friendly name of the resource.
+   */
+  @NonNull
+  @JsonProperty("display_name")
+  private String displayName;
+
+  /**
+   * The URL of the icon image
+   */
+  @NonNull
+  @JsonProperty("icon_url")
+  private String iconUrl;
+
+  /**
    * The inference endpoint identifier.
    */
   @NonNull
   private String id;
+
+  /**
+   * The input schema
+   */
+  @NonNull
+  @JsonProperty("input_schema")
+  private String inputSchema;
 
   /**
    * The inference endpoint name.
@@ -40,23 +67,11 @@ public class InferenceEndpoint {
   private String organizationName;
 
   /**
-   * The display-friendly name of the resource.
+   * The output schema
    */
   @NonNull
-  @JsonProperty("display_name")
-  private String displayName;
-
-  /**
-   * The detailed description of the resource.
-   */
-  @NonNull
-  private String description;
-
-  /**
-   * A markdown file containing a detailed description of the inference endpoint
-   */
-  @NonNull
-  private String readme;
+  @JsonProperty("output_schema")
+  private String outputSchema;
 
   /**
    * A description of the price
@@ -66,23 +81,8 @@ public class InferenceEndpoint {
   private String priceDescription;
 
   /**
-   * The URL of the icon image
+   * A markdown file containing a detailed description of the inference endpoint
    */
   @NonNull
-  @JsonProperty("icon_url")
-  private String iconUrl;
-
-  /**
-   * The input schema
-   */
-  @NonNull
-  @JsonProperty("input_schema")
-  private String inputSchema;
-
-  /**
-   * The output schema
-   */
-  @NonNull
-  @JsonProperty("output_schema")
-  private String outputSchema;
+  private String readme;
 }

@@ -118,6 +118,20 @@ public class ContainerGroup {
   private ContainerRestartPolicy restartPolicy;
 
   /**
+   * List of scaling actions configurations
+   */
+  @NonNull
+  @JsonProperty("scaling-actions")
+  private List<ContainerGroupScalingAction> scalingActions;
+
+  /**
+   * Indicates if scheduled scaling is enabled
+   */
+  @NonNull
+  @JsonProperty("scheduled-scaling-enabled")
+  private Boolean scheduledScalingEnabled;
+
+  /**
    * ISO 8601 timestamp when this container group was last updated
    */
   @NonNull
@@ -305,6 +319,8 @@ public class ContainerGroup {
         projectName,
         replicas,
         restartPolicy,
+        scalingActions,
+        scheduledScalingEnabled,
         updateTime,
         version,
         livenessProbe,

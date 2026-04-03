@@ -95,9 +95,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     QueuePrototype queuePrototype = QueuePrototype.builder()
-      .name("name")
-      .displayName("AV3ysQq")
       .description("description")
+      .displayName("tLWSUinMUjM")
+      .name("name")
       .build();
 
     Queue response = saladCloudSdk.queues.createQueue("acme-corp", "dev-env", queuePrototype);
@@ -190,7 +190,7 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    QueuePatch queuePatch = QueuePatch.builder().displayName("5Ecnf").description("description").build();
+    QueuePatch queuePatch = QueuePatch.builder().description("description").displayName("hB13").build();
 
     Queue response = saladCloudSdk.queues.updateQueue("acme-corp", "dev-env", "fifo-queue", queuePatch);
 

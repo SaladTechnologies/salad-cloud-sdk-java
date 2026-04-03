@@ -42,12 +42,6 @@ public class GpuClass {
   private List<GpuClassPrice> prices;
 
   /**
-   * Whether the GPU class is in high demand
-   */
-  @JsonProperty("is_high_demand")
-  private JsonNullable<Boolean> isHighDemand;
-
-  /**
    * The type of GPU class
    */
   @JsonProperty("gpu_class_type")
@@ -60,10 +54,22 @@ public class GpuClass {
   private JsonNullable<Long> gpuCount;
 
   /**
-   * The minimum vCPU count
+   * Whether the GPU class is in high demand
    */
-  @JsonProperty("min_vcpu")
-  private JsonNullable<Long> minVcpu;
+  @JsonProperty("is_high_demand")
+  private JsonNullable<Boolean> isHighDemand;
+
+  /**
+   * The maximum RAM amount in MB
+   */
+  @JsonProperty("max_ram")
+  private JsonNullable<Long> maxRam;
+
+  /**
+   * The maximum storage amount in bytes
+   */
+  @JsonProperty("max_storage")
+  private JsonNullable<Long> maxStorage;
 
   /**
    * The maximum vCPU count
@@ -78,27 +84,16 @@ public class GpuClass {
   private JsonNullable<Long> minRam;
 
   /**
-   * The maximum RAM amount in MB
-   */
-  @JsonProperty("max_ram")
-  private JsonNullable<Long> maxRam;
-
-  /**
    * The minimum storage amount in bytes
    */
   @JsonProperty("min_storage")
   private JsonNullable<Long> minStorage;
 
   /**
-   * The maximum storage amount in bytes
+   * The minimum vCPU count
    */
-  @JsonProperty("max_storage")
-  private JsonNullable<Long> maxStorage;
-
-  @JsonIgnore
-  public Boolean getIsHighDemand() {
-    return isHighDemand.orElse(null);
-  }
+  @JsonProperty("min_vcpu")
+  private JsonNullable<Long> minVcpu;
 
   @JsonIgnore
   public GpuClassType getGpuClassType() {
@@ -111,8 +106,18 @@ public class GpuClass {
   }
 
   @JsonIgnore
-  public Long getMinVcpu() {
-    return minVcpu.orElse(null);
+  public Boolean getIsHighDemand() {
+    return isHighDemand.orElse(null);
+  }
+
+  @JsonIgnore
+  public Long getMaxRam() {
+    return maxRam.orElse(null);
+  }
+
+  @JsonIgnore
+  public Long getMaxStorage() {
+    return maxStorage.orElse(null);
   }
 
   @JsonIgnore
@@ -126,33 +131,17 @@ public class GpuClass {
   }
 
   @JsonIgnore
-  public Long getMaxRam() {
-    return maxRam.orElse(null);
-  }
-
-  @JsonIgnore
   public Long getMinStorage() {
     return minStorage.orElse(null);
   }
 
   @JsonIgnore
-  public Long getMaxStorage() {
-    return maxStorage.orElse(null);
+  public Long getMinVcpu() {
+    return minVcpu.orElse(null);
   }
 
   // Overwrite lombok builder methods
   public static class GpuClassBuilder {
-
-    private JsonNullable<Boolean> isHighDemand = JsonNullable.undefined();
-
-    @JsonProperty("is_high_demand")
-    public GpuClassBuilder isHighDemand(Boolean value) {
-      if (value == null) {
-        throw new IllegalStateException("isHighDemand cannot be null");
-      }
-      this.isHighDemand = JsonNullable.of(value);
-      return this;
-    }
 
     private JsonNullable<GpuClassType> gpuClassType = JsonNullable.undefined();
 
@@ -176,14 +165,36 @@ public class GpuClass {
       return this;
     }
 
-    private JsonNullable<Long> minVcpu = JsonNullable.undefined();
+    private JsonNullable<Boolean> isHighDemand = JsonNullable.undefined();
 
-    @JsonProperty("min_vcpu")
-    public GpuClassBuilder minVcpu(Long value) {
+    @JsonProperty("is_high_demand")
+    public GpuClassBuilder isHighDemand(Boolean value) {
       if (value == null) {
-        throw new IllegalStateException("minVcpu cannot be null");
+        throw new IllegalStateException("isHighDemand cannot be null");
       }
-      this.minVcpu = JsonNullable.of(value);
+      this.isHighDemand = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> maxRam = JsonNullable.undefined();
+
+    @JsonProperty("max_ram")
+    public GpuClassBuilder maxRam(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("maxRam cannot be null");
+      }
+      this.maxRam = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> maxStorage = JsonNullable.undefined();
+
+    @JsonProperty("max_storage")
+    public GpuClassBuilder maxStorage(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("maxStorage cannot be null");
+      }
+      this.maxStorage = JsonNullable.of(value);
       return this;
     }
 
@@ -209,17 +220,6 @@ public class GpuClass {
       return this;
     }
 
-    private JsonNullable<Long> maxRam = JsonNullable.undefined();
-
-    @JsonProperty("max_ram")
-    public GpuClassBuilder maxRam(Long value) {
-      if (value == null) {
-        throw new IllegalStateException("maxRam cannot be null");
-      }
-      this.maxRam = JsonNullable.of(value);
-      return this;
-    }
-
     private JsonNullable<Long> minStorage = JsonNullable.undefined();
 
     @JsonProperty("min_storage")
@@ -231,14 +231,14 @@ public class GpuClass {
       return this;
     }
 
-    private JsonNullable<Long> maxStorage = JsonNullable.undefined();
+    private JsonNullable<Long> minVcpu = JsonNullable.undefined();
 
-    @JsonProperty("max_storage")
-    public GpuClassBuilder maxStorage(Long value) {
+    @JsonProperty("min_vcpu")
+    public GpuClassBuilder minVcpu(Long value) {
       if (value == null) {
-        throw new IllegalStateException("maxStorage cannot be null");
+        throw new IllegalStateException("minVcpu cannot be null");
       }
-      this.maxStorage = JsonNullable.of(value);
+      this.minVcpu = JsonNullable.of(value);
       return this;
     }
   }

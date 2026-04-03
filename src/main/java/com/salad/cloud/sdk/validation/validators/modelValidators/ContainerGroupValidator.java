@@ -1,6 +1,7 @@
 package com.salad.cloud.sdk.validation.validators.modelValidators;
 
 import com.salad.cloud.sdk.models.ContainerGroup;
+import com.salad.cloud.sdk.models.ContainerGroupScalingAction;
 import com.salad.cloud.sdk.models.CountryCode;
 import com.salad.cloud.sdk.validation.Violation;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
@@ -8,14 +9,32 @@ import com.salad.cloud.sdk.validation.validators.ListValidator;
 import com.salad.cloud.sdk.validation.validators.NumericValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
 
+/**
+ * Validator implementation for ContainerGroup model.
+ * Validates all fields and nested structures according to the model's constraints.
+ */
 public class ContainerGroupValidator extends AbstractModelValidator<ContainerGroup> {
 
+  /**
+   * Creates a validator with a field name for nested validation paths.
+   *
+   * @param fieldName The field name to use in violation paths
+   */
   public ContainerGroupValidator(String fieldName) {
     super(fieldName);
   }
 
+  /**
+   * Creates a validator for root-level validation.
+   */
   public ContainerGroupValidator() {}
 
+  /**
+   * Validates the ContainerGroup model's fields and constraints.
+   *
+   * @param containerGroup The model instance to validate
+   * @return Array of violations found during validation
+   */
   @Override
   protected Violation[] validateModel(ContainerGroup containerGroup) {
     return new ViolationAggregator()
@@ -60,6 +79,13 @@ public class ContainerGroupValidator extends AbstractModelValidator<ContainerGro
           .validate(containerGroup.getProjectName())
       )
       .add(new NumericValidator<Long>("replicas").min(0L).max(500L).required().validate(containerGroup.getReplicas()))
+      .add(
+        new ListValidator<ContainerGroupScalingAction>("scalingActions")
+          .maxLength(100)
+          .itemValidator(new ContainerGroupScalingActionValidator().required())
+          .required()
+          .validate(containerGroup.getScalingActions())
+      )
       .add(
         new NumericValidator<Long>("version").min(1L).max(2147483647L).required().validate(containerGroup.getVersion())
       )

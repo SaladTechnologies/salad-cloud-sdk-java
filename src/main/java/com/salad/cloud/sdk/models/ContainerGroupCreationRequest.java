@@ -98,6 +98,18 @@ public class ContainerGroupCreationRequest {
   private JsonNullable<ContainerGroupReadinessProbe> readinessProbe;
 
   /**
+   * List of scaling action configurations
+   */
+  @JsonProperty("scaling-actions")
+  private JsonNullable<List<ContainerGroupScalingAction>> scalingActions;
+
+  /**
+   * Indicates if scheduled scaling is enabled
+   */
+  @JsonProperty("scheduled-scaling-enabled")
+  private JsonNullable<Boolean> scheduledScalingEnabled;
+
+  /**
    * Defines a probe that checks if a container application has started successfully. Startup probes help prevent applications from being prematurely marked as unhealthy during initialization. The probe can use HTTP requests, TCP connections, gRPC calls, or shell commands to determine startup status.
    */
   @JsonProperty("startup_probe")
@@ -136,6 +148,16 @@ public class ContainerGroupCreationRequest {
   @JsonIgnore
   public ContainerGroupReadinessProbe getReadinessProbe() {
     return readinessProbe.orElse(null);
+  }
+
+  @JsonIgnore
+  public List<ContainerGroupScalingAction> getScalingActions() {
+    return scalingActions.orElse(null);
+  }
+
+  @JsonIgnore
+  public Boolean getScheduledScalingEnabled() {
+    return scheduledScalingEnabled.orElse(null);
   }
 
   @JsonIgnore
@@ -214,6 +236,28 @@ public class ContainerGroupCreationRequest {
     @JsonProperty("readiness_probe")
     public ContainerGroupCreationRequestBuilder readinessProbe(ContainerGroupReadinessProbe value) {
       this.readinessProbe = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<List<ContainerGroupScalingAction>> scalingActions = JsonNullable.undefined();
+
+    @JsonProperty("scaling-actions")
+    public ContainerGroupCreationRequestBuilder scalingActions(List<ContainerGroupScalingAction> value) {
+      if (value == null) {
+        throw new IllegalStateException("scalingActions cannot be null");
+      }
+      this.scalingActions = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Boolean> scheduledScalingEnabled = JsonNullable.undefined();
+
+    @JsonProperty("scheduled-scaling-enabled")
+    public ContainerGroupCreationRequestBuilder scheduledScalingEnabled(Boolean value) {
+      if (value == null) {
+        throw new IllegalStateException("scheduledScalingEnabled cannot be null");
+      }
+      this.scheduledScalingEnabled = JsonNullable.of(value);
       return this;
     }
 
