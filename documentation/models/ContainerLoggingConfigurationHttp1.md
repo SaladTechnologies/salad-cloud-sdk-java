@@ -6,11 +6,11 @@ Configuration for sending container logs to an HTTP endpoint. Defines how logs a
 
 | Name        | Type                                                                  | Required | Description                                                    |
 | :---------- | :-------------------------------------------------------------------- | :------- | :------------------------------------------------------------- |
-| host        | String                                                                | ✅       | The hostname or IP address of the HTTP logging endpoint        |
-| port        | Long                                                                  | ✅       | The port number of the HTTP logging endpoint (1-65535)         |
+| compression | [ContainerLoggingHttpCompression](ContainerLoggingHttpCompression.md) | ✅       | The compression algorithm to apply to logs before transmission |
 | format      | [ContainerLoggingHttpFormat](ContainerLoggingHttpFormat.md)           | ✅       | The format in which logs will be delivered                     |
 | headers     | List<[ContainerLoggingHttpHeader](ContainerLoggingHttpHeader.md)>     | ✅       | Optional HTTP headers to include in log transmission requests  |
-| compression | [ContainerLoggingHttpCompression](ContainerLoggingHttpCompression.md) | ✅       | The compression algorithm to apply to logs before transmission |
-| user        | String                                                                | ❌       | Optional username for HTTP authentication                      |
+| host        | String                                                                | ✅       | The hostname or IP address of the HTTP logging endpoint        |
+| port        | Long                                                                  | ✅       | The port number of the HTTP logging endpoint (1-65535)         |
 | password    | String                                                                | ❌       | Optional password for HTTP authentication                      |
 | path        | String                                                                | ❌       | Optional URL path for the HTTP endpoint                        |
+| user        | String                                                                | ❌       | Optional username for HTTP authentication                      |

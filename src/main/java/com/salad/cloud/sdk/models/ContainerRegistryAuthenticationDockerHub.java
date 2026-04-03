@@ -21,15 +21,15 @@ import lombok.extern.jackson.Jacksonized;
 public class ContainerRegistryAuthenticationDockerHub {
 
   /**
-   * Docker Hub username
-   */
-  @NonNull
-  private String username;
-
-  /**
    * Docker Hub personal access token (PAT)
    */
   @NonNull
   @JsonProperty("personal_access_token")
   private String personalAccessToken;
+
+  /**
+   * Docker Hub username
+   */
+  @NonNull
+  private String username;
 }

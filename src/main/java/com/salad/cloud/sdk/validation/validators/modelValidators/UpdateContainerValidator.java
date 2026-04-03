@@ -6,14 +6,32 @@ import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.validators.ListValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
 
+/**
+ * Validator implementation for UpdateContainer model.
+ * Validates all fields and nested structures according to the model's constraints.
+ */
 public class UpdateContainerValidator extends AbstractModelValidator<UpdateContainer> {
 
+  /**
+   * Creates a validator with a field name for nested validation paths.
+   *
+   * @param fieldName The field name to use in violation paths
+   */
   public UpdateContainerValidator(String fieldName) {
     super(fieldName);
   }
 
+  /**
+   * Creates a validator for root-level validation.
+   */
   public UpdateContainerValidator() {}
 
+  /**
+   * Validates the UpdateContainer model's fields and constraints.
+   *
+   * @param updateContainer The model instance to validate
+   * @return Array of violations found during validation
+   */
   @Override
   protected Violation[] validateModel(UpdateContainer updateContainer) {
     return new ViolationAggregator()

@@ -20,6 +20,12 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class CpuAvailabilityPrototype {
 
   /**
+   * A list of country codes where the resources are available
+   */
+  @JsonProperty("country_codes")
+  private JsonNullable<List<CountryCode>> countryCodes;
+
+  /**
    * The number of available CPU cores
    */
   @JsonProperty("cpu")
@@ -37,11 +43,10 @@ public class CpuAvailabilityPrototype {
   @JsonProperty("storage_amount")
   private JsonNullable<Long> storageAmount;
 
-  /**
-   * A list of country codes where the resources are available
-   */
-  @JsonProperty("country_codes")
-  private JsonNullable<List<CountryCode>> countryCodes;
+  @JsonIgnore
+  public List<CountryCode> getCountryCodes() {
+    return countryCodes.orElse(null);
+  }
 
   @JsonIgnore
   public Long getCpu() {
@@ -58,13 +63,19 @@ public class CpuAvailabilityPrototype {
     return storageAmount.orElse(null);
   }
 
-  @JsonIgnore
-  public List<CountryCode> getCountryCodes() {
-    return countryCodes.orElse(null);
-  }
-
   // Overwrite lombok builder methods
   public static class CpuAvailabilityPrototypeBuilder {
+
+    private JsonNullable<List<CountryCode>> countryCodes = JsonNullable.undefined();
+
+    @JsonProperty("country_codes")
+    public CpuAvailabilityPrototypeBuilder countryCodes(List<CountryCode> value) {
+      if (value == null) {
+        throw new IllegalStateException("countryCodes cannot be null");
+      }
+      this.countryCodes = JsonNullable.of(value);
+      return this;
+    }
 
     private JsonNullable<Long> cpu = JsonNullable.undefined();
 
@@ -87,17 +98,6 @@ public class CpuAvailabilityPrototype {
     @JsonProperty("storage_amount")
     public CpuAvailabilityPrototypeBuilder storageAmount(Long value) {
       this.storageAmount = JsonNullable.of(value);
-      return this;
-    }
-
-    private JsonNullable<List<CountryCode>> countryCodes = JsonNullable.undefined();
-
-    @JsonProperty("country_codes")
-    public CpuAvailabilityPrototypeBuilder countryCodes(List<CountryCode> value) {
-      if (value == null) {
-        throw new IllegalStateException("countryCodes cannot be null");
-      }
-      this.countryCodes = JsonNullable.of(value);
       return this;
     }
   }

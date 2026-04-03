@@ -37,6 +37,12 @@ import okhttp3.Response;
  */
 public class QueuesService extends BaseService {
 
+  /**
+   * Constructs a new instance of QueuesService.
+   *
+   * @param httpClient The HTTP client to use for requests
+   * @param config The SDK configuration
+   */
   public QueuesService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
     super(httpClient, config);
   }
@@ -52,6 +58,7 @@ public class QueuesService extends BaseService {
     throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -71,6 +78,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueuesRequest(organizationName, projectName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -126,6 +134,7 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueRequest(organizationName, projectName, queuePrototype);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -148,6 +157,7 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueRequest(organizationName, projectName, queuePrototype);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -204,6 +214,7 @@ public class QueuesService extends BaseService {
     throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueRequest(organizationName, projectName, queueName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -225,6 +236,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueRequest(organizationName, projectName, queueName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -294,6 +306,7 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, queuePatch);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -318,6 +331,7 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateQueueRequest(organizationName, projectName, queueName, queuePatch);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -384,6 +398,7 @@ public class QueuesService extends BaseService {
     throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteQueueRequest(organizationName, projectName, queueName);
     this.execute(request);
   }
@@ -403,6 +418,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteQueueRequest(organizationName, projectName, queueName);
     return this.executeAsync(request).thenApplyAsync(response -> null);
   }
@@ -467,6 +483,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -490,6 +507,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListQueueJobsRequest(organizationName, projectName, queueName, requestParameters);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -563,6 +581,7 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, queueJobPrototype);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -587,6 +606,7 @@ public class QueuesService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildCreateQueueJobRequest(organizationName, projectName, queueName, queueJobPrototype);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -658,6 +678,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -681,6 +702,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -751,6 +773,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     this.execute(request);
   }
@@ -772,6 +795,7 @@ public class QueuesService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteQueueJobRequest(organizationName, projectName, queueName, queueJobId);
     return this.executeAsync(request).thenApplyAsync(response -> null);
   }

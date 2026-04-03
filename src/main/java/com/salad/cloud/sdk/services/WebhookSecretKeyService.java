@@ -25,6 +25,12 @@ import okhttp3.Response;
  */
 public class WebhookSecretKeyService extends BaseService {
 
+  /**
+   * Constructs a new instance of WebhookSecretKeyService.
+   *
+   * @param httpClient The HTTP client to use for requests
+   * @param config The SDK configuration
+   */
   public WebhookSecretKeyService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
     super(httpClient, config);
   }
@@ -38,6 +44,7 @@ public class WebhookSecretKeyService extends BaseService {
   public WebhookSecretKey getWebhookSecretKey(@NonNull String organizationName) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetWebhookSecretKeyRequest(organizationName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -54,6 +61,7 @@ public class WebhookSecretKeyService extends BaseService {
     throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetWebhookSecretKeyRequest(organizationName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -93,6 +101,7 @@ public class WebhookSecretKeyService extends BaseService {
     throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateWebhookSecretKeyRequest(organizationName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -109,6 +118,7 @@ public class WebhookSecretKeyService extends BaseService {
     throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildUpdateWebhookSecretKeyRequest(organizationName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {

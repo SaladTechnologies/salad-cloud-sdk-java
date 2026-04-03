@@ -6,13 +6,21 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import com.salad.cloud.sdk.http.util.ContentTypes;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import okhttp3.MediaType;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 
+/**
+ * Utility class for converting between JSON and Java models.
+ * Uses Jackson ObjectMapper with preconfigured settings for SDK serialization/deserialization.
+ * Handles responses as Class types or TypeReferences with proper error logging.
+ */
 public final class ModelConverter {
 
   private static final Logger logger = Logger.getLogger(ModelConverter.class.getName());
@@ -32,6 +40,14 @@ public final class ModelConverter {
 
   private ModelConverter() {}
 
+  /**
+   * Converts an HTTP response body to a Java object of the specified class.
+   *
+   * @param <T> The type of the model class
+   * @param response The HTTP response to convert
+   * @param clazz The target class to deserialize into
+   * @return The deserialized object, or null if conversion fails
+   */
   public static <T> T convert(final Response response, final Class<T> clazz) {
     try {
       return convert(response.body().bytes(), clazz);
@@ -41,6 +57,14 @@ public final class ModelConverter {
     }
   }
 
+  /**
+   * Converts raw byte array to a Java object of the specified class.
+   *
+   * @param <T> The type of the model class
+   * @param bodyBytes The response body as bytes
+   * @param clazz The target class to deserialize into
+   * @return The deserialized object, or null if conversion fails or body is empty
+   */
   public static <T> T convert(final byte[] bodyBytes, final Class<T> clazz) {
     try {
       if (bodyBytes == null || bodyBytes.length == 0) {
@@ -139,6 +163,12 @@ public final class ModelConverter {
     }
   }
 
+  /**
+   * Serializes a Java model object to JSON string.
+   *
+   * @param model The model object to serialize
+   * @return The JSON string representation, or null if serialization fails
+   */
   public static String modelToJson(final Object model) {
     try {
       return mapper.writeValueAsString(model);
@@ -146,5 +176,69 @@ public final class ModelConverter {
       logger.log(Level.SEVERE, "Failed to serialize model to JSON: " + e.getMessage(), e);
       return null;
     }
+  }
+
+  /**
+   * Converts response body bytes to a OneOf type by determining the appropriate factory method
+   * based on the content type and using reflection to invoke it.
+   *
+   * @param <T> The type of the OneOf model class
+   * @param bodyBytes The response body as bytes
+   * @param typeReference The target TypeReference to deserialize into
+   * @param contentType The content type of the response
+   * @return The deserialized object, or null if conversion fails
+   */
+  public static <T> T convertOneOf(
+    final byte[] bodyBytes,
+    final TypeReference<T> typeReference,
+    final MediaType contentType
+  ) {
+    try {
+      String methodName;
+      Class<?> parameterType;
+      Object data;
+
+      if (ContentTypes.isTextual(contentType)) {
+        methodName = "ofString";
+        parameterType = String.class;
+        data = toBodyString(bodyBytes);
+      } else if (ContentTypes.isBinary(contentType)) {
+        methodName = "ofBinary";
+        parameterType = byte[].class;
+        data = bodyBytes;
+      } else {
+        return convert(bodyBytes, typeReference);
+      }
+
+      Class<?> clazz = (Class<?>) typeReference.getType();
+
+      Method method = clazz.getDeclaredMethod(methodName, parameterType);
+      method.setAccessible(true);
+
+      return (T) method.invoke(null, data);
+    } catch (Exception e) {
+      logger.log(Level.SEVERE, "Failed to convert OneOf response: " + e.getMessage(), e);
+      return null;
+    }
+  }
+
+  /**
+   * Converts response body string to a OneOf type by determining the appropriate factory method
+   * based on the content type and using reflection to invoke it.
+   *
+   * @param <T> The type of the OneOf model class
+   * @param body The response body as string
+   * @param typeReference The target TypeReference to deserialize into
+   * @param contentType The content type of the response
+   * @return The deserialized object, or null if conversion fails
+   */
+  public static <T> T convertOneOf(
+    final String body,
+    final TypeReference<T> typeReference,
+    final MediaType contentType
+  ) {
+    byte[] bodyBytes = body.getBytes(StandardCharsets.UTF_8);
+
+    return convertOneOf(bodyBytes, typeReference, contentType);
   }
 }

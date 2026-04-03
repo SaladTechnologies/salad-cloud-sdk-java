@@ -29,22 +29,16 @@ public class ContainerResourceUpdateSchema {
   private JsonNullable<Long> cpu;
 
   /**
-   * The amount of memory to allocate to the container in megabytes (between 1024 and 1073741824).
-   */
-  @JsonProperty("memory")
-  private JsonNullable<Long> memory;
-
-  /**
    * List of GPU class identifiers that the container can use, specified as UUIDs.
    */
   @JsonProperty("gpu_classes")
   private JsonNullable<List<String>> gpuClasses;
 
   /**
-   * The amount of storage to allocate to the container in bytes (between 1 GB and 1 PB).
+   * The amount of memory to allocate to the container in megabytes (between 1024 and 1073741824).
    */
-  @JsonProperty("storage_amount")
-  private JsonNullable<Long> storageAmount;
+  @JsonProperty("memory")
+  private JsonNullable<Long> memory;
 
   /**
    * The amount of shared memory to allocate to the container via `/dev/shm` in megabytes (between 64 and 1073741824). If not specified, defaults to 64 MB.
@@ -52,14 +46,15 @@ public class ContainerResourceUpdateSchema {
   @JsonProperty("shm_size")
   private JsonNullable<Long> shmSize;
 
+  /**
+   * The amount of storage to allocate to the container in bytes (between 1 GB and 1 PB).
+   */
+  @JsonProperty("storage_amount")
+  private JsonNullable<Long> storageAmount;
+
   @JsonIgnore
   public Long getCpu() {
     return cpu.orElse(null);
-  }
-
-  @JsonIgnore
-  public Long getMemory() {
-    return memory.orElse(null);
   }
 
   @JsonIgnore
@@ -68,13 +63,18 @@ public class ContainerResourceUpdateSchema {
   }
 
   @JsonIgnore
-  public Long getStorageAmount() {
-    return storageAmount.orElse(null);
+  public Long getMemory() {
+    return memory.orElse(null);
   }
 
   @JsonIgnore
   public Long getShmSize() {
     return shmSize.orElse(null);
+  }
+
+  @JsonIgnore
+  public Long getStorageAmount() {
+    return storageAmount.orElse(null);
   }
 
   // Overwrite lombok builder methods
@@ -88,14 +88,6 @@ public class ContainerResourceUpdateSchema {
       return this;
     }
 
-    private JsonNullable<Long> memory = JsonNullable.undefined();
-
-    @JsonProperty("memory")
-    public ContainerResourceUpdateSchemaBuilder memory(Long value) {
-      this.memory = JsonNullable.of(value);
-      return this;
-    }
-
     private JsonNullable<List<String>> gpuClasses = JsonNullable.undefined();
 
     @JsonProperty("gpu_classes")
@@ -104,11 +96,11 @@ public class ContainerResourceUpdateSchema {
       return this;
     }
 
-    private JsonNullable<Long> storageAmount = JsonNullable.undefined();
+    private JsonNullable<Long> memory = JsonNullable.undefined();
 
-    @JsonProperty("storage_amount")
-    public ContainerResourceUpdateSchemaBuilder storageAmount(Long value) {
-      this.storageAmount = JsonNullable.of(value);
+    @JsonProperty("memory")
+    public ContainerResourceUpdateSchemaBuilder memory(Long value) {
+      this.memory = JsonNullable.of(value);
       return this;
     }
 
@@ -117,6 +109,14 @@ public class ContainerResourceUpdateSchema {
     @JsonProperty("shm_size")
     public ContainerResourceUpdateSchemaBuilder shmSize(Long value) {
       this.shmSize = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> storageAmount = JsonNullable.undefined();
+
+    @JsonProperty("storage_amount")
+    public ContainerResourceUpdateSchemaBuilder storageAmount(Long value) {
+      this.storageAmount = JsonNullable.of(value);
       return this;
     }
   }

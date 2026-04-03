@@ -15,6 +15,7 @@ import com.salad.cloud.sdk.models.ContainerGroupProbeExec;
 import com.salad.cloud.sdk.models.ContainerGroupProbeHttpHeader;
 import com.salad.cloud.sdk.models.ContainerGroupQueueConnection;
 import com.salad.cloud.sdk.models.ContainerGroupReadinessProbe;
+import com.salad.cloud.sdk.models.ContainerGroupScalingAction;
 import com.salad.cloud.sdk.models.ContainerGroupStartupProbe;
 import com.salad.cloud.sdk.models.ContainerGroupTcpProbe;
 import com.salad.cloud.sdk.models.ContainerLoggingConfigurationHttp2;
@@ -45,239 +46,253 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Main {
+    public static void main(String[] args) {
+		SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
+			.apiKeyAuthConfig(
+				ApiKeyAuthConfig.builder()
+					.apiKey("YOUR_API_KEY")
+					.build()
+			)
+			.build();
 
-  public static void main(String[] args) {
-    SaladCloudSdkConfig config = SaladCloudSdkConfig.builder()
-      .apiKeyAuthConfig(ApiKeyAuthConfig.builder().apiKey("YOUR_API_KEY").build())
-      .build();
+		SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
+		List<String> commandList = Arrays.asList("command");
 
-    List<String> commandList = Arrays.asList("command");
+		AxiomLoggingConfiguration axiomLoggingConfiguration = AxiomLoggingConfiguration.builder()
+			.apiToken("api_token")
+			.dataset("dataset")
+			.host("host")
+			.build();
 
-    AxiomLoggingConfiguration axiomLoggingConfiguration = AxiomLoggingConfiguration.builder()
-      .host("host")
-      .apiToken("api_token")
-      .dataset("dataset")
-      .build();
+		DatadogTagForContainerLogging datadogTagForContainerLogging = DatadogTagForContainerLogging.builder()
+			.name("name")
+			.value("value")
+			.build();
 
-    DatadogTagForContainerLogging datadogTagForContainerLogging = DatadogTagForContainerLogging.builder()
-      .name("name")
-      .value("value")
-      .build();
+		List<DatadogTagForContainerLogging> tagsList = Arrays.asList(datadogTagForContainerLogging);
 
-    List<DatadogTagForContainerLogging> tagsList = Arrays.asList(datadogTagForContainerLogging);
+		DatadogLoggingConfiguration datadogLoggingConfiguration = DatadogLoggingConfiguration.builder()
+			.apiKey("api_key")
+			.host("host")
+			.tags(tagsList)
+			.build();
 
-    DatadogLoggingConfiguration datadogLoggingConfiguration = DatadogLoggingConfiguration.builder()
-      .host("host")
-      .apiKey("api_key")
-      .tags(tagsList)
-      .build();
+		ContainerLoggingHttpHeader containerLoggingHttpHeader = ContainerLoggingHttpHeader.builder()
+			.name("name")
+			.value("value")
+			.build();
 
-    ContainerLoggingHttpHeader containerLoggingHttpHeader = ContainerLoggingHttpHeader.builder()
-      .name("name")
-      .value("value")
-      .build();
+		List<ContainerLoggingHttpHeader> headersList = Arrays.asList(containerLoggingHttpHeader);
 
-    List<ContainerLoggingHttpHeader> headersList = Arrays.asList(containerLoggingHttpHeader);
+		ContainerLoggingConfigurationHttp2 containerLoggingConfigurationHttp2 = ContainerLoggingConfigurationHttp2.builder()
+			.compression(ContainerLoggingHttpCompression.NONE)
+			.format(ContainerLoggingHttpFormat.JSON)
+			.headers(headersList)
+			.host("host")
+			.password("password")
+			.path("path")
+			.port(42056L)
+			.user("user")
+			.build();
 
-    ContainerLoggingConfigurationHttp2 containerLoggingConfigurationHttp2 = ContainerLoggingConfigurationHttp2.builder()
-      .host("host")
-      .port(46840L)
-      .user("user")
-      .password("password")
-      .path("path")
-      .format(ContainerLoggingHttpFormat.JSON)
-      .headers(headersList)
-      .compression(ContainerLoggingHttpCompression.NONE)
-      .build();
+		NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration.builder()
+			.host("host")
+			.ingestionKey("ingestion_key")
+			.build();
 
-    NewRelicLoggingConfiguration newRelicLoggingConfiguration = NewRelicLoggingConfiguration.builder()
-      .host("host")
-      .ingestionKey("ingestion_key")
-      .build();
+		ContainerLoggingSplunkConfiguration containerLoggingSplunkConfiguration = ContainerLoggingSplunkConfiguration.builder()
+			.host("host")
+			.token("token")
+			.build();
 
-    ContainerLoggingSplunkConfiguration containerLoggingSplunkConfiguration =
-      ContainerLoggingSplunkConfiguration.builder().host("host").token("token").build();
+		TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration.builder()
+			.host("host")
+			.port(44671L)
+			.build();
 
-    TcpLoggingConfiguration tcpLoggingConfiguration = TcpLoggingConfiguration.builder()
-      .host("host")
-      .port(44671L)
-      .build();
+		ContainerConfigurationLogging containerConfigurationLogging = ContainerConfigurationLogging.builder()
+			.axiom(axiomLoggingConfiguration)
+			.datadog(datadogLoggingConfiguration)
+			.http(containerLoggingConfigurationHttp2)
+			.newRelic(newRelicLoggingConfiguration)
+			.splunk(containerLoggingSplunkConfiguration)
+			.tcp(tcpLoggingConfiguration)
+			.build();
 
-    ContainerConfigurationLogging containerConfigurationLogging = ContainerConfigurationLogging.builder()
-      .axiom(axiomLoggingConfiguration)
-      .datadog(datadogLoggingConfiguration)
-      .http(containerLoggingConfigurationHttp2)
-      .newRelic(newRelicLoggingConfiguration)
-      .splunk(containerLoggingSplunkConfiguration)
-      .tcp(tcpLoggingConfiguration)
-      .build();
+		ContainerRegistryAuthenticationAwsEcr containerRegistryAuthenticationAwsEcr = ContainerRegistryAuthenticationAwsEcr.builder()
+			.accessKeyId("access_key_id")
+			.secretAccessKey("secret_access_key")
+			.build();
 
-    ContainerRegistryAuthenticationAwsEcr containerRegistryAuthenticationAwsEcr =
-      ContainerRegistryAuthenticationAwsEcr.builder()
-        .accessKeyId("access_key_id")
-        .secretAccessKey("secret_access_key")
-        .build();
+		ContainerRegistryAuthenticationBasic containerRegistryAuthenticationBasic = ContainerRegistryAuthenticationBasic.builder()
+			.password("password")
+			.username("username")
+			.build();
 
-    ContainerRegistryAuthenticationBasic containerRegistryAuthenticationBasic =
-      ContainerRegistryAuthenticationBasic.builder().username("username").password("password").build();
+		ContainerRegistryAuthenticationDockerHub containerRegistryAuthenticationDockerHub = ContainerRegistryAuthenticationDockerHub.builder()
+			.personalAccessToken("personal_access_token")
+			.username("username")
+			.build();
 
-    ContainerRegistryAuthenticationDockerHub containerRegistryAuthenticationDockerHub =
-      ContainerRegistryAuthenticationDockerHub.builder()
-        .username("username")
-        .personalAccessToken("personal_access_token")
-        .build();
+		ContainerRegistryAuthenticationGcpGar containerRegistryAuthenticationGcpGar = ContainerRegistryAuthenticationGcpGar.builder()
+			.serviceKey("service_key")
+			.build();
 
-    ContainerRegistryAuthenticationGcpGar containerRegistryAuthenticationGcpGar =
-      ContainerRegistryAuthenticationGcpGar.builder().serviceKey("service_key").build();
+		ContainerRegistryAuthenticationGcpGcr containerRegistryAuthenticationGcpGcr = ContainerRegistryAuthenticationGcpGcr.builder()
+			.serviceKey("service_key")
+			.build();
 
-    ContainerRegistryAuthenticationGcpGcr containerRegistryAuthenticationGcpGcr =
-      ContainerRegistryAuthenticationGcpGcr.builder().serviceKey("service_key").build();
+		ContainerRegistryAuthentication containerRegistryAuthentication = ContainerRegistryAuthentication.builder()
+			.awsEcr(containerRegistryAuthenticationAwsEcr)
+			.basic(containerRegistryAuthenticationBasic)
+			.dockerHub(containerRegistryAuthenticationDockerHub)
+			.gcpGar(containerRegistryAuthenticationGcpGar)
+			.gcpGcr(containerRegistryAuthenticationGcpGcr)
+			.build();
 
-    ContainerRegistryAuthentication containerRegistryAuthentication = ContainerRegistryAuthentication.builder()
-      .awsEcr(containerRegistryAuthenticationAwsEcr)
-      .basic(containerRegistryAuthenticationBasic)
-      .dockerHub(containerRegistryAuthenticationDockerHub)
-      .gcpGar(containerRegistryAuthenticationGcpGar)
-      .gcpGcr(containerRegistryAuthenticationGcpGcr)
-      .build();
+		List<String> gpuClassesList = Arrays.asList("gpu_classes");
 
-    List<String> gpuClassesList = Arrays.asList("gpu_classes");
+		CreateContainerResourceRequirements createContainerResourceRequirements = CreateContainerResourceRequirements.builder()
+			.cpu(827L)
+			.gpuClasses(gpuClassesList)
+			.memory(734164836L)
+			.shmSize(64L)
+			.storageAmount(761306530849177.9L)
+			.build();
 
-    CreateContainerResourceRequirements createContainerResourceRequirements =
-      CreateContainerResourceRequirements.builder()
-        .cpu(924L)
-        .memory(226493682L)
-        .gpuClasses(gpuClassesList)
-        .storageAmount(3576666867910L)
-        .shmSize(64L)
-        .build();
+		ContainerConfiguration containerConfiguration = ContainerConfiguration.builder()
+			.command(commandList)
+			.environmentVariables(new HashMap())
+			.image("acme/:latest")
+			.imageCaching(true)
+			.logging(containerConfigurationLogging)
+			.priority(ContainerGroupPriority.HIGH)
+			.registryAuthentication(containerRegistryAuthentication)
+			.resources(createContainerResourceRequirements)
+			.build();
 
-    ContainerConfiguration containerConfiguration = ContainerConfiguration.builder()
-      .command(commandList)
-      .environmentVariables(new HashMap())
-      .image("acme/:latest")
-      .imageCaching(true)
-      .logging(containerConfigurationLogging)
-      .priority(ContainerGroupPriority.HIGH)
-      .registryAuthentication(containerRegistryAuthentication)
-      .resources(createContainerResourceRequirements)
-      .build();
+		List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
 
-    List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
+		List<String> commandList1 = Arrays.asList("command");
 
-    List<String> commandList1 = Arrays.asList("command");
+		ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder()
+			.command(commandList1)
+			.build();
 
-    ContainerGroupProbeExec containerGroupProbeExec = ContainerGroupProbeExec.builder().command(commandList1).build();
+		ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe.builder()
+			.port(37648L)
+			.service("service")
+			.build();
 
-    ContainerGroupGRpcProbe containerGroupGRpcProbe = ContainerGroupGRpcProbe.builder()
-      .port(37648L)
-      .service("service")
-      .build();
+		ContainerGroupProbeHttpHeader containerGroupProbeHttpHeader = ContainerGroupProbeHttpHeader.builder()
+			.name("name")
+			.value("value")
+			.build();
 
-    ContainerGroupProbeHttpHeader containerGroupProbeHttpHeader = ContainerGroupProbeHttpHeader.builder()
-      .name("name")
-      .value("value")
-      .build();
+		List<ContainerGroupProbeHttpHeader> headersList1 = Arrays.asList(containerGroupProbeHttpHeader);
 
-    List<ContainerGroupProbeHttpHeader> headersList1 = Arrays.asList(containerGroupProbeHttpHeader);
+		ContainerGroupHttpProbeConfiguration containerGroupHttpProbeConfiguration = ContainerGroupHttpProbeConfiguration.builder()
+			.headers(headersList1)
+			.path("path")
+			.port(29069L)
+			.scheme(HttpScheme.HTTP)
+			.build();
 
-    ContainerGroupHttpProbeConfiguration containerGroupHttpProbeConfiguration =
-      ContainerGroupHttpProbeConfiguration.builder()
-        .headers(headersList1)
-        .path("path")
-        .port(29069L)
-        .scheme(HttpScheme.HTTP)
-        .build();
+		ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder()
+			.port(13817L)
+			.build();
 
-    ContainerGroupTcpProbe containerGroupTcpProbe = ContainerGroupTcpProbe.builder().port(13817L).build();
+		ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe.builder()
+			.exec(containerGroupProbeExec)
+			.failureThreshold(3L)
+			.grpc(containerGroupGRpcProbe)
+			.http(containerGroupHttpProbeConfiguration)
+			.initialDelaySeconds(670L)
+			.periodSeconds(10L)
+			.successThreshold(1L)
+			.tcp(containerGroupTcpProbe)
+			.timeoutSeconds(30L)
+			.build();
 
-    ContainerGroupLivenessProbe containerGroupLivenessProbe = ContainerGroupLivenessProbe.builder()
-      .exec(containerGroupProbeExec)
-      .failureThreshold(3L)
-      .grpc(containerGroupGRpcProbe)
-      .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(670L)
-      .periodSeconds(10L)
-      .successThreshold(1L)
-      .tcp(containerGroupTcpProbe)
-      .timeoutSeconds(30L)
-      .build();
+		CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking.builder()
+			.auth(false)
+			.clientRequestTimeout(100000L)
+			.loadBalancer(TheContainerGroupNetworkingLoadBalancer.ROUND_ROBIN)
+			.port(60000L)
+			.protocol(ContainerNetworkingProtocol.HTTP)
+			.serverResponseTimeout(100000L)
+			.singleConnectionLimit(false)
+			.build();
 
-    CreateContainerGroupNetworking createContainerGroupNetworking = CreateContainerGroupNetworking.builder()
-      .auth(false)
-      .clientRequestTimeout(100000L)
-      .loadBalancer(TheContainerGroupNetworkingLoadBalancer.ROUND_ROBIN)
-      .port(60000L)
-      .protocol(ContainerNetworkingProtocol.HTTP)
-      .serverResponseTimeout(100000L)
-      .singleConnectionLimit(false)
-      .build();
+		QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration.builder()
+			.desiredQueueLength(53L)
+			.maxDownscalePerMinute(59L)
+			.maxReplicas(321L)
+			.maxUpscalePerMinute(100L)
+			.minReplicas(54L)
+			.pollingPeriod(140L)
+			.build();
 
-    QueueBasedAutoscalerConfiguration queueBasedAutoscalerConfiguration = QueueBasedAutoscalerConfiguration.builder()
-      .desiredQueueLength(53L)
-      .maxReplicas(291L)
-      .maxDownscalePerMinute(65L)
-      .maxUpscalePerMinute(100L)
-      .minReplicas(54L)
-      .pollingPeriod(140L)
-      .build();
+		ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection.builder()
+			.path("path")
+			.port(47568L)
+			.queueName("z1h-3z01x9")
+			.build();
 
-    ContainerGroupQueueConnection containerGroupQueueConnection = ContainerGroupQueueConnection.builder()
-      .path("path")
-      .port(47568L)
-      .queueName("z1h-3z01x9")
-      .build();
+		ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe.builder()
+			.exec(containerGroupProbeExec)
+			.failureThreshold(3L)
+			.grpc(containerGroupGRpcProbe)
+			.http(containerGroupHttpProbeConfiguration)
+			.initialDelaySeconds(262L)
+			.periodSeconds(1L)
+			.successThreshold(1L)
+			.tcp(containerGroupTcpProbe)
+			.timeoutSeconds(1L)
+			.build();
 
-    ContainerGroupReadinessProbe containerGroupReadinessProbe = ContainerGroupReadinessProbe.builder()
-      .exec(containerGroupProbeExec)
-      .failureThreshold(3L)
-      .grpc(containerGroupGRpcProbe)
-      .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(262L)
-      .periodSeconds(1L)
-      .successThreshold(1L)
-      .tcp(containerGroupTcpProbe)
-      .timeoutSeconds(1L)
-      .build();
+		ContainerGroupScalingAction containerGroupScalingAction = ContainerGroupScalingAction.builder()
+			.replicas(461L)
+			.schedule("7kwC/T8C   da       x6Ci   bM-rgGYn     bDY6,vT")
+			.build();
 
-    ContainerGroupStartupProbe containerGroupStartupProbe = ContainerGroupStartupProbe.builder()
-      .exec(containerGroupProbeExec)
-      .failureThreshold(15L)
-      .grpc(containerGroupGRpcProbe)
-      .http(containerGroupHttpProbeConfiguration)
-      .initialDelaySeconds(1106L)
-      .tcp(containerGroupTcpProbe)
-      .periodSeconds(3L)
-      .successThreshold(2L)
-      .timeoutSeconds(10L)
-      .build();
+		List<ContainerGroupScalingAction> scalingActionsList = Arrays.asList(containerGroupScalingAction);
 
-    ContainerGroupCreationRequest containerGroupCreationRequest = ContainerGroupCreationRequest.builder()
-      .autostartPolicy(false)
-      .container(containerConfiguration)
-      .countryCodes(countryCodesList)
-      .displayName("592CH6")
-      .livenessProbe(containerGroupLivenessProbe)
-      .name("name")
-      .networking(createContainerGroupNetworking)
-      .queueAutoscaler(queueBasedAutoscalerConfiguration)
-      .queueConnection(containerGroupQueueConnection)
-      .readinessProbe(containerGroupReadinessProbe)
-      .replicas(309L)
-      .restartPolicy(ContainerRestartPolicy.ALWAYS)
-      .startupProbe(containerGroupStartupProbe)
-      .build();
+		ContainerGroupStartupProbe containerGroupStartupProbe = ContainerGroupStartupProbe.builder()
+			.exec(containerGroupProbeExec)
+			.failureThreshold(15L)
+			.grpc(containerGroupGRpcProbe)
+			.http(containerGroupHttpProbeConfiguration)
+			.initialDelaySeconds(503L)
+			.periodSeconds(3L)
+			.successThreshold(2L)
+			.tcp(containerGroupTcpProbe)
+			.timeoutSeconds(10L)
+			.build();
 
-    ContainerGroup response = saladCloudSdk.containerGroups.createContainerGroup(
-      "acme-corp",
-      "dev-env",
-      containerGroupCreationRequest
-    );
+		ContainerGroupCreationRequest containerGroupCreationRequest = ContainerGroupCreationRequest.builder()
+			.autostartPolicy(false)
+			.container(containerConfiguration)
+			.countryCodes(countryCodesList)
+			.displayName("KMg0KyVwpb")
+			.livenessProbe(containerGroupLivenessProbe)
+			.name("name")
+			.networking(createContainerGroupNetworking)
+			.queueAutoscaler(queueBasedAutoscalerConfiguration)
+			.queueConnection(containerGroupQueueConnection)
+			.readinessProbe(containerGroupReadinessProbe)
+			.replicas(77L)
+			.restartPolicy(ContainerRestartPolicy.ALWAYS)
+			.scalingActions(scalingActionsList)
+			.scheduledScalingEnabled(true)
+			.startupProbe(containerGroupStartupProbe)
+			.build();
 
-    System.out.println(response);
-  }
+		ContainerGroup response = saladCloudSdk.containerGroups.createContainerGroup("acme-corp", "dev-env", containerGroupCreationRequest);
+
+		System.out.println(response);
+    }
 }
 
 ```

@@ -7,14 +7,32 @@ import com.salad.cloud.sdk.validation.ViolationAggregator;
 import com.salad.cloud.sdk.validation.validators.ListValidator;
 import com.salad.cloud.sdk.validation.validators.NumericValidator;
 
+/**
+ * Validator implementation for InferenceEndpointJobCollection model.
+ * Validates all fields and nested structures according to the model's constraints.
+ */
 public class InferenceEndpointJobCollectionValidator extends AbstractModelValidator<InferenceEndpointJobCollection> {
 
+  /**
+   * Creates a validator with a field name for nested validation paths.
+   *
+   * @param fieldName The field name to use in violation paths
+   */
   public InferenceEndpointJobCollectionValidator(String fieldName) {
     super(fieldName);
   }
 
+  /**
+   * Creates a validator for root-level validation.
+   */
   public InferenceEndpointJobCollectionValidator() {}
 
+  /**
+   * Validates the InferenceEndpointJobCollection model's fields and constraints.
+   *
+   * @param inferenceEndpointJobCollection The model instance to validate
+   * @return Array of violations found during validation
+   */
   @Override
   protected Violation[] validateModel(InferenceEndpointJobCollection inferenceEndpointJobCollection) {
     return new ViolationAggregator()

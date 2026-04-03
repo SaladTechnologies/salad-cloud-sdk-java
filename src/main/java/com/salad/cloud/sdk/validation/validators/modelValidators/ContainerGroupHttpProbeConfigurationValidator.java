@@ -8,15 +8,33 @@ import com.salad.cloud.sdk.validation.validators.ListValidator;
 import com.salad.cloud.sdk.validation.validators.NumericValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
 
+/**
+ * Validator implementation for ContainerGroupHttpProbeConfiguration model.
+ * Validates all fields and nested structures according to the model's constraints.
+ */
 public class ContainerGroupHttpProbeConfigurationValidator
   extends AbstractModelValidator<ContainerGroupHttpProbeConfiguration> {
 
+  /**
+   * Creates a validator with a field name for nested validation paths.
+   *
+   * @param fieldName The field name to use in violation paths
+   */
   public ContainerGroupHttpProbeConfigurationValidator(String fieldName) {
     super(fieldName);
   }
 
+  /**
+   * Creates a validator for root-level validation.
+   */
   public ContainerGroupHttpProbeConfigurationValidator() {}
 
+  /**
+   * Validates the ContainerGroupHttpProbeConfiguration model's fields and constraints.
+   *
+   * @param containerGroupHttpProbeConfiguration The model instance to validate
+   * @return Array of violations found during validation
+   */
   @Override
   protected Violation[] validateModel(ContainerGroupHttpProbeConfiguration containerGroupHttpProbeConfiguration) {
     return new ViolationAggregator()

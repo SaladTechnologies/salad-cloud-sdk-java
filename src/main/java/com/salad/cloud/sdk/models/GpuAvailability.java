@@ -25,6 +25,12 @@ public class GpuAvailability {
   private JsonNullable<Long> availableGpuBatch;
 
   /**
+   * The number of available high-end GPUs
+   */
+  @JsonProperty("available_gpu_high")
+  private JsonNullable<Long> availableGpuHigh;
+
+  /**
    * The number of available low-end GPUs
    */
   @JsonProperty("available_gpu_low")
@@ -35,12 +41,6 @@ public class GpuAvailability {
    */
   @JsonProperty("available_gpu_medium")
   private JsonNullable<Long> availableGpuMedium;
-
-  /**
-   * The number of available high-end GPUs
-   */
-  @JsonProperty("available_gpu_high")
-  private JsonNullable<Long> availableGpuHigh;
 
   /**
    * The number of on-call GPUs available
@@ -54,6 +54,11 @@ public class GpuAvailability {
   }
 
   @JsonIgnore
+  public Long getAvailableGpuHigh() {
+    return availableGpuHigh.orElse(null);
+  }
+
+  @JsonIgnore
   public Long getAvailableGpuLow() {
     return availableGpuLow.orElse(null);
   }
@@ -61,11 +66,6 @@ public class GpuAvailability {
   @JsonIgnore
   public Long getAvailableGpuMedium() {
     return availableGpuMedium.orElse(null);
-  }
-
-  @JsonIgnore
-  public Long getAvailableGpuHigh() {
-    return availableGpuHigh.orElse(null);
   }
 
   @JsonIgnore
@@ -84,6 +84,17 @@ public class GpuAvailability {
         throw new IllegalStateException("availableGpuBatch cannot be null");
       }
       this.availableGpuBatch = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> availableGpuHigh = JsonNullable.undefined();
+
+    @JsonProperty("available_gpu_high")
+    public GpuAvailabilityBuilder availableGpuHigh(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("availableGpuHigh cannot be null");
+      }
+      this.availableGpuHigh = JsonNullable.of(value);
       return this;
     }
 
@@ -106,17 +117,6 @@ public class GpuAvailability {
         throw new IllegalStateException("availableGpuMedium cannot be null");
       }
       this.availableGpuMedium = JsonNullable.of(value);
-      return this;
-    }
-
-    private JsonNullable<Long> availableGpuHigh = JsonNullable.undefined();
-
-    @JsonProperty("available_gpu_high")
-    public GpuAvailabilityBuilder availableGpuHigh(Long value) {
-      if (value == null) {
-        throw new IllegalStateException("availableGpuHigh cannot be null");
-      }
-      this.availableGpuHigh = JsonNullable.of(value);
       return this;
     }
 

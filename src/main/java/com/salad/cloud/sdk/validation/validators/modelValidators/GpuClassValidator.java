@@ -8,14 +8,32 @@ import com.salad.cloud.sdk.validation.validators.ListValidator;
 import com.salad.cloud.sdk.validation.validators.NumericValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
 
+/**
+ * Validator implementation for GpuClass model.
+ * Validates all fields and nested structures according to the model's constraints.
+ */
 public class GpuClassValidator extends AbstractModelValidator<GpuClass> {
 
+  /**
+   * Creates a validator with a field name for nested validation paths.
+   *
+   * @param fieldName The field name to use in violation paths
+   */
   public GpuClassValidator(String fieldName) {
     super(fieldName);
   }
 
+  /**
+   * Creates a validator for root-level validation.
+   */
   public GpuClassValidator() {}
 
+  /**
+   * Validates the GpuClass model's fields and constraints.
+   *
+   * @param gpuClass The model instance to validate
+   * @return Array of violations found during validation
+   */
   @Override
   protected Violation[] validateModel(GpuClass gpuClass) {
     return new ViolationAggregator()
@@ -36,12 +54,12 @@ public class GpuClassValidator extends AbstractModelValidator<GpuClass> {
           .validate(gpuClass.getPrices())
       )
       .add(new NumericValidator<Long>("gpuCount").min(1L).max(512L).optional().validate(gpuClass.getGpuCount()))
-      .add(new NumericValidator<Long>("minVcpu").min(0L).optional().validate(gpuClass.getMinVcpu()))
+      .add(new NumericValidator<Long>("maxRam").min(0L).optional().validate(gpuClass.getMaxRam()))
+      .add(new NumericValidator<Long>("maxStorage").min(0L).optional().validate(gpuClass.getMaxStorage()))
       .add(new NumericValidator<Long>("maxVcpu").min(0L).optional().validate(gpuClass.getMaxVcpu()))
       .add(new NumericValidator<Long>("minRam").min(0L).optional().validate(gpuClass.getMinRam()))
-      .add(new NumericValidator<Long>("maxRam").min(0L).optional().validate(gpuClass.getMaxRam()))
       .add(new NumericValidator<Long>("minStorage").min(0L).optional().validate(gpuClass.getMinStorage()))
-      .add(new NumericValidator<Long>("maxStorage").min(0L).optional().validate(gpuClass.getMaxStorage()))
+      .add(new NumericValidator<Long>("minVcpu").min(0L).optional().validate(gpuClass.getMinVcpu()))
       .aggregate();
   }
 }

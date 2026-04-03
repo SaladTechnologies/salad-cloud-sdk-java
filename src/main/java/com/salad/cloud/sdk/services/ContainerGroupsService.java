@@ -35,6 +35,12 @@ import okhttp3.Response;
  */
 public class ContainerGroupsService extends BaseService {
 
+  /**
+   * Constructs a new instance of ContainerGroupsService.
+   *
+   * @param httpClient The HTTP client to use for requests
+   * @param config The SDK configuration
+   */
   public ContainerGroupsService(@NonNull OkHttpClient httpClient, SaladCloudSdkConfig config) {
     super(httpClient, config);
   }
@@ -49,6 +55,7 @@ public class ContainerGroupsService extends BaseService {
   public ContainerGroupCollection listContainerGroups(@NonNull String organizationName, @NonNull String projectName)
     throws ApiError, ValidationException {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListContainerGroupsRequest(organizationName, projectName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -67,6 +74,7 @@ public class ContainerGroupsService extends BaseService {
     @NonNull String projectName
   ) throws ApiError, ValidationException {
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListContainerGroupsRequest(organizationName, projectName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -122,6 +130,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildCreateContainerGroupRequest(organizationName, projectName, containerGroupCreationRequest);
     Response response = this.execute(request);
@@ -145,6 +154,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildCreateContainerGroupRequest(organizationName, projectName, containerGroupCreationRequest);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
@@ -209,6 +219,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetContainerGroupRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -230,6 +241,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildGetContainerGroupRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -300,6 +312,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildUpdateContainerGroupRequest(organizationName, projectName, containerGroupName, containerGroupPatch);
     Response response = this.execute(request);
@@ -326,6 +339,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildUpdateContainerGroupRequest(organizationName, projectName, containerGroupName, containerGroupPatch);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
@@ -397,6 +411,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteContainerGroupRequest(organizationName, projectName, containerGroupName);
     this.execute(request);
   }
@@ -417,6 +432,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildDeleteContainerGroupRequest(organizationName, projectName, containerGroupName);
     return this.executeAsync(request).thenApplyAsync(response -> null);
   }
@@ -480,6 +496,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildStartContainerGroupRequest(organizationName, projectName, containerGroupName);
     this.execute(request);
   }
@@ -500,6 +517,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildStartContainerGroupRequest(organizationName, projectName, containerGroupName);
     return this.executeAsync(request).thenApplyAsync(response -> null);
   }
@@ -563,6 +581,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildStopContainerGroupRequest(organizationName, projectName, containerGroupName);
     this.execute(request);
   }
@@ -583,6 +602,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(400, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildStopContainerGroupRequest(organizationName, projectName, containerGroupName);
     return this.executeAsync(request).thenApplyAsync(response -> null);
   }
@@ -645,6 +665,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListContainerGroupInstancesRequest(organizationName, projectName, containerGroupName);
     Response response = this.execute(request);
     byte[] bodyBytes = ModelConverter.readBytes(response);
@@ -666,6 +687,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request = this.buildListContainerGroupInstancesRequest(organizationName, projectName, containerGroupName);
     CompletableFuture<Response> futureResponse = this.executeAsync(request);
     return futureResponse.thenApplyAsync(response -> {
@@ -734,6 +756,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildGetContainerGroupInstanceRequest(
           organizationName,
@@ -763,6 +786,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildGetContainerGroupInstanceRequest(
           organizationName,
@@ -843,6 +867,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildUpdateContainerGroupInstanceRequest(
           organizationName,
@@ -877,6 +902,7 @@ public class ContainerGroupsService extends BaseService {
     this.addErrorMapping(403, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildUpdateContainerGroupInstanceRequest(
           organizationName,
@@ -961,6 +987,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildReallocateContainerGroupInstanceRequest(
           organizationName,
@@ -988,6 +1015,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildReallocateContainerGroupInstanceRequest(
           organizationName,
@@ -1060,6 +1088,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildRecreateContainerGroupInstanceRequest(
           organizationName,
@@ -1087,6 +1116,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildRecreateContainerGroupInstanceRequest(
           organizationName,
@@ -1159,6 +1189,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildRestartContainerGroupInstanceRequest(
           organizationName,
@@ -1186,6 +1217,7 @@ public class ContainerGroupsService extends BaseService {
   ) throws ApiError, ValidationException {
     this.addErrorMapping(404, ProblemDetails.class, ProblemDetailsException.class);
     this.addErrorMapping(429, ProblemDetails.class, ProblemDetailsException.class);
+    this.addDefaultErrorMapping(ProblemDetails.class, ProblemDetailsException.class);
     Request request =
       this.buildRestartContainerGroupInstanceRequest(
           organizationName,

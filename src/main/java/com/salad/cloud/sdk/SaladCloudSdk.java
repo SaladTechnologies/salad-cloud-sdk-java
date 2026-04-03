@@ -9,6 +9,7 @@ import com.salad.cloud.sdk.services.ContainerGroupsService;
 import com.salad.cloud.sdk.services.InferenceEndpointsService;
 import com.salad.cloud.sdk.services.LogsService;
 import com.salad.cloud.sdk.services.OrganizationDataService;
+import com.salad.cloud.sdk.services.OrganizationsService;
 import com.salad.cloud.sdk.services.QueuesService;
 import com.salad.cloud.sdk.services.QuotasService;
 import com.salad.cloud.sdk.services.SystemLogsService;
@@ -27,14 +28,24 @@ public class SaladCloudSdk {
   public final OrganizationDataService organizationData;
   public final WebhookSecretKeyService webhookSecretKey;
   public final LogsService logs;
+  public final OrganizationsService organizations;
 
   private final SaladCloudSdkConfig config;
 
+  /**
+   * Constructs a new instance of SaladCloudSdk with default configuration.
+   */
   public SaladCloudSdk() {
     // Default configs
     this(SaladCloudSdkConfig.builder().build());
   }
 
+  /**
+   * Constructs a new instance of SaladCloudSdk with custom configuration.
+   * Initializes all services, HTTP client, and optional OAuth token manager.
+   *
+   * @param config The SDK configuration including base URL, authentication, timeout, and retry settings
+   */
   public SaladCloudSdk(SaladCloudSdkConfig config) {
     this.config = config;
 
@@ -52,21 +63,42 @@ public class SaladCloudSdk {
     this.organizationData = new OrganizationDataService(httpClient, config);
     this.webhookSecretKey = new WebhookSecretKeyService(httpClient, config);
     this.logs = new LogsService(httpClient, config);
+    this.organizations = new OrganizationsService(httpClient, config);
   }
 
+  /**
+   * Sets the environment for all API requests.
+   *
+   * @param environment The environment to use (e.g., DEFAULT, PRODUCTION, STAGING)
+   */
   public void setEnvironment(Environment environment) {
     setBaseUrl(environment.getUrl());
   }
 
+  /**
+   * Sets the base URL for all API requests.
+   *
+   * @param baseUrl The base URL to use for API requests
+   */
   public void setBaseUrl(String baseUrl) {
     this.config.setBaseUrl(baseUrl);
   }
 
+  /**
+   * Sets the API key for all API requests.
+   *
+   * @param apiKey The API key to use for authentication
+   */
   public void setApiKey(String apiKey) {
     ApiKeyAuthConfig apiKeyAuthConfig = this.config.getApiKeyAuthConfig();
     apiKeyAuthConfig.setApiKey(apiKey);
   }
 
+  /**
+   * Sets the API key header name for all API requests.
+   *
+   * @param apiKeyHeader The header name to use for the API key
+   */
   public void setApiKeyHeader(String apiKeyHeader) {
     ApiKeyAuthConfig apiKeyAuthConfig = this.config.getApiKeyAuthConfig();
     apiKeyAuthConfig.setApiKeyHeader(apiKeyHeader);

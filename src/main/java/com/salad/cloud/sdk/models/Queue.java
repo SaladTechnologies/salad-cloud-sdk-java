@@ -24,25 +24,6 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class Queue {
 
   /**
-   * The queue identifier. This is automatically generated and assigned when the queue is created.
-   */
-  @NonNull
-  private String id;
-
-  /**
-   * The queue name. This must be unique within the project.
-   */
-  @NonNull
-  private String name;
-
-  /**
-   * The display name. This may be used as a more human-readable name.
-   */
-  @NonNull
-  @JsonProperty("display_name")
-  private String displayName;
-
-  /**
    * The container groups that are part of this queue. Each container group represents a scalable set of identical containers running as a distributed service.
    */
   @NonNull
@@ -57,6 +38,25 @@ public class Queue {
   private String createTime;
 
   /**
+   * The display name. This may be used as a more human-readable name.
+   */
+  @NonNull
+  @JsonProperty("display_name")
+  private String displayName;
+
+  /**
+   * The queue identifier. This is automatically generated and assigned when the queue is created.
+   */
+  @NonNull
+  private String id;
+
+  /**
+   * The queue name. This must be unique within the project.
+   */
+  @NonNull
+  private String name;
+
+  /**
    * The date and time the queue was last updated.
    */
   @NonNull
@@ -64,40 +64,29 @@ public class Queue {
   private String updateTime;
 
   /**
-   * The description. This may be used as a space for notes or other information about the queue.
-   */
-  @JsonProperty("description")
-  private JsonNullable<String> description;
-
-  /**
    * The current length of the queue
    */
   @JsonProperty("current_queue_length")
   private JsonNullable<Long> currentQueueLength;
 
-  @JsonIgnore
-  public String getDescription() {
-    return description.orElse(null);
-  }
+  /**
+   * The description. This may be used as a space for notes or other information about the queue.
+   */
+  @JsonProperty("description")
+  private JsonNullable<String> description;
 
   @JsonIgnore
   public Long getCurrentQueueLength() {
     return currentQueueLength.orElse(null);
   }
 
+  @JsonIgnore
+  public String getDescription() {
+    return description.orElse(null);
+  }
+
   // Overwrite lombok builder methods
   public static class QueueBuilder {
-
-    private JsonNullable<String> description = JsonNullable.undefined();
-
-    @JsonProperty("description")
-    public QueueBuilder description(String value) {
-      if (value == null) {
-        throw new IllegalStateException("description cannot be null");
-      }
-      this.description = JsonNullable.of(value);
-      return this;
-    }
 
     private JsonNullable<Long> currentQueueLength = JsonNullable.undefined();
 
@@ -107,6 +96,17 @@ public class Queue {
         throw new IllegalStateException("currentQueueLength cannot be null");
       }
       this.currentQueueLength = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<String> description = JsonNullable.undefined();
+
+    @JsonProperty("description")
+    public QueueBuilder description(String value) {
+      if (value == null) {
+        throw new IllegalStateException("description cannot be null");
+      }
+      this.description = JsonNullable.of(value);
       return this;
     }
   }

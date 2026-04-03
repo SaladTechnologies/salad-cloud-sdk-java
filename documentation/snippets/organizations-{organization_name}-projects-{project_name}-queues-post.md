@@ -15,9 +15,9 @@ public class Main {
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
     QueuePrototype queuePrototype = QueuePrototype.builder()
-      .name("name")
-      .displayName("AV3ysQq")
       .description("description")
+      .displayName("tLWSUinMUjM")
+      .name("name")
       .build();
 
     Queue response = saladCloudSdk.queues.createQueue("acme-corp", "dev-env", queuePrototype);

@@ -1,6 +1,7 @@
 package com.salad.cloud.sdk.validation.validators.modelValidators;
 
 import com.salad.cloud.sdk.models.ContainerGroupCreationRequest;
+import com.salad.cloud.sdk.models.ContainerGroupScalingAction;
 import com.salad.cloud.sdk.models.CountryCode;
 import com.salad.cloud.sdk.validation.Violation;
 import com.salad.cloud.sdk.validation.ViolationAggregator;
@@ -8,14 +9,32 @@ import com.salad.cloud.sdk.validation.validators.ListValidator;
 import com.salad.cloud.sdk.validation.validators.NumericValidator;
 import com.salad.cloud.sdk.validation.validators.StringValidator;
 
+/**
+ * Validator implementation for ContainerGroupCreationRequest model.
+ * Validates all fields and nested structures according to the model's constraints.
+ */
 public class ContainerGroupCreationRequestValidator extends AbstractModelValidator<ContainerGroupCreationRequest> {
 
+  /**
+   * Creates a validator with a field name for nested validation paths.
+   *
+   * @param fieldName The field name to use in violation paths
+   */
   public ContainerGroupCreationRequestValidator(String fieldName) {
     super(fieldName);
   }
 
+  /**
+   * Creates a validator for root-level validation.
+   */
   public ContainerGroupCreationRequestValidator() {}
 
+  /**
+   * Validates the ContainerGroupCreationRequest model's fields and constraints.
+   *
+   * @param containerGroupCreationRequest The model instance to validate
+   * @return Array of violations found during validation
+   */
   @Override
   protected Violation[] validateModel(ContainerGroupCreationRequest containerGroupCreationRequest) {
     return new ViolationAggregator()
@@ -78,6 +97,13 @@ public class ContainerGroupCreationRequestValidator extends AbstractModelValidat
         new ContainerGroupReadinessProbeValidator("readinessProbe")
           .optional()
           .validate(containerGroupCreationRequest.getReadinessProbe())
+      )
+      .add(
+        new ListValidator<ContainerGroupScalingAction>("scalingActions")
+          .maxLength(100)
+          .itemValidator(new ContainerGroupScalingActionValidator().required())
+          .optional()
+          .validate(containerGroupCreationRequest.getScalingActions())
       )
       .add(
         new ContainerGroupStartupProbeValidator("startupProbe")

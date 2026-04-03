@@ -17,19 +17,19 @@ public class Main {
 
     SaladCloudSdk saladCloudSdk = new SaladCloudSdk(config);
 
-    List<String> gpuClassesList = Arrays.asList("gpu_classes");
-
     List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
 
+    List<String> gpuClassesList = Arrays.asList("gpu_classes");
+
     GpuAvailabilityPrototype gpuAvailabilityPrototype = GpuAvailabilityPrototype.builder()
-      .gpuClasses(gpuClassesList)
+      .countryCodes(countryCodesList)
       .cpu(4L)
+      .gpuClasses(gpuClassesList)
       .memory(8192L)
       .storageAmount(1000000000L)
-      .countryCodes(countryCodesList)
       .build();
 
-    GpuAvailability response = saladCloudSdk.organizationData.getGpuAvailability("acme-corp", gpuAvailabilityPrototype);
+    GpuAvailability response = saladCloudSdk.organizations.getGpuAvailability("acme-corp", gpuAvailabilityPrototype);
 
     System.out.println(response);
   }

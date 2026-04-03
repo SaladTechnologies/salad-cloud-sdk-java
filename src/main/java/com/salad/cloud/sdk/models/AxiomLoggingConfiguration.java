@@ -21,12 +21,6 @@ import lombok.extern.jackson.Jacksonized;
 public class AxiomLoggingConfiguration {
 
   /**
-   * The Axiom host URL where logs will be sent (e.g. logs.axiom.co)
-   */
-  @NonNull
-  private String host;
-
-  /**
    * Authentication token for the Axiom API with appropriate write permissions
    */
   @NonNull
@@ -38,4 +32,10 @@ public class AxiomLoggingConfiguration {
    */
   @NonNull
   private String dataset;
+
+  /**
+   * The Axiom host URL where logs will be sent (e.g. logs.axiom.co)
+   */
+  @NonNull
+  private String host;
 }

@@ -42,16 +42,16 @@ public class CreateContainerResourceRequirements {
   private JsonNullable<List<String>> gpuClasses;
 
   /**
-   * The amount of storage to allocate to the container in bytes (between 1 GB and 1 PB).
-   */
-  @JsonProperty("storage_amount")
-  private JsonNullable<Long> storageAmount;
-
-  /**
    * The amount of shared memory to allocate to the container via `/dev/shm` in megabytes (between 64 and 1073741824). If not specified, defaults to 64 MB.
    */
   @JsonProperty("shm_size")
   private JsonNullable<Long> shmSize;
+
+  /**
+   * The amount of storage to allocate to the container in bytes (between 1 GB and 1 PB).
+   */
+  @JsonProperty("storage_amount")
+  private JsonNullable<Long> storageAmount;
 
   @JsonIgnore
   public List<String> getGpuClasses() {
@@ -59,13 +59,13 @@ public class CreateContainerResourceRequirements {
   }
 
   @JsonIgnore
-  public Long getStorageAmount() {
-    return storageAmount.orElse(null);
+  public Long getShmSize() {
+    return shmSize.orElse(null);
   }
 
   @JsonIgnore
-  public Long getShmSize() {
-    return shmSize.orElse(null);
+  public Long getStorageAmount() {
+    return storageAmount.orElse(null);
   }
 
   // Overwrite lombok builder methods
@@ -82,17 +82,6 @@ public class CreateContainerResourceRequirements {
       return this;
     }
 
-    private JsonNullable<Long> storageAmount = JsonNullable.undefined();
-
-    @JsonProperty("storage_amount")
-    public CreateContainerResourceRequirementsBuilder storageAmount(Long value) {
-      if (value == null) {
-        throw new IllegalStateException("storageAmount cannot be null");
-      }
-      this.storageAmount = JsonNullable.of(value);
-      return this;
-    }
-
     private JsonNullable<Long> shmSize = JsonNullable.of(64L);
 
     @JsonProperty("shm_size")
@@ -101,6 +90,17 @@ public class CreateContainerResourceRequirements {
         throw new IllegalStateException("shmSize cannot be null");
       }
       this.shmSize = JsonNullable.of(value);
+      return this;
+    }
+
+    private JsonNullable<Long> storageAmount = JsonNullable.undefined();
+
+    @JsonProperty("storage_amount")
+    public CreateContainerResourceRequirementsBuilder storageAmount(Long value) {
+      if (value == null) {
+        throw new IllegalStateException("storageAmount cannot be null");
+      }
+      this.storageAmount = JsonNullable.of(value);
       return this;
     }
   }

@@ -20,13 +20,13 @@ public class Main {
     List<CountryCode> countryCodesList = Arrays.asList(CountryCode.AF);
 
     CpuAvailabilityPrototype cpuAvailabilityPrototype = CpuAvailabilityPrototype.builder()
+      .countryCodes(countryCodesList)
       .cpu(4L)
       .memory(8192L)
       .storageAmount(1000000000L)
-      .countryCodes(countryCodesList)
       .build();
 
-    CpuAvailability response = saladCloudSdk.organizationData.getCpuAvailability("acme-corp", cpuAvailabilityPrototype);
+    CpuAvailability response = saladCloudSdk.organizations.getCpuAvailability("acme-corp", cpuAvailabilityPrototype);
 
     System.out.println(response);
   }
